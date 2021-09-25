@@ -30,16 +30,13 @@ const buttonRipper = document.querySelector('.ripple')
   buttonRipper.addEventListener('click', function (e) {
         const x = e.clientX;
         const y = e.clientY;
-        console.log('x' + x,'y' + y);
+        let rect = e.target.getBoundingClientRect();
        
-        
-        const buttonTop = e.target.offsetTop;
-        const buttonLeft = e.target.offsetLeft;
-        console.log(buttonLeft, buttonTop)
+        const buttonTop = rect.top;
+        const buttonLeft = rect.left;
 
         const xInside = x - buttonLeft
         const yInside = y - buttonTop
-        console.log(xInside, yInside)
 
         const circle = document.createElement('span')
         circle.classList.add('circle')
