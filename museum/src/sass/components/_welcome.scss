@@ -1,0 +1,128 @@
+.welcome {
+  background-color: $color-bg-dark;
+  padding: 150px 0 60px;
+}
+
+.welcome__container {
+  position: relative;
+  padding-bottom: 212px;
+
+}
+.welcome__text {
+  position: relative;
+  z-index: 100;
+  pointer-events: none;
+}
+.title_welcome {
+  color: $color-font-white;
+  padding-bottom: 25px;
+}
+.welcome__slogan {
+  @extend %font-roboto;
+  @include font(28px, 33px, 300);
+  letter-spacing: 2px;
+  color: $color-font-white;
+  padding-bottom: 75px;
+}
+
+.welcome__slider {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.swiper {
+  width: 1000px;
+  height: 750px;
+  // cursor: pointer;
+}
+.welcome__slider__content {
+  position: relative;
+}
+.swiper-slide {
+  color: $color-font-light-gold;
+}
+.welcome__slider__content::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.5) 16.19%, rgba(0, 0, 0, 0) 30.73%);
+  pointer-events: none;
+  z-index: 10;
+}
+.slider__panel {
+  position: absolute;
+  right: 0;
+  bottom: -60px;
+  width: 600px;
+  height: 120px;
+  background-color: $color-bg-dark;
+  @include flex(center, center);
+  z-index: 1000;
+}
+.panel__count {
+  color: $color-font-white;
+  @include font(22px, 40px, 100);
+  @extend %font-roboto;
+  margin-right: 55px;
+  width: 76px;
+  @include flex(space-between, center);
+}
+.panel__paginate {
+  max-width: 180px;
+  @include flex(space-between, center);
+  gap: 0 25px;
+  margin-right: 60px;
+}
+.square {
+  width: 16px;
+  height: 16px;
+  background-color: $color-font-white;
+  cursor: pointer;
+  @extend %transition;
+}
+.square:hover {
+  background-color: $color-font-gold;
+}
+.square_active {
+  background-color: $color-font-light-gold;
+}
+.panel__navigate {
+  max-width: 80px;
+  @include flex(space-between, center);
+  gap: 0 20px;
+}
+.arrow__right,
+.arrow__left {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  @include flex(center, center);
+}
+
+.arrow {
+  background-color: $color-font-black;
+  cursor: pointer;
+  @extend %transition;
+  display: inline-block;
+  width: 30px;
+  height: 8px;
+  &.left {
+    background-image: url('./assets/icons/welcome/arrow__left.svg');
+  }
+  &.right {
+    background-image: url('./assets/icons/welcome/arrow__right.svg');
+  }
+}
+.arrow__left:hover {
+  .left {
+    background-image: url('./assets/icons/welcome/ar__left_active.svg');
+  }
+}
+.arrow__right:hover {
+  .right {
+    background-image: url('./assets/icons/welcome/ar__right_active.svg');
+  }
+}

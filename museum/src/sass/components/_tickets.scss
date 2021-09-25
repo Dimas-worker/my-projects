@@ -1,0 +1,165 @@
+.tickets {
+  padding-top: 75px;
+}
+.title__tickets {
+  color: $color-font-gold;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 115px;
+    width: 100%;
+    background-color: $color-dark-red;
+    height: 3px;
+  }
+}
+.tickets__container {
+  @include flex(space-between, normal);
+  padding: 103px 0 75px;
+}
+.tickets__img {
+  flex: 0 0 50%;
+}
+.tickets__type {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px 0;
+  padding-left: 60px;
+  padding-top: 2px;
+  &> h4 {
+    color: $color-font-black;
+    padding-bottom: 25px;
+  }
+}
+.tickets__label__type,
+.tickets__label__amount {
+  @extend %font-roboto;
+  @include font(22px, 26px, 300);
+  color: $color-font-black;
+}
+.tickets__label__type {
+  display: block;
+  position: relative;
+  padding-left: 40px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  @extend %transition;
+  &> input {
+    opacity: 0;
+    display: none;
+  }
+  &:hover {
+    opacity: 0.6;
+  }
+}
+.checkmark {
+  position: absolute;
+  top: 20%;
+  left: 0px;
+  height: 17px;
+  width: 17px;
+  border: 2px solid $color-font-black;
+  border-radius: 50%;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 18%;
+    left: 3.5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-font-black;
+    display: none;
+  }
+}
+input:checked ~ .checkmark:after {
+  display: block;
+}
+.tickets__amount {
+  flex: 0 0 25%;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  &> h4 {
+    color: $color-font-black;
+    padding-bottom: 27px;
+  }
+  &>.tickets__label__amount:nth-child(2) {
+    padding-bottom: 10px;
+  }
+}
+.bordered {
+  display: flex;
+  border: 3px solid $color-font-black;
+  margin-top: 15px;
+  & button {
+    cursor: pointer;
+    width: 44.5px;
+    height: 44px;
+    padding: 0 14px;
+  }
+}
+.amount__window {
+  @extend %font-roboto;
+  @include font(22px, 26px, 300);
+  color: $color-font-black;
+  width: 55px;
+  height: 44px;
+  text-align: center;
+  background: transparent;
+  @extend %transition;
+  &:nth-child(odd) {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.minus,
+.plus {
+  width: 18px;
+  height: 38px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 37px;
+  color: $color-font-black;
+  cursor: pointer;
+}
+.minus {
+  margin-bottom: 20px
+}
+.tickets__total {
+  @extend %font-roboto;
+  @include font(28px, 33px, 700);
+  letter-spacing: 1.65px;
+  color: $color-font-black;
+  padding: 51px 0 60px;
+  .window_total {
+    @extend %font-roboto;
+    @include font(28px, 33px, 700);
+    text-align: end;
+    background: transparent;
+    width: 53px;
+    letter-spacing: 1.65px;
+    color: $color-font-black;
+  }
+}
+
+// Parallax
+.parallax {
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('./assets/img/parallax.jpg');
+}

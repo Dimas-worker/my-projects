@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+h2 {
+  @extend %font-forum;
+  @include font(80px, 90px, normal);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+h3 {
+  @extend %font-forum;
+  @include font(32px, 35px, normal);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: $color-bg-dark;
+}
+h4 {
+  @extend %font-roboto;
+  @include font(28px, 33px, bold);
+}
+h5 {
+  @extend %font-roboto;
+  @include font(32px, 37px, 500);
+  color: $color-title-popup;
+}
+h6 {
+  @extend %font-forum;
+  @include font(18px, 20px, normal);
+  text-transform: capitalize;
+  color: $color-font-gold;
+}
+button,
+input {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	display: none;
+}
+h3 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}

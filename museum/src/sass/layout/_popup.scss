@@ -1,0 +1,495 @@
+.popup {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: $color-bg-dark, $alpha: 0.8);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @extend %transition;
+
+}
+.popup_active {
+  opacity: 1;
+  visibility: visible;
+}
+.popup__content {
+  background-color: $color-font-white;
+  padding: 91px 235px;
+  @extend %font-roboto;
+  position: relative;
+
+  transform: translate(-100%, 0);
+  opacity: 0;
+  @extend %transition;
+}
+.popup__content_active {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.close__popup {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background-image: url('./assets/icons/boolking/Close-popup.svg');
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+.layout-2-column {
+  @include flex(center, stretch);
+  gap: 0 40px;
+}
+.popup__data {
+  display: flex;
+  flex-direction: column;
+}
+.popup__title {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.logo__popup {
+  display: inline-block;
+  width: 85px;
+  height: 41px;
+  background-image: url('./assets/icons/boolking/logo__popup.svg');
+}
+.popup__title {
+  @extend %font-forum;
+  @include font(50px, 55px, normal);
+  text-transform: uppercase;
+  color: $color-font-gold;
+  letter-spacing: 0;
+}
+.popup__text {
+  @extend %font-roboto;
+  @include font(18px, 21px, normal);
+  color: $color-dark-red;
+  padding-top: 15px;
+  position: relative;
+}
+.popup__text::before {
+  position: absolute;
+  content: "";
+  bottom: -11px;
+  height: 3px;
+  width: 100%;
+  background-color: $color-bottom-line;
+}
+.data__forma {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  @extend %font-roboto;
+  @include font(18px, 21px, normal);
+  width: 400px;
+}
+.date__time {
+  padding-top: 72px;
+  display: flex;
+  justify-content: space-between;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background-image: url('./assets/icons/boolking/close-arrow.svg');
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+}
+input[type="date"] {
+  position: relative;
+  background-image: url('./assets/icons/boolking/date.svg');
+  background-repeat: no-repeat;
+  background-position: left 14px top 13px;
+  width: 190px;
+  height: 45px;
+  border: 1px solid #000000;
+  outline: none;
+  border-radius: 0;
+}
+input[type="time"] {
+  position: relative;
+  background-image: url('./assets/icons/boolking/time.svg');
+  background-repeat: no-repeat;
+  background-position: left 14px top 13px;
+  width: 190px;
+  height: 45px;
+  border: 1px solid #000000;
+  outline: none;
+  border-radius: 0;
+}
+input[type="date"]::before {
+  position: absolute;
+  content: "Date";
+  top: 10px;
+  left: 45px;
+  color: $color-font-black;
+}
+input[type="time"]::before {
+  position: absolute;
+  content: "Time";
+  top: 10px;
+  left: 45px;
+  color: $color-font-black;
+}
+input[type="date"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit {
+  opacity: 0;
+}
+.input__forma {
+  width: 400px;
+  height: 45px;
+  border: 1px solid $color-font-black;
+  outline: none;
+  border-radius: 0;
+  color: $color-font-black;
+  padding-left: 43px;
+  background-repeat: no-repeat;
+}
+.data_name {
+  background-image: url('./assets/icons/boolking/name.svg');
+  background-position: left 14px top 13px;
+}
+
+input[type="email"] {
+  background-image: url('./assets/icons/boolking/email.svg');
+  background-position: left 14px top 15px;
+}
+
+input[type="tel"] {
+  background-image: url('./assets/icons/boolking/tel.svg');
+  background-position: left 14px top 9px;
+}
+input[type="text"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder,
+input[type="tel"]::-webkit-input-placeholder {
+  color: $color-font-black;
+}
+.select {
+  padding-left: 45px;
+  @include font(18px, 21px, normal);
+  appearance: none;
+  background-image: url('./assets/icons/boolking/ballot.svg');
+  background-position: left 14px top 13px;
+}
+
+.label_select {
+  position: relative;
+  pointer-events: none;
+}
+.label_select::before {
+  position: absolute;
+  content: "";
+  bottom: 35px;
+  right: 15px;
+  background-image: url('./assets/icons/boolking/close-arrow.svg');
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+}
+
+.count__cost {
+  border: 1px solid $color-bg-dark;
+  padding: 0 15px;
+  h6 {
+    position: relative;
+    margin: 10px 0 20px;
+  }
+}
+h6::after {
+  position: absolute;
+  content: "";
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: $color-dark-red;
+}
+.count__cost__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.count__cost__container:last-child {
+  margin-bottom: 14px;
+}
+.count__cost_basic,
+.count__cost_senior {
+  @include font(18px, 21px, normal);
+  color: $color-bg-dark;
+}
+.count__cost__bordered {
+  display: flex;
+  border: 1px solid $color-font-black;
+  button {
+    background-color: $color-bg-dark;
+    color: $color-font-white;
+  }
+}
+.count__men {
+  @include font(18px, 21px, normal);
+  color: $color-bg-dark;
+  width: 34px;
+  height: 23px;
+  text-align: center;
+  background: transparent;
+  outline: none;
+}
+.operator_minus,
+.operator_plus {
+  width: 100%;
+  height: 100%;
+  color: $color-font-white;
+  cursor: pointer;
+}
+
+// left column
+
+.popup__payment {
+  border: 1px solid $color-font-black;
+  padding: 25px 30px;
+  width: 530px;
+  background-image: url('./assets/icons/boolking/mini-louvre.jpg');
+  background-repeat: no-repeat;
+  background-position: top 25px right 30px;
+}
+.payment__subtitle {
+  @extend %font-roboto;
+  @include font(22px, 26px, 500);
+  color: $color-bottom-line;
+  opacity: 0.9;
+  padding-top: 3px;
+  padding-bottom: 6px
+}
+.payment__info {
+  @extend %font-roboto;
+  @include font(18px, 21px, 300);
+  color: $color-bg-dark;
+  padding-top: 5px;
+}
+.payment_icon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+}
+.date_icon {
+  background-image: url('./assets/icons/boolking/date.svg');
+}
+.time_icon {
+  background-image: url('./assets/icons/boolking/time.svg');
+}
+.type_icon {
+  background-image: url('./assets/icons/boolking/check_circle_outline.svg');
+}
+.payment__total {
+  display: flex;
+  justify-content: space-between;
+  padding: 21px 0;
+}
+.payment__total_count,
+.payment__total_cost {
+  display: flex;
+  flex-direction: column;
+  gap: 7px 0;
+}
+.total_count,
+.total_cost {
+  display: flex;
+  align-items: center;
+  @include font(22px, 26px, normal);
+  color: $color-bg-dark;
+}
+.bordred_bg {
+  display: inline-block;
+  @include font(18px, 21px, normal);
+  color: #A4A4A3;
+  border-radius: 5px;
+  background-color: $color-bg-dark;
+  width: 32px;
+  height: 20px;
+  text-align: center;
+  margin-right: 10px;
+}
+.payment__total__sum {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding-bottom: 10px;
+}
+.payment__total__sum::after {
+  position: absolute;
+  content: "";
+  top: -12px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: $color-bottom-line;
+}
+.total__sum_text {
+  @include font(32px, 37px, normal);
+}
+.total__sum_count {
+  @include font(32px, 37px, 500);
+}
+.popup__payment__cards {
+  position: relative;
+}
+.popup__payment__cards label{
+  @include font(12px, 14px, normal);
+  font-family: Roboto;
+  color: #161615;
+}
+.payment__card_top {
+  position: relative;
+  z-index: 10;
+  width: 360px;
+  height: 211px;
+  background-color: $color-bg-card-top;
+  border-radius: 3px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+  background-image: url('./assets/icons/boolking/Visa.png');
+  background-position: top 34px right 20px;
+  background-repeat: no-repeat;
+}
+.payment__card_top::before {
+  position: absolute;
+  content: "";
+  background-image: url('./assets/icons/boolking/Mastercard.png');
+  background-repeat: no-repeat;
+  top: 65px;
+  right: 20px;
+  width: 52px;
+  height: 32px;
+  // z-index: 100;
+}
+
+.payment__card_bottom {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  top: 30px;
+  width: 360px;
+  height: 211px;
+  background-color: $color-bg-card-bottom;
+  border-radius: 3px;
+}
+.card_top_content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0;
+
+  .card__number {
+    width: 215px;
+    height: 35px;
+    outline: none;
+  }
+
+  .card__date_field {
+    position: relative;
+
+    .date__month,
+    .date__year {
+      width: 100px;
+      height: 35px;
+      padding-left: 10px;
+      outline: none;
+    }
+    .date__month {
+      margin-right: 13px;
+    }
+    .date__month::-webkit-inner-spin-button,
+    .date__month::-webkit-outer-spin-button,
+    .date__year::-webkit-inner-spin-button,
+    .date__year::-webkit-outer-spin-button {
+      height: 20px;
+      display: inline-block;
+      opacity: 0.6;
+      margin-right: 7px;
+    }
+  }
+
+  .card__date_field::after {
+    position: absolute;
+    content: "";
+    height: 35px;
+    width: 1px;
+    background-color: $color-bg-card-top;
+    top: 0;
+    left: 70px;
+  }
+  .card__date_field::before {
+    position: absolute;
+    content: "";
+    height: 35px;
+    width: 1px;
+    background-color: $color-bg-card-top;
+    top: 0;
+    left: 186px;
+  }
+
+  .card__name {
+    width: 320px;
+    height: 35px;
+    outline: none;
+  }
+
+  .card__number_cvc {
+    width: 75px;
+    height: 35px;
+    outline: none;
+  }
+}
+
+.card_bottom__line {
+  width: 100%;
+  height: 45px;
+  background-color: #161615;
+  margin-top: 25px;
+}
+.card_top_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 15px 20px;
+
+  
+  .card_top_content {
+    width: 75px;
+    text-align: center;
+  }
+  p {
+    width: 55px;
+    margin: auto;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #161615;
+    text-align: left;
+    padding-top: 5px;
+  }
+}
+.popup__submit {
+  padding-top: 56px;
+  display: flex;
+  justify-content: flex-end;
+}

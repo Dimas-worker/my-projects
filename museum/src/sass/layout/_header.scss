@@ -1,0 +1,60 @@
+.header {
+  background-color: $color-bg-dark;
+  padding: 59px 0 58px;
+}
+.heading_one {
+  position: absolute;
+  left: -999px;
+}
+.logo__link {
+  @include flex(stretch, stretch);
+  text-decoration: none;
+  // flex: 0 0 50%;
+}
+.logo__link:hover {
+  .logo__icon {
+    opacity: 0.5;
+  }
+  .logo__name {
+    color: $color-font-gold;
+  }
+}
+.logo__icon {
+  background-image: url("./assets/icons/logo.svg");
+  display: inline-block;
+  width: 49px;
+  height: 26px;
+  @extend %transition;
+}
+.logo__name {
+  @extend %font-forum;
+  @include font(28px, 31px, normal);
+  letter-spacing: 5px;
+  color: $color-font-white;
+  text-transform: uppercase;
+  margin-left: 25px;
+  @extend %transition;
+  padding-top: 2px;
+}
+.nav {
+  width: 775px;
+}
+.nav__list {
+  @include flex(space-between, center);
+  list-style: none;
+  gap: 0 55px;
+}
+.nav__link {
+  @extend %font-roboto;
+  @include font(22px, 26px, 200);
+  letter-spacing: 2px;
+  color: $color-font-white;
+  text-decoration: none;
+  @extend %transition;
+  &:hover {
+    color: $color-font-gold;
+  }
+  &:active {
+    color: $color-active;  
+  }
+}

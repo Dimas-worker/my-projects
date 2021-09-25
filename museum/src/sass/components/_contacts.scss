@@ -1,0 +1,35 @@
+.contacts {
+  padding: 75px 0 73px;
+}
+.title__contacts {
+  color: $color-font-gold;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 115px;
+    width: 100%;
+    background-color: $color-dark-red;
+    height: 3px;
+  }
+}
+.contacts__container {
+  @include flex(space-between, normal);
+  padding-top: 105px;
+}
+.contacts__content h4 {
+  @include font(28px, 33px, 500);
+}
+.contacts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px 0;
+  list-style: none;
+  padding-top: 50px;
+  & li {
+    @extend %font-roboto;
+    @include font(22px, 25.78px, 300);
+    color: $color-font-black;
+  }
+}

@@ -1,0 +1,117 @@
+.footer {
+  background-color: $color-bg-dark;
+  padding: 75px 0 50px;
+  position: relative;
+}
+.footer::after {
+  position: absolute;
+  content: "";
+  top: 265px;
+  width: 100%;
+  height: 3px;
+  background-color: $color-border-link;
+}
+.footer__content_top {
+  display: flex;
+  height: 140px;
+  margin-bottom: 50px;
+}
+
+.logo__footer {
+  padding-top: 9px;
+}
+.nav__footer {
+  display: flex;
+  padding: 12px 252px 0 143px;
+}
+
+.nav__list__footer {
+  list-style: none;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 25px 169px;
+}
+.footer__links {
+  @include flex(flex-end, flex-end);
+  // padding-left: 397px;
+  width: 100%;
+}
+.social__links {
+  display: flex;
+  list-style: none;
+  gap: 0 25px;
+  padding-bottom: 5px;
+}
+.social__link {
+  @include flex(center, center);
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: 1px solid $color-border-link;
+  border-radius: 50%;
+  @extend %transition;
+  &:hover {
+    border: 1px solid $color-font-gold;
+    .youtube {
+      background-image: url("./assets/icons/footer/youtube_hover.svg");
+    }
+    .instagram {
+      background-image: url("./assets/icons/footer/instagram_hover.svg");
+    }
+    .facebook {
+      background-image: url("./assets/icons/footer/facebook_hover.svg");
+    }
+    .twitter {
+      background-image: url("./assets/icons/footer/twitter_hover.svg");
+    }
+    .pinterest {
+      background-image: url("./assets/icons/footer/pinterest_hover.svg");
+    }
+  }
+}
+.social__icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  @extend %transition;
+}
+.youtube {
+  background-image: url("./assets/icons/footer/youtube.svg");
+}
+.instagram {
+  background-image: url("./assets/icons/footer/instagram.svg");
+}
+.facebook {
+  background-image: url("./assets/icons/footer/facebook.svg");
+}
+.twitter {
+  background-image: url("./assets/icons/footer/twitter.svg");
+}
+.pinterest {
+  background-image: url("./assets/icons/footer/pinterest.svg");
+}
+.footer__content_bottom {
+  @include flex(space-between, center);
+  padding-top: 55px;
+  color: $color-font-white;
+  @extend %font-roboto;
+  @include font(22px, 22px, 200);
+  letter-spacing: 2px;
+}
+
+.footer__school {
+  padding-left: 73px;
+}
+
+.footer__school,
+.footer__user {
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: $color-font-white;
+    @extend %transition;
+  }
+  a:hover {
+    color: $color-font-gold;
+  }
+}

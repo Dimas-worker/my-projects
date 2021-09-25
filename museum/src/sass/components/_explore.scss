@@ -1,0 +1,68 @@
+.explore {
+  background-color: $color-bg-dark;
+  padding: 75px 0 76px;
+}
+.explore__content {
+  display: flex;
+  flex: 0 0 50%;
+  flex-direction: column;
+  padding-right: 60px;
+}
+.title__explore {
+  color: $color-font-white;
+  position: relative;
+  padding-bottom: 78px;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 115px;
+    width: 100%;
+    background-color: $color-dark-red;
+    height: 3px;
+  }
+}
+.explore__text {
+  @extend %font-roboto;
+  @include font(22px, 38.5px, 300);
+  color: $color-font-white;
+  padding-top: 26px;
+  .colored {
+    color: $color-font-gold;
+  }
+  &:nth-child(2) {
+    padding-right: 10px;
+  }
+  &:nth-child(4) {
+    padding-top: 25px;
+  }
+}
+.explore__compare {
+  position: relative;
+  height: 700px;
+  margin-top: 15px;
+  flex: 0 0 50%;
+}
+.compare__before,
+.compare__after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.explore_img {
+  // display: inline-block;
+  // vertical-align: middle;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.comparison__img {
+  position: absolute;
+  z-index: 10;
+  cursor: ew-resize;
+  /*set the appearance of the slider:*/
+  display: inline-block;
+  background-image: url('./assets/icons/explore/explore_slider.svg');
+  width: 39px;
+  height: 700px;
+}
