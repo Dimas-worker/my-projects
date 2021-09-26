@@ -1,4 +1,4 @@
-.amount__window, .tickets__label__type, .dot, .swipe, .video__container__slider.shifting, .progress__bar, .player_controls button, .screen_button, .card__title::after, .visiting__card, .arrow, .square, .footer__school a,
+.contacts__list li a, .amount__window, .tickets__label__type, .dot, .swipe, .video__container__slider.shifting, .progress__bar, .player_controls button, .screen_button, .comparison__img, .card__title::after, .visiting__card, .arrow, .square, .footer__school a,
 .footer__user a, .social__icon, .social__link, .nav__link, .logo__name, .logo__icon, .popup__content, .popup, .popup__btn, .btn_ticket, .btn__welcome {
   transition: 0.5s ease-in-out;
 }
@@ -367,6 +367,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
   width: 17px;
   height: 17px;
   display: inline-block;
+  margin-right: 10px;
 }
 
 input[type=date] {
@@ -399,6 +400,7 @@ input[type=date]::before {
   top: 10px;
   left: 45px;
   color: #000000;
+  visibility: visible;
 }
 
 input[type=time]::before {
@@ -411,7 +413,12 @@ input[type=time]::before {
 
 input[type=date]::-webkit-datetime-edit,
 input[type=time]::-webkit-datetime-edit {
-  opacity: 0;
+  visibility: hidden;
+}
+
+input[type=date]:focus:before,
+input[type=time]:focus:before {
+  visibility: hidden;
 }
 
 .input__forma {
@@ -722,6 +729,7 @@ h6::after {
   width: 215px;
   height: 35px;
   outline: none;
+  text-align: center;
 }
 .card_top_content .card__date_field {
   position: relative;
@@ -767,11 +775,13 @@ h6::after {
   width: 320px;
   height: 35px;
   outline: none;
+  text-align: center;
 }
 .card_top_content .card__number_cvc {
   width: 75px;
   height: 35px;
   outline: none;
+  text-align: center;
 }
 
 .card_bottom__line {
@@ -1318,6 +1328,10 @@ h6::after {
   height: 700px;
 }
 
+.comparison__img:hover {
+  opacity: 0.6;
+}
+
 .video {
   padding: 75px 0 72px;
 }
@@ -1847,6 +1861,14 @@ input:checked ~ .checkmark:after {
   font-weight: 300;
   font-style: normal;
   color: #000000;
+}
+.contacts__list li a {
+  color: #000000;
+  text-decoration: none;
+}
+.contacts__list li:hover a {
+  letter-spacing: 1px;
+  color: #7E6C51;
 }
 
 /*# sourceMappingURL=style.css.map */
