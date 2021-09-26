@@ -27,9 +27,23 @@
   gap: 25px 0;
   list-style: none;
   padding-top: 50px;
+
   & li {
     @extend %font-roboto;
     @include font(22px, 25.78px, 300);
     color: $color-font-black;
+    
+    a {
+      @extend %transition;
+      color: $color-font-black;
+      text-decoration: none;
+    }
+  }
+  & li:hover {
+
+    a {
+      letter-spacing: 1px;
+      color: $color-active;
+    }
   }
 }

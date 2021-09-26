@@ -65,4 +65,8 @@
   background-image: url('./assets/icons/explore/explore_slider.svg');
   width: 39px;
   height: 700px;
+  @extend %transition;
+}
+.comparison__img:hover {
+  opacity: 0.6;
 }

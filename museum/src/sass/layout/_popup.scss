@@ -106,6 +106,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   width: 17px;
   height: 17px;
   display: inline-block;
+  margin-right: 10px;
 }
 input[type="date"] {
   position: relative;
@@ -118,6 +119,7 @@ input[type="date"] {
   outline: none;
   border-radius: 0;
 }
+
 input[type="time"] {
   position: relative;
   background-image: url('./assets/icons/boolking/time.svg');
@@ -135,6 +137,7 @@ input[type="date"]::before {
   top: 10px;
   left: 45px;
   color: $color-font-black;
+  visibility: visible;
 }
 input[type="time"]::before {
   position: absolute;
@@ -145,8 +148,16 @@ input[type="time"]::before {
 }
 input[type="date"]::-webkit-datetime-edit,
 input[type="time"]::-webkit-datetime-edit {
-  opacity: 0;
+  visibility: hidden;
 }
+
+input[type="date"]:focus,
+input[type="time"]:focus {
+  &:before {
+  visibility: hidden;
+  }
+}
+
 .input__forma {
   width: 400px;
   height: 45px;
@@ -400,6 +411,7 @@ h6::after {
     width: 215px;
     height: 35px;
     outline: none;
+    text-align: center;
   }
 
   .card__date_field {
@@ -449,12 +461,14 @@ h6::after {
     width: 320px;
     height: 35px;
     outline: none;
+    text-align: center;
   }
 
   .card__number_cvc {
     width: 75px;
     height: 35px;
     outline: none;
+    text-align: center;
   }
 }
 
