@@ -1,4 +1,4 @@
-.contacts__list li a, .amount__window, .tickets__label__type, .dot, .swipe, .video__container__slider.shifting, .progress__bar, .player_controls button, .screen_button, .comparison__img, .card__title::after, .visiting__card, .arrow, .square, .footer__school a,
+.contacts__list li a, .amount__window, .tickets__label__type, .dot, .swipe, .video__container__slider.shifting, .progress__bar, .player_controls button, .screen_button, .card__title::after, .visiting__card, .arrow, .square, .footer__school a,
 .footer__user a, .social__icon, .social__link, .nav__link, .logo__name, .logo__icon, .popup__content, .popup, .popup__btn, .btn_ticket, .btn__welcome {
   transition: 0.5s ease-in-out;
 }
@@ -1326,6 +1326,7 @@ h6::after {
   background-image: url("./assets/icons/explore/explore_slider.svg");
   width: 39px;
   height: 700px;
+  transition: opacity 0.5s linear;
 }
 
 .comparison__img:hover {
