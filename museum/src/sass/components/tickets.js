@@ -10,7 +10,7 @@ const totalSum = document.querySelector('#total_input');
 
 [basicMinus, seniorMinus, basicPlus, seniorPlus].forEach(el => {
   el.addEventListener('click', (e) => {
-    console.log(e.target.textContent);
+    // console.log(e.target.textContent);
     if (e.target.textContent === '_') {
       el.nextElementSibling.value === '0' ? 0 : el.nextElementSibling.value--;
     }
@@ -67,3 +67,33 @@ const buttonRipper = document.querySelector('.ripple')
       switchPopup();
     } else return;
   });
+
+  function visitInput() {
+    this.style.setProperty('--visibility-input', 'visible');
+    this.style.setProperty('--bg-image', "url('./assets/icons/boolking/close-arrow-focus.svg')");
+  }
+  function leaveInput() {
+    this.style.setProperty('--visibility-input', 'hidden');
+    this.style.setProperty('--bg-image', "url('./assets/icons/boolking/close-arrow.svg')");
+  }
+  const curDate = document.querySelector('#cur_date');
+  const curTime = document.querySelector('#cur_time');
+
+  curDate.addEventListener('focus', visitInput)
+  curDate.addEventListener('blur', leaveInput)
+
+  curTime.addEventListener('focus', visitInput)
+  curTime.addEventListener('blur', leaveInput)
+
+  const selectType = document.querySelector('#select');
+  const selectLabel = document.querySelector('.label_select');
+
+  selectType.addEventListener('focus', () => {
+    selectLabel.style.setProperty('--bg-image', "url('./assets/icons/boolking/close-arrow-focus.svg')");
+  })
+  selectType.addEventListener('blur', () => {
+    selectLabel.style.setProperty('--bg-image', "url('./assets/icons/boolking/close-arrow.svg')");
+  })
+  selectType.addEventListener('change', () => {
+    selectLabel.style.setProperty('--bg-image', "url('./assets/icons/boolking/close-arrow.svg')");
+  })

@@ -65,8 +65,8 @@
   background-image: url('./assets/icons/explore/explore_slider.svg');
   width: 39px;
   height: 700px;
-  @extend %transition;
+  transition: filter 0.5s ease-in-out;
 }
 .comparison__img:hover {
-  opacity: 0.6;
-}
+  // opacity: 0.6;
+  filter: invert(57%) sepia(26%) saturate(415%) hue-rotate(356deg) brightness(89%) contrast(94%);}

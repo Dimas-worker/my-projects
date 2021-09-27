@@ -102,7 +102,8 @@
 }
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  background-image: url('./assets/icons/boolking/close-arrow.svg');
+  // background-image: url('./assets/icons/boolking/close-arrow.svg');
+  background-image: var(--bg-image);
   width: 17px;
   height: 17px;
   display: inline-block;
@@ -146,18 +147,27 @@ input[type="time"]::before {
   left: 45px;
   color: $color-font-black;
 }
-input[type="date"]::-webkit-datetime-edit,
-input[type="time"]::-webkit-datetime-edit {
-  visibility: hidden;
+#cur_date,
+#cur_time,
+.label_select {
+  --visibility-input: hidden;
+  --bg-image: url('./assets/icons/boolking/close-arrow.svg');
 }
-
+.label__data {
+  input[type="date"]::-webkit-datetime-edit,
+  input[type="time"]::-webkit-datetime-edit {
+    // visibility: hidden;
+    visibility: var(--visibility-input);
+    cursor: pointer;
+    padding-left: 35px;
+  }
+}
 input[type="date"]:focus,
 input[type="time"]:focus {
   &:before {
   visibility: hidden;
   }
 }
-
 .input__forma {
   width: 400px;
   height: 45px;
@@ -204,7 +214,8 @@ input[type="tel"]::-webkit-input-placeholder {
   content: "";
   bottom: 35px;
   right: 15px;
-  background-image: url('./assets/icons/boolking/close-arrow.svg');
+  background-image: var(--bg-image);
+  // background-image: url('./assets/icons/boolking/close-arrow.svg');
   width: 17px;
   height: 17px;
   display: inline-block;

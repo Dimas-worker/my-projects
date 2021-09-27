@@ -272,7 +272,6 @@
         </div>
       </div>
       <div class="popup close_link">
-        <!-- <div class="wrapper wrapper__popup"> -->
           <div class="popup__content">
             <span class="close__popup"></span>
             <div class="layout-2-column">
@@ -282,8 +281,12 @@
                 <p class="popup__text">Tour to Louvre</p>
                 <form name="data__forma" class="data__forma">
                   <div class="date__time">
-                    <input type="date">
-                    <input type="time">
+                    <label for="cur_date" class="label__data">
+                      <input type="date" id="cur_date">
+                    </label>
+                    <label for="cur_time" class="label__data">
+                      <input type="time" id="cur_time">
+                    </label>
                   </div>
                   <input type="text" placeholder="Name" class="input__forma data_name">
                   <input type="email" placeholder="E-mail" class="input__forma">
@@ -365,7 +368,6 @@
                         <p>The last<br>3 or 4 digits<br>on back<br>of the card</p>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
                 <div class="popup__submit">
@@ -374,7 +376,6 @@
               </div>
             </div>
           </div>
-        <!-- </div> -->
       </div>
       <div class="parallax"></div>
     </section>
