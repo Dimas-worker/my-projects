@@ -363,7 +363,7 @@ h3 {
 
 input[type=date]::-webkit-calendar-picker-indicator,
 input[type=time]::-webkit-calendar-picker-indicator {
-  background-image: url("./assets/icons/boolking/close-arrow.svg");
+  background-image: var(--bg-image);
   width: 17px;
   height: 17px;
   display: inline-block;
@@ -411,9 +411,18 @@ input[type=time]::before {
   color: #000000;
 }
 
-input[type=date]::-webkit-datetime-edit,
-input[type=time]::-webkit-datetime-edit {
-  visibility: hidden;
+#cur_date,
+#cur_time,
+.label_select {
+  --visibility-input: hidden;
+  --bg-image: url("./assets/icons/boolking/close-arrow.svg");
+}
+
+.label__data input[type=date]::-webkit-datetime-edit,
+.label__data input[type=time]::-webkit-datetime-edit {
+  visibility: var(--visibility-input);
+  cursor: pointer;
+  padding-left: 35px;
 }
 
 input[type=date]:focus:before,
@@ -474,7 +483,7 @@ input[type=tel]::-webkit-input-placeholder {
   content: "";
   bottom: 35px;
   right: 15px;
-  background-image: url("./assets/icons/boolking/close-arrow.svg");
+  background-image: var(--bg-image);
   width: 17px;
   height: 17px;
   display: inline-block;
@@ -1326,11 +1335,11 @@ h6::after {
   background-image: url("./assets/icons/explore/explore_slider.svg");
   width: 39px;
   height: 700px;
-  transition: opacity 0.5s linear;
+  transition: filter 0.5s ease-in-out;
 }
 
 .comparison__img:hover {
-  opacity: 0.6;
+  filter: invert(57%) sepia(26%) saturate(415%) hue-rotate(356deg) brightness(89%) contrast(94%);
 }
 
 .video {
