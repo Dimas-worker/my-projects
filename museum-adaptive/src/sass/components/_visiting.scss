@@ -1,0 +1,158 @@
+.visiting {
+  padding: 76px 0 71px;
+
+  @include media-desktop {
+    padding: 52px 0 58px;
+  }
+
+  @include media-big-laptop {
+    padding: 40px 0 78px;
+  }
+
+  @include media-table-635 {
+    padding: 40px 0 41px;
+  }
+}
+.title_visiting {
+  color: $color-font-gold;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 114px;
+    width: 100%;
+    background-color: $color-dark-red;
+    height: 3px;
+
+    @include media-desktop {
+      top: 103px;
+    }
+    @include media-big-laptop {
+      top: 80px
+    }
+    @include media-table-635 {
+      top: 60px;
+    }
+  }
+}
+.visiting__container {
+  @include flex(space-between, stretch);
+  flex-wrap: wrap;
+  gap: 74px 0;
+  padding-top: 102px;
+
+  @include media-desktop {
+    gap: 60px 0;
+    @include flex(space-evenly, stretch);
+    padding-top: 77px;
+  }
+
+  @include media-desktop {
+    padding-top: 76px;
+  }
+
+  @include media-big-laptop {
+    padding-top: 63px;
+    gap: 40px 0;
+  }
+  @include media-table-normal {
+    @include flex(space-around, stretch);
+  }
+}
+
+.visiting__card {
+  flex: 0 1 30.5%;
+  display: block;
+  @extend %transition;
+  cursor: pointer;
+  text-decoration: none;
+
+  @include media-desktop {
+    flex: 0 1 33.5%;
+  }
+
+  @include media-laptop-low {
+    flex: 0 1 38.5%;
+  }
+  @include media-table-normal {
+    flex: 0 1 45%;
+  }
+  @include media-table-635 {
+    flex: 0 1 73.5%;
+  }
+  @include media-min-mobile {
+    flex: 0 1 95%;
+  }
+
+  &:hover {
+    .card__title::after {
+      width:100%
+    }
+  }
+  h3 {
+    margin-top: 25px;
+    
+    @include media-laptop-low {
+      margin-top: 22px;
+    }
+
+  }
+  .card_img {
+    width: 100%;
+  }
+
+  .card__title {
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 43px;
+      width: 300px;
+      background-color: $color-dark-red;
+      height: 2px;
+      @extend %transition;
+  
+      @include media-desktop {
+        width: 150px;
+        top: 39px;
+      }
+      @include media-laptop-low {
+        top: 33px;
+      }
+      @include media-table-635 {
+        top: 30px;
+      }
+    }
+  }
+
+  .card__subtitle_top {
+    @extend %font-roboto;
+    @include font(22px, 26px, 200);
+    color: $color-font-black;
+    padding-top: 22px;
+
+    @include media-desktop {
+      @include font(20px, 23px, 200);
+    }
+    @include media-laptop-low {
+      @include font(18px, 21px, 200);
+    }
+    @include media-table-635 {
+      @include font(16px, 19px, 200);
+    }
+  }
+
+  .card__subtitle_bottom {
+    @extend %font-roboto;
+    @include font(18px, 21px, 200);
+    color: $color-font-black;
+    padding-top: 10px;
+
+    @include media-desktop {
+      @include font(16px, 19px, 200);
+    }
+  }
+}
+

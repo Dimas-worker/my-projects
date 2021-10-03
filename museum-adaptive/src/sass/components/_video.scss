@@ -1,0 +1,433 @@
+.video {
+  padding: 3.5% 0 3.4%;
+
+  @include media-desktop {
+    padding: 5% 0 5.8%;
+  }
+  @include media-laptop-800 {
+    padding: 5% 0 10%;
+  }
+  @include media-table {
+    padding: 9% 0 8.8%;
+  }
+}
+
+.video__text__container {
+  @include flex(space-between, center);
+  padding-bottom: 75px;
+
+  @include media-desktop {
+    padding-bottom: 34px;
+  }
+  @include media-laptop-800 {
+    padding-bottom: 21px;
+  }
+  @include media-table {
+    padding-bottom: 18px;
+  }
+  .title_video {
+    color: $color-font-gold;
+    flex: 0 0 50%;
+    @include media-middle {
+      flex: 0 0 auto;
+    }
+  }
+  .video_text {
+    @include font(22px, 38px, 300);
+    color: $color-font-black;
+    flex: 0 0 50%;
+    @extend %font-roboto;
+  
+    @include media-middle {
+      display: none;
+    }
+  }
+}
+
+.player {
+  position: relative;
+  background-color: $color-font-black;
+  width: 100%;
+  height: 100%;
+  
+  video::-webkit-media-controls {
+    display: none !important;
+  }
+}
+
+.player__video {
+  /* width: 1440px;
+  height: 630px; */
+  width: 100%;
+  max-height: 735px;
+  position: relative;
+  object-fit: cover;
+
+  @include media-laptop {
+    max-height: 504px;
+  }
+  @include media-laptop-800 {
+    max-height: 383px;
+  }
+  @include media-table {
+    max-height: 224px;
+  }
+  @include media-mobile {
+    height: 224px;
+  }
+}
+
+.screen_button {
+  position: absolute;
+  top: calc(44% - 30% / 2);
+  left: calc(50% - 15.3% / 2);
+  display: inline-block;
+  background-image: url("./assets/icons/player/screen_play.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  // width: 220px;
+  // height: 220px;
+  width: 15.3%;
+  height: 30%;
+  background-color: transparent;
+  cursor: pointer;
+  @extend %transition;
+  /* z-index: 100; */
+
+  @include media-laptop-800 {
+    width: 11.3%;
+    height: 23%;
+    top: calc(44% - 23% / 2);
+    left: calc(50% -  11.3% / 2);
+  }
+
+  @include media-table {
+    width: 13.5%;
+    height: 21.5%;
+    top: 27.5%;
+    left: 44%;
+  }
+}
+.screen_button:hover {
+  opacity: 0.5;
+}
+
+.player_controls {
+  @include flex(space-between, center);
+  position: absolute;
+  /* left: 0; */
+  bottom: 0;
+  width: 100%;
+  height: 85px;
+  background-color: #000000;
+  z-index: 100;
+
+  @include media-desktop {
+    height: 60px;
+  }
+  @include media-laptop-800 {
+    height: 53px;
+  }
+  @include media-table {
+    height: 50px;
+  }
+
+  button {
+    background-color: transparent;
+    cursor: pointer;
+    @extend %transition;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+.player_controls_hidden {
+  bottom: -83px;
+}
+
+
+.previous__btn {
+  display: inline-block;
+  background-image: url("./assets/icons/player/previous.svg");
+  width: 27px;
+  height: 30px;
+}
+
+.play__btn {
+  display: inline-block;
+  background-image: url("./assets/icons/player/play_stop.svg");
+  width: 30px;
+  height: 30px;
+  margin-left: 28px;
+
+  @include media-desktop {
+    margin-left: 37px;
+  }
+  @include media-laptop-800 {
+    margin-left: 28px;
+  }
+  @include media-table {
+    margin-left: 13px;
+    background-size: 63%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+.pause__btn {
+  display: inline-block;
+  background-image: url("./assets/icons/player/pause.svg");
+  width: 30px;
+  height: 30px;
+  margin-left: 28px;
+}
+
+.next__btn {
+  display: inline-block;
+  background-image: url("./assets/icons/player/next.svg");
+  width: 27px;
+  height: 30px;
+}
+
+.progress__bar {
+  // flex: 0 0 60%;
+  width: 929px;
+  height: 8px;
+  background: linear-gradient(to right, $color-dark-red 0%, $color-dark-red 53%, $color-font-light-grey 53%, $color-font-light-grey 100%);
+  outline: none;
+  -webkit-appearance: none;
+  @extend %transition;
+
+  @include media-middle {
+    flex: 0 0 60%;
+    width: 100%;
+  }
+  @include media-desktop {
+    flex: 0 0 57%;
+    height: 5px;
+  }
+  @include media-laptop-800 {
+    display: none;
+  }
+}
+
+.progress__bar_top {
+  display: none;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 60px;
+  z-index: 1000;
+  
+  @include media-laptop-800 {
+    display: block;
+    bottom: 53px;
+  }
+  @include media-table {
+    bottom: 50px;
+  }
+}
+
+.player__volume::-webkit-slider-thumb,
+.progress__bar::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  cursor: ew-resize;
+  background: #ffffff;
+
+  @include media-desktop {
+    width: 13px;
+    height: 13px;
+  }
+  @include media-table {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.volume__btn {
+  display: inline-block;
+  background-image: url("./assets/icons/player/volume.svg");
+  width: 37px;
+  height: 30px;
+
+  @include media-desktop {
+    background-size: 73%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  @include media-table {
+    background-size: 54%;
+  }
+}
+.volume__btn_mute {
+  background-image: url("./assets/icons/player/mute.svg");
+  width: 37px;
+  height: 36px;
+}
+.player__volume {
+  // flex: 0 0 10%;
+  width: 155px;
+  height: 8px;
+  background: linear-gradient(to right, $color-dark-red 0%, $color-dark-red 42%, $color-font-light-grey 42%, $color-font-light-grey 100%);
+  outline: none;
+  -webkit-appearance: none;
+
+  @include media-middle {
+    flex: 0 0 10%;
+    width: 100%;
+  }
+  @include media-desktop {
+    flex: 0 0 14%;
+    height: 5px;
+  }
+  @include media-laptop-800 {
+    flex: 0 0 67%;
+  }
+  @include media-table {
+    flex: 0 0 53%;
+  }
+}
+
+.fullscreen__btn {
+  display: inline-block;
+  background-image: url("./assets/icons/player/fullscreen.svg");
+  width: 36px;
+  height: 36px;
+  margin-right: 27px;
+
+  @include media-desktop {
+    margin-right: 34px;
+    background-size: 73%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  @include media-laptop-800 {
+    margin-right: 25px;
+  }
+  @include media-table {
+    margin-right: 12px;
+    background-size: 52%;
+  }
+}
+.fullscreen__btn_exit {
+  background-image: url("./assets/icons/player/fullscreen_exit.svg");
+}
+
+/* slider */
+
+.video__slider {
+  padding-top: 40px;
+  overflow: hidden;
+  position: relative;
+
+  @include media-laptop-800 {
+    padding-top: 21px;
+  }
+  @include media-table {
+    padding-top: 39px;
+  }
+}
+
+.video__slide {
+  width: 100%;
+  position: relative;
+  padding-bottom: 17.8%;
+  height: 0;
+
+  @include media-laptop {
+    padding-bottom: 17.2%;
+  }
+  @include media-laptop-low {
+    padding-bottom: 27.5%;
+  }
+
+  .slider__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    border: 0;
+  }
+}
+
+/* dots style */
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 20px;
+  padding-top: 40px;
+
+  // @include media-desktop {
+  //   padding-top: 33px;
+  // }
+
+  @include media-laptop-800 {
+    padding-top: 20px;
+  }
+  @include media-table {
+    padding-top: 36px;
+  }
+}
+.swipe {
+  display: inline-block;
+  width: 10px;
+  height: 12px;
+  cursor: pointer;
+  @extend %transition;
+  
+}
+
+.swipe_left {
+  background-image: url('./assets/icons/player/arrow-left.svg');
+}
+.swipe_left:hover {
+  background-image: url('./assets/icons/player/arrow-left_active.svg');
+}
+.swipe_right {
+  background-image: url('./assets/icons/player/arrow-right.svg');
+}
+.swipe_right:hover {
+  background-image: url('./assets/icons/player/arrow-right_active.svg');
+}
+.dots__swipes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 20px;
+  max-width: 140px;
+
+  @include media-laptop-800 {
+    max-width: 130px;
+  }
+  @include media-table {
+    max-width: 120px;
+  }
+}
+.dot {
+  background-color: #999999;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  @extend %transition;
+
+  @include media-laptop-800 {
+    height: 10px;
+    width: 10px;
+  }
+  @include media-table {
+    height: 8px;
+    width: 8px;
+  }
+}
+.dot_active {
+  background-color: #000000;
+}
+.dot:hover {
+  background-color: $color-dark-red;
+}
