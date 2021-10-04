@@ -2962,6 +2962,20 @@ h6::after {
   background-size: contain;
   background-repeat: no-repeat;
 }
+.video__slide .video__slide_title {
+  position: absolute;
+  top: 16px;
+  left: 60px;
+  width: 73%;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 38px;
+  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .video__slide .video__slide_link {
   position: absolute;
   top: 0;
