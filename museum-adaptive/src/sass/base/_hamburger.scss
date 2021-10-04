@@ -108,7 +108,7 @@
 
     .burger__container_img1 {
       @extend %burger-images;
-      background-image: url('../../assets/img/burger-menu/image-1.jpg');
+      background-image: url('./assets/img/burger-menu/image-1.jpg');
       background-size: inherit;
 
       @include media-table {
@@ -123,26 +123,26 @@
       
       .burger__container_img2 {
         @extend %burger-images;
-        background-image: url('../../assets/img/burger-menu/image-2.jpg');
+        background-image: url('./assets/img/burger-menu/image-2.jpg');
         background-size: inherit;
 
         @include media-table {
-          background-image: url('../../assets/img/burger-menu/image-5.jpg');
+          background-image: url('./assets/img/burger-menu/image-5.jpg');
         }
       }
       .burger__container_img3 {
         background-size: inherit;
         @extend %burger-images;
-        background-image: url('../../assets/img/burger-menu/image-3.jpg');
+        background-image: url('./assets/img/burger-menu/image-3.jpg');
 
         @include media-table {
-          background-image: url('../../assets/img/burger-menu/image-6.jpg');
+          background-image: url('./assets/img/burger-menu/image-6.jpg');
         }
       }
       .burger__container_img4 {
         background-size: inherit;
         @extend %burger-images;
-        background-image: url('../../assets/img/burger-menu/image-4.jpg');
+        background-image: url('./assets/img/burger-menu/image-4.jpg');
         display: none;
         
         @include media-table {
@@ -181,7 +181,7 @@
     flex-direction: column;
 
     &>li {
-      background-image: url('../../assets/icons/welcome/menu-arrow.svg');
+      background-image: url('./assets/icons/welcome/menu-arrow.svg');
       background-position: center right;
       background-repeat: no-repeat;
       width: 122px;

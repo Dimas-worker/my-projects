@@ -273,3 +273,68 @@ const videoSwiper = new Swiper('.video__slider', {
       handleProgress();
     }
   });
+
+// iframe 
+
+function findVideos() {
+  let videos = document.querySelectorAll('#video__slide');
+  console.log(videos);
+  for (let i = 0; i < videos.length; i++) {
+    setupVideo(videos[i]);
+  }
+}
+
+function setupVideo(video) {
+    let link = video.querySelector('.video__slide_link');
+    let media = video.querySelector('.video__slide_img');
+    let button = video.querySelector('.video__slide_btn');
+    let icon = video.querySelector('.video__slide_logo');
+
+    let id = parseMediaURL(media);
+    
+    video.addEventListener('click', () => {
+      let iframe = createIframe(id);
+      
+      link.remove();
+      button.remove();
+      icon.remove();
+
+      video.appendChild(iframe);
+    });
+    
+    link.removeAttribute('href');
+    // video.classList.add('video__slide__enable');
+}
+
+function parseMediaURL(media) {
+    let match;
+    let regexp = /https:\/\/i\.ytimg\.com\/vi\/([a-zA-Z0-9_-]+)\/maxresdefault\.jpg/i;
+    let regexp_hq = /https:\/\/i\.ytimg\.com\/vi\/([a-zA-Z0-9_-]+)\/mqdefault\.jpg/i;
+    let url = media.src;
+    if (/mqdefault/.test(url)) {
+      match = url.match(regexp_hq);
+    } else {
+      match = url.match(regexp);
+    }
+
+    return match[1];
+}
+
+function createIframe(id) {
+    let iframe = document.createElement('iframe');
+
+    iframe.setAttribute('allowfullscreen', "");
+    iframe.setAttribute('allow', 'autoplay');
+    iframe.setAttribute('src', generateURL(id));
+    iframe.classList.add('slider__iframe');
+
+    return iframe;
+}
+
+function generateURL(id) {
+    let query = '?rel=0&showinfo=0&autoplay=1';
+
+    return 'https://www.youtube.com/embed/' + id + query;
+}
+
+findVideos();

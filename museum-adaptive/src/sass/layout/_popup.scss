@@ -135,15 +135,21 @@
   @include font(18px, 21px, normal);
   width: 400px;
   
-  @include media-table {
+  @include media-big-laptop {
     width: 100%;
   }
+
+  // @include media-table {
+  // }
 }
 .date__time {
   padding-top: 72px;
   display: flex;
   justify-content: space-between;
 
+  @include media-big-laptop {
+    gap: 0 28px;
+  }
   @include media-table {
     flex-direction: column;
     gap: 20px 0;
@@ -170,9 +176,10 @@ input[type="date"] {
   outline: none;
   border-radius: 0;
 
-  @include media-table {
+  @include media-big-laptop {
     width: 100%;
   }
+  
 }
 
 input[type="time"] {
@@ -185,10 +192,11 @@ input[type="time"] {
   border: 1px solid #000000;
   outline: none;
   border-radius: 0;
-
-  @include media-table {
+  
+  @include media-big-laptop {
     width: 100%;
   }
+  
 }
 input[type="date"]::before {
   position: absolute;
@@ -212,6 +220,10 @@ input[type="time"]::before {
   --bg-image: url('./assets/icons/boolking/close-arrow.svg');
 }
 .label__data {
+
+  @include media-big-laptop {
+    width: 100%;
+  }
   input[type="date"]::-webkit-datetime-edit,
   input[type="time"]::-webkit-datetime-edit {
     // visibility: hidden;
@@ -236,6 +248,9 @@ input[type="time"]:focus {
   padding-left: 43px;
   background-repeat: no-repeat;
 
+  @include media-big-laptop {
+    width: 100%;
+  }
   @include media-table-635 {
     width: 100%;
   }

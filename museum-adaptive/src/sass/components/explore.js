@@ -9,19 +9,19 @@ function initComparisons() {
     let clicked = 0;
     const rec = img.getBoundingClientRect();
     const recCur = cur.getBoundingClientRect();
-    console.log(rec, recCur);
+    // console.log(rec, recCur);
     let w = img.offsetWidth;
     let wC = cur.offsetWidth;
     if (!w) {
       w = wC;
     }
-    console.log('w ' + w, 'wC ' + wC);
+    // console.log('w ' + w, 'wC ' + wC);
     // let h = img.offsetHeight;
     /*set the width of the img element to 50%:*/
     // img.style.width = (w * 43 / 70) + "px";
 
     img.style.width = w * 0.61 / w * 100 + "%";
-    console.log(img.style.width);
+    // console.log(img.style.width);
     /*create slider:*/
     let slider = document.createElement("DIV");
     slider.setAttribute("class", "comparison__img");
@@ -85,4 +85,6 @@ function initComparisons() {
     }
   }
 }
-initComparisons();
+
+window.addEventListener('load', initComparisons);
+// initComparisons();

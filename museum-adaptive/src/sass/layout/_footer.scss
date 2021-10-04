@@ -96,6 +96,8 @@
 .nav__footer {
   display: flex;
   padding: 12px 10% 0 10%;
+  position: relative;
+  z-index: 100;
 
   @include media-desktop {
     padding: 14px 5% 0 4%;
