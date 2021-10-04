@@ -405,7 +405,8 @@ h3 {
 }
 .burger__nav .burger__container .burger__container_img1 {
   background-image: url("./assets/img/burger-menu/image-1.jpg");
-  background-size: inherit;
+  background-size: cover;
+  width: 100%;
 }
 @media (max-width: 550px) {
   .burger__nav .burger__container .burger__container_img1 {
@@ -418,10 +419,27 @@ h3 {
   align-items: center;
   padding: 3px 0 17px;
   gap: 0 20px;
+  padding-top: 15px;
+}
+@media (max-width: 800px) {
+  .burger__nav .burger__container .container__img {
+    padding-top: 0;
+  }
+}
+@media (max-width: 550px) {
+  .burger__nav .burger__container .container__img {
+    gap: 0 12px;
+  }
 }
 .burger__nav .burger__container .container__img .burger__container_img2 {
   background-image: url("./assets/img/burger-menu/image-2.jpg");
-  background-size: inherit;
+  background-size: cover;
+  width: 100%;
+}
+@media (max-width: 800px) {
+  .burger__nav .burger__container .container__img .burger__container_img2 {
+    background-size: contain;
+  }
 }
 @media (max-width: 550px) {
   .burger__nav .burger__container .container__img .burger__container_img2 {
@@ -429,8 +447,14 @@ h3 {
   }
 }
 .burger__nav .burger__container .container__img .burger__container_img3 {
-  background-size: inherit;
+  background-size: cover;
+  width: 100%;
   background-image: url("./assets/img/burger-menu/image-3.jpg");
+}
+@media (max-width: 800px) {
+  .burger__nav .burger__container .container__img .burger__container_img3 {
+    background-size: contain;
+  }
 }
 @media (max-width: 550px) {
   .burger__nav .burger__container .container__img .burger__container_img3 {
@@ -438,13 +462,24 @@ h3 {
   }
 }
 .burger__nav .burger__container .container__img .burger__container_img4 {
-  background-size: inherit;
+  background-size: cover;
+  width: 100%;
   background-image: url("./assets/img/burger-menu/image-4.jpg");
   display: none;
+}
+@media (max-width: 800px) {
+  .burger__nav .burger__container .container__img .burger__container_img4 {
+    background-size: contain;
+  }
 }
 @media (max-width: 550px) {
   .burger__nav .burger__container .container__img .burger__container_img4 {
     display: block;
+  }
+}
+@media (max-width: 405px) {
+  .burger__nav .burger__container .container__img .burger__container_img4 {
+    display: none;
   }
 }
 .burger__nav .burger__container .burger__line {
@@ -2905,6 +2940,7 @@ h6::after {
   position: relative;
   padding-bottom: 17.8%;
   height: 0;
+  cursor: pointer;
 }
 @media (max-width: 1024px) {
   .video__slide {
