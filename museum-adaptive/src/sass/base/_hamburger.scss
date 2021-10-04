@@ -109,7 +109,8 @@
     .burger__container_img1 {
       @extend %burger-images;
       background-image: url('./assets/img/burger-menu/image-1.jpg');
-      background-size: inherit;
+      background-size: cover;
+      width: 100%;
 
       @include media-table {
         display: none;
@@ -120,33 +121,57 @@
       @include flex(space-between, center);
       padding: 3px 0 17px;
       gap: 0 20px;
+      padding-top: 15px;
+
+      @include media-laptop-800 {
+        padding-top: 0;
+      }
+      @include media-table {
+        gap: 0 12px;
+      }
       
       .burger__container_img2 {
         @extend %burger-images;
         background-image: url('./assets/img/burger-menu/image-2.jpg');
-        background-size: inherit;
+        background-size: cover;
+        width: 100%;
 
+        @include media-laptop-800 {
+          background-size: contain;
+        }
         @include media-table {
           background-image: url('./assets/img/burger-menu/image-5.jpg');
         }
+        
       }
       .burger__container_img3 {
-        background-size: inherit;
+        background-size: cover;
+        width: 100%;
         @extend %burger-images;
         background-image: url('./assets/img/burger-menu/image-3.jpg');
 
+        @include media-laptop-800 {
+          background-size: contain;
+        }
         @include media-table {
           background-image: url('./assets/img/burger-menu/image-6.jpg');
         }
       }
       .burger__container_img4 {
-        background-size: inherit;
+        background-size: cover;
+        width: 100%;
         @extend %burger-images;
         background-image: url('./assets/img/burger-menu/image-4.jpg');
         display: none;
         
+        @include media-laptop-800 {
+          background-size: contain;
+        }
         @include media-table {
           display: block;
+        }
+        @include media-min-mobile {
+          display: none;
         }
       }
     }

@@ -336,6 +336,7 @@
   position: relative;
   padding-bottom: 17.8%;
   height: 0;
+  cursor: pointer;
 
   @include media-laptop {
     padding-bottom: 17.2%;
@@ -373,6 +374,7 @@
       background-size: contain;
       background-repeat: no-repeat;
       background-position: top 0 left 0;
+
     }
   }
   .video__slide_btn {
