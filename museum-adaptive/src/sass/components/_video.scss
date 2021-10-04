@@ -353,6 +353,22 @@
     background-image: url('./assets/videos/icon-iframe.png');
     background-size: contain;
     background-repeat: no-repeat;
+
+    
+  }
+  .video__slide_title {
+    position: absolute;
+    top: 16px;
+    left: 60px;
+    width: 73%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 38px;
+    color: $color-font-white;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .video__slide_link {
     position: absolute;
@@ -361,8 +377,6 @@
     width: 100%;
     height: 100%;
     
-  
-
     .video__slide_img {
       position: absolute;
       top: 0;

@@ -289,6 +289,7 @@ function setupVideo(video) {
     let media = video.querySelector('.video__slide_img');
     let button = video.querySelector('.video__slide_btn');
     let icon = video.querySelector('.video__slide_logo');
+    let text = video.querySelector('.video__slide_title');
 
     let id = parseMediaURL(media);
     
@@ -298,6 +299,7 @@ function setupVideo(video) {
       link.remove();
       button.remove();
       icon.remove();
+      text.remove();
 
       video.appendChild(iframe);
     });
