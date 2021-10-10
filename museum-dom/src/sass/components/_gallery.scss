@@ -1,0 +1,111 @@
+.gallery {
+  background-color: $color-bg-dark;
+  padding-top: 75px;
+
+  @include media-desktop {
+    padding-top: 52px;
+  }
+  @include media-laptop-800 {
+    padding-top: 41px;
+  }
+
+  .title__gallery {
+    color: $color-font-white;
+    padding-bottom: 75px;
+  
+    @include media-desktop {
+      padding-bottom: 53px;
+    }
+
+    @include media-laptop-800 {
+      padding-bottom: 41px;
+    }
+    @include media-table {
+      padding-bottom: 39px;
+    }
+  }
+  .gallery__container {
+    position: relative;
+    height: 1960px;
+    // height: 100%;
+    overflow: hidden;
+  
+    @include media-desktop {
+      height: 1265px;
+    }
+    @include media-laptop-800 {
+      height: 1079px;
+    }
+    @include media-table {
+      height: 637px;
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+      width: 100%;
+      height: 360px;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+    }
+
+    .gallery__container_inner {
+      display: flex;
+      flex-flow: column wrap;
+      align-content: space-between;
+      gap: 24px 0;
+      height: 2960px;
+    
+      &::after,
+      &::before {
+        flex-basis: 100%;
+        order: 2;
+        width: 0;
+        content: "";
+      }
+      &::after {
+    
+        @include media-big-laptop {
+          display: none;
+        }
+      }
+
+      .gallery__card {
+        width: calc(33.3% - 24px);
+        opacity: 0;
+        transform: translateY(30%) scale(0.9);
+        @extend %transition;
+
+        @include media-big-laptop {
+          width: calc(50% - 12px);
+        }
+      }
+      .gallery__card_active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+}
+
+
+
+.gallery__container_inner img:nth-child(3n+1) {
+   order: 1; 
+}
+.gallery__container_inner img:nth-child(3n+2) { 
+  order: 2;
+}
+.gallery__container_inner img:nth-child(3n) { 
+  order: 3;
+
+  @include media-big-laptop {
+    display: none;
+  }
+}
+.gallery__container_inner img:nth-child(1),
+.gallery__container_inner img:nth-child(3) {
+    margin-top: 50px;
+}

@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "description": "My new js application",
+  "private": true,
+  "name": "museum",
+  "scripts": {
+    "start": "rss-scripts start",
+    "build": "rss-scripts build",
+    "style": "sass --watch src/sass/style.scss src/style.css"
+  },
+  "devDependencies": {
+    "mapbox-gl": "^2.5.1",
+    "rss-scripts": "^0.2.1",
+    "swiper": "^7.0.6"
+  }
+}

@@ -1,0 +1,132 @@
+.contacts {
+  padding: 72px 0 71px;;
+
+  @include media-desktop {
+    padding: 52px 0 65px;
+  }
+  @include media-big-laptop {
+    padding: 42px 0 70px;
+  }
+  @include media-table {
+    padding: 42px 0 39px;
+  }
+}
+.title__contacts {
+  color: $color-font-gold;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 115px;
+    width: 100%;
+    background-color: $color-dark-red;
+    height: 3px;
+
+    @include media-desktop {
+      top: 102px;
+    }
+    @include media-big-laptop {
+      top: 78px;
+    }
+    @include media-table {
+      top: 58px;
+    }
+  }
+}
+.contacts__container {
+  @include flex(space-between, normal);
+  padding-top: 105px;
+
+  @include media-desktop {
+    padding-top: 75px;
+  }
+
+  @include media-big-laptop {
+    flex-direction: column;
+    padding-top: 61px;
+  }
+
+  .contacts__content {
+    flex: 0 0 auto;
+
+    @include media-desktop {
+      padding-right: 38px;
+    }
+    @include media-big-laptop {
+      padding-right: 0;
+      padding-bottom: 40px;
+    }
+
+    h4 {
+      @include font(28px, 33px, 500);
+
+      @include media-desktop {
+        @include font(24px, 28px, 500);
+      }
+      @include media-big-laptop {
+        @include font(20px, 23px, 500);
+      }
+      @include media-table {
+        @include font(16px, 19px, 500);
+      }
+    }
+  }
+}
+
+.contacts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px 0;
+  list-style: none;
+  padding-top: 50px;
+  @include font(22px, 25.78px, 300);
+
+  @include media-desktop {
+    padding-top: 35px;
+    @include font(20px, 23px, 300);
+    gap: 15px 0;
+  }
+  @include media-big-laptop {
+    @include font(18px, 21px, 300);
+    padding-top: 41px;
+  }
+  @include media-table {
+    @include font(16px, 19px, 300);
+  }
+
+  & li {
+    @extend %font-roboto;
+    color: $color-font-black;
+    
+    a {
+      @extend %transition;
+      color: $color-font-black;
+      text-decoration: none;
+    }
+  }
+  & li:hover {
+
+    a {
+      letter-spacing: 1px;
+      color: $color-active;
+    }
+  }
+}
+#map {
+  width: 960px;
+  height: 620px;
+
+  @include media-desktop-1130 {
+    width: calc(100vw - 330px);
+    height: calc(65vw - 212px);
+  }
+}
+// .contacts__map_img {
+//   width: 100%;
+//   object-fit: none;
+// }
+// .contacts__map {
+//   width: 400px;
+//   height: 400px;
+// }
