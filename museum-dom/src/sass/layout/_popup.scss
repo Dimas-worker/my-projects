@@ -577,12 +577,14 @@ h6::after {
   display: flex;
   flex-direction: column;
   gap: 5px 0;
+  position: relative;
 
   .card__number {
     width: 215px;
     height: 35px;
     outline: none;
     text-align: center;
+    @include font(16px, 16px, normal);
 
     @include media-min-mobile {
       width: 100%;
@@ -637,6 +639,9 @@ h6::after {
     height: 35px;
     outline: none;
     text-align: center;
+    @include font(16px, 16px, normal);
+    position: relative;
+
 
     @include media-table-635 {
       width: 100%;
@@ -648,6 +653,8 @@ h6::after {
     height: 35px;
     outline: none;
     text-align: center;
+    @include font(16px, 16px, normal);
+    position: relative;
   }
 }
 

@@ -1264,12 +1264,17 @@ h6::after {
   display: flex;
   flex-direction: column;
   gap: 5px 0;
+  position: relative;
 }
 .card_top_content .card__number {
   width: 215px;
   height: 35px;
   outline: none;
   text-align: center;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: normal;
+  font-style: normal;
 }
 @media (max-width: 405px) {
   .card_top_content .card__number {
@@ -1321,6 +1326,11 @@ h6::after {
   height: 35px;
   outline: none;
   text-align: center;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: normal;
+  font-style: normal;
+  position: relative;
 }
 @media (max-width: 635px) {
   .card_top_content .card__name {
@@ -1332,6 +1342,11 @@ h6::after {
   height: 35px;
   outline: none;
   text-align: center;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: normal;
+  font-style: normal;
+  position: relative;
 }
 
 .card_bottom__line {
@@ -3650,19 +3665,31 @@ input:checked ~ .checkmark:after {
   bottom: -15px;
   z-index: 100;
   font-size: 13px;
-  line-height: 10px;
+  line-height: 15px;
   font-weight: normal;
   font-style: normal;
   color: red;
   visibility: hidden;
+  padding-left: 5px;
+}
+
+.valid__forma_cvc {
+  bottom: 38px;
 }
 
 .valid__forma_active {
   visibility: visible;
+  background-color: #ffffff;
+  border-radius: 3px;
+  z-index: 10;
 }
 
 .invalid__input {
   border-color: red;
+}
+
+.invalid__input_card {
+  border: 1px solid red;
 }
 
 .contacts {

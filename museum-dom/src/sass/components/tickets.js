@@ -254,6 +254,85 @@ formaPhone.addEventListener('input', () => {
   }
 });
 
+// ------------------------------additional----------------------------
+
+const cardNumber = document.querySelector('.card__number');
+const cardName = document.querySelector('.card__name');
+const cardNumberCvc = document.querySelector('.card__number_cvc');
+
+function isValidNumberCard(value) {
+  if (value === '') return true;
+  let phoneValid = /[^\-\d]/g.test(value);
+  let defVal = /\-/g.test(value);
+
+  if (!phoneValid && defVal) {
+    let arrPhone = value.split(/\-/g);
+    console.log(value);
+      let validArr = arrPhone.every(el => el.length === 4);
+      let numberCount = value.replace(/[\-]/g, '')
+      if (validArr && numberCount.length === 16)  {
+        return true;
+      }
+    }
+  return false;
+};
+
+cardNumber.addEventListener('input', () => {
+  let validCard = isValidNumberCard(cardNumber.value);
+  if (validCard) {
+    cardNumber.classList.remove('invalid__input_card');
+    cardNumber.nextElementSibling.classList.remove('valid__forma_active');
+  } else {
+    cardNumber.classList.add('invalid__input_card');
+    cardNumber.nextElementSibling.classList.add('valid__forma_active');
+  }
+});
+
+function isValidNameCard(value) {
+  if (value === '') return true;
+  let lng = value.length;
+  let isLetterEn = /[A-Za-z]/g.test(value);
+  let isLetterRu = /[а-яА-ЯёЁ]/g.test(value);
+  let isNumber =/[^A-Za-z\sа-яА-ЯёЁ]/g.test(value);
+  if ((isLetterEn && !isLetterRu && !isNumber && lng > 2 && lng < 16) || (!isLetterEn && isLetterRu && !isNumber && lng > 2 && lng < 16)) {
+    return true;
+  }
+  return false;
+};
+
+cardName.addEventListener('input', () => {
+  let validCard = isValidNameCard(cardName.value);
+  if (validCard) {
+    cardName.classList.remove('invalid__input_card');
+    cardName.nextElementSibling.classList.remove('valid__forma_active');
+  } else {
+    cardName.classList.add('invalid__input_card');
+    cardName.nextElementSibling.classList.add('valid__forma_active');
+  }
+});
+
+
+function isValidNumberCvcCard(value) {
+  if (value === '') return true;
+  let phoneValid = /[^\d]/g.test(value);
+  if (!phoneValid) {
+    if (value.length === 3)  {
+        return true;
+      }
+    }
+  return false;
+};
+
+cardNumberCvc.addEventListener('input', () => {
+  let validCard = isValidNumberCvcCard(cardNumberCvc.value);
+  if (validCard) {
+    cardNumberCvc.classList.remove('invalid__input_card');
+    cardNumberCvc.nextElementSibling.classList.remove('valid__forma_active');
+  } else {
+    cardNumberCvc.classList.add('invalid__input_card');
+    cardNumberCvc.nextElementSibling.classList.add('valid__forma_active');
+  }
+});
 
 // -----------------------------------------LocalStorage----------------------------------------------
 window.addEventListener('load', () => {

@@ -446,7 +446,7 @@
                   </label>
                   <label id="forma__email_label">
                     <input type="email" placeholder="E-mail" class="input__forma" id="forma__email">
-                    <span class="valid__forma">invalid email, use example@mail.com</span>
+                    <span class="valid__forma">invalid email</span>
                   </label>
                   <label id="forma__phone_label">
                     <input type="tel" placeholder="Phone" class="input__forma" id="forma__phone">
@@ -513,7 +513,8 @@
                   <div class="payment__card_top">
                     <div class="card_top_content">
                       <label for="card__number">Card number</label>
-                      <input type="number" class="card__number" id="card__number">
+                      <input type="text" class="card__number" id="card__number" placeholder="xxxx-xxxx-xxxx-xxxx">
+                      <span class="valid__forma">invalid number, use only numbers</span>
                     </div>
                     <div class="card_top_content">
                       <label class="card__date">Expiration date</label>
@@ -525,6 +526,7 @@
                     <div class="card_top_content">
                       <label>Cardholder name</label>
                       <input type="text" class="card__name">
+                      <span class="valid__forma">invalid name, use only letters</span>
                     </div>
                   </div>
                   <div class="payment__card_bottom">
@@ -532,7 +534,8 @@
                     <div class="card_top_container">
                       <div class="card_top_content">
                         <label>CVC/CVV</label>
-                        <input type="number" class="card__number_cvc">
+                        <input type="number" class="card__number_cvc" placeholder="xxx">
+                        <span class="valid__forma valid__forma_cvc">invalid cvc</span>
                         <p>The last<br>3 or 4 digits<br>on back<br>of the card</p>
                       </div>
                     </div>

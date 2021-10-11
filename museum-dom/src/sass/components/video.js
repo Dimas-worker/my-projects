@@ -179,7 +179,7 @@ videoSwiper.on('slideChange', () => {
   video.poster = `./assets/videos/poster${index}.jpg`;
   toggleScreenIcon();
 })
-const swipeVideo = document.querySelectorAll('.dots');
+// const swipeVideo = document.querySelectorAll('.dots');
 const videoSlide = document.querySelectorAll('.video__slide');
 
 function stopIframe() {
@@ -189,12 +189,21 @@ function stopIframe() {
   arrIframe.forEach(el => {
     console.log(el);
     el.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*')
+    el.addEventListener('command', () => {
+      console.log('event');
+    })
   })
 }
 
-console.log(swipeVideo);
-swipeVideo.forEach(el => {
-  el.addEventListener('click', stopIframe)
+
+// console.log(swipeVideo);
+// swipeVideo.forEach(el => {
+//   el.addEventListener('click', stopIframe)
+// })
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('dot') || e.target.classList.contains('swipe')) {
+    stopIframe();
+  }
 })
 
 videoSlide.forEach(el => {
