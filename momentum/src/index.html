@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+        <button class="volume-icon"></button>
+        <input type="range" name="volume" class="player__volume" value="0.5" step="0.05" min="0" max="1">
+      </div>
+      <div class="player-track">Aqua Caelestis</div>
+      <div class="player-custom">
+        <input type="range" name="playbackRate" class="player__bar" value="0" step="0.01" min="0" max="1">
+        <span class="progress__time">0:00 / 0:00</span>
+      </div>
+      <ul class="play-list"></ul>
+    </div>
+    <div class="todo">
+      <h4>TODO</h4>
+      <div class="add-task"id="add-task">
+        <h3 class="heading">Add Item</h3>
+        <div class="add-task__new">
+          <input id="new-task" class="input-text task new-task" type="text">
+          <button class="button">Add</button>
+        </div>
+      </div>
+      <h1 class="heading">Todo</h1>
+      <ul class="incomplete-tasks" id="incomplete-tasks">
+        <li class="layout">
+          <input class="input-checkbox" type="checkbox">
+          <label class="task">Pay Bills</label>
+          <input class="input-text task type="text">
+          <button class="button edit">Edit</button>
+          <button class="button delete-task">Del</button>
+        </li>
+        <li class="layout edit-mode">
+          <input class="input-checkbox" type="checkbox">
+          <label class="task">Go Shopping</label>
+          <input type="text" value="Go Shopping" class="input-text task">
+          <button class="button edit">Save</button>
+          <button class="button delete-task"></button>
+        </li>
+      </ul>
+      <h3 class="heading">Completed</h3>
+      <ul class="complete-tasks" id="complete-tasks">
+        <li class="layout">
+          <input class="input-checkbox" type="checkbox" checked>
+          <label class="task">See the Doctor</label>
+          <input type="text" class="input-text task">
+          <button class="button edit">Edit</button>
+          <button class="button delete-task">Del</button>
+        </li>
+      </ul>
+    </div>
+    <div class="weather">
+      <input type="text" class="city" value="Minsk"/>
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time"></time>
+    <date class="date"></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name" placeholder="[Enter name]" value=""/>
+    </div>
+  </main>
+  <footer class="footer">
+    <button class="change-quote"></button>
+    <div class="quotes__container">
+      <div class="quote"></div>
+      <div class="author"></div>
+    </div>
+    <div class="setting__menu">
+      <div class="setting__lists">
+        <h4>Setting</h4>
+        <div class="setting__option language">
+          <p>Language:</p>
+          <div class="language__icons">
+            <span class="language__icon language__icon_active">en</span>
+            <span class="language__icon">ru</span>
+          </div>
+        </div>
+        <div class="setting__option background__source">
+          <p>Source image:</p>
+          <div class="background__icons">
+            <span class="bg__icon bg__icon_active">Github</span>
+            <span class="bg__icon">Unsplash API</span>
+            <span class="bg__icon">Flickr API</span>
+          </div>
+        </div>
+        <div class="setting__option tags__name">
+          <p>tags:</p>
+          <input type="text" class="tags__name_input">
+        </div>
+        <div class="setting__option">
+          <label for="time_vis">Time</label>
+          <input type="checkbox" class="checkbox_vis" name="0" id="time_vis" checked>
+        </div>
+        <div class="setting__option">
+          <label for="date_vis">Date</label>
+          <input type="checkbox" class="checkbox_vis" name="1" id="date_vis" checked>
+        </div>
+        <div class="setting__option">
+          <label for="greeting_vis">Greeting</label>
+          <input type="checkbox" class="checkbox_vis" name="2" id="greeting_vis" checked>
+        </div>
+        <div class="setting__option">
+          <label for="quote_vis">Quote</label>
+          <input type="checkbox" class="checkbox_vis" name="3" id="quote_vis" checked>
+        </div>
+        <div class="setting__option">
+          <label for="weather_vis">Weather</label>
+          <input type="checkbox" class="checkbox_vis" name="4" id="weather_vis" checked>
+        </div>
+        <div class="setting__option">
+          <label for="player_vis">Player</label>
+          <input type="checkbox" class="checkbox_vis" name="5" id="player_vis" checked>
+        </div>
+        <div class="setting__option">
+          <label for="todo_vis">Todo</label>
+          <input type="checkbox" class="checkbox_vis" name="6" id="todo_vis" checked>
+        </div>
+      </div>
+      <button class="setting-icon"></button>
+    </div>
+  </footer>
+</body>
+</html>

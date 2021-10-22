@@ -1,0 +1,5 @@
+import './js/clock'
+import './js/weather'
+import './js/audio-player'
+import './js/settings'
+import './js/bg-api'
