@@ -74,7 +74,8 @@ async function getLinkToImageUnsplash(value) {
   } else {
     timeOfDay = value;
   }
-  const url = `https://api.unsplash.com/photos/random?query=${timeOfDay}&client_id=e2077ad31a806c894c460aec8f81bc2af4d09c4f8104ae3177bb809faf0eac17`;
+  console.log(timeOfDay);
+  const url = `https://api.unsplash.com/photos/random?query=${timeOfDay}&client_id=24fQEfxLzr73V-8EQmY8VPLxSofe7nXj6eoxxNCwwLk`;
   try {
     const res = await fetch(url);
     const data = await res.json();

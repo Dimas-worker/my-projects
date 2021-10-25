@@ -21,9 +21,15 @@ async function getWeather(lang = "en") {
     temperature.textContent = `${getRound(data.main.temp)}°C`;
     weatherDescription.textContent = data.weather[0].description;
     if (lang === 'ru') {
+      if (city.value === 'Minsk') {
+        city.value = 'Минск'
+      }
       wind.textContent = `Скорость ветра: ${getRound(data.wind.speed)} м/с`;
       humidity.textContent = `Влажность: ${getRound(data.main.humidity)} %`;
     } else {
+      if (city.value === 'Минск') {
+        city.value = 'Minsk'
+      }
       wind.textContent = `Wind speed: ${getRound(data.wind.speed)} m/s`;
       humidity.textContent = `Humidity: ${getRound(data.main.humidity)} %`;
     }
@@ -35,10 +41,16 @@ async function getWeather(lang = "en") {
     temperature.textContent = '---- °C';
     weatherDescription.textContent = '';
     if (lang === 'ru') {
+      if (city.value === 'Minsk') {
+        city.value = 'Минск'
+      }
       weatherError.textContent = `Ошибка! Город ${city.value} не найден!`;
       wind.textContent = `Скорость ветра: ---- м/с`;
       humidity.textContent = `Влажность: ---- %`;
     } else {
+      if (city.value === 'Минск') {
+        city.value = 'Minsk'
+      }
       weatherError.textContent = `Error! city not found for ${city.value}!`;
       wind.textContent = `Wind speed: ---- m/s`;
       humidity.textContent = `Humidity: ---- %`;

@@ -28,7 +28,8 @@ function showTime(l = "en") {
       greeting.textContent = `Доброй ${timeOfDay},`;
     }
   } else {
-    greeting.textContent = `Good ${timeOfDay[0].toUpperCase() + timeOfDay.slice(1)},`;
+    greeting.textContent = `Good ${timeOfDay},`;
+    // greeting.textContent = `Good ${timeOfDay[0].toUpperCase() + timeOfDay.slice(1)},`;
   }
   timeId = setTimeout(() => {
     showTime(lang);
@@ -46,7 +47,6 @@ function showDate(data, lang = "en") {
 
 function getTimeOfDay(date, lang = "en") {
   const hours = date.getHours();
-  // console.log(Math.floor(hours/6));
   let digitTime = Math.floor(hours/6);
   if (lang == 'ru') {
     switch (digitTime) {
