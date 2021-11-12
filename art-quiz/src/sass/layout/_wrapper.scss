@@ -1,0 +1,15 @@
+.wrapper {
+  max-width: 1440px;
+  margin: auto;
+
+  @include mobile {
+    padding: 0 16px;
+  }
+}
+.wrapper__main,
+.wrapper__setting {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}

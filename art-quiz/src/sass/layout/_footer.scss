@@ -1,0 +1,32 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  color: $color-white;
+
+  .school__logo {
+
+    .rss {
+      width: 61px;
+      height: 23px;
+      display: inline-block;
+      background-image: url('./assets/icons/rss__logo.svg');
+      @extend %transition;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+  .developer {
+
+    a {
+      text-decoration: none;
+      color: $color-white;
+      @extend %transition;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}

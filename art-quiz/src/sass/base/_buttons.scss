@@ -1,0 +1,71 @@
+button {
+  background: transparent;
+  border: none;
+}
+
+.header__btn {
+  width: 34px;
+  height: 34px;
+  display: inline-block;
+  background-image: url('./assets/icons/carbon_settings.svg');
+  @extend %transition;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+  &:active {
+    transform: rotate(180deg);
+  }
+}
+
+.btn {
+  width: 268px;
+  height: 56px;
+  border: 2px solid $color-white;
+  border-radius: 25px;
+  color: $color-white;
+  @include font(24px, 28px, 500);
+  @extend %transition;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-active-bt;
+    color: $color-black;
+    border-color: $color-active-bt;
+  }
+}
+
+.close__btn {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-image: url('./assets/icons/setting/close-icon.svg');
+  cursor: pointer;
+  @extend %transition;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+.btn_time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  color: $color-black;
+  background-color: $color-white;
+  font-size: 30px;
+  cursor: pointer;
+  @extend %transition;
+
+  &:hover {
+    background-color: $color-active-bt;
+  }
+}

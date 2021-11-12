@@ -1,0 +1,233 @@
+.setting__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3% 3%;
+
+  .setting__btn {
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    cursor: pointer;
+    @extend %transition;
+    color: $color-white;
+    font-size: 24px;
+    line-height: 28px;
+
+    .arrow_icon {
+      width: 11px;
+      height: 20px;
+      display: inline-block;
+      background-image: url('./assets/icons/setting/arrow-set.svg');
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+
+.setting__main {
+  display: flex;
+  flex-direction: column;
+  gap: 10vh 0;
+
+  @include mobile {
+    gap: 5vh 0;
+  }
+  
+
+  .setting__volume {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    @include mobile {
+      align-items: center;
+    }
+
+    .volume__container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0 2%;
+      
+      @include mobile {
+        justify-content: space-between;
+      }
+
+      .progress__volume {
+        width: 30%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        
+        
+        &::-webkit-slider-runnable-track {
+          background: linear-gradient(to right, $color-active-bt 0%, $color-active-bt 40%, $color-white 40%, $color-white 100%);
+          height: 3px;
+        }
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 16px;
+          height: 16px;
+          background-color: $color-white;
+          border-radius: 50%;
+          cursor: pointer;
+          transform: translateY(-35%);
+          @extend %transition;
+
+          &:hover {
+            background-color: $color-active-bt;
+          }
+        }
+
+        @include mobile {
+          width: 80%;
+        }
+      }
+
+      .volume__icon {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        background-image: url('./assets/icons/setting/volume-icon.svg');
+        @extend %transition;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+  .setting__time {
+    display: flex;
+    flex-direction: column;
+
+    .switcher {
+      display: flex;
+      align-items: center;
+      gap: 0 20px;
+
+      @include mobile {
+        align-self: center;
+      }
+
+      .val_switch {
+        color: $color-white;
+        @include font(24px, 28px, 500);
+      }
+    }
+  }
+  
+  .setting__answer {
+    display: flex;
+    flex-direction: column;
+  
+    .time__container {
+      display: flex;
+      gap: 0 14px;
+
+      @include mobile {
+        align-self: center;
+      }
+  
+      .minus {
+        padding-bottom: 30px;
+      }
+      .time_count {
+        background-color: transparent;
+        color: $color-white;
+        border: none;
+        @include font(24px, 28px, 500);
+        width: 48px;
+        text-align: center;
+  
+        &:focus-visible {
+          border: none;
+          outline: none;
+        }
+      }
+    }
+  }
+  
+  .setting__button {
+    @include flex(flex-end);
+    gap: 0 16px;
+  
+    @include mobile {
+      @include flex(flex-start);
+    }
+  
+    .btn_default,
+    .btn_save {
+  
+      @include mobile {
+        width: 156px;
+        height: 56px;
+      }
+    }
+  }
+}
+
+
+
+
+//-----------switch game time
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $color-white-off;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: $color-white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: $color-active-bt;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $color-active-bt;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(150%);
+  -ms-transform: translateX(150%);
+  transform: translateX(150%);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}

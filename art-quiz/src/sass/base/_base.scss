@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+body {
+  background-color: $color-black;
+  font-family: 'Gilroy', sans-serif;
+}
+h3 {
+  color: $color-white;
+  @include font(30px, 28px, bold);
+  padding-bottom: 20px;
+  text-align: start;
+
+  @include mobile {
+    text-align: center;
+  }
+}
+.hidden {
+  display: none;
+}
+.volume__icon_off {
+  width: 23px;
+  background-image: url('./assets/icons/setting/volume-off.svg');
+}
