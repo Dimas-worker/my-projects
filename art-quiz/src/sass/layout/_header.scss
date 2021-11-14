@@ -3,3 +3,82 @@
   justify-content: flex-end;
   padding: 22px 10px;
 }
+
+.setting__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3% 3%;
+
+  .setting__btn {
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    cursor: pointer;
+    @extend %transition;
+    color: $color-white;
+    font-size: 24px;
+    line-height: 28px;
+
+    .arrow_icon {
+      width: 11px;
+      height: 20px;
+      display: inline-block;
+      background-image: url("./assets/icons/setting/arrow-set.svg");
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .close__btn {
+    @include mobile {
+      display: none;
+    }
+  }
+}
+
+.categories__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 10px;
+}
+
+.art-game__header {
+  padding: 22px 10px;
+  display: flex;
+  justify-content: space-between;
+
+  .progress__game {
+    width: 80%;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(
+        to right,
+        $color-active-bt 0%,
+        $color-active-bt 10%,
+        $color-white 10%,
+        $color-white 100%
+      );
+      height: 3px;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      display: none;
+
+      &:hover {
+        background-color: $color-active-bt;
+      }
+    }
+  }
+
+  .art-game__time {
+    color: $color-white;
+  }
+}

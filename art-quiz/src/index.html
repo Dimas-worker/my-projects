@@ -11,7 +11,7 @@
     <section class="main__page hidden">
         <div class="wrapper wrapper__main">
             <div class="main__header">
-                <button class="header__btn"></button>
+                <button class="set__btn"></button>
             </div>
             <div class="main__content">
                 <div class="main__log">
@@ -84,8 +84,58 @@
             </div>
         </div>
     </section>
-    <section class="pre-game">
-
+    <section class="categories__page hidden">
+        <div class="wrapper categories__wrapper">
+            <div class="categories__header">
+                <div class="logo">
+                    <span class="logo_color"></span>
+                </div>
+                <nav class="nav">
+										<ul class="nav__list">
+											<li class="nav__link">Home</li>
+											<li class="nav__link active-link">Categories</li>
+											<li class="nav__link">Score</li>
+										</ul>
+                </nav>
+                <div class="setting_icon">
+                  	<button class="set__btn"></button>
+              	</div>
+            </div>
+            <div class="categories__main">
+								<h3>Categories</h3>
+								<div class="categories__list">
+										<div class="categories__list_inner">
+										</div>
+								</div>
+            </div>
+            <div class="nav__bottom">
+                <ul class="nav__bottom__list">
+                  <li class="bottom__link">
+                    <span class="nav_icon home"></span>
+                    <span class="nav_heading">Home</span>
+                  </li>
+                  <li class="bottom__link active__bottom-link">
+                    <span class="nav_icon category"></span>
+                    <span class="nav_heading">Categories</span>
+                  </li>
+                  <li class="bottom__link">
+                    <span class="nav_icon score"></span>
+                    <span class="nav_heading">Score</span>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="art-game__page">
+        <div class="wrapper">
+            <div class="art-game__header">
+              <button class="close__btn_game"></button>
+              <input type="range" min="1" max="10" step="1" value="1" class="progress__game">
+              <div class="art-game__time">1:00</div>
+            </div>
+            <div class="art-game__main">
+            </div>
+        </div>
     </section>
 </body>
 </html>

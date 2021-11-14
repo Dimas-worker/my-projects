@@ -7,7 +7,7 @@
 }
 body {
   background-color: $color-black;
-  font-family: 'Gilroy', sans-serif;
+  font-family: "Gilroy", sans-serif;
 }
 h3 {
   color: $color-white;
@@ -24,5 +24,9 @@ h3 {
 }
 .volume__icon_off {
   width: 23px;
-  background-image: url('./assets/icons/setting/volume-off.svg');
+  background-image: url("./assets/icons/setting/volume-off.svg");
+}
+
+.card_inactive {
+  filter: saturate(0%);
 }

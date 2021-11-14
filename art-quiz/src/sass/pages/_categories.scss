@@ -1,0 +1,175 @@
+.categories__header {
+  .logo {
+    .logo_color {
+      width: 166px;
+      height: 62px;
+      display: inline-block;
+      background-image: url("./assets/icons/logo-art.svg");
+    }
+  }
+  .nav {
+    width: 262px;
+    @include flex(flex-end, center);
+
+    .nav__list {
+      @include flex(space-between, center);
+      list-style: none;
+      gap: 0 40px;
+
+      @include mobile {
+        display: none;
+      }
+
+      .nav__link {
+        @include font(18px, 18px, 500);
+        color: $color-white;
+        text-decoration: none;
+        @extend %transition;
+        cursor: pointer;
+
+        &:hover {
+          color: $color-active-bt;
+        }
+      }
+      .active-link {
+        color: $color-active-bt;
+      }
+    }
+  }
+}
+.categories__main {
+  .categories__list {
+    // height: 100%;
+    display: flex;
+
+    @include mobile {
+      height: 80vh;
+    }
+
+    .categories__list_inner {
+      padding: 10px;
+      overflow: scroll;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 48px 25px;
+
+      @include mobile {
+        gap: 20px 18px;
+        padding: 10px 0;
+      }
+    }
+  }
+}
+
+.category__card {
+  cursor: pointer;
+  // @extend %transition;
+
+  .heading__card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+
+    @include mobile {
+      padding-bottom: 8px;
+    }
+
+    h4 {
+      color: $color-white;
+    }
+
+    .progress__card {
+      color: $color-white;
+    }
+  }
+  .card__img {
+    overflow: hidden;
+    border-radius: 10%;
+
+    img {
+      @extend %transition;
+      @include mobile {
+        width: 155px;
+        height: 164px;
+      }
+    }
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.nav__bottom {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: none;
+  border: 2px solid $color-white;
+  border-radius: 10px 10px 0 0;
+  background-color: $color-black;
+
+  @include mobile {
+    display: block;
+  }
+
+  .nav__bottom__list {
+    @include flex(space-around, center);
+    list-style: none;
+    padding: 14px 0;
+    width: 100%;
+
+    .bottom__link {
+      @include flex(space-around, center);
+      flex-direction: column;
+      text-decoration: none;
+      @extend %transition;
+      cursor: pointer;
+
+      .nav_icon {
+        @extend %transition;
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+      }
+
+      .home {
+        background-image: url("./assets/icons/categories/home.svg");
+      }
+      .category {
+        background-image: url("./assets/icons/categories/category.svg");
+      }
+      .score {
+        background-image: url("./assets/icons/categories/score.svg");
+      }
+
+      .nav_heading {
+        @extend %transition;
+        @include font(12px, 18px, bold);
+        color: $color-white;
+      }
+
+      &:hover {
+        .nav_heading {
+          color: $color-active-bt;
+        }
+        .nav_icon {
+          filter: invert(34%) sepia(32%) saturate(489%) hue-rotate(325deg) brightness(103%) contrast(102%);
+        }
+      }
+    }
+    .active__bottom-link {
+      .nav_heading {
+        color: $color-active-bt;
+      }
+      .nav_icon {
+        filter: invert(34%) sepia(32%) saturate(489%) hue-rotate(325deg) brightness(103%) contrast(102%);
+      }
+    }
+  }
+}

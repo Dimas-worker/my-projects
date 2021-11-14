@@ -3,11 +3,11 @@ button {
   border: none;
 }
 
-.header__btn {
+.set__btn {
   width: 34px;
   height: 34px;
   display: inline-block;
-  background-image: url('./assets/icons/carbon_settings.svg');
+  background-image: url("./assets/icons/carbon_settings.svg");
   @extend %transition;
   cursor: pointer;
 
@@ -36,22 +36,20 @@ button {
   }
 }
 
-.close__btn {
+.close__btn,
+.close__btn_game {
   width: 18px;
   height: 18px;
   display: inline-block;
-  background-image: url('./assets/icons/setting/close-icon.svg');
+  background-image: url("./assets/icons/setting/close-icon.svg");
   cursor: pointer;
   @extend %transition;
 
   &:hover {
     opacity: 0.6;
   }
-
-  @include mobile {
-    display: none;
-  }
 }
+
 .btn_time {
   display: flex;
   align-items: center;
