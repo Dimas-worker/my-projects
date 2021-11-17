@@ -21,18 +21,23 @@
       }
 
       .nav__link {
-        @include font(18px, 18px, 500);
-        color: $color-white;
-        text-decoration: none;
-        @extend %transition;
-        cursor: pointer;
+        a {
+          @include font(18px, 18px, 500);
+          color: $color-white;
+          text-decoration: none;
+          @extend %transition;
+          cursor: pointer;
 
-        &:hover {
-          color: $color-active-bt;
+          &:hover {
+            color: $color-active-bt;
+          }
         }
+        
       }
       .active-link {
-        color: $color-active-bt;
+        a {
+          color: $color-active-bt;
+        }
       }
     }
   }
@@ -44,17 +49,18 @@
 
     @include mobile {
       height: 80vh;
+      margin-bottom: 8px;
     }
 
     .categories__list_inner {
       padding: 10px;
-      overflow: scroll;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 48px 25px;
 
       @include mobile {
+        overflow: scroll;
         gap: 20px 18px;
         padding: 10px 0;
       }
@@ -125,50 +131,56 @@
     width: 100%;
 
     .bottom__link {
-      @include flex(space-around, center);
-      flex-direction: column;
-      text-decoration: none;
-      @extend %transition;
       cursor: pointer;
 
-      .nav_icon {
+      a {
+        @include flex(space-around, center);
+        flex-direction: column;
+        text-decoration: none;
         @extend %transition;
-        width: 22px;
-        height: 22px;
-        display: inline-block;
-      }
 
-      .home {
-        background-image: url("./assets/icons/categories/home.svg");
+        .nav_icon {
+          @extend %transition;
+          width: 22px;
+          height: 22px;
+          display: inline-block;
+        }
+  
+        .home {
+          background-image: url("./assets/icons/categories/home.svg");
+        }
+        .category {
+          background-image: url("./assets/icons/categories/category.svg");
+        }
+        .score {
+          background-image: url("./assets/icons/categories/score.svg");
+        }
+  
+        .nav_heading {
+          @extend %transition;
+          @include font(12px, 18px, bold);
+          color: $color-white;
+        }
+  
+        &:hover {
+          .nav_heading {
+            color: $color-active-bt;
+          }
+          .nav_icon {
+            filter: invert(34%) sepia(32%) saturate(489%) hue-rotate(325deg) brightness(103%) contrast(102%);
+          }
+        }
       }
-      .category {
-        background-image: url("./assets/icons/categories/category.svg");
-      }
-      .score {
-        background-image: url("./assets/icons/categories/score.svg");
-      }
+    }
 
-      .nav_heading {
-        @extend %transition;
-        @include font(12px, 18px, bold);
-        color: $color-white;
-      }
-
-      &:hover {
+    .active__bottom-link {
+      a {
         .nav_heading {
           color: $color-active-bt;
         }
         .nav_icon {
           filter: invert(34%) sepia(32%) saturate(489%) hue-rotate(325deg) brightness(103%) contrast(102%);
         }
-      }
-    }
-    .active__bottom-link {
-      .nav_heading {
-        color: $color-active-bt;
-      }
-      .nav_icon {
-        filter: invert(34%) sepia(32%) saturate(489%) hue-rotate(325deg) brightness(103%) contrast(102%);
       }
     }
   }

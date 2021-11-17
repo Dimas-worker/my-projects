@@ -10,14 +10,20 @@
   align-items: $items;
 }
 
+@mixin table {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
 @mixin mobile {
   @media (min-width: 320px) and (max-width: 768px) {
     @content;
   }
 }
 
-@mixin table {
-  @media (min-width: 769px) and (max-width: 1024px) {
+@mixin max-525 {
+  @media screen and (max-width: 525px) {
     @content;
   }
 }

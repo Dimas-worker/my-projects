@@ -2,14 +2,16 @@
 @import "sass/abstracts/constants";
 @import "sass/abstracts/placeholders";
 
-@import "sass/base/base";
-@import "sass/base/buttons";
-
 @import "sass/layout/wrapper";
 @import "sass/layout/header";
 @import "sass/layout/footer";
+@import "sass/layout/popup-answer";
+@import "sass/layout/popup-end-round";
 
 @import "sass/pages/main";
 @import "sass/pages/setting";
 @import "sass/pages/categories";
 @import "sass/pages/art-game";
+
+@import "sass/base/base";
+@import "sass/base/buttons";

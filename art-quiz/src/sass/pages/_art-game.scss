@@ -1,10 +1,48 @@
-.art-game__main {
-  .art__img {
-    width: 100%;
-    border-radius: 5%;
-  }
 
-  .img__info {
-    color: $color-white;
+.art-game__main {
+  display: flex;
+  justify-content: center;
+
+  
+ 
+  .game__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .game__question {
+      color: $color-white;
+      @include font(22px, 28px, 500);
+
+    }
+    .art__img {
+      width: 80%;
+      border-radius: 5%;
+      padding: 15px 0;
+      @include table {
+        width: 80%;
+      }
+      @include mobile {
+        width: 100%;
+      }
+    }
+  
+    .img__info {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 15px 25px;
+
+      @include table {
+        gap: 20px 20px;
+      }
+
+      @include mobile {
+        gap: 12px 10px;
+      }
+    }
   }
 }

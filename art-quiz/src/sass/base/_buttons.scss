@@ -28,10 +28,11 @@ button {
   @include font(24px, 28px, 500);
   @extend %transition;
   cursor: pointer;
+  @include flex(center, center);
 
   &:hover {
-    background-color: $color-active-bt;
-    color: $color-black;
+    // background-color: $color-active-bt;
+    color: $color-active-bt;
     border-color: $color-active-bt;
   }
 }
@@ -44,6 +45,7 @@ button {
   background-image: url("./assets/icons/setting/close-icon.svg");
   cursor: pointer;
   @extend %transition;
+  margin-right: 15px;
 
   &:hover {
     opacity: 0.6;
@@ -66,4 +68,70 @@ button {
   &:hover {
     background-color: $color-active-bt;
   }
+}
+.btn__choose {
+  width: 100%;
+  height: 62px;
+  @include font(22px, 22px, 500);
+  
+  
+  @include table {
+    @include font(16px, 18px, 500);
+    height: 48px;
+  }
+  @include mobile {
+    @include font(16px, 18px, 500);
+    height: 48px;
+  }
+}
+
+.btn__next {
+  width: 400px;
+  height: 62px;
+  border-radius: 25px;
+  color: $color-black;
+  background-color: $color-active-bt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include font(22px, 22px, normal);
+  cursor: pointer;
+  @extend %transition;
+  border: 2px solid $color-active-bt;
+
+  @include mobile {
+    width: 100%;
+  }
+  &:hover {
+    border: 2px solid $color-black;
+    background-color: $color-white;
+  }
+}
+
+.btn__popup {
+  color: $color-black;
+  width: 100%;
+  height: 62px;
+  border-radius: 25px;
+  background-color: $color-active-bt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include font(22px, 22px, normal);
+  cursor: pointer;
+  @extend %transition;
+  border: 2px solid $color-active-bt;
+
+  &:hover {
+    border: 2px solid $color-black;
+    background-color: $color-white;
+  }
+}
+
+.btn_correct {
+  background-color: $color-right;
+}
+
+.btn_wrong {
+  background-color: $color-mis;
 }

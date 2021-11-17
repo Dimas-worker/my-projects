@@ -8,6 +8,7 @@
 body {
   background-color: $color-black;
   font-family: "Gilroy", sans-serif;
+  position: relative;
 }
 h3 {
   color: $color-white;
@@ -19,6 +20,9 @@ h3 {
     text-align: center;
   }
 }
+a {
+  text-decoration: none;
+}
 .hidden {
   display: none;
 }
@@ -29,4 +33,44 @@ h3 {
 
 .card_inactive {
   filter: saturate(0%);
+}
+
+// animation for pages-------------------------
+
+.hidden__body {
+  animation: ani-body 2s;
+}
+
+@keyframes ani-body {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  51% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+// animation for game-----------------------------
+
+.show__block {
+  animation: show-me 1.5s;
+}
+
+@keyframes show-me {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
