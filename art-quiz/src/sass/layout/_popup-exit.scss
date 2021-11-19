@@ -1,0 +1,72 @@
+.popup__exit {
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba($color: $color-black, $alpha: 0.8);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @extend %transition;
+  animation: show-this 1s;
+
+  .popup__content {
+    background-color: $color-white;
+    @extend %transition;
+    width: 100%;
+    max-width: 522px;
+    max-height: 689px;
+    border-radius: 5%;
+    position: relative;
+
+    @include max-525 {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .wrapper__popup {
+
+      .button__container {
+        @include flex(space-between, center);
+        width: 100%;
+        gap: 0 5%;
+      }
+      .congratulation {
+        padding: 15%;
+        @include font(36px, 35px, 500);
+        
+        @include max-525 {
+          padding: 10%;
+          @include font(22px, 28px, 500);
+        }
+      }
+    }
+    .popup__close {
+      position: absolute;
+      right: 5%;
+      top: 5%;
+      color: $color-black;
+      cursor: pointer;
+      font-size: 18px;
+      @extend %transition;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+      &:active {
+        transform: translateY(3px);
+      }
+    }
+  }
+}
+@keyframes show-this {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

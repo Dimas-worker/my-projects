@@ -1,8 +1,10 @@
-import { Home } from './pages/home'
-import { Setting } from './pages/setting'
-import { Category } from './pages/category'
-import { ArtGame } from './pages/art-game'
-import { animationPage } from './components/use-func'
+import './components/ls';
+import { Home } from './pages/home';
+import { Setting } from './pages/setting';
+import { Category } from './pages/category';
+import { ArtGame } from './pages/art-game';
+import { animationPage } from './components/use-func';
+
 
 const Utils = { 
   parseRequestURL : () => {

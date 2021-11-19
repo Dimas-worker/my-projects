@@ -77,19 +77,17 @@
     justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
+    color: $color-white;
 
     @include mobile {
       padding-bottom: 8px;
     }
-
-    h4 {
-      color: $color-white;
-    }
-
-    .progress__card {
-      color: $color-white;
-    }
   }
+
+  .heading__card_active {
+    color: $color-active-bt;
+  }
+  
   .card__img {
     overflow: hidden;
     border-radius: 10%;

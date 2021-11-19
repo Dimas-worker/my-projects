@@ -26,6 +26,8 @@ function animationPopup(el) {
 }
 
 function playSound(isTrue, isFinish = false) {
+  let isVolume = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
+  if (!isVolume) return;
   const audio = new Audio();
   if (!isFinish) {
     let track = isTrue ? 'yeap' : 'noep';

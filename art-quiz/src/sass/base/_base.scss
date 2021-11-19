@@ -74,3 +74,16 @@ a {
     opacity: 1;
   }
 }
+
+.hide_popup {
+  animation: hide-this 1s;
+}
+
+@keyframes hide-this {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

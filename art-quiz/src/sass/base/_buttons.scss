@@ -31,9 +31,12 @@ button {
   @include flex(center, center);
 
   &:hover {
-    // background-color: $color-active-bt;
-    color: $color-active-bt;
+    background-color: $color-active-bt;
+    color: $color-black;
     border-color: $color-active-bt;
+  }
+  &:active {
+    transform: scale(0.9);
   }
 }
 
@@ -73,7 +76,12 @@ button {
   width: 100%;
   height: 62px;
   @include font(22px, 22px, 500);
-  
+  border: 2px solid $color-white;
+  border-radius: 25px;
+  color: $color-white;
+  @extend %transition;
+  cursor: pointer;
+  @include flex(center, center);
   
   @include table {
     @include font(16px, 18px, 500);
@@ -82,6 +90,11 @@ button {
   @include mobile {
     @include font(16px, 18px, 500);
     height: 48px;
+  }
+  
+  &:hover {
+    color: $color-active-bt;
+    border-color: $color-active-bt;
   }
 }
 

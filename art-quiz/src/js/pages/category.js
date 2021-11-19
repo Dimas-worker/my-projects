@@ -65,13 +65,14 @@ export class Category {
               </div>
               <div class="create__year">2021</div>
           </div>
-        </div>
-      `;
+        </div>`;
       return document.body.innerHTML = view;
     }
     creatCard(index) {
       // check LS if use category and how questions is answered 'progress card counts-------------------------
-      this.count = localStorage.getItem(this.ARRAY_CATEGORIES[index]) ? localStorage.getItem(this.ARRAY_CATEGORIES[index]) : 0;
+      let curCardObj = JSON.parse(localStorage.getItem(this.ARRAY_CATEGORIES[index]));
+      this.count = curCardObj.correct;
+
       const divCard = document.createElement('a');
       divCard.classList.add('category__card');
       divCard.href = '/#/art-game';
@@ -80,20 +81,22 @@ export class Category {
         <h4>${this.ARRAY_CATEGORIES[index]}</h4>
         <div class="progress__card">${this.count}/10</div>
       </div>`;
+      if (this.count) {
+        divCard.firstElementChild.classList.add('heading__card_active');
+      }
       const cardDiv = document.createElement('div');
       cardDiv.classList.add('card__img');
       const img = document.createElement('img');
       img.src = `./assets/img/categories/${index}.png`;
       img.alt = `${index}`;
-      console.log(localStorage.getItem(this.ARRAY_CATEGORIES[index]));
-      if (!localStorage.getItem(this.ARRAY_CATEGORIES[index])) {
+      if (!curCardObj.visit) {
         img.classList.add('card_inactive');
       }
       cardDiv.append(img);
       divCard.append(cardDiv);
       divCard.addEventListener('click', ()=> {
-          console.log(this.ARRAY_CATEGORIES[index]);
-          localStorage.setItem('curCategory', this.ARRAY_CATEGORIES[index]);
+        console.log(this.ARRAY_CATEGORIES[index]);
+        localStorage.setItem('curCategory', this.ARRAY_CATEGORIES[index]);
       })
       return divCard;
     }
