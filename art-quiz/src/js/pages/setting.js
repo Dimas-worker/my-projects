@@ -84,15 +84,17 @@ export class Setting {
     buttonPlus.textContent = '+';
     settingAnswer.addEventListener('click', (e) => {
       if (e.target.textContent === '_') {
-        if (this.inputTime.value !== '0') {
-          this.inputTime.value--;
+        if (this.inputTime.value > 5) {
+          this.inputTime.value = +this.inputTime.value - 5;
         } 
         if (this.inputTime.value === '0') {
           this.check.checked = false;
           this.checkTimer();
         }
       } else if (e.target.textContent === '+') {
-        this.inputTime.value++;
+        if (this.inputTime.value < 30) {
+          this.inputTime.value = +this.inputTime.value + 5;
+        }
       }
     });
     this.inputTime.addEventListener('change', () => {

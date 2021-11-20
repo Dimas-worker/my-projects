@@ -1,4 +1,4 @@
-import { randomImg , shuffle, playSound, animationPopup } from '../components/use-func';
+import { randomImg , shuffle, playSound, animationPopup, getData } from '../components/use-func';
 import { PopupAnswer } from '../components/popup-answer';
 import { PopupEndRound } from '../components/popup-end-round';
 import { PopupExit } from '../components/popup-exist';
@@ -7,7 +7,7 @@ export class ArtGame {
   constructor() {
     this.container = document.body;
     this.progressValue = 0;
-    this.timeline = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
+    this.timeline;
     this.countCorrectAnswer = 0;
     this.timerId;
     this.category;
@@ -29,30 +29,30 @@ export class ArtGame {
       </div>
       <div class="create__year">2021</div>`;
     this.header = document.createElement('div');
-    this.button = document.createElement('button');
-    this.button.classList.add('close__btn_game');
-    this.button.onclick = () => {
-      console.log('ddd');
+    this.buttonClose = document.createElement('button');
+    this.buttonClose.classList.add('close__btn_game');
+    this.buttonClose.onclick = () => {
       const exit = new PopupExit();
       exit.render();
     }
+
   }
 
-  renderHeader(val) {
+  renderHeader(val, time) {
     this.header.classList.add('art-game__header');
     this.header.innerHTML = `
       <input type="range" min="1" max="10" step="1" value="${val}" class="progress__game">
-      <div class="game__time">${this.timeline}</div>`;
-    this.header.prepend(this.button);
+      <div class="game__time">${time}</div>`;
+    this.header.prepend(this.buttonClose);
   }
 
   renderHTML() {
+    this.timeline = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
     let progress = this.progressValue + 1;
-    this.renderHeader(progress);
+    this.renderHeader(progress, this.timeline);
     this.container.innerHTML ='';
     const tag = document.createElement('div');
     tag.classList.add('wrapper__game', 'wrapper__art-game');
-    // tag.innerHTML += this.header;
     tag.innerHTML += this.main;
     tag.innerHTML += this.footer;
     tag.prepend(this.header);
@@ -62,12 +62,15 @@ export class ArtGame {
   }
  
   async renderQuestion(path) {
-    const res = await fetch('./json/images.json');
-    const data = await res.json();
+    // const res = await fetch('./json/images.json');
+    // const data = await res.json();
+    const data = await getData();
+    //todo ----------------------------------------------------------------
+    if (this.category !== localStorage.getItem('curCategory')) {
+      this.category = localStorage.getItem('curCategory');
+      this.curObjOfCategory = JSON.parse(localStorage.getItem(this.category));
+    }
 
-    this.category = localStorage.getItem('curCategory');
-    this.curObjOfCategory = JSON.parse(localStorage.getItem(this.category));
-    
     this.rmNumber = this.curObjOfCategory.question[this.progressValue].num;
     this.rightObj = data[this.rmNumber];
 
@@ -88,10 +91,18 @@ export class ArtGame {
         i--;
       }
     }
-    // mixin arrAuthor
-    shuffle(arrAuthor);
+    this.renderBtn(arrAuthor, btnContainer)
+   
+    img.onload = () => {
+      path.innerHTML = `<div class="game__question">Who is the author of this picture?</div>`;
+      path.append(img);
+      path.append(btnContainer);
+    }
+  };
 
-    arrAuthor.forEach(el => {
+  renderBtn(arr, path) {
+    shuffle(arr); //mix answer
+    arr.forEach(el => {
       const button = document.createElement('button');
       button.classList.add('btn__choose');
       button.textContent = el;
@@ -99,8 +110,8 @@ export class ArtGame {
         clearTimeout(this.timerId)
         if (button.textContent === this.rightObj.author) {
           if (!this.curObjOfCategory.question[this.progressValue].stats) {
-            this.curObjOfCategory.question[this.progressValue].stats = true;
-            ++this.curObjOfCategory.correct;
+            this.curObjOfCategory.question[this.progressValue].stats = true;            
+            this.curObjOfCategory.correct++;
           }
           
           if (!this.curObjOfCategory.visit) {
@@ -109,29 +120,28 @@ export class ArtGame {
           
           button.classList.toggle('btn_correct');
           this.booleanCorrectAnswer = true;
-          ++this.countCorrectAnswer;
+          this.countCorrectAnswer++;
         }
         else {
+          if (this.curObjOfCategory.question[this.progressValue].stats) {
+            this.curObjOfCategory.correct--;
+          }
+          this.curObjOfCategory.question[this.progressValue].stats = false;
           button.classList.toggle('btn_wrong');
           this.booleanCorrectAnswer = false;
         }
-        setTimeout( () => {this.nextCard()}, 500);
+        setTimeout( () => {this.nextCard(this.booleanCorrectAnswer)}, 500);
       })
-      btnContainer.append(button);
+      path.append(button);
     })
-    img.onload = () => {
-      path.innerHTML = `<div class="game__question">Who is the author of this picture?</div>`;
-      path.append(img);
-      path.append(btnContainer);
-    }
-  };
+  }
 
-  showEndPopup() {
+  showEndPopup(obj) {
     let endRound = new PopupEndRound(this.countCorrectAnswer);
     playSound(this.booleanCorrectAnswer, true);
     endRound.render();
     // ls---------------------------------------------------------------------------------------
-    let str = JSON.stringify(this.curObjOfCategory)
+    let str = JSON.stringify(obj)
     localStorage.setItem(this.category, str);
     // -------------------------------------------------------------------------------------------
     this.progressValue = 0;
@@ -139,22 +149,22 @@ export class ArtGame {
     clearTimeout(this.timerId);
   }
 
-  nextCard() {
-    const popupAnswer = new PopupAnswer(this.rmNumber, this.booleanCorrectAnswer, this.rightObj);
+  nextCard(bool) {
+    const popupAnswer = new PopupAnswer(this.rmNumber, bool, this.rightObj);
     popupAnswer.render();
-    playSound(this.booleanCorrectAnswer);
-    document.addEventListener('click', (e) => {
+    playSound(bool);
+    popupAnswer.buttonNext.addEventListener('click', (e) => {
       if (e.target.className === 'btn__next') {
         console.log(this.progressValue);
         this.progressValue++;
         popupAnswer.remove();
         if (this.progressValue === 10) {
-          this.showEndPopup()
+          this.showEndPopup(this.curObjOfCategory)
         } else {
           this.render();
         }
       }
-    }, {once: true} );
+    }, {once: true});
   };
 
   setTimer(time, tag) {
@@ -162,8 +172,8 @@ export class ArtGame {
     if (!isTimer) return;
     clearTimeout(this.timerId)
     if (time === -1) {
-      this.nextCard();
       this.booleanCorrectAnswer = false;
+      this.nextCard(this.booleanCorrectAnswer);
       return;
     }
     window.addEventListener('hashchange', () => {
@@ -184,7 +194,7 @@ export class ArtGame {
 
     const timeRound = document.querySelector('.game__time');
     this.setTimer(this.timeline, timeRound);
-
+    
     await this.renderQuestion(artGameCont);
   };
 }

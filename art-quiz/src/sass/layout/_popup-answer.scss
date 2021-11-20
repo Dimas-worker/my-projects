@@ -43,7 +43,6 @@
       }
     }
     
-
     .img__popup {
       width: 100%;
       border-radius: 5%;
@@ -57,7 +56,7 @@
       gap: 0.5em 0;
 
       .img__name {
-        @include font(32px, 39px, 500);
+        @include font(23px, 28px, 500);
 
         @include max-525 {
           @include font(22px, 26px, 500);

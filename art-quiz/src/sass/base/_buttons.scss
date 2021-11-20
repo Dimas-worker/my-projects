@@ -12,10 +12,10 @@ button {
   cursor: pointer;
 
   &:hover {
-    opacity: 0.6;
+    transform: rotate(180deg);
   }
   &:active {
-    transform: rotate(180deg);
+    transform: scale(0.8);
   }
 }
 
@@ -36,7 +36,7 @@ button {
     border-color: $color-active-bt;
   }
   &:active {
-    transform: scale(0.9);
+    transform: scale(0.8);
   }
 }
 
@@ -52,6 +52,9 @@ button {
 
   &:hover {
     opacity: 0.6;
+  }
+  &:active {
+    transform: scale(0.8);
   }
 }
 

@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   @extend %transition;
-  animation: show-this 1s;
+  // animation: show-this 0.5s;
 
   .popup__content {
     background-color: $color-white;

@@ -43,15 +43,17 @@
   }
 }
 .categories__main {
-  .categories__list {
-    // height: 100%;
-    display: flex;
+  padding-bottom: 20px;
 
+  .categories__list {
+    // animation: show-me 1.5s;
+    display: flex;
+    
     @include mobile {
       height: 80vh;
       margin-bottom: 8px;
     }
-
+    
     .categories__list_inner {
       padding: 10px;
       display: flex;
@@ -94,6 +96,9 @@
 
     img {
       @extend %transition;
+      width: 195px;
+      height: 206px;
+      
       @include mobile {
         width: 155px;
         height: 164px;

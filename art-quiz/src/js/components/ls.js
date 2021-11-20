@@ -19,4 +19,3 @@ function setLS(array) {
 }
 
 setLS(ARRAY_CATEGORIES);
-export { setLS };
