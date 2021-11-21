@@ -13,12 +13,12 @@ export class Category {
         <div class="logo"><span class="logo_color"></span></div>
         <nav class="nav">
           <ul class="nav__list">
-            <li class="nav__link"><a href="/#/">Home</a></li>
-            <li class="nav__link active-link"><a href="/#/category">Categories</a></li>
-            <li class="nav__link"><a href="/#/score">Score</a></li>
+            <li class="nav__link"><a href="./#/">Home</a></li>
+            <li class="nav__link active-link"><a href="./#/category">Categories</a></li>
+            <li class="nav__link"><a href="./#/score">Score</a></li>
           </ul>
         </nav>
-        <div class="setting_icon"><a href="/#/setting" class="set__btn"></a></div>`;
+        <div class="setting_icon"><a href="./#/setting" class="set__btn"></a></div>`;
       this.main = document.createElement('div');
       this.main.classList.add('categories__main');
       this.main.innerHTML = `<h3>Categories</h3><div class="categories__list"></div>`;
@@ -30,19 +30,19 @@ export class Category {
       this.navMenu.innerHTML = `
       <ul class="nav__bottom__list">
         <li class="bottom__link">
-          <a href="/#/">
+          <a href="./#/">
             <span class="nav_icon home"></span>
             <span class="nav_heading">Home</span>
           </a>
         </li>
         <li class="bottom__link active__bottom-link">
-          <a href="/#/category">
+          <a href="./#/category">
             <span class="nav_icon category"></span>
             <span class="nav_heading">Categories</span>
           </a>
         </li>
         <li class="bottom__link">
-          <a href="/#/score">
+          <a href="./#/score">
             <span class="nav_icon score"></span>
             <span class="nav_heading">Score</span>
           </a>
@@ -74,7 +74,7 @@ export class Category {
 
       const divCard = document.createElement('a');
       divCard.classList.add('category__card');
-      divCard.href = '/#/art-game';
+      divCard.href = './#/art-game';
       divCard.innerHTML = `
       <div class="heading__card">
         <h4>${this.categories[index]}</h4>

@@ -13,35 +13,35 @@ export class Score extends Category {
         <nav class="nav">
             <ul class="nav__list">
                 <li class="nav__link">
-                    <a href="/#/">Home</a>
+                    <a href="./#/">Home</a>
                 </li>
                 <li class="nav__link">
-                    <a href="/#/category">Categories</a>
+                    <a href="./#/category">Categories</a>
                 </li>
                 <li class="nav__link active-link">
-                    <a href="/#/score">Score</a>
+                    <a href="./#/score">Score</a>
                 </li>
             </ul>
         </nav>
         <div class="setting_icon">
-            <a href="/#/setting" class="set__btn"></a>
+            <a href="./#/setting" class="set__btn"></a>
         </div>`;
       this.navMenu.innerHTML = `
         <ul class="nav__bottom__list">
             <li class="bottom__link">
-                <a href="/#/">
+                <a href="./#/">
                     <span class="nav_icon home"></span>
                     <span class="nav_heading">Home</span>
                 </a>
             </li>
             <li class="bottom__link">
-                <a href="/#/category">
+                <a href="./#/category">
                     <span class="nav_icon category"></span>
                     <span class="nav_heading">Categories</span>
                 </a>
             </li>
             <li class="bottom__link active__bottom-link">
-                <a href="/#/score">
+                <a href="./#/score">
                     <span class="nav_icon score"></span>
                     <span class="nav_heading">Score</span>
                 </a>

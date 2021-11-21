@@ -1,9 +1,6 @@
 import { ArtGame } from './art-game';
-
 import { randomImg , shuffle, playSound, animationPopup, getData } from '../components/use-func';
-import { PopupAnswer } from '../components/popup-answer';
 import { PopupEndRound } from '../components/popup-end-round';
-import { PopupExit } from '../components/popup-exist';
 
 export class PicGame extends ArtGame {
   constructor() {

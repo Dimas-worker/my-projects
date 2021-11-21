@@ -33,9 +33,9 @@ function playSound(isTrue, isFinish = false) {
   audio.volume = value / 100;
   if (!isFinish) {
     let track = isTrue ? 'yeap' : 'noep';
-    audio.src = `assets/sounds/${track}.mp3`;
+    audio.src = `./assets/sounds/${track}.mp3`;
   } else {
-    audio.src = `assets/sounds/end-round.mp3`;
+    audio.src = `./assets/sounds/end-round.mp3`;
   }
   
   audio.play();

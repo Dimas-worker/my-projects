@@ -11,8 +11,8 @@ export class PopupEndRound {
              <div class="congratulation">Congratulations!</div>
              <div class="total__result">${this.numberOfImg}/10</div>
              <div class="button__container">
-                  <a href="/#/" class="btn__popup">Home</a>
-                  <a href="/#/${path}" class="btn__popup">Next Quiz</a>
+                  <a href="./#/" class="btn__popup">Home</a>
+                  <a href="./#/${path}" class="btn__popup">Next Quiz</a>
               </div>
           </div>
       </div>`;

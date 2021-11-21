@@ -11,7 +11,7 @@ export class PopupExit extends PopupEndRound {
             <div class="congratulation">Do you really want to quit the game?!</div>
             <div class="button__container">
                 <button class="btn__popup closing">Cancel</button>
-                <a href="/#/" class="btn__popup">Yes</a>
+                <a href="./#/" class="btn__popup">Yes</a>
             </div>
         </div>
       </div>`;

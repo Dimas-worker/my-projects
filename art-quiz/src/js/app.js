@@ -38,7 +38,6 @@ const routes = {
 };
 
 const router = async () => {
-  
   document.body.innerHTML = '';
   let request = Utils.parseRequestURL();
   let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
