@@ -1,52 +1,43 @@
-import { Category } from './category';
+import { Score } from "./score";
+import { PicCategory } from "./pic-category";
 import { getData } from '../components/use-func';
 
-export class Score extends Category {
+export class PicScore extends PicCategory {
   constructor() {
     super()
     this.header = document.createElement('div');
-      this.header.classList.add('categories__header');
-      this.header.innerHTML = `
-        <div class="logo">
-            <span class="logo_color"></span>
-        </div>
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__link">
-                    <a href="/#/">Home</a>
-                </li>
-                <li class="nav__link">
-                    <a href="/#/category">Categories</a>
-                </li>
-                <li class="nav__link active-link">
-                    <a href="/#/score">Score</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="setting_icon">
-            <a href="/#/setting" class="set__btn"></a>
-        </div>`;
-      this.navMenu.innerHTML = `
-        <ul class="nav__bottom__list">
-            <li class="bottom__link">
-                <a href="/#/">
-                    <span class="nav_icon home"></span>
-                    <span class="nav_heading">Home</span>
-                </a>
-            </li>
-            <li class="bottom__link">
-                <a href="/#/category">
-                    <span class="nav_icon category"></span>
-                    <span class="nav_heading">Categories</span>
-                </a>
-            </li>
-            <li class="bottom__link active__bottom-link">
-                <a href="/#/score">
-                    <span class="nav_icon score"></span>
-                    <span class="nav_heading">Score</span>
-                </a>
-            </li>
-        </ul>`;
+    this.header.classList.add('categories__header');
+    this.header.innerHTML = `
+    <div class="logo"><span class="logo_color"></span></div>
+    <nav class="nav">
+      <ul class="nav__list">
+        <li class="nav__link"><a href="/#/">Home</a></li>
+        <li class="nav__link"><a href="/#/pic-category">Categories</a></li>
+        <li class="nav__link active-link"><a href="/#/pic-score">Score</a></li>
+      </ul>
+    </nav>
+    <div class="setting_icon"><a href="/#/setting" class="set__btn"></a></div>`;
+    this.navMenu.innerHTML = `
+    <ul class="nav__bottom__list">
+      <li class="bottom__link">
+        <a href="/#/">
+          <span class="nav_icon home"></span>
+          <span class="nav_heading">Home</span>
+        </a>
+      </li>
+      <li class="bottom__link">
+        <a href="/#/pic-category">
+          <span class="nav_icon category"></span>
+          <span class="nav_heading">Categories</span>
+        </a>
+      </li>
+      <li class="bottom__link active__bottom-link">
+        <a href="/#/pic-score">
+          <span class="nav_icon score"></span>
+          <span class="nav_heading">Score</span>
+        </a>
+      </li>
+    </ul>`;
   }
   creatCard(index) {
     // let curCardObj = JSON.parse(localStorage.getItem(this.categories[index]));
@@ -117,7 +108,7 @@ export class Score extends Category {
     this.nameCategory.innerHTML = `<span class="score_icon"></span>`;
     const cur = document.createElement('span');
     cur.classList.add('score__category');
-    cur.textContent = `${this.categories[category]} category`;
+    cur.textContent = `${this.categories[category - 12]} category`;
     this.nameCategory.append(cur);
     this.main.innerHTML = '';
     this.main.append(this.nameCategory);

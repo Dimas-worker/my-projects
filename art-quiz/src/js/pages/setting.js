@@ -18,6 +18,7 @@ export class Setting {
     settingVolume.innerHTML = `<h3>Volume</h3><div class="volume__container"></div>`;
     const btnVolume = document.createElement('button');
     btnVolume.classList.add('volume__icon');
+    if (localStorage.getItem('volume') == 0) {btnVolume.classList.add('volume__icon', 'volume__icon_mute')};
     this.input = document.createElement('input');
     this.input.type = 'range';
     this.input.classList.add('progress__volume');

@@ -43,6 +43,50 @@
   display: flex;
   justify-content: space-between;
   padding: 22px 0;
+
+  .logo {
+    .logo_color {
+      width: 166px;
+      height: 62px;
+      display: inline-block;
+      background-image: url("./assets/icons/logo-art.svg");
+    }
+  }
+  .nav {
+    width: 262px;
+    @include flex(flex-end, center);
+
+    .nav__list {
+      @include flex(space-between, center);
+      list-style: none;
+      gap: 0 40px;
+
+      @include mobile {
+        display: none;
+      }
+
+      .nav__link {
+        cursor: pointer;
+        a {
+          @include font(18px, 18px, 500);
+          color: $color-white;
+          text-decoration: none;
+          @extend %transition;
+        }
+        &:hover {
+          a {
+            color: $color-active-bt;
+          }
+        }
+        
+      }
+      .active-link {
+        a {
+          color: $color-active-bt;
+        }
+      }
+    }
+  }
 }
 
 .art-game__header {

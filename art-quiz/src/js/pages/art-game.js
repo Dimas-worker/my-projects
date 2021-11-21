@@ -68,7 +68,7 @@ export class ArtGame {
     //todo ----------------------------------------------------------------
     if (this.category !== localStorage.getItem('curCategory')) {
       this.category = localStorage.getItem('curCategory');
-      this.curObjOfCategory = JSON.parse(localStorage.getItem(this.category));
+      this.curObjOfCategory = JSON.parse(localStorage.getItem('answer'))[this.category];
     }
 
     this.rmNumber = this.curObjOfCategory.question[this.progressValue].num;
@@ -137,12 +137,15 @@ export class ArtGame {
   }
 
   showEndPopup(obj) {
-    let endRound = new PopupEndRound(this.countCorrectAnswer);
+    let endRound = new PopupEndRound(this.countCorrectAnswer, 'category');
     playSound(this.booleanCorrectAnswer, true);
     endRound.render();
     // ls---------------------------------------------------------------------------------------
-    let str = JSON.stringify(obj)
-    localStorage.setItem(this.category, str);
+    let answer = JSON.parse(localStorage.getItem('answer'))
+    answer[this.category] = obj;
+    let str = JSON.stringify(answer);
+
+    localStorage.setItem('answer', str);
     // -------------------------------------------------------------------------------------------
     this.progressValue = 0;
     this.countCorrectAnswer = 0;

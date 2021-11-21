@@ -26,9 +26,9 @@ function animationPopup(el) {
 }
 
 function playSound(isTrue, isFinish = false) {
-  const isVolume = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
+  // const isVolume = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
   const value = localStorage.getItem('volume') ? JSON.parse(localStorage.getItem('volume')) : 40;
-  if (!isVolume) return;
+  if (!value) return;
   const audio = new Audio();
   audio.volume = value / 100;
   if (!isFinish) {

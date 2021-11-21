@@ -1,7 +1,7 @@
 
 
 export class PopupEndRound {
-  constructor(num) {
+  constructor(num, path) {
     this.content = document.body
     this.numberOfImg = num;
     this.view = `
@@ -12,7 +12,7 @@ export class PopupEndRound {
              <div class="total__result">${this.numberOfImg}/10</div>
              <div class="button__container">
                   <a href="/#/" class="btn__popup">Home</a>
-                  <a href="/#/category" class="btn__popup">Next Quiz</a>
+                  <a href="/#/${path}" class="btn__popup">Next Quiz</a>
               </div>
           </div>
       </div>`;
