@@ -1,5 +1,5 @@
 import { ArtGame } from './art-game';
-import { randomImg , shuffle, playSound, animationPopup, getData } from '../components/use-func';
+import { randomImg , shuffle, playSound, getData } from '../components/use-func';
 import { PopupEndRound } from '../components/popup-end-round';
 
 export class PicGame extends ArtGame {
@@ -21,7 +21,6 @@ export class PicGame extends ArtGame {
     picContainer.classList.add('img__container');
     let arrPic = [];
     arrPic.push(this.rightObj.imageNum);
-    console.log(arrPic);
     for (let i = 0; i < 3; i++) {
       let count = randomImg();
       if (!arrPic.includes(data[count].imageNum)) {
@@ -30,7 +29,6 @@ export class PicGame extends ArtGame {
         i--;
       }
     }
-    console.log(arrPic);
     this.renderBtn(arrPic, picContainer)
    
     path.innerHTML = `<div class="game__question">Which is ${this.rightObj.author} picture?</div>`;
@@ -71,8 +69,10 @@ export class PicGame extends ArtGame {
         }
         setTimeout( () => {this.nextCard(this.booleanCorrectAnswer)}, 500);
       })
-      div.append(img)
-      path.append(div);
+      img.onload = () => {
+        div.append(img)
+        path.append(div);
+      }
     })
   }
   showEndPopup(obj) {

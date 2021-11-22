@@ -28,7 +28,11 @@ export class PopupAnswer {
   }
 
   render() {
-    this.content.append(this.section);
+    const img = new Image();
+    img.src = `./assets/img/all-img/${this.numberOfImg}.jpg`;
+    img.onload = () => {
+      this.content.append(this.section);
+    }
   }
   remove() {
     this.section.remove();

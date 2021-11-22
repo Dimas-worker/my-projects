@@ -1,4 +1,3 @@
-import { Score } from "./score";
 import { PicCategory } from "./pic-category";
 import { getData } from '../components/use-func';
 
@@ -40,15 +39,13 @@ export class PicScore extends PicCategory {
     </ul>`;
   }
   creatCard(index) {
-    // let curCardObj = JSON.parse(localStorage.getItem(this.categories[index]));
     let curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
     const divCard = document.createElement('div');
     divCard.classList.add('category__card');
-    // divCard.id = this.categories[index];
     divCard.id = index;
-    divCard.innerHTML = `<div class="heading__card"><h4>${this.categories[index]}</h4><div class="progress__card">${this.count}/10</div></div>`;
+    divCard.innerHTML = `<div class="heading__card"><h4>${this.categories[index - 12]}</h4><div class="progress__card">${this.count}/10</div></div>`;
     if (this.count) {
       divCard.firstElementChild.classList.add('heading__card_active');
     }
@@ -60,8 +57,10 @@ export class PicScore extends PicCategory {
     if (!curCardObj.visit) {
       img.classList.add('card_inactive');
     };
-    cardDiv.append(img);
-    divCard.append(cardDiv);
+    img.onload = () => {
+      cardDiv.append(img);
+      divCard.append(cardDiv);
+    }
     divCard.addEventListener('click', (e)=> {
       this.getImageOfCategory(e.currentTarget.id);
     })
@@ -70,9 +69,7 @@ export class PicScore extends PicCategory {
   }
   async showImages(category) {
     const data = await getData();
-    // let curCardObj = JSON.parse(localStorage.getItem(category));
     let curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
-    // const digitOfCategory =  this.categories.indexOf(category);
 
     let index = category > 0 ? category : '';
     const imgList = document.createElement('div');
@@ -88,7 +85,6 @@ export class PicScore extends PicCategory {
       const img = document.createElement('img');
       img.src = `./assets/img/all-img/${digit}.jpg`;
       img.alt = `${digit}`;
-      // console.log(curCardObj.question[i].stats);
       if (!curCardObj.question[i].stats) {
         img.classList.add('card_inactive');
       }
@@ -97,8 +93,10 @@ export class PicScore extends PicCategory {
           info.classList.toggle('img__info_active');
         }
       })
-      block.append(img, info)
-      imgList.append(block)
+      img.onload = () => {
+        block.append(img, info)
+        imgList.append(block)
+      }
     }
     this.main.append(imgList);
   }

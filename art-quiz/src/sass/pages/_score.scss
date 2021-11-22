@@ -23,11 +23,12 @@
   }
 }
 .categories__img__lists {
-  padding: 10px;
+  padding: 10px 10%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 48px 25px;
+  overflow: hidden;
 
   @include mobile {
     overflow: scroll;
@@ -40,7 +41,7 @@
     cursor: pointer;
     overflow: hidden;
     border-radius: 10%;
-    animation: show-yourself 1s 1;
+    animation: grow-up 1.5s 1;
     @extend %transition;
     width: 195px;
     height: 206px;
@@ -90,11 +91,18 @@
   }
   
 }
-@keyframes show-yourself {
+@keyframes grow-up {
   0%{
-    transform: scale(0);
+    transform: translateX(-500%);
+    // transform: scale(0);
+  }
+  70% {
+    // transform: scale(1.1)
+    transform: translateX(10%);
   }
   100% {
-    transform: scale(1);
+    transform: translateX(0);
+
+    // transform: scale(1);
   }
 }

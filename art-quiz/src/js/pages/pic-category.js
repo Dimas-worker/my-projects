@@ -59,8 +59,10 @@ export class PicCategory extends Category {
     if (!curCardObj.visit) {
       img.classList.add('card_inactive');
     }
-    cardDiv.append(img);
-    divCard.append(cardDiv);
+    img.onload = () => {
+      cardDiv.append(img);
+      divCard.append(cardDiv);
+    }
     divCard.addEventListener('click', ()=> {
       localStorage.setItem('curCategory', index);
     })

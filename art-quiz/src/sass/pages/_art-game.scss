@@ -2,8 +2,6 @@
 .art-game__main {
   display: flex;
   justify-content: center;
-
-  
  
   .game__container {
     width: 100%;
@@ -16,6 +14,10 @@
       color: $color-white;
       @include font(22px, 28px, 500);
       padding: 15px 0;
+
+      @include max-525 {
+        @include font(18px, 22px, 500);
+      }
     }
     .art__img {
       padding: 15px 0;
@@ -43,15 +45,20 @@
       @include mobile {
         gap: 12px 10px;
       }
-
-      
     }
+
     .img__container {
       width: 100%;
+      padding: 0 10%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       gap: 25px 25px;
+      @extend %transition;
+
+      @include mobile {
+        padding: 0;
+      }
       
       .img__card {
         @extend %transition;

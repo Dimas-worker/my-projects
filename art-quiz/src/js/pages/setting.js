@@ -79,6 +79,7 @@ export class Setting {
     this.inputTime = document.createElement('input');
     this.inputTime.classList.add('time_count');
     this.inputTime.type = 'number';
+    this.inputTime.readOnly = true;
     this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
     const buttonPlus = document.createElement('button');
     buttonPlus.classList.add('btn_time', 'plus');

@@ -158,7 +158,6 @@ export class ArtGame {
     playSound(bool);
     popupAnswer.buttonNext.addEventListener('click', (e) => {
       if (e.target.className === 'btn__next') {
-        console.log(this.progressValue);
         this.progressValue++;
         popupAnswer.remove();
         if (this.progressValue === 10) {
@@ -189,10 +188,10 @@ export class ArtGame {
   };
 
   async render() {
-    await this.renderHTML();
+    this.renderHTML();
     const artGameCont = document.querySelector('.game__container');
     const progressGame = document.querySelector('.progress__game');
-    let value = `${(this.progressValue + 1) * 10}`;
+    let value = (this.progressValue + 1) * 10;
     progressGame.style.background = `linear-gradient(to right, #FFBCA2 0%, #FFBCA2 ${value}%, #fff ${value}%, #fff 100%)`;
 
     const timeRound = document.querySelector('.game__time');

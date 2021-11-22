@@ -49,13 +49,11 @@ export class Score extends Category {
         </ul>`;
   }
   creatCard(index) {
-    // let curCardObj = JSON.parse(localStorage.getItem(this.categories[index]));
     let curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
     const divCard = document.createElement('div');
     divCard.classList.add('category__card');
-    // divCard.id = this.categories[index];
     divCard.id = index;
     divCard.innerHTML = `<div class="heading__card"><h4>${this.categories[index]}</h4><div class="progress__card">${this.count}/10</div></div>`;
     if (this.count) {
@@ -69,8 +67,10 @@ export class Score extends Category {
     if (!curCardObj.visit) {
       img.classList.add('card_inactive');
     };
-    cardDiv.append(img);
-    divCard.append(cardDiv);
+    img.onload = () => {
+      cardDiv.append(img);
+      divCard.append(cardDiv);
+    }
     divCard.addEventListener('click', (e)=> {
       this.getImageOfCategory(e.currentTarget.id);
     })
@@ -79,9 +79,7 @@ export class Score extends Category {
   }
   async showImages(category) {
     const data = await getData();
-    // let curCardObj = JSON.parse(localStorage.getItem(category));
     let curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
-    // const digitOfCategory =  this.categories.indexOf(category);
 
     let index = category > 0 ? category : '';
     const imgList = document.createElement('div');
@@ -97,7 +95,6 @@ export class Score extends Category {
       const img = document.createElement('img');
       img.src = `./assets/img/all-img/${digit}.jpg`;
       img.alt = `${digit}`;
-      // console.log(curCardObj.question[i].stats);
       if (!curCardObj.question[i].stats) {
         img.classList.add('card_inactive');
       }
@@ -106,8 +103,10 @@ export class Score extends Category {
           info.classList.toggle('img__info_active');
         }
       })
-      block.append(img, info)
-      imgList.append(block)
+      img.onload = () => {
+        block.append(img, info)
+        imgList.append(block)
+      }
     }
     this.main.append(imgList);
   }

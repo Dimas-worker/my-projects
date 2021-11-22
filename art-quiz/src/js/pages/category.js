@@ -67,9 +67,7 @@ export class Category {
     }
     creatCard(index) {
       // check LS if use category and how questions is answered 'progress card counts-------------------------
-      // let curCardObj = JSON.parse(localStorage.getItem(this.categories[index]));
       let curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
-
       this.count = curCardObj.correct;
 
       const divCard = document.createElement('a');
@@ -91,11 +89,12 @@ export class Category {
       if (!curCardObj.visit) {
         img.classList.add('card_inactive');
       }
-      cardDiv.append(img);
-      divCard.append(cardDiv);
+      img.onload = () => {
+        cardDiv.append(img);
+        divCard.append(cardDiv);
+      }
       divCard.addEventListener('click', ()=> {
         localStorage.setItem('curCategory', index);
-        // localStorage.setItem('curCategory', this.categories[index]);
       })
       return divCard;
     }
@@ -107,7 +106,7 @@ export class Category {
       })
     }
     async render() {
-      await this.renderHTML();
+      this.renderHTML();
       this.renderCard();
     }
   
