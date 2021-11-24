@@ -68,7 +68,7 @@ export class PicGame extends ArtGame {
           this.booleanCorrectAnswer = false;
         }
         setTimeout( () => {this.nextCard(this.booleanCorrectAnswer)}, 500);
-      })
+      }, {once: true})
       img.onload = () => {
         div.append(img)
         path.append(div);

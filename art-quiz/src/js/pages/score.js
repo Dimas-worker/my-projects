@@ -78,6 +78,7 @@ export class Score extends Category {
     return divCard;
   }
   async showImages(category) {
+    console.log('show');
     const data = await getData();
     let curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
 

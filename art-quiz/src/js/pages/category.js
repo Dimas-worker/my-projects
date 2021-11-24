@@ -105,7 +105,7 @@ export class Category {
         this.lists.append(card);
       })
     }
-    async render() {
+    render() {
       this.renderHTML();
       this.renderCard();
     }

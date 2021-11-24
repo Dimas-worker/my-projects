@@ -106,6 +106,7 @@ export class ArtGame {
       const button = document.createElement('button');
       button.classList.add('btn__choose');
       button.textContent = el;
+      let isClick;
       button.addEventListener('click', () => {
         clearTimeout(this.timerId)
         if (button.textContent === this.rightObj.author) {
@@ -131,7 +132,7 @@ export class ArtGame {
           this.booleanCorrectAnswer = false;
         }
         setTimeout( () => {this.nextCard(this.booleanCorrectAnswer)}, 500);
-      })
+      }, {once: true})
       path.append(button);
     })
   }
