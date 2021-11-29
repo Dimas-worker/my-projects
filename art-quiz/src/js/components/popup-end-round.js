@@ -1,8 +1,6 @@
-
-
 export class PopupEndRound {
   constructor(num, path) {
-    this.content = document.body
+    this.content = document.body;
     this.numberOfImg = num;
     this.phrase = this.getPhrase();
     this.view = `
@@ -25,18 +23,19 @@ export class PopupEndRound {
   render() {
     this.content.append(this.section);
   }
+
   remove() {
     this.section.remove();
   }
+
   getPhrase() {
     if (this.numberOfImg < 2) {
       return 'Maybe next time?';
-    } else if (this.numberOfImg < 6) {
+    } if (this.numberOfImg < 6) {
       return 'Well done!';
-    } else if (this.numberOfImg < 9) {
+    } if (this.numberOfImg < 9) {
       return 'Congratulations!';
-    } else {
-      return 'Champion!'
     }
+    return 'Champion!';
   }
 }

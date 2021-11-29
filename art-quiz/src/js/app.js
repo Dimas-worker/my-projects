@@ -9,43 +9,40 @@ import { PicGame } from './pages/pic-game';
 import { PicScore } from './pages/pic-score';
 import { animationPage } from './components/use-func';
 
-
-const Utils = { 
-  parseRequestURL : () => {
-    let url = location.hash.slice(1).toLowerCase() || '/';
-    let r = url.split("/");
-    let request = {
-      resource    : null,
-      id          : null,
-      verb        : null
+const Utils = {
+  parseRequestURL: () => {
+    const url = location.hash.slice(1).toLowerCase() || '/';
+    const r = url.split('/');
+    const request = {
+      resource: null,
+      id: null,
+      verb: null,
     };
-    request.resource    = r[1]
-    request.id          = r[2]
-    request.verb        = r[3]
-    return request
-  }
-}
+    [, request.resource, request.id, request.verb] = r;
+    return request;
+  },
+};
 
 const routes = {
-  '/'             : new Home,
-  '/setting'      : new Setting,
-  '/category'     : new Category,
-  '/art-game'     : new ArtGame,
-  '/pic-category' : new PicCategory,
-  '/pic-game'     : new PicGame,
-  '/score'        : new Score,
-  '/pic-score'    : new PicScore,
+  '/': new Home(),
+  '/setting': new Setting(),
+  '/category': new Category(),
+  '/art-game': new ArtGame(),
+  '/pic-category': new PicCategory(),
+  '/pic-game': new PicGame(),
+  '/score': new Score(),
+  '/pic-score': new PicScore(),
 };
 
 const router = async () => {
   document.body.innerHTML = '';
-  let request = Utils.parseRequestURL();
-  let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
-  let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  const request = Utils.parseRequestURL();
+  const parsedURL = (request.resource ? `/${request.resource}` : '/') + (request.id ? '/:id' : '') + (request.verb ? `/${request.verb}` : '');
+  const page = routes[parsedURL] ? routes[parsedURL] : Error404;
   await page.render();
-}
+};
 
 window.addEventListener('hashchange', () => {
   animationPage(document.body, router);
-})
+});
 window.addEventListener('load', router);

@@ -1,6 +1,6 @@
 export class PopupAnswer {
   constructor(num, bul, obj) {
-    this.content = document.body
+    this.content = document.body;
     this.numberOfImg = num;
     this.correctAnswer = bul;
     this.trueData = obj;
@@ -8,7 +8,7 @@ export class PopupAnswer {
     this.buttonNext = document.createElement('button');
     this.buttonNext.classList.add('btn__next');
     this.buttonNext.textContent = 'Next';
-    this.popup =  document.createElement('section');
+    this.popup = document.createElement('section');
     this.popup.classList.add('popup__content');
     this.popup.innerHTML = `
     <div class="wrapper__popup">
@@ -32,8 +32,9 @@ export class PopupAnswer {
     img.src = `./assets/img/all-img/${this.numberOfImg}.jpg`;
     img.onload = () => {
       this.content.append(this.section);
-    }
+    };
   }
+
   remove() {
     this.section.remove();
   }

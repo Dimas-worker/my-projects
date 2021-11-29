@@ -1,9 +1,9 @@
-import { PopupEndRound } from './popup-end-round'
+import { PopupEndRound } from './popup-end-round';
 
 export class PopupExit extends PopupEndRound {
   constructor() {
-    super()
-    this.content = document.body
+    super();
+    this.content = document.body;
     this.view = `
       <div class="popup__content">
         <button class="popup__close closing">X</button>
@@ -24,8 +24,8 @@ export class PopupExit extends PopupEndRound {
         this.section.onanimationend = () => {
           this.section.classList.remove('hide_popup');
           this.section.remove();
-        }
+        };
       }
-    })
+    });
   }
 }

@@ -1,8 +1,8 @@
-import { Category } from "./category";
+import { Category } from './category';
 
 export class PicCategory extends Category {
   constructor() {
-    super()
+    super();
     this.header.innerHTML = `
         <div class="logo"><span class="logo_color"></span></div>
         <nav class="nav">
@@ -35,9 +35,10 @@ export class PicCategory extends Category {
         </li>
       </ul>`;
   }
+
   creatCard(index) {
     // check LS if use category and how questions is answered 'progress card counts-------------------------
-    let curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
+    const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
     const divCard = document.createElement('a');
@@ -62,19 +63,19 @@ export class PicCategory extends Category {
     img.onload = () => {
       cardDiv.append(img);
       divCard.append(cardDiv);
-    }
-    divCard.addEventListener('click', ()=> {
+    };
+    divCard.addEventListener('click', () => {
       localStorage.setItem('curCategory', index);
-    })
+    });
     return divCard;
   }
 
   renderCard() {
     this.lists.innerHTML = '';
     this.categories.forEach((el, index) => {
-      let i = 12 + index;
+      const i = 12 + index;
       const card = this.creatCard(i);
       this.lists.append(card);
-    })
+    });
   }
 }

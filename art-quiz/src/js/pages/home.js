@@ -16,15 +16,15 @@ export class Home {
       <div class="school__logo"><a href="https://rs.school/js/" target="_blank" class="rss"></a></div>
       <div class="developer"><a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a></div>
       <div class="create__year">2021</div>
-    </div>`; 
+    </div>`;
   }
 
   render() {
     const img = new Image();
-    img.src = './assets/img/start_bg.jpg'
+    img.src = './assets/img/start_bg.jpg';
     img.onload = () => {
       this.container.append(this.section);
-    }
+    };
   }
 }
 // export default Home;

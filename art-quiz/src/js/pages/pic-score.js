@@ -1,9 +1,9 @@
-import { PicCategory } from "./pic-category";
+import { PicCategory } from './pic-category';
 import { getData } from '../components/use-func';
 
 export class PicScore extends PicCategory {
   constructor() {
-    super()
+    super();
     this.header = document.createElement('div');
     this.header.classList.add('categories__header');
     this.header.innerHTML = `
@@ -38,8 +38,9 @@ export class PicScore extends PicCategory {
       </li>
     </ul>`;
   }
+
   creatCard(index) {
-    let curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
+    const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
     const divCard = document.createElement('div');
@@ -56,32 +57,33 @@ export class PicScore extends PicCategory {
     img.alt = `${index}`;
     if (!curCardObj.visit) {
       img.classList.add('card_inactive');
-    };
+    }
     img.onload = () => {
       cardDiv.append(img);
       divCard.append(cardDiv);
-    }
-    divCard.addEventListener('click', (e)=> {
+    };
+    divCard.addEventListener('click', (e) => {
       this.getImageOfCategory(e.currentTarget.id);
-    })
+    });
 
     return divCard;
   }
+
   async showImages(category) {
     const data = await getData();
-    let curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
+    const curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
 
-    let index = category > 0 ? category : '';
+    const index = category > 0 ? category : '';
     const imgList = document.createElement('div');
     imgList.classList.add('categories__img__lists');
-    
+
     for (let i = 0; i < 10; i++) {
-      let digit = `${index}${i}`;
+      const digit = `${index}${i}`;
       const block = document.createElement('div');
       block.classList.add('container__img');
       const info = document.createElement('div');
       info.classList.add('img__info');
-      info.innerHTML = `<h4>${data[digit].name}</h4><div>${data[digit].author}, ${data[digit].year}</div>`
+      info.innerHTML = `<h4>${data[digit].name}</h4><div>${data[digit].author}, ${data[digit].year}</div>`;
       const img = document.createElement('img');
       img.src = `./assets/img/all-img/${digit}.jpg`;
       img.alt = `${digit}`;
@@ -92,18 +94,19 @@ export class PicScore extends PicCategory {
         if (!img.classList.contains('card_inactive')) {
           info.classList.toggle('img__info_active');
         }
-      })
+      });
       img.onload = () => {
-        block.append(img, info)
-        imgList.append(block)
-      }
+        block.append(img, info);
+        imgList.append(block);
+      };
     }
     this.main.append(imgList);
   }
+
   getImageOfCategory(category) {
     this.nameCategory = document.createElement('div');
     this.nameCategory.classList.add('score__container');
-    this.nameCategory.innerHTML = `<span class="score_icon"></span>`;
+    this.nameCategory.innerHTML = '<span class="score_icon"></span>';
     const cur = document.createElement('span');
     cur.classList.add('score__category');
     cur.textContent = `${this.categories[category - 12]} category`;
@@ -114,13 +117,13 @@ export class PicScore extends PicCategory {
 
     this.nameCategory.addEventListener('click', () => {
       this.nameCategory.remove();
-      this.main.innerHTML = `<h3>Categories</h3><div class="categories__list"></div>`;
+      this.main.innerHTML = '<h3>Categories</h3><div class="categories__list"></div>';
       this.main.lastElementChild.append(this.lists);
       this.renderCard();
       this.main.classList.add('show__block');
       this.main.addEventListener('animationend', () => {
         this.main.classList.remove('show__block');
-      })
-    })
+      });
+    });
   }
 }

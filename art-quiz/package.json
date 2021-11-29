@@ -6,17 +6,19 @@
   "scripts": {
     "start": "webpack serve --env development",
     "build": "webpack",
-    "lint": "eslint"
+    "lint": "eslint ./src --fix"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^8.1.1",
     "css-loader": "^5.2.7",
-    "eslint": "^8.2.0",
+    "eslint": "^8.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^1.6.2",
+    "prettier": "^2.5.0",
     "sass": "^1.42.1",
     "sass-loader": "^11.1.1",
     "webpack": "^5.58.1",

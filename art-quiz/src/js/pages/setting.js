@@ -12,13 +12,13 @@ export class Setting {
     this.main = document.createElement('div');
     this.main.classList.add('setting__main');
 
-    //setting__volume------------------------------------------------------------------
+    // setting__volume------------------------------------------------------------------
     const settingVolume = document.createElement('div');
     settingVolume.classList.add('setting__volume');
-    settingVolume.innerHTML = `<h3>Volume</h3><div class="volume__container"></div>`;
+    settingVolume.innerHTML = '<h3>Volume</h3><div class="volume__container"></div>';
     const btnVolume = document.createElement('button');
     btnVolume.classList.add('volume__icon');
-    if (localStorage.getItem('volume') == 0) {btnVolume.classList.add('volume__icon', 'volume__icon_mute')};
+    if (localStorage.getItem('volume') == 0) { btnVolume.classList.add('volume__icon', 'volume__icon_mute'); }
     this.input = document.createElement('input');
     this.input.type = 'range';
     this.input.classList.add('progress__volume');
@@ -44,15 +44,15 @@ export class Setting {
         this.input.value = 0;
       }
       this.setVolume();
-    })
+    });
     settingVolume.lastElementChild.append(this.input);
     settingVolume.lastElementChild.append(btnVolume);
     this.main.append(settingVolume);
 
-    //setting__time-------------------------------------------------------------------------
+    // setting__time-------------------------------------------------------------------------
     const settingTime = document.createElement('div');
     settingTime.classList.add('setting__time');
-    settingTime.innerHTML = `<h3>Time game</h3><div class="switcher"></div>`;
+    settingTime.innerHTML = '<h3>Time game</h3><div class="switcher"></div>';
     this.displaySwitch = document.createElement('span');
     this.displaySwitch.classList.add('val_switch');
     this.displaySwitch.textContent = 'On';
@@ -64,7 +64,7 @@ export class Setting {
     this.check.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
     const span = document.createElement('span');
     span.classList.add('slider', 'round');
-    this.check.addEventListener('change', () => {this.checkTimer()})
+    this.check.addEventListener('change', () => { this.checkTimer(); });
     label.append(this.check, span);
     settingTime.lastElementChild.append(this.displaySwitch, label);
     this.main.append(settingTime);
@@ -72,7 +72,7 @@ export class Setting {
     // setting__answer -------------------------------------------------------------------
     const settingAnswer = document.createElement('div');
     settingAnswer.classList.add('setting__answer');
-    settingAnswer.innerHTML = `<h3>Time to answer</h3><div class="time__container"></div>`;
+    settingAnswer.innerHTML = '<h3>Time to answer</h3><div class="time__container"></div>';
     const buttonMinus = document.createElement('button');
     buttonMinus.classList.add('btn_time', 'minus');
     buttonMinus.textContent = '_';
@@ -88,7 +88,7 @@ export class Setting {
       if (e.target.textContent === '_') {
         if (this.inputTime.value > 5) {
           this.inputTime.value = +this.inputTime.value - 5;
-        } 
+        }
         if (this.inputTime.value === '0') {
           this.check.checked = false;
           this.checkTimer();
@@ -107,7 +107,7 @@ export class Setting {
         this.check.checked = false;
         this.checkTimer();
       }
-    })
+    });
     settingAnswer.lastElementChild.append(buttonMinus, this.inputTime, buttonPlus);
     this.main.append(settingAnswer);
     // setting__buttons -------------------------------------------------------------------
@@ -119,7 +119,7 @@ export class Setting {
     const btnSave = document.createElement('button');
     btnSave.classList.add('btn', 'btn_save');
     btnSave.textContent = 'Save';
-    btnDefault.addEventListener('click', () => {this.setDefault()});
+    btnDefault.addEventListener('click', () => { this.setDefault(); });
     btnSave.addEventListener('click', () => {
       this.setLS();
     });
@@ -143,21 +143,26 @@ export class Setting {
     this.section.append(this.footer);
     this.setLS();
   }
+
   render() {
     this.setCurrent();
     this.content.append(this.section);
   }
+
   setVolume() {
     this.input.style.background = `linear-gradient(to right, #FFBCA2 0%,#FFBCA2 ${this.input.value}%, #fff ${this.input.value}%, #fff 100%)`;
   }
+
   checkTimer() {
     this.displaySwitch.textContent = this.check.checked ? 'On' : 'Off';
   }
+
   setLS() {
     localStorage.setItem('volume', this.input.value);
     localStorage.setItem('timer', this.check.checked);
     localStorage.setItem('timerValue', this.inputTime.value);
   }
+
   setDefault() {
     this.input.value = '40';
     this.setVolume();
@@ -165,6 +170,7 @@ export class Setting {
     this.checkTimer();
     this.inputTime.value = 20;
   }
+
   setCurrent() {
     this.input.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
     this.setVolume();
