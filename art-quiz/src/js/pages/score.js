@@ -137,4 +137,5 @@ class Score extends Category {
     });
   }
 }
+
 export default Score;

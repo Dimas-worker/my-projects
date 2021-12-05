@@ -39,4 +39,5 @@ class PopupAnswer {
     this.section.remove();
   }
 }
+
 export default PopupAnswer;

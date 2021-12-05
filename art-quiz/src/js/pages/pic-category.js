@@ -79,4 +79,5 @@ class PicCategory extends Category {
     });
   }
 }
+
 export default PicCategory;

@@ -31,5 +31,7 @@ function setPicLS() {
     localStorage.setItem('answer', str);
   }
 }
-export default ARRAY_CATEGORIES;
+
 setPicLS();
+
+export default ARRAY_CATEGORIES;

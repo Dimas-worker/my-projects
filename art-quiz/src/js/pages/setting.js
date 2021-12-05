@@ -179,4 +179,5 @@ class Setting {
     this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
   }
 }
+
 export default Setting;

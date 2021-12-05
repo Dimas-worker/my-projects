@@ -112,4 +112,5 @@ class Category {
     this.renderCard();
   }
 }
+
 export default Category;

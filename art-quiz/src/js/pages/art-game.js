@@ -107,8 +107,8 @@ class ArtGame {
   }
 
   renderBtn(arr, path) {
-    shuffle(arr); // mix answer
-    arr.forEach((el) => {
+    const mixedAnswers = shuffle(arr);
+    mixedAnswers.forEach(el => {
       const button = document.createElement('button');
       button.classList.add('btn__choose');
       button.textContent = el;

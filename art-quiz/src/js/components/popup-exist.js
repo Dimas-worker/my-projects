@@ -29,4 +29,5 @@ class PopupExit extends PopupEndRound {
     });
   }
 }
+
 export default PopupExit;

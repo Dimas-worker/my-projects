@@ -37,8 +37,8 @@ class PicGame extends ArtGame {
   }
 
   renderBtn(arr, path) {
-    shuffle(arr); // mix answer
-    arr.forEach((el) => {
+    const mixedAnswers = shuffle(arr);
+    mixedAnswers.forEach((el) => {
       const div = document.createElement('div');
       div.classList.add('img__card');
       div.innerHTML = '<div class="sheet"></div>';
@@ -93,4 +93,5 @@ class PicGame extends ArtGame {
     clearTimeout(this.timerId);
   }
 }
+
 export default PicGame;

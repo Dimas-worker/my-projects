@@ -3,10 +3,12 @@ function randomImg() {
 }
 
 function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i -= 1) {
+  const curArray = [].concat(array);
+  for (let i = curArray.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    [curArray[i], curArray[j]] = [curArray[j], curArray[i]];
   }
+  return curArray;
 }
 
 function animationPage(el, cb) {
@@ -47,6 +49,7 @@ async function getData() {
   const data = await res.json();
   return data;
 }
+
 export {
   randomImg, shuffle, animationPage, playSound, animationPopup, getData,
 };

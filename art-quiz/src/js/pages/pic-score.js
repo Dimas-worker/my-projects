@@ -127,4 +127,5 @@ class PicScore extends PicCategory {
     });
   }
 }
+
 export default PicScore;
