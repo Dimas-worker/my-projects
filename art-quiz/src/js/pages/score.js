@@ -1,7 +1,7 @@
-import { Category } from './category';
+import Category from './category';
 import { getData } from '../components/use-func';
 
-export class Score extends Category {
+class Score extends Category {
   constructor() {
     super();
     this.header = document.createElement('div');
@@ -80,7 +80,6 @@ export class Score extends Category {
   }
 
   async showImages(category) {
-    console.log('show');
     const data = await getData();
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
 
@@ -88,7 +87,7 @@ export class Score extends Category {
     const imgList = document.createElement('div');
     imgList.classList.add('categories__img__lists');
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i += 1) {
       const digit = `${index}${i}`;
       const block = document.createElement('div');
       block.classList.add('container__img');
@@ -138,3 +137,4 @@ export class Score extends Category {
     });
   }
 }
+export default Score;

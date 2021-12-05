@@ -1,15 +1,13 @@
-import { ArtGame } from './art-game';
+import ArtGame from './art-game';
 import {
   randomImg, shuffle, playSound, getData,
 } from '../components/use-func';
-import { PopupEndRound } from '../components/popup-end-round';
+import PopupEndRound from '../components/popup-end-round';
 
-export class PicGame extends ArtGame {
-  constructor() {
-    super();
-  }
+class PicGame extends ArtGame {
 
   async renderQuestion(path) {
+    const curTag = path;
     const data = await getData();
     // todo ----------------------------------------------------------------
     if (this.category !== localStorage.getItem('curCategory')) {
@@ -24,23 +22,23 @@ export class PicGame extends ArtGame {
     picContainer.classList.add('img__container');
     const arrPic = [];
     arrPic.push(this.rightObj.imageNum);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       const count = randomImg();
       if (!arrPic.includes(data[count].imageNum)) {
         arrPic.push(data[count].imageNum);
       } else {
-        i--;
+        i -= 1;
       }
     }
     this.renderBtn(arrPic, picContainer);
 
-    path.innerHTML = `<div class="game__question">Which is ${this.rightObj.author} picture?</div>`;
-    path.append(picContainer);
+    curTag.innerHTML = `<div class="game__question">Which is ${this.rightObj.author} picture?</div>`;
+    curTag.append(picContainer);
   }
 
   renderBtn(arr, path) {
     shuffle(arr); // mix answer
-    arr.forEach((el, index) => {
+    arr.forEach((el) => {
       const div = document.createElement('div');
       div.classList.add('img__card');
       div.innerHTML = '<div class="sheet"></div>';
@@ -52,7 +50,7 @@ export class PicGame extends ArtGame {
         if (img.alt === this.rightObj.imageNum) {
           if (!this.curObjOfCategory.question[this.progressValue].stats) {
             this.curObjOfCategory.question[this.progressValue].stats = true;
-            this.curObjOfCategory.correct++;
+            this.curObjOfCategory.correct += 1;
           }
 
           if (!this.curObjOfCategory.visit) {
@@ -61,10 +59,10 @@ export class PicGame extends ArtGame {
 
           div.firstElementChild.classList.toggle('right_img');
           this.booleanCorrectAnswer = true;
-          this.countCorrectAnswer++;
+          this.countCorrectAnswer += 1;
         } else {
           if (this.curObjOfCategory.question[this.progressValue].stats) {
-            this.curObjOfCategory.correct--;
+            this.curObjOfCategory.correct -= 1;
           }
           this.curObjOfCategory.question[this.progressValue].stats = false;
           div.firstElementChild.classList.toggle('wrong_img');
@@ -95,3 +93,4 @@ export class PicGame extends ArtGame {
     clearTimeout(this.timerId);
   }
 }
+export default PicGame;

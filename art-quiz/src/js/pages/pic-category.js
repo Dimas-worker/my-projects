@@ -1,6 +1,6 @@
-import { Category } from './category';
+import Category from './category';
 
-export class PicCategory extends Category {
+class PicCategory extends Category {
   constructor() {
     super();
     this.header.innerHTML = `
@@ -79,3 +79,4 @@ export class PicCategory extends Category {
     });
   }
 }
+export default PicCategory;

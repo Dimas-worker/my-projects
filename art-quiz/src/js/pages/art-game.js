@@ -1,22 +1,29 @@
 import {
   randomImg, shuffle, playSound, animationPopup, getData,
 } from '../components/use-func';
-import { PopupAnswer } from '../components/popup-answer';
-import { PopupEndRound } from '../components/popup-end-round';
-import { PopupExit } from '../components/popup-exist';
+import PopupAnswer from '../components/popup-answer';
+import PopupEndRound from '../components/popup-end-round';
+import PopupExit from '../components/popup-exist';
 
-export class ArtGame {
+class ArtGame {
+  timeline;
+
+  timerId;
+
+  category;
+
+  curObjOfCategory;
+
+  rmNumber;
+
+  rightObj;
+
   constructor() {
     this.container = document.body;
     this.progressValue = 0;
-    this.timeline;
     this.countCorrectAnswer = 0;
-    this.timerId;
-    this.category;
-    this.curObjOfCategory;
-    this.rmNumber;
-    this.rightObj;
     this.booleanCorrectAnswer = false;
+    this.commonCountRound = 10;
     this.main = `
       <div class="art-game__main">
       <div class="game__container"></div>
@@ -63,10 +70,8 @@ export class ArtGame {
   }
 
   async renderQuestion(path) {
-    // const res = await fetch('./json/images.json');
-    // const data = await res.json();
+    const cirTag = path;
     const data = await getData();
-    // todo ----------------------------------------------------------------
     if (this.category !== localStorage.getItem('curCategory')) {
       this.category = localStorage.getItem('curCategory');
       this.curObjOfCategory = JSON.parse(localStorage.getItem('answer'))[this.category];
@@ -84,20 +89,20 @@ export class ArtGame {
     btnContainer.classList.add('img__info');
     const arrAuthor = [];
     arrAuthor.push(this.rightObj.author);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       const count = randomImg();
       if (!arrAuthor.includes(data[count].author)) {
         arrAuthor.push(data[count].author);
       } else {
-        i--;
+        i -= 1;
       }
     }
     this.renderBtn(arrAuthor, btnContainer);
 
     img.onload = () => {
-      path.innerHTML = '<div class="game__question">Who is the author of this picture?</div>';
-      path.append(img);
-      path.append(btnContainer);
+      cirTag.innerHTML = '<div class="game__question">Who is the author of this picture?</div>';
+      cirTag.append(img);
+      cirTag.append(btnContainer);
     };
   }
 
@@ -107,13 +112,12 @@ export class ArtGame {
       const button = document.createElement('button');
       button.classList.add('btn__choose');
       button.textContent = el;
-      let isClick;
       button.addEventListener('click', () => {
         clearTimeout(this.timerId);
         if (button.textContent === this.rightObj.author) {
           if (!this.curObjOfCategory.question[this.progressValue].stats) {
             this.curObjOfCategory.question[this.progressValue].stats = true;
-            this.curObjOfCategory.correct++;
+            this.curObjOfCategory.correct += 1;
           }
 
           if (!this.curObjOfCategory.visit) {
@@ -122,10 +126,10 @@ export class ArtGame {
 
           button.classList.toggle('btn_correct');
           this.booleanCorrectAnswer = true;
-          this.countCorrectAnswer++;
+          this.countCorrectAnswer += 1;
         } else {
           if (this.curObjOfCategory.question[this.progressValue].stats) {
-            this.curObjOfCategory.correct--;
+            this.curObjOfCategory.correct -= 1;
           }
           this.curObjOfCategory.question[this.progressValue].stats = false;
           button.classList.toggle('btn_wrong');
@@ -159,9 +163,9 @@ export class ArtGame {
     playSound(bool);
     popupAnswer.buttonNext.addEventListener('click', (e) => {
       if (e.target.className === 'btn__next') {
-        this.progressValue++;
+        this.progressValue += 1;
         popupAnswer.remove();
-        if (this.progressValue === 10) {
+        if (this.progressValue === this.commonCountRound) {
           this.showEndPopup(this.curObjOfCategory);
         } else {
           this.render();
@@ -171,10 +175,12 @@ export class ArtGame {
   }
 
   setTimer(time, tag) {
+    let curTime = time;
+    const curTag = tag;
     const isTimer = JSON.parse(localStorage.getItem('timer'));
     if (!isTimer) return;
     clearTimeout(this.timerId);
-    if (time === -1) {
+    if (curTime === -1) {
       this.booleanCorrectAnswer = false;
       this.nextCard(this.booleanCorrectAnswer);
       return;
@@ -183,9 +189,10 @@ export class ArtGame {
       clearTimeout(this.timerId);
       this.progressValue = 0;
     });
-    tag.textContent = time;
+    curTag.textContent = curTime;
     this.timerId = setTimeout(() => {
-      this.setTimer(--time, tag);
+      curTime -= 1;
+      this.setTimer(curTime, curTag);
     }, 1000);
   }
 
@@ -202,3 +209,5 @@ export class ArtGame {
     await this.renderQuestion(artGameCont);
   }
 }
+
+export default ArtGame;

@@ -3,30 +3,31 @@ function randomImg() {
 }
 
 function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
+  for (let i = array.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
 
 function animationPage(el, cb) {
-  el.classList.add('hidden__body');
+  const curTag = el;
+  curTag.classList.add('hidden__body');
   setTimeout(() => {
     cb();
   }, 1000);
-  el.onanimationend = () => {
-    el.classList.remove('hidden__body');
+  curTag.onanimationend = () => {
+    curTag.classList.remove('hidden__body');
   };
 }
 function animationPopup(el) {
-  el.classList.add('show__block');
-  el.onanimationend = () => {
-    el.classList.remove('show__block');
+  const curTag = el;
+  curTag.classList.add('show__block');
+  curTag.onanimationend = () => {
+    curTag.classList.remove('show__block');
   };
 }
 
 function playSound(isTrue, isFinish = false) {
-  // const isVolume = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
   const value = localStorage.getItem('volume') ? JSON.parse(localStorage.getItem('volume')) : 40;
   if (!value) return;
   const audio = new Audio();

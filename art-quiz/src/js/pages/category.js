@@ -1,9 +1,8 @@
-import { ARRAY_CATEGORIES } from '../components/ls';
+import ARRAY_CATEGORIES from '../components/ls';
 
-export class Category {
+class Category {
   constructor() {
     this.categories = ARRAY_CATEGORIES;
-    this.count;
     this.container = document.body;
     this.section = document.createElement('div');
     this.section.classList.add('wrapper', 'categories__wrapper');
@@ -69,7 +68,7 @@ export class Category {
   creatCard(index) {
     // check LS if use category and how questions is answered 'progress card counts-------------------------
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
-    this.count = curCardObj.correct;
+    const count = curCardObj.correct;
 
     const divCard = document.createElement('a');
     divCard.classList.add('category__card');
@@ -77,9 +76,9 @@ export class Category {
     divCard.innerHTML = `
       <div class="heading__card">
         <h4>${this.categories[index]}</h4>
-        <div class="progress__card">${this.count}/10</div>
+        <div class="progress__card">${count}/10</div>
       </div>`;
-    if (this.count) {
+    if (count) {
       divCard.firstElementChild.classList.add('heading__card_active');
     }
     const cardDiv = document.createElement('div');
@@ -113,3 +112,4 @@ export class Category {
     this.renderCard();
   }
 }
+export default Category;

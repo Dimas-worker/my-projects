@@ -1,4 +1,4 @@
-export class Home {
+class Home {
   constructor() {
     this.container = document.body;
     this.section = document.createElement('div');
@@ -27,4 +27,4 @@ export class Home {
     };
   }
 }
-// export default Home;
+export default Home;

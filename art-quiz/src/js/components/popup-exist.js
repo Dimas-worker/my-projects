@@ -1,6 +1,6 @@
-import { PopupEndRound } from './popup-end-round';
+import PopupEndRound from './popup-end-round';
 
-export class PopupExit extends PopupEndRound {
+class PopupExit extends PopupEndRound {
   constructor() {
     super();
     this.content = document.body;
@@ -29,3 +29,4 @@ export class PopupExit extends PopupEndRound {
     });
   }
 }
+export default PopupExit;

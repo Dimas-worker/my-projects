@@ -1,7 +1,7 @@
-import { PicCategory } from './pic-category';
+import PicCategory from './pic-category';
 import { getData } from '../components/use-func';
 
-export class PicScore extends PicCategory {
+class PicScore extends PicCategory {
   constructor() {
     super();
     this.header = document.createElement('div');
@@ -77,7 +77,7 @@ export class PicScore extends PicCategory {
     const imgList = document.createElement('div');
     imgList.classList.add('categories__img__lists');
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i += 1) {
       const digit = `${index}${i}`;
       const block = document.createElement('div');
       block.classList.add('container__img');
@@ -127,3 +127,4 @@ export class PicScore extends PicCategory {
     });
   }
 }
+export default PicScore;

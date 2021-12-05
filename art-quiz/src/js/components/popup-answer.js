@@ -1,4 +1,4 @@
-export class PopupAnswer {
+class PopupAnswer {
   constructor(num, bul, obj) {
     this.content = document.body;
     this.numberOfImg = num;
@@ -39,3 +39,4 @@ export class PopupAnswer {
     this.section.remove();
   }
 }
+export default PopupAnswer;

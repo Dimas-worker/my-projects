@@ -1,17 +1,16 @@
-import './components/ls';
-import { Home } from './pages/home';
-import { Setting } from './pages/setting';
-import { Category } from './pages/category';
-import { Score } from './pages/score';
-import { ArtGame } from './pages/art-game';
-import { PicCategory } from './pages/pic-category';
-import { PicGame } from './pages/pic-game';
-import { PicScore } from './pages/pic-score';
+import  Home from './pages/home';
+import Setting from './pages/setting';
+import Category from './pages/category';
+import Score from './pages/score';
+import ArtGame from './pages/art-game';
+import PicCategory from './pages/pic-category';
+import PicGame from './pages/pic-game';
+import PicScore from './pages/pic-score';
 import { animationPage } from './components/use-func';
 
 const Utils = {
   parseRequestURL: () => {
-    const url = location.hash.slice(1).toLowerCase() || '/';
+    const url = window.location.hash.slice(1).toLowerCase() || '/';
     const r = url.split('/');
     const request = {
       resource: null,
@@ -38,7 +37,7 @@ const router = async () => {
   document.body.innerHTML = '';
   const request = Utils.parseRequestURL();
   const parsedURL = (request.resource ? `/${request.resource}` : '/') + (request.id ? '/:id' : '') + (request.verb ? `/${request.verb}` : '');
-  const page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  const page = routes[parsedURL] ? routes[parsedURL] : new Home();
   await page.render();
 };
 

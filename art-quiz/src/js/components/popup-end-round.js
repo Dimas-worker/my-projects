@@ -1,4 +1,4 @@
-export class PopupEndRound {
+class PopupEndRound {
   constructor(num, path) {
     this.content = document.body;
     this.numberOfImg = num;
@@ -39,3 +39,5 @@ export class PopupEndRound {
     return 'Champion!';
   }
 }
+
+export default PopupEndRound;
