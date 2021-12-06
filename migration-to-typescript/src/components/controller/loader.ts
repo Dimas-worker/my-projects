@@ -1,7 +1,14 @@
+export type Callback<T> = (data: T) => void;
+
 export type DataUrlOptions = {
     [index: string]: string;
 };
 
+interface ResponseObject {
+    ok: boolean;
+    status: number;
+    statusText: string;
+}
 type defaultOption = {
     sources?: string;
 };
@@ -43,7 +50,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method:string, endpoint: string, callback: (data:object) => void, options = {}): void {
+    load(method: string, endpoint: string, callback: (data: ResponseObject) => void, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
