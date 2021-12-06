@@ -1,8 +1,10 @@
-export type Callback<T> = (data: T) => void;
-
 export type DataUrlOptions = {
     [index: string]: string;
 };
+
+enum MethodAttribute {
+    GET = 'GET',
+}
 
 interface ResponseObject {
     ok: boolean;
@@ -26,7 +28,7 @@ class Loader {
             console.error('No callback for GET response');
         }
     ): void {
-        this.load("GET", endpoint, callback, options);
+        this.load(MethodAttribute.GET, endpoint, callback, options);
     }
 
     errorHandler(res: Response): Response {
@@ -50,7 +52,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: ResponseObject) => void, options = {}): void {
+    load(method: MethodAttribute, endpoint: string, callback: (data: ResponseObject) => void, options = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
