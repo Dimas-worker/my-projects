@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: center;
   @extend %transition;
-  // animation: show-this 0.5s;
 
   .popup__content {
     background-color: $color-white;
@@ -44,6 +43,7 @@
         }
       }
     }
+
     .popup__close {
       position: absolute;
       right: 5%;
@@ -62,11 +62,15 @@
     }
   }
 }
+
 @keyframes show-this {
+
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
+  
 }

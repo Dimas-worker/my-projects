@@ -92,17 +92,17 @@
   
 }
 @keyframes grow-up {
-  0%{
+  
+  0% {
     transform: translateX(-500%);
-    // transform: scale(0);
   }
+
   70% {
-    // transform: scale(1.1)
     transform: translateX(10%);
   }
+
   100% {
     transform: translateX(0);
-
-    // transform: scale(1);
   }
+
 }

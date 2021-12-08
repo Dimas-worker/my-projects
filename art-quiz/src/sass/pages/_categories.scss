@@ -3,7 +3,6 @@
   padding-bottom: 20px;
 
   .categories__list {
-    // animation: show-me 1.5s;
     display: flex;
     
     @include mobile {
@@ -29,7 +28,6 @@
 
 .category__card {
   cursor: pointer;
-  // @extend %transition;
 
   .heading__card {
     display: flex;

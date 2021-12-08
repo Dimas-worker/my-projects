@@ -27,23 +27,31 @@
     }
 
     .wrapper__popup {
+
       .button__container {
         @include flex(space-between, center);
         width: 100%;
         gap: 0 5%;
       }
+
       .congratulation {
         @include font(42px, 51px, 600);
+
         @include max-525 {
           @include font(32px, 42px, 600);
         }
+        
       }
+
       .total__result {
         @include font(82px, 102px, bold);
+
         @include max-525 {
           @include font(42px, 51px, bold);
         }
+
       }
+
     }
   }
   

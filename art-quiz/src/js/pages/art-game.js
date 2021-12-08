@@ -145,13 +145,12 @@ class ArtGame {
     const endRound = new PopupEndRound(this.countCorrectAnswer, 'category');
     playSound(this.booleanCorrectAnswer, true);
     endRound.render();
-    // ls---------------------------------------------------------------------------------------
+
     const answer = JSON.parse(localStorage.getItem('answer'));
     answer[this.category] = obj;
     const str = JSON.stringify(answer);
-
     localStorage.setItem('answer', str);
-    // -------------------------------------------------------------------------------------------
+    
     this.progressValue = 0;
     this.countCorrectAnswer = 0;
     clearTimeout(this.timerId);

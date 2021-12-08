@@ -5,11 +5,13 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
+
 body {
   background-color: $color-black;
   font-family: "Gilroy", sans-serif;
   position: relative;
 }
+
 h3 {
   color: $color-white;
   @include font(30px, 28px, bold);
@@ -20,12 +22,15 @@ h3 {
     text-align: center;
   }
 }
+
 a {
   text-decoration: none;
 }
+
 .hidden {
   display: none;
 }
+
 .volume__icon_off {
   width: 23px;
   background-image: url("./assets/icons/setting/volume-off.svg");
@@ -34,8 +39,6 @@ a {
 .card_inactive {
   filter: saturate(0%);
 }
-
-// animation for pages-------------------------
 
 .hidden__body {
   animation: ani-body 2s;
@@ -59,8 +62,6 @@ a {
     opacity: 1;
   }
 }
-
-// animation for game-----------------------------
 
 .show__block {
   animation: show-me 1.5s;

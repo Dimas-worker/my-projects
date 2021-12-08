@@ -66,7 +66,6 @@ class Category {
   }
 
   creatCard(index) {
-    // check LS if use category and how questions is answered 'progress card counts-------------------------
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     const count = curCardObj.correct;
 

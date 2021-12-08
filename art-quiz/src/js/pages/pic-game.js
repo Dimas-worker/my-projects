@@ -9,7 +9,6 @@ class PicGame extends ArtGame {
   async renderQuestion(path) {
     const curTag = path;
     const data = await getData();
-    // todo ----------------------------------------------------------------
     if (this.category !== localStorage.getItem('curCategory')) {
       this.category = localStorage.getItem('curCategory');
       this.curObjOfCategory = JSON.parse(localStorage.getItem('answer'))[this.category];
@@ -81,13 +80,12 @@ class PicGame extends ArtGame {
     const endRound = new PopupEndRound(this.countCorrectAnswer, 'pic-category');
     playSound(this.booleanCorrectAnswer, true);
     endRound.render();
-    // ls---------------------------------------------------------------------------------------
+    
     const answer = JSON.parse(localStorage.getItem('answer'));
     answer[this.category] = obj;
     const str = JSON.stringify(answer);
-
     localStorage.setItem('answer', str);
-    // -------------------------------------------------------------------------------------------
+
     this.progressValue = 0;
     this.countCorrectAnswer = 0;
     clearTimeout(this.timerId);
