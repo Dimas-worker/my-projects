@@ -1,10 +1,10 @@
 class PopupAnswer {
-  constructor(num, bul, obj) {
+  constructor(numberOfImg, isCorrectAnswer, correctPictureData) {
     this.content = document.body;
-    this.numberOfImg = num;
-    this.correctAnswer = bul;
-    this.trueData = obj;
-    this.classTag = this.correctAnswer ? 'tick_right' : 'tick_mis';
+    this.numberOfImg = numberOfImg;
+    this.isCorrectAnswer = isCorrectAnswer;
+    this.correctPictureData = correctPictureData;
+    this.classTag = this.isCorrectAnswer ? 'tick_right' : 'tick_mis';
     this.buttonNext = document.createElement('button');
     this.buttonNext.classList.add('btn__next');
     this.buttonNext.textContent = 'Next';
@@ -17,8 +17,8 @@ class PopupAnswer {
       </div>
       <img src="./assets/img/all-img/${this.numberOfImg}.jpg" alt="${this.numberOfImg}" class="img__popup">
       <div class="img__description">
-        <div class="img__name">${this.trueData.name}</div>
-        <div class="img__author">${this.trueData.author}, ${this.trueData.year}</div>
+        <div class="img__name">${this.correctPictureData.name}</div>
+        <div class="img__author">${this.correctPictureData.author}, ${this.correctPictureData.year}</div>
       </div>
     </div>`;
     this.popup.firstElementChild.append(this.buttonNext);

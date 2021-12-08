@@ -36,7 +36,7 @@ class PicCategory extends Category {
       </ul>`;
   }
 
-  creatCard(index) {
+  createCard(index) {
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
@@ -73,7 +73,7 @@ class PicCategory extends Category {
     this.lists.innerHTML = '';
     this.categories.forEach((el, index) => {
       const i = 12 + index;
-      const card = this.creatCard(i);
+      const card = this.createCard(i);
       this.lists.append(card);
     });
   }

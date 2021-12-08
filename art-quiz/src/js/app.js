@@ -11,13 +11,13 @@ import { animationPage } from './components/use-func';
 const Utils = {
   parseRequestURL: () => {
     const url = window.location.hash.slice(1).toLowerCase() || '/';
-    const r = url.split('/');
+    const spaceUrl = url.split('/');
     const request = {
       resource: null,
       id: null,
       verb: null,
     };
-    [, request.resource, request.id, request.verb] = r;
+    [, request.resource, request.id, request.verb] = spaceUrl;
     return request;
   },
 };

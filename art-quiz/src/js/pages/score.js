@@ -49,19 +49,19 @@ class Score extends Category {
         </ul>`;
   }
 
-  creatCard(index) {
+  createCard(index) {
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
-    const divCard = document.createElement('div');
-    divCard.classList.add('category__card');
-    divCard.id = index;
-    divCard.innerHTML = `<div class="heading__card"><h4>${this.categories[index]}</h4><div class="progress__card">${this.count}/10</div></div>`;
+    const cardsContainer = document.createElement('div');
+    cardsContainer.classList.add('category__card');
+    cardsContainer.id = index;
+    cardsContainer.innerHTML = `<div class="heading__card"><h4>${this.categories[index]}</h4><div class="progress__card">${this.count}/10</div></div>`;
     if (this.count) {
-      divCard.firstElementChild.classList.add('heading__card_active');
+      cardsContainer.firstElementChild.classList.add('heading__card_active');
     }
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card__img');
+    const imgWrapper = document.createElement('div');
+    imgWrapper.classList.add('card__img');
     const img = document.createElement('img');
     img.src = `./assets/img/categories/${index}.jpg`;
     img.alt = `${index}`;
@@ -69,18 +69,18 @@ class Score extends Category {
       img.classList.add('card_inactive');
     }
     img.onload = () => {
-      cardDiv.append(img);
-      divCard.append(cardDiv);
+      imgWrapper.append(img);
+      cardsContainer.append(imgWrapper);
     };
-    divCard.addEventListener('click', (e) => {
+    cardsContainer.addEventListener('click', (e) => {
       this.getImageOfCategory(e.currentTarget.id);
     });
 
-    return divCard;
+    return cardsContainer;
   }
 
   async showImages(category) {
-    const data = await getData();
+    const allPicture = await getData();
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
 
     const index = category > 0 ? category : '';
@@ -88,26 +88,26 @@ class Score extends Category {
     imgList.classList.add('categories__img__lists');
 
     for (let i = 0; i < 10; i += 1) {
-      const digit = `${index}${i}`;
-      const block = document.createElement('div');
-      block.classList.add('container__img');
-      const info = document.createElement('div');
-      info.classList.add('img__info');
-      info.innerHTML = `<h4>${data[digit].name}</h4><div>${data[digit].author}, ${data[digit].year}</div>`;
+      const uniqueNumber = `${index}${i}`;
+      const imgDiv = document.createElement('div');
+      imgDiv.classList.add('container__img');
+      const tittleOfPicture = document.createElement('div');
+      tittleOfPicture.classList.add('img__info');
+      tittleOfPicture.innerHTML = `<h4>${allPicture[uniqueNumber].name}</h4><div>${allPicture[uniqueNumber].author}, ${allPicture[uniqueNumber].year}</div>`;
       const img = document.createElement('img');
-      img.src = `./assets/img/all-img/${digit}.jpg`;
-      img.alt = `${digit}`;
+      img.src = `./assets/img/all-img/${uniqueNumber}.jpg`;
+      img.alt = `${uniqueNumber}`;
       if (!curCardObj.question[i].stats) {
         img.classList.add('card_inactive');
       }
-      block.addEventListener('click', () => {
+      imgDiv.addEventListener('click', () => {
         if (!img.classList.contains('card_inactive')) {
-          info.classList.toggle('img__info_active');
+          tittleOfPicture.classList.toggle('img__info_active');
         }
       });
       img.onload = () => {
-        block.append(img, info);
-        imgList.append(block);
+        imgDiv.append(img, tittleOfPicture);
+        imgList.append(imgDiv);
       };
     }
     this.main.append(imgList);
@@ -117,10 +117,10 @@ class Score extends Category {
     this.nameCategory = document.createElement('div');
     this.nameCategory.classList.add('score__container');
     this.nameCategory.innerHTML = '<span class="score_icon"></span>';
-    const cur = document.createElement('span');
-    cur.classList.add('score__category');
-    cur.textContent = `${this.categories[category]} category`;
-    this.nameCategory.append(cur);
+    const numberOfCategory = document.createElement('span');
+    numberOfCategory.classList.add('score__category');
+    numberOfCategory.textContent = `${this.categories[category]} category`;
+    this.nameCategory.append(numberOfCategory);
     this.main.innerHTML = '';
     this.main.append(this.nameCategory);
     this.showImages(category);

@@ -19,15 +19,15 @@ class Setting {
     const btnVolume = document.createElement('button');
     btnVolume.classList.add('volume__icon');
     if (+localStorage.getItem('volume') === 0) { btnVolume.classList.add('volume__icon', 'volume__icon_mute'); }
-    this.input = document.createElement('input');
-    this.input.type = 'range';
-    this.input.classList.add('progress__volume');
-    this.input.min = '0';
-    this.input.max = '100';
-    this.input.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
-    this.input.addEventListener('input', () => {
+    this.inputRange = document.createElement('input');
+    this.inputRange.type = 'range';
+    this.inputRange.classList.add('progress__volume');
+    this.inputRange.min = '0';
+    this.inputRange.max = '100';
+    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
+    this.inputRange.addEventListener('input', () => {
       this.setVolume();
-      if (this.input.value === '0') {
+      if (this.inputRange.value === '0') {
         btnVolume.classList.add('volume__icon_mute');
       } else {
         btnVolume.classList.remove('volume__icon_mute');
@@ -37,15 +37,15 @@ class Setting {
     btnVolume.addEventListener('click', () => {
       if (btnVolume.classList.contains('volume__icon_mute')) {
         btnVolume.classList.remove('volume__icon_mute');
-        this.input.value = curVolume;
+        this.inputRange.value = curVolume;
       } else {
         btnVolume.classList.add('volume__icon_mute');
-        curVolume = this.input.value;
-        this.input.value = 0;
+        curVolume = this.inputRange.value;
+        this.inputRange.value = 0;
       }
       this.setVolume();
     });
-    settingVolume.lastElementChild.append(this.input);
+    settingVolume.lastElementChild.append(this.inputRange);
     settingVolume.lastElementChild.append(btnVolume);
     this.main.append(settingVolume);
 
@@ -58,14 +58,14 @@ class Setting {
     this.displaySwitch.textContent = 'On';
     const label = document.createElement('label');
     label.classList.add('switch');
-    this.check = document.createElement('input');
-    this.check.classList.add('checkbox');
-    this.check.type = 'checkbox';
-    this.check.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
+    this.timerSwitcher = document.createElement('input');
+    this.timerSwitcher.classList.add('checkbox');
+    this.timerSwitcher.type = 'checkbox';
+    this.timerSwitcher.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
     const span = document.createElement('span');
     span.classList.add('slider', 'round');
-    this.check.addEventListener('change', () => { this.checkTimer(); });
-    label.append(this.check, span);
+    this.timerSwitcher.addEventListener('change', () => { this.checkTimer(); });
+    label.append(this.timerSwitcher, span);
     settingTime.lastElementChild.append(this.displaySwitch, label);
     this.main.append(settingTime);
 
@@ -90,7 +90,7 @@ class Setting {
           this.inputTime.value = +this.inputTime.value - 5;
         }
         if (this.inputTime.value === '0') {
-          this.check.checked = false;
+          this.timerSwitcher.checked = false;
           this.checkTimer();
         }
       } else if (e.target.textContent === '+') {
@@ -104,7 +104,7 @@ class Setting {
         this.inputTime.value = 0;
       }
       if (this.inputTime.value === '0') {
-        this.check.checked = false;
+        this.timerSwitcher.checked = false;
         this.checkTimer();
       }
     });
@@ -121,7 +121,7 @@ class Setting {
     btnSave.textContent = 'Save';
     btnDefault.addEventListener('click', () => { this.setDefault(); });
     btnSave.addEventListener('click', () => {
-      this.setLS();
+      this.setSettingsToLocalStorage();
     });
     settingBtn.append(btnDefault, btnSave);
     this.main.append(settingBtn);
@@ -141,7 +141,7 @@ class Setting {
     this.section.append(this.header);
     this.section.append(this.main);
     this.section.append(this.footer);
-    this.setLS();
+    this.setSettingsToLocalStorage();
   }
 
   render() {
@@ -150,31 +150,31 @@ class Setting {
   }
 
   setVolume() {
-    this.input.style.background = `linear-gradient(to right, #FFBCA2 0%,#FFBCA2 ${this.input.value}%, #fff ${this.input.value}%, #fff 100%)`;
+    this.inputRange.style.background = `linear-gradient(to right, #FFBCA2 0%,#FFBCA2 ${this.inputRange.value}%, #fff ${this.inputRange.value}%, #fff 100%)`;
   }
 
   checkTimer() {
-    this.displaySwitch.textContent = this.check.checked ? 'On' : 'Off';
+    this.displaySwitch.textContent = this.timerSwitcher.checked ? 'On' : 'Off';
   }
 
-  setLS() {
-    localStorage.setItem('volume', this.input.value);
-    localStorage.setItem('timer', this.check.checked);
+  setSettingsToLocalStorage() {
+    localStorage.setItem('volume', this.inputRange.value);
+    localStorage.setItem('timer', this.timerSwitcher.checked);
     localStorage.setItem('timerValue', this.inputTime.value);
   }
 
   setDefault() {
-    this.input.value = '40';
+    this.inputRange.value = '40';
     this.setVolume();
-    this.check.checked = true;
+    this.timerSwitcher.checked = true;
     this.checkTimer();
     this.inputTime.value = 20;
   }
 
   setCurrent() {
-    this.input.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
+    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
     this.setVolume();
-    this.check.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
+    this.timerSwitcher.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
     this.checkTimer();
     this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
   }

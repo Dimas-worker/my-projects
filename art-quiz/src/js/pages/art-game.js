@@ -1,5 +1,5 @@
 import {
-  randomImg, shuffle, playSound, animationPopup, getData,
+  getRandomImgNumber, mixedValue, playSound, animatedPopup, getData,
 } from '../components/use-func';
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
@@ -14,7 +14,7 @@ class ArtGame {
 
   curObjOfCategory;
 
-  rmNumber;
+  ownNumberOfImg;
 
   rightObj;
 
@@ -65,49 +65,49 @@ class ArtGame {
     tag.innerHTML += this.footer;
     tag.prepend(this.header);
     this.container.append(tag);
-    animationPopup(tag);
+    animatedPopup(tag);
     return this.container;
   }
 
   async renderQuestion(path) {
-    const cirTag = path;
+    const currentTag = path;
     const data = await getData();
     if (this.category !== localStorage.getItem('curCategory')) {
       this.category = localStorage.getItem('curCategory');
       this.curObjOfCategory = JSON.parse(localStorage.getItem('answer'))[this.category];
     }
 
-    this.rmNumber = this.curObjOfCategory.question[this.progressValue].num;
-    this.rightObj = data[this.rmNumber];
+    this.ownNumberOfImg = this.curObjOfCategory.question[this.progressValue].num;
+    this.rightObj = data[this.ownNumberOfImg];
 
     const img = document.createElement('img');
-    img.alt = this.rmNumber;
+    img.alt = this.ownNumberOfImg;
     img.className = 'art__img';
-    img.src = `./assets/img/all-img/${this.rmNumber}.jpg`;
+    img.src = `./assets/img/all-img/${this.ownNumberOfImg}.jpg`;
 
     const btnContainer = document.createElement('div');
     btnContainer.classList.add('img__info');
-    const arrAuthor = [];
-    arrAuthor.push(this.rightObj.author);
+    const authors = [];
+    authors.push(this.rightObj.author);
     for (let i = 0; i < 3; i += 1) {
-      const count = randomImg();
-      if (!arrAuthor.includes(data[count].author)) {
-        arrAuthor.push(data[count].author);
+      const count = getRandomImgNumber();
+      if (!authors.includes(data[count].author)) {
+        authors.push(data[count].author);
       } else {
         i -= 1;
       }
     }
-    this.renderBtn(arrAuthor, btnContainer);
+    this.renderBtn(authors, btnContainer);
 
     img.onload = () => {
-      cirTag.innerHTML = '<div class="game__question">Who is the author of this picture?</div>';
-      cirTag.append(img);
-      cirTag.append(btnContainer);
+      currentTag.innerHTML = '<div class="game__question">Who is the author of this picture?</div>';
+      currentTag.append(img);
+      currentTag.append(btnContainer);
     };
   }
 
-  renderBtn(arr, path) {
-    const mixedAnswers = shuffle(arr);
+  renderBtn(answerOptions, buttonContainer) {
+    const mixedAnswers = mixedValue(answerOptions);
     mixedAnswers.forEach(el => {
       const button = document.createElement('button');
       button.classList.add('btn__choose');
@@ -137,7 +137,7 @@ class ArtGame {
         }
         setTimeout(() => { this.nextCard(this.booleanCorrectAnswer); }, 500);
       }, { once: true });
-      path.append(button);
+      buttonContainer.append(button);
     });
   }
 
@@ -157,7 +157,7 @@ class ArtGame {
   }
 
   nextCard(bool) {
-    const popupAnswer = new PopupAnswer(this.rmNumber, bool, this.rightObj);
+    const popupAnswer = new PopupAnswer(this.ownNumberOfImg, bool, this.rightObj);
     popupAnswer.render();
     playSound(bool);
     popupAnswer.buttonNext.addEventListener('click', (e) => {

@@ -41,10 +41,10 @@ a {
 }
 
 .hidden__body {
-  animation: ani-body 2s;
+  animation: animate-body 2s;
 }
 
-@keyframes ani-body {
+@keyframes animate-body {
   0% {
     transform: translateX(0);
     opacity: 1;

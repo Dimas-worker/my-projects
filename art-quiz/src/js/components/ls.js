@@ -1,4 +1,4 @@
-const ARRAY_CATEGORIES = [
+const ART_CATEGORIES = [
   'Realism',
   'Impressionism',
   'Religion',
@@ -13,25 +13,25 @@ const ARRAY_CATEGORIES = [
   'Expressionism',
 ];
 
-function setPicLS() {
+function setAllImgToLocalStorage() {
   if (!localStorage.getItem('answer')) {
-    const arr = Array.from({ length: 24 });
-    const res = arr.map((el, index) => {
-      const x = [];
+    const emptyCategories = Array.from({ length: 24 });
+    const fillCategories = emptyCategories.map((el, index) => {
+      const interimArr = [];
       for (let i = 0; i < 10; i += 1) {
         if (!index) {
-          x.push({ num: i, stats: false });
+          interimArr.push({ num: i, stats: false });
         } else {
-          x.push({ num: `${index}${i}`, stats: false });
+          interimArr.push({ num: `${index}${i}`, stats: false });
         }
       }
       return { visit: false, correct: 0, question: x };
     });
-    const str = JSON.stringify(res);
-    localStorage.setItem('answer', str);
+    const dataStr = JSON.stringify(fillCategories);
+    localStorage.setItem('answer', dataStr);
   }
 }
 
-setPicLS();
+setAllImgToLocalStorage();
 
-export default ARRAY_CATEGORIES;
+export default ART_CATEGORIES;

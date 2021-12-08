@@ -1,8 +1,8 @@
-import ARRAY_CATEGORIES from '../components/ls';
+import ART_CATEGORIES from '../components/ls';
 
 class Category {
   constructor() {
-    this.categories = ARRAY_CATEGORIES;
+    this.categories = ART_CATEGORIES;
     this.container = document.body;
     this.section = document.createElement('div');
     this.section.classList.add('wrapper', 'categories__wrapper');
@@ -65,7 +65,7 @@ class Category {
     return this.container;
   }
 
-  creatCard(index) {
+  createCard(index) {
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     const count = curCardObj.correct;
 
@@ -101,7 +101,7 @@ class Category {
   renderCard() {
     this.lists.innerHTML = '';
     this.categories.forEach((el, index) => {
-      const card = this.creatCard(index);
+      const card = this.createCard(index);
       this.lists.append(card);
     });
   }

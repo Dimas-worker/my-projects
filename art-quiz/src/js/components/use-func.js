@@ -1,8 +1,8 @@
-function randomImg() {
+function getRandomImgNumber() {
   return Math.floor(Math.random() * 240);
 }
 
-function shuffle(array) {
+function mixedValue(array) {
   const curArray = [].concat(array);
   for (let i = curArray.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -11,18 +11,19 @@ function shuffle(array) {
   return curArray;
 }
 
-function animationPage(el, cb) {
-  const curTag = el;
+function animationPage(tag, renderPage) {
+  const curTag = tag;
   curTag.classList.add('hidden__body');
   setTimeout(() => {
-    cb();
+    renderPage();
   }, 1000);
   curTag.onanimationend = () => {
     curTag.classList.remove('hidden__body');
   };
 }
-function animationPopup(el) {
-  const curTag = el;
+
+function animatedPopup(tag) {
+  const curTag = tag;
   curTag.classList.add('show__block');
   curTag.onanimationend = () => {
     curTag.classList.remove('show__block');
@@ -40,7 +41,6 @@ function playSound(isTrue, isFinish = false) {
   } else {
     audio.src = './assets/sounds/end-round.mp3';
   }
-
   audio.play();
 }
 
@@ -51,5 +51,5 @@ async function getData() {
 }
 
 export {
-  randomImg, shuffle, animationPage, playSound, animationPopup, getData,
+  getRandomImgNumber, mixedValue, animationPage, playSound, animatedPopup, getData,
 };

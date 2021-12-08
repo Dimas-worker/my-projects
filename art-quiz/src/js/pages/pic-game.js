@@ -1,6 +1,6 @@
 import ArtGame from './art-game';
 import {
-  randomImg, shuffle, playSound, getData,
+  getRandomImgNumber, mixedValue, playSound, getData,
 } from '../components/use-func';
 import PopupEndRound from '../components/popup-end-round';
 
@@ -14,29 +14,29 @@ class PicGame extends ArtGame {
       this.curObjOfCategory = JSON.parse(localStorage.getItem('answer'))[this.category];
     }
 
-    this.rmNumber = this.curObjOfCategory.question[this.progressValue].num;
-    this.rightObj = data[this.rmNumber];
+    this.ownNumberOfImg = this.curObjOfCategory.question[this.progressValue].num;
+    this.rightObj = data[this.ownNumberOfImg];
 
     const picContainer = document.createElement('div');
     picContainer.classList.add('img__container');
-    const arrPic = [];
-    arrPic.push(this.rightObj.imageNum);
+    const pictures = [];
+    pictures.push(this.rightObj.imageNum);
     for (let i = 0; i < 3; i += 1) {
-      const count = randomImg();
-      if (!arrPic.includes(data[count].imageNum)) {
-        arrPic.push(data[count].imageNum);
+      const count = getRandomImgNumber();
+      if (!pictures.includes(data[count].imageNum)) {
+        pictures.push(data[count].imageNum);
       } else {
         i -= 1;
       }
     }
-    this.renderBtn(arrPic, picContainer);
+    this.renderBtn(pictures, picContainer);
 
     curTag.innerHTML = `<div class="game__question">Which is ${this.rightObj.author} picture?</div>`;
     curTag.append(picContainer);
   }
 
-  renderBtn(arr, path) {
-    const mixedAnswers = shuffle(arr);
+  renderBtn(answerOptions, buttonContainer) {
+    const mixedAnswers = mixedValue(answerOptions);
     mixedAnswers.forEach((el) => {
       const div = document.createElement('div');
       div.classList.add('img__card');
@@ -71,7 +71,7 @@ class PicGame extends ArtGame {
       }, { once: true });
       img.onload = () => {
         div.append(img);
-        path.append(div);
+        buttonContainer.append(div);
       };
     });
   }
