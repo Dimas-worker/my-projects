@@ -1,4 +1,5 @@
 import { DEFAULT_VOLUME, MAX_VOLUME, DEFAULT_TIME } from '../components/constants'
+import { createFooter } from '../components/utils'
 
 const timerRange = {
   min: 5,
@@ -20,25 +21,27 @@ class Setting {
     this.main = document.createElement('div');
     this.main.classList.add('setting__main');
 
-    // setting__volume------------------------------------------------------------------
+  }
+
+  createSettingVolume() {
     const settingVolume = document.createElement('div');
     settingVolume.classList.add('setting__volume');
     settingVolume.innerHTML = '<h3>Volume</h3><div class="volume__container"></div>';
     const btnVolume = document.createElement('button');
     btnVolume.classList.add('volume__icon');
-    if (+localStorage.getItem('volume') === 0) { btnVolume.classList.add('volume__icon', 'volume__icon_mute'); }
+    if (!(+localStorage.getItem('volume'))) { btnVolume.classList.add('volume__icon', 'volume__icon_mute'); }
     this.inputRange = document.createElement('input');
     this.inputRange.type = 'range';
     this.inputRange.classList.add('progress__volume');
     this.inputRange.min = '0';
     this.inputRange.max = MAX_VOLUME;
-    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : DEFAULT_VOLUME;
+    this.inputRange.value = localStorage.getItem('volume') ?? DEFAULT_VOLUME;
     this.inputRange.addEventListener('input', () => {
       this.setVolume();
-      if (this.inputRange.value === '0') {
-        btnVolume.classList.add('volume__icon_mute');
-      } else {
+      if (+this.inputRange.value) {
         btnVolume.classList.remove('volume__icon_mute');
+      } else {
+        btnVolume.classList.add('volume__icon_mute');
       }
     });
     let curVolume;
@@ -56,8 +59,9 @@ class Setting {
     settingVolume.lastElementChild.append(this.inputRange);
     settingVolume.lastElementChild.append(btnVolume);
     this.main.append(settingVolume);
+  }
 
-    // setting__time-------------------------------------------------------------------------
+  createSettingTime() {
     const settingTime = document.createElement('div');
     settingTime.classList.add('setting__time');
     settingTime.innerHTML = '<h3>Time game</h3><div class="switcher"></div>';
@@ -69,15 +73,19 @@ class Setting {
     this.timerSwitcher = document.createElement('input');
     this.timerSwitcher.classList.add('checkbox');
     this.timerSwitcher.type = 'checkbox';
+    console.log(localStorage.getItem('timer'));
     this.timerSwitcher.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
+    console.log(this.timerSwitcher.checked);
     const span = document.createElement('span');
     span.classList.add('slider', 'round');
+
     this.timerSwitcher.addEventListener('change', () => { this.checkTimer(); });
     label.append(this.timerSwitcher, span);
     settingTime.lastElementChild.append(this.displaySwitch, label);
     this.main.append(settingTime);
+  }
 
-    // setting__answer -------------------------------------------------------------------
+  createSettingAnswer() {
     const settingAnswer = document.createElement('div');
     settingAnswer.classList.add('setting__answer');
     settingAnswer.innerHTML = '<h3>Time to answer</h3><div class="time__container"></div>';
@@ -88,7 +96,7 @@ class Setting {
     this.inputTime.classList.add('time_count');
     this.inputTime.type = 'number';
     this.inputTime.readOnly = true;
-    this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : DEFAULT_TIME;
+    this.inputTime.value = localStorage.getItem('timerValue') ?? DEFAULT_TIME;
     const buttonPlus = document.createElement('button');
     buttonPlus.classList.add('btn_time', 'plus');
     buttonPlus.textContent = '+';
@@ -98,7 +106,7 @@ class Setting {
         if (this.inputTime.value > timerRange.min) {
           this.inputTime.value = +this.inputTime.value - timerRange.step;
         }
-        if (this.inputTime.value === '0') {
+        if (!(+this.inputTime.value)) {
           this.timerSwitcher.checked = false;
           this.checkTimer();
         }
@@ -112,14 +120,16 @@ class Setting {
       if (this.inputTime.value < 0) {
         this.inputTime.value = 0;
       }
-      if (this.inputTime.value === '0') {
+      if (!(+this.inputTime.value)) {
         this.timerSwitcher.checked = false;
         this.checkTimer();
       }
     });
     settingAnswer.lastElementChild.append(buttonMinus, this.inputTime, buttonPlus);
     this.main.append(settingAnswer);
-    // setting__buttons -------------------------------------------------------------------
+  }
+
+  createSettingButtons() {
     const settingBtn = document.createElement('div');
     settingBtn.classList.add('setting__button');
     const btnDefault = document.createElement('button');
@@ -135,16 +145,7 @@ class Setting {
     settingBtn.append(btnDefault, btnSave);
     this.main.append(settingBtn);
 
-    this.footer = document.createElement('div');
-    this.footer.classList.add('footer');
-    this.footer.innerHTML = `
-        <div class="school__logo">
-            <a href="https://rs.school/js/" target="_blank" class="rss"></a>
-        </div>
-        <div class="developer">
-            <a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a>
-        </div>
-        <div class="create__year">2021</div>`;
+    this.footer = createFooter();
     this.section = document.createElement('div');
     this.section.classList.add('wrapper', 'wrapper__setting');
     this.section.append(this.header);
@@ -154,6 +155,11 @@ class Setting {
   }
 
   render() {
+    this.main.innerHTML = '';
+    this.createSettingVolume();
+    this.createSettingTime();
+    this.createSettingAnswer()
+    this.createSettingButtons();
     this.setCurrent();
     this.content.append(this.section);
   }
