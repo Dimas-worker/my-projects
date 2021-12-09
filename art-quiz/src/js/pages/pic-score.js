@@ -70,7 +70,7 @@ class PicScore extends PicCategory {
   }
 
   async showImages(category) {
-    const allPicture = await getData();
+    const allPictures = await getData();
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
 
     const index = category > 0 ? category : '';
@@ -78,15 +78,16 @@ class PicScore extends PicCategory {
     imgList.classList.add('categories__img__lists');
 
     for (let i = 0; i < 10; i += 1) {
-      const uniqueNumber = `${index}${i}`;
+      const uniqueNumberOfPicture = `${index}${i}`;
       const imgDiv = document.createElement('div');
       imgDiv.classList.add('container__img');
       const tittleOfPicture = document.createElement('div');
       tittleOfPicture.classList.add('img__info');
-      tittleOfPicture.innerHTML = `<h4>${allPicture[uniqueNumber].name}</h4><div>${allPicture[uniqueNumber].author}, ${allPicture[uniqueNumber].year}</div>`;
+      tittleOfPicture.innerHTML = `
+        <h4>${allPictures[uniqueNumberOfPicture].name}</h4><div>${allPictures[uniqueNumberOfPicture].author}, ${allPictures[uniqueNumberOfPicture].year}</div>`;
       const img = document.createElement('img');
-      img.src = `./assets/img/all-img/${uniqueNumber}.jpg`;
-      img.alt = `${uniqueNumber}`;
+      img.src = `./assets/img/all-img/${uniqueNumberOfPicture}.jpg`;
+      img.alt = `${uniqueNumberOfPicture}`;
       if (!curCardObj.question[i].stats) {
         img.classList.add('card_inactive');
       }

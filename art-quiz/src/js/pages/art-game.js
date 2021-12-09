@@ -1,5 +1,5 @@
 import {
-  getRandomImgNumber, mixedValue, playSound, animatedPopup, getData,
+  getRandomImgNumber, mixValue, playSound, animatePopup, getData,
 } from '../components/use-func';
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
@@ -65,7 +65,7 @@ class ArtGame {
     tag.innerHTML += this.footer;
     tag.prepend(this.header);
     this.container.append(tag);
-    animatedPopup(tag);
+    animatePopup(tag);
     return this.container;
   }
 
@@ -107,7 +107,7 @@ class ArtGame {
   }
 
   renderBtn(answerOptions, buttonContainer) {
-    const mixedAnswers = mixedValue(answerOptions);
+    const mixedAnswers = mixValue(answerOptions);
     mixedAnswers.forEach(el => {
       const button = document.createElement('button');
       button.classList.add('btn__choose');

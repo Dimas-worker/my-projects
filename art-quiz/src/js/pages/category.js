@@ -1,4 +1,4 @@
-import ART_CATEGORIES from '../components/ls';
+import ART_CATEGORIES from '../components/constant';
 
 class Category {
   constructor() {
@@ -69,19 +69,19 @@ class Category {
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     const count = curCardObj.correct;
 
-    const divCard = document.createElement('a');
-    divCard.classList.add('category__card');
-    divCard.href = './#/art-game';
-    divCard.innerHTML = `
+    const cardsContainer = document.createElement('a');
+    cardsContainer.classList.add('category__card');
+    cardsContainer.href = './#/art-game';
+    cardsContainer.innerHTML = `
       <div class="heading__card">
         <h4>${this.categories[index]}</h4>
         <div class="progress__card">${count}/10</div>
       </div>`;
     if (count) {
-      divCard.firstElementChild.classList.add('heading__card_active');
+      cardsContainer.firstElementChild.classList.add('heading__card_active');
     }
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card__img');
+    const imgWrapper = document.createElement('div');
+    imgWrapper.classList.add('card__img');
     const img = document.createElement('img');
     img.src = `./assets/img/categories/${index}.jpg`;
     img.alt = `${index}`;
@@ -89,13 +89,13 @@ class Category {
       img.classList.add('card_inactive');
     }
     img.onload = () => {
-      cardDiv.append(img);
-      divCard.append(cardDiv);
+      imgWrapper.append(img);
+      cardsContainer.append(imgWrapper);
     };
-    divCard.addEventListener('click', () => {
+    cardsContainer.addEventListener('click', () => {
       localStorage.setItem('curCategory', index);
     });
-    return divCard;
+    return cardsContainer;
   }
 
   renderCard() {

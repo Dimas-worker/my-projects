@@ -2,7 +2,7 @@ function getRandomImgNumber() {
   return Math.floor(Math.random() * 240);
 }
 
-function mixedValue(array) {
+function mixValue(array) {
   const curArray = [].concat(array);
   for (let i = curArray.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -11,7 +11,7 @@ function mixedValue(array) {
   return curArray;
 }
 
-function animationPage(tag, renderPage) {
+function animatePage(tag, renderPage) {
   const curTag = tag;
   curTag.classList.add('hidden__body');
   setTimeout(() => {
@@ -22,7 +22,7 @@ function animationPage(tag, renderPage) {
   };
 }
 
-function animatedPopup(tag) {
+function animatePopup(tag) {
   const curTag = tag;
   curTag.classList.add('show__block');
   curTag.onanimationend = () => {
@@ -51,5 +51,5 @@ async function getData() {
 }
 
 export {
-  getRandomImgNumber, mixedValue, animationPage, playSound, animatedPopup, getData,
+  getRandomImgNumber, mixValue, animatePage, playSound, animatePopup, getData,
 };

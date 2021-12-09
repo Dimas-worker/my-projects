@@ -80,7 +80,7 @@ class Score extends Category {
   }
 
   async showImages(category) {
-    const allPicture = await getData();
+    const allPictures = await getData();
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[category];
 
     const index = category > 0 ? category : '';
@@ -93,7 +93,7 @@ class Score extends Category {
       imgDiv.classList.add('container__img');
       const tittleOfPicture = document.createElement('div');
       tittleOfPicture.classList.add('img__info');
-      tittleOfPicture.innerHTML = `<h4>${allPicture[uniqueNumber].name}</h4><div>${allPicture[uniqueNumber].author}, ${allPicture[uniqueNumber].year}</div>`;
+      tittleOfPicture.innerHTML = `<h4>${allPictures[uniqueNumber].name}</h4><div>${allPictures[uniqueNumber].author}, ${allPictures[uniqueNumber].year}</div>`;
       const img = document.createElement('img');
       img.src = `./assets/img/all-img/${uniqueNumber}.jpg`;
       img.alt = `${uniqueNumber}`;

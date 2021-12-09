@@ -1,4 +1,4 @@
-import  Home from './pages/home';
+import Home from './pages/home';
 import Setting from './pages/setting';
 import Category from './pages/category';
 import Score from './pages/score';
@@ -6,18 +6,18 @@ import ArtGame from './pages/art-game';
 import PicCategory from './pages/pic-category';
 import PicGame from './pages/pic-game';
 import PicScore from './pages/pic-score';
-import { animationPage } from './components/use-func';
+import { animatePage } from './components/use-func';
 
 const Utils = {
   parseRequestURL: () => {
     const url = window.location.hash.slice(1).toLowerCase() || '/';
-    const spaceUrl = url.split('/');
+    const dividedUrl = url.split('/');
     const request = {
       resource: null,
       id: null,
       verb: null,
     };
-    [, request.resource, request.id, request.verb] = spaceUrl;
+    [, request.resource, request.id, request.verb] = dividedUrl;
     return request;
   },
 };
@@ -42,6 +42,6 @@ const router = async () => {
 };
 
 window.addEventListener('hashchange', () => {
-  animationPage(document.body, router);
+  animatePage(document.body, router);
 });
 window.addEventListener('load', router);

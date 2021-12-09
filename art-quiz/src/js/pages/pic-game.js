@@ -1,6 +1,6 @@
 import ArtGame from './art-game';
 import {
-  getRandomImgNumber, mixedValue, playSound, getData,
+  getRandomImgNumber, mixValue, playSound, getData,
 } from '../components/use-func';
 import PopupEndRound from '../components/popup-end-round';
 
@@ -36,7 +36,7 @@ class PicGame extends ArtGame {
   }
 
   renderBtn(answerOptions, buttonContainer) {
-    const mixedAnswers = mixedValue(answerOptions);
+    const mixedAnswers = mixValue(answerOptions);
     mixedAnswers.forEach((el) => {
       const div = document.createElement('div');
       div.classList.add('img__card');

@@ -40,19 +40,19 @@ class PicCategory extends Category {
     const curCardObj = JSON.parse(localStorage.getItem('answer'))[index];
     this.count = curCardObj.correct;
 
-    const divCard = document.createElement('a');
-    divCard.classList.add('category__card');
-    divCard.href = './#/pic-game';
-    divCard.innerHTML = `
+    const cardsContainer = document.createElement('a');
+    cardsContainer.classList.add('category__card');
+    cardsContainer.href = './#/pic-game';
+    cardsContainer.innerHTML = `
     <div class="heading__card">
       <h4>${this.categories[index - 12]}</h4>
       <div class="progress__card">${this.count}/10</div>
     </div>`;
     if (this.count) {
-      divCard.firstElementChild.classList.add('heading__card_active');
+      cardsContainer.firstElementChild.classList.add('heading__card_active');
     }
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('card__img');
+    const imgWrapper = document.createElement('div');
+    imgWrapper.classList.add('card__img');
     const img = document.createElement('img');
     img.src = `./assets/img/categories/${index}.jpg`;
     img.alt = `${index}`;
@@ -60,13 +60,13 @@ class PicCategory extends Category {
       img.classList.add('card_inactive');
     }
     img.onload = () => {
-      cardDiv.append(img);
-      divCard.append(cardDiv);
+      imgWrapper.append(img);
+      cardsContainer.append(imgWrapper);
     };
-    divCard.addEventListener('click', () => {
+    cardsContainer.addEventListener('click', () => {
       localStorage.setItem('curCategory', index);
     });
-    return divCard;
+    return cardsContainer;
   }
 
   renderCard() {
