@@ -1,5 +1,7 @@
+import { ALL_IMAGES, DEFAULT_VOLUME, MAX_VOLUME } from './constants';
+
 function getRandomImgNumber() {
-  return Math.floor(Math.random() * 240);
+  return Math.floor(Math.random() * ALL_IMAGES);
 }
 
 function mixValue(array) {
@@ -31,10 +33,10 @@ function animatePopup(tag) {
 }
 
 function playSound(isTrue, isFinish = false) {
-  const value = localStorage.getItem('volume') ? JSON.parse(localStorage.getItem('volume')) : 40;
+  const value = localStorage.getItem('volume') ? JSON.parse(localStorage.getItem('volume')) : DEFAULT_VOLUME;
   if (!value) return;
   const audio = new Audio();
-  audio.volume = value / 100;
+  audio.volume = value / MAX_VOLUME;
   if (!isFinish) {
     const track = isTrue ? 'yeap' : 'noep';
     audio.src = `./assets/sounds/${track}.mp3`;

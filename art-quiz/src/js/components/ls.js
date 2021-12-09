@@ -1,24 +1,11 @@
-const ART_CATEGORIES = [
-  'Realism',
-  'Impressionism',
-  'Religion',
-  'Portrait',
-  'Renaissance',
-  'Painting',
-  'Landscape',
-  'Marine',
-  'Avant-garde',
-  'Surrealism',
-  'Romanticism',
-  'Expressionism',
-];
+import { QUESTION_IN_ROUND, CATEGORIES_IN_GAME } from './constants';
 
 function setAllImgToLocalStorage() {
   if (!localStorage.getItem('answer')) {
-    const countOfCategories = Array.from({ length: 24 })
+    const countOfCategories = Array.from({ length: CATEGORIES_IN_GAME })
       .map((el, index) => {
         const interimArr = [];
-        for (let i = 0; i < 10; i += 1) {
+        for (let i = 0; i < QUESTION_IN_ROUND; i += 1) {
           if (!index) {
             interimArr.push({ num: i, stats: false });
           } else {
@@ -33,5 +20,3 @@ function setAllImgToLocalStorage() {
 }
 
 setAllImgToLocalStorage();
-
-export default ART_CATEGORIES;

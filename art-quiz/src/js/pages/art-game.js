@@ -1,6 +1,7 @@
 import {
   getRandomImgNumber, mixValue, playSound, animatePopup, getData,
 } from '../components/use-func';
+import { QUESTION_IN_ROUND, DEFAULT_TIME, COUNT_PICK } from '../components/constants'
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
 import PopupExit from '../components/popup-exist';
@@ -22,8 +23,8 @@ class ArtGame {
     this.container = document.body;
     this.progressValue = 0;
     this.countCorrectAnswer = 0;
-    this.booleanCorrectAnswer = false;
-    this.commonCountRound = 10;
+    this.isCorrectAnswer = false;
+    this.commonCountRound = QUESTION_IN_ROUND;
     this.main = `
       <div class="art-game__main">
       <div class="game__container"></div>
@@ -49,13 +50,13 @@ class ArtGame {
   renderHeader(val, time) {
     this.header.classList.add('art-game__header');
     this.header.innerHTML = `
-      <input type="range" min="1" max="10" step="1" value="${val}" class="progress__game">
+      <input type="range" min="1" max="${this.commonCountRound}" step="1" value="${val}" class="progress__game">
       <div class="game__time">${time}</div>`;
     this.header.prepend(this.buttonClose);
   }
 
   renderHTML() {
-    this.timeline = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
+    this.timeline = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : DEFAULT_TIME;
     const progress = this.progressValue + 1;
     this.renderHeader(progress, this.timeline);
     this.container.innerHTML = '';
@@ -89,7 +90,7 @@ class ArtGame {
     btnContainer.classList.add('img__info');
     const authors = [];
     authors.push(this.rightObj.author);
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < COUNT_PICK - 1; i += 1) {
       const count = getRandomImgNumber();
       if (!authors.includes(data[count].author)) {
         authors.push(data[count].author);
@@ -125,7 +126,7 @@ class ArtGame {
           }
 
           button.classList.toggle('btn_correct');
-          this.booleanCorrectAnswer = true;
+          this.isCorrectAnswer = true;
           this.countCorrectAnswer += 1;
         } else {
           if (this.curObjOfCategory.question[this.progressValue].stats) {
@@ -133,9 +134,9 @@ class ArtGame {
           }
           this.curObjOfCategory.question[this.progressValue].stats = false;
           button.classList.toggle('btn_wrong');
-          this.booleanCorrectAnswer = false;
+          this.isCorrectAnswer = false;
         }
-        setTimeout(() => { this.nextCard(this.booleanCorrectAnswer); }, 500);
+        setTimeout(() => { this.nextCard(this.isCorrectAnswer); }, 500);
       }, { once: true });
       buttonContainer.append(button);
     });
@@ -143,7 +144,7 @@ class ArtGame {
 
   showEndPopup(obj) {
     const endRound = new PopupEndRound(this.countCorrectAnswer, 'category');
-    playSound(this.booleanCorrectAnswer, true);
+    playSound(this.isCorrectAnswer, true);
     endRound.render();
 
     const answer = JSON.parse(localStorage.getItem('answer'));
@@ -180,8 +181,8 @@ class ArtGame {
     if (!isTimer) return;
     clearTimeout(this.timerId);
     if (curTime === -1) {
-      this.booleanCorrectAnswer = false;
-      this.nextCard(this.booleanCorrectAnswer);
+      this.isCorrectAnswer = false;
+      this.nextCard(this.isCorrectAnswer);
       return;
     }
     window.addEventListener('hashchange', () => {
@@ -199,7 +200,7 @@ class ArtGame {
     this.renderHTML();
     const artGameCont = document.querySelector('.game__container');
     const progressGame = document.querySelector('.progress__game');
-    const value = (this.progressValue + 1) * 10;
+    const value = (this.progressValue + 1) * this.commonCountRound;
     progressGame.style.background = `linear-gradient(to right, #FFBCA2 0%, #FFBCA2 ${value}%, #fff ${value}%, #fff 100%)`;
 
     const timeRound = document.querySelector('.game__time');

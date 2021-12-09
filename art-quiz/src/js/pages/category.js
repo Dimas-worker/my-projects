@@ -1,4 +1,4 @@
-import ART_CATEGORIES from '../components/constant';
+import { ART_CATEGORIES } from '../components/constants';
 
 class Category {
   constructor() {

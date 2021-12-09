@@ -1,5 +1,6 @@
 import Category from './category';
 import { getData } from '../components/use-func';
+import { QUESTION_IN_ROUND } from '../components/constants'
 
 class Score extends Category {
   constructor() {
@@ -87,7 +88,7 @@ class Score extends Category {
     const imgList = document.createElement('div');
     imgList.classList.add('categories__img__lists');
 
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < QUESTION_IN_ROUND; i += 1) {
       const uniqueNumber = `${index}${i}`;
       const imgDiv = document.createElement('div');
       imgDiv.classList.add('container__img');

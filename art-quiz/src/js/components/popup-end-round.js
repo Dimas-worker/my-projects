@@ -1,3 +1,9 @@
+const resultOptions = {
+  low: 2,
+  average: 6,
+  high: 9
+}
+
 class PopupEndRound {
   constructor(num, path) {
     this.content = document.body;
@@ -29,13 +35,15 @@ class PopupEndRound {
   }
 
   getPhrase() {
-    if (this.numberOfImg < 2) {
+    if (this.numberOfImg < resultOptions.low) {
       return 'Maybe next time?';
-    } if (this.numberOfImg < 6) {
+    } 
+    if (this.numberOfImg < resultOptions.average) {
       return 'Well done!';
-    } if (this.numberOfImg < 9) {
+    } 
+    if (this.numberOfImg < resultOptions.high) {
       return 'Congratulations!';
-    }
+    } 
     return 'Champion!';
   }
 }

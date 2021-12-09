@@ -1,5 +1,6 @@
 import PicCategory from './pic-category';
 import { getData } from '../components/use-func';
+import { QUESTION_IN_ROUND } from '../components/constants'
 
 class PicScore extends PicCategory {
   constructor() {
@@ -46,7 +47,7 @@ class PicScore extends PicCategory {
     const cardsContainer = document.createElement('div');
     cardsContainer.classList.add('category__card');
     cardsContainer.id = index;
-    cardsContainer.innerHTML = `<div class="heading__card"><h4>${this.categories[index - 12]}</h4><div class="progress__card">${this.count}/10</div></div>`;
+    cardsContainer.innerHTML = `<div class="heading__card"><h4>${this.categories[index - this.nextPartCategories]}</h4><div class="progress__card">${this.count}/10</div></div>`;
     if (this.count) {
       cardsContainer.firstElementChild.classList.add('heading__card_active');
     }
@@ -77,7 +78,7 @@ class PicScore extends PicCategory {
     const imgList = document.createElement('div');
     imgList.classList.add('categories__img__lists');
 
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < QUESTION_IN_ROUND; i += 1) {
       const uniqueNumberOfPicture = `${index}${i}`;
       const imgDiv = document.createElement('div');
       imgDiv.classList.add('container__img');
@@ -110,7 +111,7 @@ class PicScore extends PicCategory {
     this.nameCategory.innerHTML = '<span class="score_icon"></span>';
     const numberOfCategory = document.createElement('span');
     numberOfCategory.classList.add('score__category');
-    numberOfCategory.textContent = `${this.categories[category - 12]} category`;
+    numberOfCategory.textContent = `${this.categories[category - this.nextPartCategories]} category`;
     this.nameCategory.append(numberOfCategory);
     this.main.innerHTML = '';
     this.main.append(this.nameCategory);

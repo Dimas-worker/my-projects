@@ -1,8 +1,10 @@
 import Category from './category';
+import { CATEGORIES_IN_GAME } from '../components/constants'
 
 class PicCategory extends Category {
   constructor() {
     super();
+    this.nextPartCategories = CATEGORIES_IN_GAME / 2;
     this.header.innerHTML = `
         <div class="logo"><span class="logo_color"></span></div>
         <nav class="nav">
@@ -45,7 +47,7 @@ class PicCategory extends Category {
     cardsContainer.href = './#/pic-game';
     cardsContainer.innerHTML = `
     <div class="heading__card">
-      <h4>${this.categories[index - 12]}</h4>
+      <h4>${this.categories[index - this.nextPartCategories]}</h4>
       <div class="progress__card">${this.count}/10</div>
     </div>`;
     if (this.count) {
@@ -72,7 +74,7 @@ class PicCategory extends Category {
   renderCard() {
     this.lists.innerHTML = '';
     this.categories.forEach((el, index) => {
-      const i = 12 + index;
+      const i = this.nextPartCategories + index;
       const card = this.createCard(i);
       this.lists.append(card);
     });

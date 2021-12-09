@@ -2,6 +2,7 @@ import ArtGame from './art-game';
 import {
   getRandomImgNumber, mixValue, playSound, getData,
 } from '../components/use-func';
+import { COUNT_PICK } from '../components/constants'
 import PopupEndRound from '../components/popup-end-round';
 
 class PicGame extends ArtGame {
@@ -21,7 +22,7 @@ class PicGame extends ArtGame {
     picContainer.classList.add('img__container');
     const pictures = [];
     pictures.push(this.rightObj.imageNum);
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < COUNT_PICK - 1; i += 1) {
       const count = getRandomImgNumber();
       if (!pictures.includes(data[count].imageNum)) {
         pictures.push(data[count].imageNum);

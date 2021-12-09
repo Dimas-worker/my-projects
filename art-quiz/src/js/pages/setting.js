@@ -1,3 +1,11 @@
+import { DEFAULT_VOLUME, MAX_VOLUME, DEFAULT_TIME } from '../components/constants'
+
+const timerRange = {
+  min: 5,
+  max: 30,
+  step: 5
+}
+
 class Setting {
   constructor() {
     this.content = document.body;
@@ -23,8 +31,8 @@ class Setting {
     this.inputRange.type = 'range';
     this.inputRange.classList.add('progress__volume');
     this.inputRange.min = '0';
-    this.inputRange.max = '100';
-    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
+    this.inputRange.max = MAX_VOLUME;
+    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : DEFAULT_VOLUME;
     this.inputRange.addEventListener('input', () => {
       this.setVolume();
       if (this.inputRange.value === '0') {
@@ -80,22 +88,23 @@ class Setting {
     this.inputTime.classList.add('time_count');
     this.inputTime.type = 'number';
     this.inputTime.readOnly = true;
-    this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
+    this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : DEFAULT_TIME;
     const buttonPlus = document.createElement('button');
     buttonPlus.classList.add('btn_time', 'plus');
     buttonPlus.textContent = '+';
+
     settingAnswer.addEventListener('click', (e) => {
       if (e.target.textContent === '_') {
-        if (this.inputTime.value > 5) {
-          this.inputTime.value = +this.inputTime.value - 5;
+        if (this.inputTime.value > timerRange.min) {
+          this.inputTime.value = +this.inputTime.value - timerRange.step;
         }
         if (this.inputTime.value === '0') {
           this.timerSwitcher.checked = false;
           this.checkTimer();
         }
       } else if (e.target.textContent === '+') {
-        if (this.inputTime.value < 30) {
-          this.inputTime.value = +this.inputTime.value + 5;
+        if (this.inputTime.value < timerRange.max) {
+          this.inputTime.value = +this.inputTime.value + timerRange.step;
         }
       }
     });
@@ -164,19 +173,19 @@ class Setting {
   }
 
   setDefault() {
-    this.inputRange.value = '40';
+    this.inputRange.value = DEFAULT_VOLUME;
     this.setVolume();
     this.timerSwitcher.checked = true;
     this.checkTimer();
-    this.inputTime.value = 20;
+    this.inputTime.value = DEFAULT_TIME;
   }
 
   setCurrent() {
-    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : '40';
+    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : DEFAULT_VOLUME;
     this.setVolume();
     this.timerSwitcher.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
     this.checkTimer();
-    this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : 20;
+    this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : DEFAULT_TIME;
   }
 }
 
