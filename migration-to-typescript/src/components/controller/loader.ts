@@ -11,9 +11,11 @@ interface ResponseObject {
     status: number;
     statusText: string;
 }
+
 type defaultOption = {
     sources?: string;
 };
+
 class Loader {
     protected baseLink: string;
     protected options: { apiKey: string };

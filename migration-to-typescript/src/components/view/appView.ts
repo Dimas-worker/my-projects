@@ -19,12 +19,12 @@ class AppView {
     }
 
     drawNews(data: HandleData): void {
-        const values = data?.articles ? data?.articles : [];
+        const values: DataNews[] = data?.articles ?? [];
         this.news.draw(values);
     }
 
     drawSources(data: HandleData): void {
-        const values = data?.sources ? data?.sources : [];
+        const values: DataSources[] = data?.sources ?? [];
         this.sources.draw(values);
     }
 }

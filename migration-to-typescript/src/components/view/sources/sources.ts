@@ -7,12 +7,12 @@ export interface DataSources {
 
 class Sources {
     draw(data: DataSources[]): void {
-        const fragment = document.createDocumentFragment();
+        const fragment: DocumentFragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
-        data.forEach((item: DataSources) => {
+        data.forEach((item: DataSources): void => {
             const sourceClone = sourceItemTemp?.content.cloneNode(true) as HTMLElement;
-            sourceClone.querySelector('.source__item-name')!.textContent = item.name;
+            (sourceClone.querySelector('.source__item-name') as HTMLElement).textContent = item.name;
             sourceClone.querySelector('.source__item')?.setAttribute('data-source-id', item.id);
 
             fragment.append(sourceClone);
