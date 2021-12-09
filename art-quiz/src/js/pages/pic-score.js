@@ -8,36 +8,36 @@ class PicScore extends PicCategory {
     this.header = document.createElement('div');
     this.header.classList.add('categories__header');
     this.header.innerHTML = `
-    <div class="logo"><span class="logo_color"></span></div>
-    <nav class="nav">
+      <div class="logo"><span class="logo_color"></span></div>
+      <nav class="nav">
       <ul class="nav__list">
-        <li class="nav__link"><a href="./#/">Home</a></li>
-        <li class="nav__link"><a href="./#/pic-category">Categories</a></li>
-        <li class="nav__link active-link"><a href="./#/pic-score">Score</a></li>
+      <li class="nav__link"><a href="./#/">Home</a></li>
+      <li class="nav__link"><a href="./#/pic-category">Categories</a></li>
+      <li class="nav__link active-link"><a href="./#/pic-score">Score</a></li>
       </ul>
-    </nav>
-    <div class="setting_icon"><a href="./#/setting" class="set__btn"></a></div>`;
+      </nav>
+      <div class="setting_icon"><a href="./#/setting" class="set__btn"></a></div>`;
     this.navMenu.innerHTML = `
-    <ul class="nav__bottom__list">
+      <ul class="nav__bottom__list">
       <li class="bottom__link">
-        <a href="./#/">
-          <span class="nav_icon home"></span>
-          <span class="nav_heading">Home</span>
-        </a>
+      <a href="./#/">
+      <span class="nav_icon home"></span>
+      <span class="nav_heading">Home</span>
+      </a>
       </li>
       <li class="bottom__link">
-        <a href="./#/pic-category">
-          <span class="nav_icon category"></span>
-          <span class="nav_heading">Categories</span>
-        </a>
+      <a href="./#/pic-category">
+      <span class="nav_icon category"></span>
+      <span class="nav_heading">Categories</span>
+      </a>
       </li>
       <li class="bottom__link active__bottom-link">
-        <a href="./#/pic-score">
-          <span class="nav_icon score"></span>
-          <span class="nav_heading">Score</span>
-        </a>
+      <a href="./#/pic-score">
+      <span class="nav_icon score"></span>
+      <span class="nav_heading">Score</span>
+      </a>
       </li>
-    </ul>`;
+      </ul>`;
   }
 
   createCard(index) {

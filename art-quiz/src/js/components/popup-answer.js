@@ -11,16 +11,16 @@ class PopupAnswer {
     this.popup = document.createElement('section');
     this.popup.classList.add('popup__content');
     this.popup.innerHTML = `
-    <div class="wrapper__popup">
+      <div class="wrapper__popup">
       <div class="answer__result">
-        <span class="icon_tick ${this.classTag}"></span>
+      <span class="icon_tick ${this.classTag}"></span>
       </div>
       <img src="./assets/img/all-img/${this.numberOfImg}.jpg" alt="${this.numberOfImg}" class="img__popup">
       <div class="img__description">
-        <div class="img__name">${this.correctPictureData.name}</div>
-        <div class="img__author">${this.correctPictureData.author}, ${this.correctPictureData.year}</div>
+      <div class="img__name">${this.correctPictureData.name}</div>
+      <div class="img__author">${this.correctPictureData.author}, ${this.correctPictureData.year}</div>
       </div>
-    </div>`;
+      </div>`;
     this.popup.firstElementChild.append(this.buttonNext);
     this.section = document.createElement('section');
     this.section.classList.add('popup__answer');
