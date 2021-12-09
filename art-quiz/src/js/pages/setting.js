@@ -187,11 +187,11 @@ class Setting {
   }
 
   setCurrent() {
-    this.inputRange.value = localStorage.getItem('volume') ? localStorage.getItem('volume') : DEFAULT_VOLUME;
+    this.inputRange.value = localStorage.getItem('volume') ?? DEFAULT_VOLUME;
     this.setVolume();
     this.timerSwitcher.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
     this.checkTimer();
-    this.inputTime.value = localStorage.getItem('timerValue') ? localStorage.getItem('timerValue') : DEFAULT_TIME;
+    this.inputTime.value = localStorage.getItem('timerValue') ?? DEFAULT_TIME;
   }
 }
 
