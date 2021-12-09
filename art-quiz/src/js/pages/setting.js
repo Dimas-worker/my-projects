@@ -73,9 +73,7 @@ class Setting {
     this.timerSwitcher = document.createElement('input');
     this.timerSwitcher.classList.add('checkbox');
     this.timerSwitcher.type = 'checkbox';
-    console.log(localStorage.getItem('timer'));
     this.timerSwitcher.checked = localStorage.getItem('timer') ? JSON.parse(localStorage.getItem('timer')) : true;
-    console.log(this.timerSwitcher.checked);
     const span = document.createElement('span');
     span.classList.add('slider', 'round');
 

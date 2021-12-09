@@ -160,7 +160,7 @@ class ArtGame {
         this.progressValue++;
         popupAnswer.remove();
         if (this.progressValue === this.commonCountRound) {
-          this.showEndPopup(this.curObjOfCategory, linkNextCategory);
+          this.showEndPopup(this.curObjOfCategory, this.linkNextCategory);
         } else {
           this.render();
         }

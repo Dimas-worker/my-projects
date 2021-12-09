@@ -1,6 +1,6 @@
 import ArtGame from './art-game';
 import {
-  getRandomImgNumber, mixValue, playSound, getData,
+  getRandomImgNumber, mixValue, getData,
 } from '../components/utils';
 import { COUNT_PICK } from '../components/constants'
 
@@ -76,21 +76,6 @@ class PicGame extends ArtGame {
       };
     });
   }
-
-  // showEndPopup(obj, category) {
-  //   const endRound = new PopupEndRound(this.countCorrectAnswer, category);
-  //   playSound(this.booleanCorrectAnswer, true);
-  //   endRound.render();
-    
-  //   const answer = JSON.parse(localStorage.getItem('answer'));
-  //   answer[this.category] = obj;
-  //   const str = JSON.stringify(answer);
-  //   localStorage.setItem('answer', str);
-
-  //   this.progressValue = 0;
-  //   this.countCorrectAnswer = 0;
-  //   clearTimeout(this.timerId);
-  // }
 }
 
 export default PicGame;
