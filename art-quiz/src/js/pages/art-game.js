@@ -1,11 +1,10 @@
 import {
-  getRandomImgNumber, mixValue, playSound, animatePopup, getData,
+  getRandomImgNumber, mixValue, playSound, animatePopup, getData, createFooter
 } from '../components/utils';
 import { QUESTION_IN_ROUND, DEFAULT_TIME, COUNT_PICK } from '../components/constants'
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
 import PopupExit from '../components/popup-exist';
-import Footer from '../components/footer';
 
 class ArtGame {
   timeline;
@@ -19,6 +18,8 @@ class ArtGame {
   ownNumberOfImg;
 
   rightObj;
+  
+  linkNextCategory = 'category';
 
   constructor() {
     this.container = document.body;
@@ -30,7 +31,7 @@ class ArtGame {
       <div class="art-game__main">
       <div class="game__container"></div>
       </div>`;
-    this.footer = new Footer();
+    this.footer = createFooter();
     this.header = document.createElement('div');
     this.buttonClose = document.createElement('button');
     this.buttonClose.classList.add('close__btn_game');
@@ -135,8 +136,8 @@ class ArtGame {
     });
   }
 
-  showEndPopup(obj) {
-    const endRound = new PopupEndRound(this.countCorrectAnswer, 'category');
+  showEndPopup(obj, category) {
+    const endRound = new PopupEndRound(this.countCorrectAnswer, category);
     playSound(this.isCorrectAnswer, true);
     endRound.render();
 
@@ -159,7 +160,7 @@ class ArtGame {
         this.progressValue++;
         popupAnswer.remove();
         if (this.progressValue === this.commonCountRound) {
-          this.showEndPopup(this.curObjOfCategory);
+          this.showEndPopup(this.curObjOfCategory, linkNextCategory);
         } else {
           this.render();
         }

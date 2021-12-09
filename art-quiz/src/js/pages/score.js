@@ -1,20 +1,18 @@
 import Category from './category';
-import Header from '../components/header';
-import NavMenu from '../components/nav-menu';
-import { createImgList, createImgOfCategory } from '../components/utils';
+import { createImgList, createImgOfCategory, createHeader, createNavMenu } from '../components/utils';
 
 class Score extends Category {
   constructor() {
     super();
-    this.header = new Header('Score');
-    this.navMenu = new NavMenu('Score');
+    this.header = createHeader('Score');
+    this.navMenu = createNavMenu('Score');
   }
 
   createContainerForCards(index) {
-    const cardsContainer = document.createElement('div');
-    cardsContainer.classList.add('category__card');
-    cardsContainer.id = index;
-    return cardsContainer;
+    this.cardsContainer = document.createElement('div');
+    this.cardsContainer.classList.add('category__card');
+    this.cardsContainer.id = index;
+    return this.cardsContainer;
   }
 
   renderCard() {

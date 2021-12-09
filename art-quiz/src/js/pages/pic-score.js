@@ -1,20 +1,18 @@
 import PicCategory from './pic-category';
-import Header from '../components/header';
-import NavMenu from '../components/nav-menu';
-import { createImgList, createImgOfCategory } from '../components/utils';
+import { createImgList, createImgOfCategory, createHeader, createNavMenu } from '../components/utils';
 
 class PicScore extends PicCategory {
   constructor() {
     super();
-    this.header = new Header('Score', this.isPicGame);
-    this.navMenu = new NavMenu('Score', this.isPicGame);
+    this.header = createHeader('Score', this.isPicGame);
+    this.navMenu = createNavMenu('Score', this.isPicGame);
   }
 
   createContainerForCards(index) {
-    const cardsContainer = document.createElement('div');
-    cardsContainer.classList.add('category__card');
-    cardsContainer.id = index;
-    return cardsContainer;
+    this.cardsContainer = document.createElement('div');
+    this.cardsContainer.classList.add('category__card');
+    this.cardsContainer.id = index;
+    return this.cardsContainer;
   }
 
   renderCard() {

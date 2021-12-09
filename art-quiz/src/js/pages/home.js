@@ -1,4 +1,4 @@
-import Footer from "../components/footer";
+import { createFooter } from '../components/utils';
 
 class Home {
   constructor() {
@@ -14,7 +14,7 @@ class Home {
       <a href="./#/pic-category"class="btn">Pictures quiz</a>
       </div>
       </div>`
-    this.footer = new Footer();
+    this.footer = createFooter();
     this.section.append(this.footer);
   }
 

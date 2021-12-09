@@ -3,9 +3,9 @@ import {
   getRandomImgNumber, mixValue, playSound, getData,
 } from '../components/utils';
 import { COUNT_PICK } from '../components/constants'
-import PopupEndRound from '../components/popup-end-round';
 
 class PicGame extends ArtGame {
+  linkNextCategory = 'pic-category';
 
   async renderQuestion(path) {
     const curTag = path;
@@ -77,20 +77,20 @@ class PicGame extends ArtGame {
     });
   }
 
-  showEndPopup(obj) {
-    const endRound = new PopupEndRound(this.countCorrectAnswer, 'pic-category');
-    playSound(this.booleanCorrectAnswer, true);
-    endRound.render();
+  // showEndPopup(obj, category) {
+  //   const endRound = new PopupEndRound(this.countCorrectAnswer, category);
+  //   playSound(this.booleanCorrectAnswer, true);
+  //   endRound.render();
     
-    const answer = JSON.parse(localStorage.getItem('answer'));
-    answer[this.category] = obj;
-    const str = JSON.stringify(answer);
-    localStorage.setItem('answer', str);
+  //   const answer = JSON.parse(localStorage.getItem('answer'));
+  //   answer[this.category] = obj;
+  //   const str = JSON.stringify(answer);
+  //   localStorage.setItem('answer', str);
 
-    this.progressValue = 0;
-    this.countCorrectAnswer = 0;
-    clearTimeout(this.timerId);
-  }
+  //   this.progressValue = 0;
+  //   this.countCorrectAnswer = 0;
+  //   clearTimeout(this.timerId);
+  // }
 }
 
 export default PicGame;

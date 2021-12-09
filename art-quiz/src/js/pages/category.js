@@ -1,9 +1,9 @@
 import { ART_CATEGORIES } from '../components/constants';
-import Header from '../components/header';
-import NavMenu from '../components/nav-menu';
-import Footer from '../components/footer';
+import { createHeader, createNavMenu, createFooter } from '../components/utils';
 
 class Category {
+  cardsContainer;
+
   constructor() {
     this.categories = ART_CATEGORIES;
     this.container = document.body;
@@ -11,7 +11,7 @@ class Category {
     this.section = document.createElement('div');
     this.section.classList.add('wrapper', 'categories__wrapper');
 
-    this.header = new Header('Categories');
+    this.header = createHeader('Categories');
 
     this.main = document.createElement('div');
     this.main.classList.add('categories__main');
@@ -20,9 +20,9 @@ class Category {
     this.lists = document.createElement('div');
     this.lists.classList.add('categories__list_inner');
     
-    this.navMenu = new NavMenu('Categories');
+    this.navMenu = createNavMenu('Categories');
 
-    this.footer = new Footer();
+    this.footer = createFooter();
 
     this.main.lastElementChild.append(this.lists);
   }
@@ -38,10 +38,10 @@ class Category {
   }
 
   createContainerForCards(linkGame) {
-    const cardsContainer = document.createElement('a');
-    cardsContainer.classList.add('category__card');
-    cardsContainer.href = `./#/${linkGame}`;
-    return cardsContainer;
+    this.cardsContainer = document.createElement('a');
+    this.cardsContainer.classList.add('category__card');
+    this.cardsContainer.href = `./#/${linkGame}`;
+    return this.cardsContainer;
   }
 
   createCard(index, linkGame) {

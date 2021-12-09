@@ -1,5 +1,4 @@
-import { ALL_IMAGES, DEFAULT_VOLUME, MAX_VOLUME, QUESTION_IN_ROUND } from './constants';
-import { ART_CATEGORIES } from './constants';
+import { ALL_IMAGES, DEFAULT_VOLUME, MAX_VOLUME, QUESTION_IN_ROUND , ART_CATEGORIES } from './constants';
 
 function getRandomImgNumber() {
   return Math.floor(Math.random() * ALL_IMAGES);
@@ -34,11 +33,19 @@ function animatePopup(tag) {
 }
 
 function playSound(isTrue, isFinish = false) {
+  let track = ''
   const value = localStorage.getItem('volume') ? JSON.parse(localStorage.getItem('volume')) : DEFAULT_VOLUME;
   if (!value) return;
   const audio = new Audio();
   audio.volume = value / MAX_VOLUME;
-  const track = isFinish ? 'end-round' : isTrue ? 'yeap' : 'noep';
+  if (isFinish) {
+    track = 'end-round';
+  } else if (isTrue) {
+    track = 'yeap';
+  } else {
+    track = 'noep';
+  }
+
   audio.src = `./assets/sounds/${track}.mp3`;
   audio.play();
 }
@@ -95,6 +102,81 @@ function createImgOfCategory(category) {
     return nameCategory;
 }
 
-export {
-  getRandomImgNumber, mixValue, animatePage, playSound, animatePopup, getData, createImgList, createImgOfCategory
-};
+function createHeader(page, isPicturesGame = false) {
+  const activeLink = {
+    Home: '',
+    Categories: '',
+    Score: ''
+  }
+  activeLink[page] = 'active-link';
+  const preLink = isPicturesGame ? 'pic-' : '';
+  const header = document.createElement('div');
+  header.classList.add('categories__header');
+  header.innerHTML = `
+    <div class="logo">
+    <span class="logo_color"></span>
+    </div>
+    <nav class="nav">
+    <ul class="nav__list">
+    <li class="nav__link ${activeLink.Home}">
+    <a href="./#/">Home</a>
+    </li>
+    <li class="nav__link ${activeLink.Categories}">
+    <a href="./#/${preLink}category">Categories</a>
+    </li>
+    <li class="nav__link ${activeLink.Score}">
+    <a href="./#/${preLink}score">Score</a>
+    </li>
+    </ul>
+    </nav>
+    <div class="setting_icon">
+    <a href="./#/setting" class="set__btn"></a>
+    </div>`;
+  return header;
+}
+
+function createNavMenu(page, isPicturesGame = false) {
+  const activeLink = {
+    Home: '',
+    Categories: '',
+    Score: ''
+  }
+  activeLink[page] = 'active__bottom-link';
+  const preLink = isPicturesGame ? 'pic-' : '';
+  const navMenu = document.createElement('div');
+  navMenu.classList.add('nav__bottom');
+  navMenu.innerHTML = `
+    <ul class="nav__bottom__list">
+    <li class="bottom__link ${activeLink.Home}">
+    <a href="./#/">
+    <span class="nav_icon home"></span>
+    <span class="nav_heading">Home</span>
+    </a>
+    </li>
+    <li class="bottom__link ${activeLink.Categories}">
+    <a href="./#/${preLink}category">
+    <span class="nav_icon category"></span>
+    <span class="nav_heading">Categories</span>
+    </a>
+    </li>
+    <li class="bottom__link ${activeLink.Score}">
+    <a href="./#/${preLink}score">
+    <span class="nav_icon score"></span>
+    <span class="nav_heading">Score</span>
+    </a>
+    </li>
+    </ul>`;
+  return navMenu;
+}
+
+function createFooter() {
+  const footer = document.createElement('div');
+  footer.classList.add('footer');
+  footer.innerHTML = `
+  <div class="school__logo"><a href="https://rs.school/js/" target="_blank" class="rss"></a></div>
+  <div class="developer"><a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a></div>
+  <div class="create__year">2021</div>`;
+  return footer;
+}
+
+export { getRandomImgNumber, mixValue, animatePage, playSound, animatePopup, getData, createImgList, createImgOfCategory, createFooter, createHeader, createNavMenu };

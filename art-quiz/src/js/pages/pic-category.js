@@ -1,6 +1,6 @@
 import Category from './category';
-import Header from '../components/header';
-import NavMenu from '../components/nav-menu';
+import { createHeader, createNavMenu } from '../components/utils';
+
 import { CATEGORIES_IN_GAME } from '../components/constants'
 
 class PicCategory extends Category {
@@ -8,8 +8,8 @@ class PicCategory extends Category {
     super();
     this.nextPartCategories = CATEGORIES_IN_GAME / 2;
     this.isPicGame = true;
-    this.header = new Header('Categories', this.isPicGame);
-    this.navMenu = new NavMenu('Categories', this.isPicGame);
+    this.header = createHeader('Categories', this.isPicGame);
+    this.navMenu = createNavMenu('Categories', this.isPicGame);
   }
 
   renderCard() {
