@@ -1,3 +1,5 @@
+import Footer from "../components/footer";
+
 class Home {
   constructor() {
     this.container = document.body;
@@ -11,12 +13,9 @@ class Home {
       <a href="./#/category" class="btn">Artist quiz</a>
       <a href="./#/pic-category"class="btn">Pictures quiz</a>
       </div>
-      </div>
-      <div class="footer">
-      <div class="school__logo"><a href="https://rs.school/js/" target="_blank" class="rss"></a></div>
-      <div class="developer"><a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a></div>
-      <div class="create__year">2021</div>
-      </div>`;
+      </div>`
+    this.footer = new Footer();
+    this.section.append(this.footer);
   }
 
   render() {

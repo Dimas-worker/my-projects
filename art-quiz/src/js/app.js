@@ -6,7 +6,7 @@ import ArtGame from './pages/art-game';
 import PicCategory from './pages/pic-category';
 import PicGame from './pages/pic-game';
 import PicScore from './pages/pic-score';
-import { animatePage } from './components/use-func';
+import { animatePage } from './components/utils';
 
 const Utils = {
   parseRequestURL: () => {

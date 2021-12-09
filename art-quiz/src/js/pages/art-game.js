@@ -1,10 +1,11 @@
 import {
   getRandomImgNumber, mixValue, playSound, animatePopup, getData,
-} from '../components/use-func';
+} from '../components/utils';
 import { QUESTION_IN_ROUND, DEFAULT_TIME, COUNT_PICK } from '../components/constants'
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
 import PopupExit from '../components/popup-exist';
+import Footer from '../components/footer';
 
 class ArtGame {
   timeline;
@@ -29,15 +30,7 @@ class ArtGame {
       <div class="art-game__main">
       <div class="game__container"></div>
       </div>`;
-    this.footer = `
-      <div class="footer">
-      <div class="school__logo">
-      <a href="https://rs.school/js/" target="_blank" class="rss"></a>
-      </div>
-      <div class="developer">
-      <a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a>
-      </div>
-      <div class="create__year">2021</div>`;
+    this.footer = new Footer();
     this.header = document.createElement('div');
     this.buttonClose = document.createElement('button');
     this.buttonClose.classList.add('close__btn_game');
@@ -92,10 +85,10 @@ class ArtGame {
     authors.push(this.rightObj.author);
     for (let i = 0; i < COUNT_PICK - 1; i++) {
       const count = getRandomImgNumber();
-      if (!authors.includes(data[count].author)) {
-        authors.push(data[count].author);
-      } else {
+      if (authors.includes(data[count].author)) {
         i--;
+      } else {
+        authors.push(data[count].author);
       }
     }
     this.renderBtn(authors, btnContainer);
@@ -118,7 +111,7 @@ class ArtGame {
         if (button.textContent === this.rightObj.author) {
           if (!this.curObjOfCategory.question[this.progressValue].stats) {
             this.curObjOfCategory.question[this.progressValue].stats = true;
-            this.curObjOfCategory.correct += 1;
+            this.curObjOfCategory.correct++;
           }
 
           if (!this.curObjOfCategory.visit) {
@@ -127,10 +120,10 @@ class ArtGame {
 
           button.classList.toggle('btn_correct');
           this.isCorrectAnswer = true;
-          this.countCorrectAnswer += 1;
+          this.countCorrectAnswer++;
         } else {
           if (this.curObjOfCategory.question[this.progressValue].stats) {
-            this.curObjOfCategory.correct -= 1;
+            this.curObjOfCategory.correct--;
           }
           this.curObjOfCategory.question[this.progressValue].stats = false;
           button.classList.toggle('btn_wrong');
@@ -163,7 +156,7 @@ class ArtGame {
     playSound(bool);
     popupAnswer.buttonNext.addEventListener('click', (e) => {
       if (e.target.className === 'btn__next') {
-        this.progressValue += 1;
+        this.progressValue++;
         popupAnswer.remove();
         if (this.progressValue === this.commonCountRound) {
           this.showEndPopup(this.curObjOfCategory);
@@ -191,7 +184,7 @@ class ArtGame {
     });
     curTag.textContent = curTime;
     this.timerId = setTimeout(() => {
-      curTime -= 1;
+      curTime--;
       this.setTimer(curTime, curTag);
     }, 1000);
   }

@@ -1,7 +1,7 @@
 import ArtGame from './art-game';
 import {
   getRandomImgNumber, mixValue, playSound, getData,
-} from '../components/use-func';
+} from '../components/utils';
 import { COUNT_PICK } from '../components/constants'
 import PopupEndRound from '../components/popup-end-round';
 
@@ -24,10 +24,10 @@ class PicGame extends ArtGame {
     pictures.push(this.rightObj.imageNum);
     for (let i = 0; i < COUNT_PICK - 1; i++) {
       const count = getRandomImgNumber();
-      if (!pictures.includes(data[count].imageNum)) {
-        pictures.push(data[count].imageNum);
-      } else {
+      if (pictures.includes(data[count].imageNum)) {
         i--;
+      } else {
+        pictures.push(data[count].imageNum);
       }
     }
     this.renderBtn(pictures, picContainer);
@@ -50,7 +50,7 @@ class PicGame extends ArtGame {
         if (img.alt === this.rightObj.imageNum) {
           if (!this.curObjOfCategory.question[this.progressValue].stats) {
             this.curObjOfCategory.question[this.progressValue].stats = true;
-            this.curObjOfCategory.correct += 1;
+            this.curObjOfCategory.correct++;
           }
 
           if (!this.curObjOfCategory.visit) {
@@ -59,10 +59,10 @@ class PicGame extends ArtGame {
 
           div.firstElementChild.classList.toggle('right_img');
           this.booleanCorrectAnswer = true;
-          this.countCorrectAnswer += 1;
+          this.countCorrectAnswer++;
         } else {
           if (this.curObjOfCategory.question[this.progressValue].stats) {
-            this.curObjOfCategory.correct -= 1;
+            this.curObjOfCategory.correct--;
           }
           this.curObjOfCategory.question[this.progressValue].stats = false;
           div.firstElementChild.classList.toggle('wrong_img');

@@ -6,11 +6,7 @@ function setAllImgToLocalStorage() {
       .map((el, index) => {
         const interimArr = [];
         for (let i = 0; i < QUESTION_IN_ROUND; i++) {
-          if (!index) {
-            interimArr.push({ num: i, stats: false });
-          } else {
-            interimArr.push({ num: `${index}${i}`, stats: false });
-          }
+          interimArr.push({ num: `${index || ''}${i}`, stats: false });
         }
         return { visit: false, correct: 0, question: interimArr };
       });
