@@ -90,12 +90,12 @@ class ArtGame {
     btnContainer.classList.add('img__info');
     const authors = [];
     authors.push(this.rightObj.author);
-    for (let i = 0; i < COUNT_PICK - 1; i += 1) {
+    for (let i = 0; i < COUNT_PICK - 1; i++) {
       const count = getRandomImgNumber();
       if (!authors.includes(data[count].author)) {
         authors.push(data[count].author);
       } else {
-        i -= 1;
+        i--;
       }
     }
     this.renderBtn(authors, btnContainer);

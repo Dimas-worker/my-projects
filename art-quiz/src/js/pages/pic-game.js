@@ -22,12 +22,12 @@ class PicGame extends ArtGame {
     picContainer.classList.add('img__container');
     const pictures = [];
     pictures.push(this.rightObj.imageNum);
-    for (let i = 0; i < COUNT_PICK - 1; i += 1) {
+    for (let i = 0; i < COUNT_PICK - 1; i++) {
       const count = getRandomImgNumber();
       if (!pictures.includes(data[count].imageNum)) {
         pictures.push(data[count].imageNum);
       } else {
-        i -= 1;
+        i--;
       }
     }
     this.renderBtn(pictures, picContainer);

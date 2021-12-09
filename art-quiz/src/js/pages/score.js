@@ -88,7 +88,7 @@ class Score extends Category {
     const imgList = document.createElement('div');
     imgList.classList.add('categories__img__lists');
 
-    for (let i = 0; i < QUESTION_IN_ROUND; i += 1) {
+    for (let i = 0; i < QUESTION_IN_ROUND; i++) {
       const uniqueNumber = `${index}${i}`;
       const imgDiv = document.createElement('div');
       imgDiv.classList.add('container__img');

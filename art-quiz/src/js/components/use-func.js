@@ -6,7 +6,7 @@ function getRandomImgNumber() {
 
 function mixValue(array) {
   const curArray = [].concat(array);
-  for (let i = curArray.length - 1; i > 0; i -= 1) {
+  for (let i = curArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [curArray[i], curArray[j]] = [curArray[j], curArray[i]];
   }

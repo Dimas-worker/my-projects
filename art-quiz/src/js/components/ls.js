@@ -5,7 +5,7 @@ function setAllImgToLocalStorage() {
     const countOfCategories = Array.from({ length: CATEGORIES_IN_GAME })
       .map((el, index) => {
         const interimArr = [];
-        for (let i = 0; i < QUESTION_IN_ROUND; i += 1) {
+        for (let i = 0; i < QUESTION_IN_ROUND; i++) {
           if (!index) {
             interimArr.push({ num: i, stats: false });
           } else {
