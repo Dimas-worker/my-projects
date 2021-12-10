@@ -1,10 +1,11 @@
 import {
-  getRandomImgNumber, mixValue, playSound, animatePopup, getData, createFooter
+  getRandomImgNumber, mixValue, playSound, animatePopup, getData
 } from '../components/utils';
 import { QUESTION_IN_ROUND, DEFAULT_TIME, COUNT_PICK } from '../components/constants'
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
 import PopupExit from '../components/popup-exist';
+import Footer from '../components/footer';
 
 class ArtGame {
   timeline;
@@ -31,7 +32,7 @@ class ArtGame {
       <div class="art-game__main">
       <div class="game__container"></div>
       </div>`;
-    this.footer = createFooter();
+    this.footer = new Footer();
     this.header = document.createElement('div');
     this.buttonClose = document.createElement('button');
     this.buttonClose.classList.add('close__btn_game');
@@ -57,8 +58,8 @@ class ArtGame {
     const tag = document.createElement('div');
     tag.classList.add('wrapper__game', 'wrapper__art-game');
     tag.innerHTML += this.main;
-    tag.innerHTML += this.footer;
     tag.prepend(this.header);
+    tag.append(this.footer.footer);
     this.container.append(tag);
     animatePopup(tag);
     return this.container;
