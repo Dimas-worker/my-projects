@@ -1,1 +1,1 @@
-console.log("Start task");
+console.log('Start task');
