@@ -30,7 +30,7 @@ class ArtGame {
     this.commonCountRound = QUESTIONS_IN_ROUND;
     this.main = `
       <div class="art-game__main">
-      <div class="game__container"></div>
+        <div class="game__container"></div>
       </div>`;
     this.footer = new Footer();
     this.header = document.createElement('div');

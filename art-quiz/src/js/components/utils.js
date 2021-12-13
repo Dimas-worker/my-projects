@@ -71,7 +71,8 @@ async function createImgList(category) {
     const tittleOfPicture = document.createElement('div');
     tittleOfPicture.classList.add('img__info');
     tittleOfPicture.innerHTML = `
-      <h4>${allPictures[uniqueNumberOfPicture].name}</h4><div>${allPictures[uniqueNumberOfPicture].author}, ${allPictures[uniqueNumberOfPicture].year}</div>`;
+      <h4>${allPictures[uniqueNumberOfPicture].name}</h4>
+      <div>${allPictures[uniqueNumberOfPicture].author}, ${allPictures[uniqueNumberOfPicture].year}</div>`;
     const img = document.createElement('img');
     img.src = `./assets/img/all-img/${uniqueNumberOfPicture}.jpg`;
     img.alt = `${uniqueNumberOfPicture}`;
@@ -114,23 +115,23 @@ function createHeader(page, isPicturesGame = false) {
   header.classList.add('categories__header');
   header.innerHTML = `
     <div class="logo">
-    <span class="logo_color"></span>
+      <span class="logo_color"></span>
     </div>
     <nav class="nav">
-    <ul class="nav__list">
-    <li class="nav__link ${activeLink.Home}">
-    <a href="./#/">Home</a>
-    </li>
-    <li class="nav__link ${activeLink.Categories}">
-    <a href="./#/${preLink}category">Categories</a>
-    </li>
-    <li class="nav__link ${activeLink.Score}">
-    <a href="./#/${preLink}score">Score</a>
-    </li>
-    </ul>
+      <ul class="nav__list">
+        <li class="nav__link ${activeLink.Home}">
+          <a href="./#/">Home</a>
+        </li>
+        <li class="nav__link ${activeLink.Categories}">
+          <a href="./#/${preLink}category">Categories</a>
+        </li>
+        <li class="nav__link ${activeLink.Score}">
+          <a href="./#/${preLink}score">Score</a>
+        </li>
+      </ul>
     </nav>
     <div class="setting_icon">
-    <a href="./#/setting" class="set__btn"></a>
+      <a href="./#/setting" class="set__btn"></a>
     </div>`;
   return header;
 }
@@ -147,24 +148,24 @@ function createNavMenu(page, isPicturesGame = false) {
   navMenu.classList.add('nav__bottom');
   navMenu.innerHTML = `
     <ul class="nav__bottom__list">
-    <li class="bottom__link ${activeLink.Home}">
-    <a href="./#/">
-    <span class="nav_icon home"></span>
-    <span class="nav_heading">Home</span>
-    </a>
-    </li>
-    <li class="bottom__link ${activeLink.Categories}">
-    <a href="./#/${preLink}category">
-    <span class="nav_icon category"></span>
-    <span class="nav_heading">Categories</span>
-    </a>
-    </li>
-    <li class="bottom__link ${activeLink.Score}">
-    <a href="./#/${preLink}score">
-    <span class="nav_icon score"></span>
-    <span class="nav_heading">Score</span>
-    </a>
-    </li>
+      <li class="bottom__link ${activeLink.Home}">
+        <a href="./#/">
+          <span class="nav_icon home"></span>
+          <span class="nav_heading">Home</span>
+        </a>
+      </li>
+      <li class="bottom__link ${activeLink.Categories}">
+        <a href="./#/${preLink}category">
+          <span class="nav_icon category"></span>
+          <span class="nav_heading">Categories</span>
+        </a>
+      </li>
+      <li class="bottom__link ${activeLink.Score}">
+        <a href="./#/${preLink}score">
+          <span class="nav_icon score"></span>
+          <span class="nav_heading">Score</span>
+        </a>
+      </li>
     </ul>`;
   return navMenu;
 }
@@ -173,9 +174,13 @@ function createFooter() {
   const footer = document.createElement('div');
   footer.classList.add('footer');
   footer.innerHTML = `
-  <div class="school__logo"><a href="https://rs.school/js/" target="_blank" class="rss"></a></div>
-  <div class="developer"><a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a></div>
-  <div class="create__year">2021</div>`;
+    <div class="school__logo">
+      <a href="https://rs.school/js/" target="_blank" class="rss"></a>
+    </div>
+    <div class="developer">
+      <a href="https://github.com/Dimas-worker" target="_blank">dimas-worker</a>
+    </div>
+    <div class="create__year">2021</div>`;
   return footer;
 }
 
