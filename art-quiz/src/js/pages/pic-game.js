@@ -2,7 +2,7 @@ import ArtGame from './art-game';
 import {
   getRandomImgNumber, mixValue, getData,
 } from '../components/utils';
-import { COUNT_PICK } from '../components/constants'
+import { ANSWER_OPTIONS_AMOUNT } from '../components/constants'
 
 class PicGame extends ArtGame {
   linkNextCategory = 'pic-category';
@@ -22,7 +22,7 @@ class PicGame extends ArtGame {
     picContainer.classList.add('img__container');
     const pictures = [];
     pictures.push(this.rightObj.imageNum);
-    for (let i = 0; i < COUNT_PICK - 1; i++) {
+    for (let i = 0; i < ANSWER_OPTIONS_AMOUNT - 1; i++) {
       const count = getRandomImgNumber();
       if (pictures.includes(data[count].imageNum)) {
         i--;

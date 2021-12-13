@@ -18,8 +18,8 @@ class PicScore extends PicCategory {
   renderCard() {
     this.lists.innerHTML = '';
     this.categories.forEach((el, index) => {
-      const i = this.nextPartCategories + index;
-      const card = this.createCard(i, i);
+      const categoryNumber = this.nextPartCategories + index;
+      const card = this.createCard(categoryNumber, categoryNumber);
       card.addEventListener('click', (e) => {
         this.getImageOfCategory(e.currentTarget.id);
       });

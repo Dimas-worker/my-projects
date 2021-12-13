@@ -1,7 +1,7 @@
 import {
   getRandomImgNumber, mixValue, playSound, animatePopup, getData
 } from '../components/utils';
-import { QUESTION_IN_ROUND, DEFAULT_TIME, COUNT_PICK } from '../components/constants'
+import { QUESTIONS_IN_ROUND, DEFAULT_TIME, ANSWER_OPTIONS_AMOUNT } from '../components/constants'
 import PopupAnswer from '../components/popup-answer';
 import PopupEndRound from '../components/popup-end-round';
 import PopupExit from '../components/popup-exist';
@@ -27,7 +27,7 @@ class ArtGame {
     this.progressValue = 0;
     this.countCorrectAnswer = 0;
     this.isCorrectAnswer = false;
-    this.commonCountRound = QUESTION_IN_ROUND;
+    this.commonCountRound = QUESTIONS_IN_ROUND;
     this.main = `
       <div class="art-game__main">
       <div class="game__container"></div>
@@ -85,7 +85,7 @@ class ArtGame {
     btnContainer.classList.add('img__info');
     const authors = [];
     authors.push(this.rightObj.author);
-    for (let i = 0; i < COUNT_PICK - 1; i++) {
+    for (let i = 0; i < ANSWER_OPTIONS_AMOUNT - 1; i++) {
       const count = getRandomImgNumber();
       if (authors.includes(data[count].author)) {
         i--;

@@ -1,7 +1,7 @@
-import { ALL_IMAGES, DEFAULT_VOLUME, MAX_VOLUME, QUESTION_IN_ROUND , ART_CATEGORIES } from './constants';
+import { ALL_IMAGES_AMOUNT, DEFAULT_VOLUME, MAX_VOLUME, QUESTIONS_IN_ROUND , ART_CATEGORIES } from './constants';
 
 function getRandomImgNumber() {
-  return Math.floor(Math.random() * ALL_IMAGES);
+  return Math.floor(Math.random() * ALL_IMAGES_AMOUNT);
 }
 
 function mixValue(array) {
@@ -64,7 +64,7 @@ async function createImgList(category) {
   const imgList = document.createElement('div');
   imgList.classList.add('categories__img__lists');
 
-  for (let i = 0; i < QUESTION_IN_ROUND; i++) {
+  for (let i = 0; i < QUESTIONS_IN_ROUND; i++) {
     const uniqueNumberOfPicture = `${index}${i}`;
     const imgDiv = document.createElement('div');
     imgDiv.classList.add('container__img');
