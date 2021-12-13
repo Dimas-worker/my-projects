@@ -94,13 +94,13 @@ async function createImgList(category) {
 
 function createImgOfCategory(category) {
   const nameCategory = document.createElement('div');
-    nameCategory.classList.add('score__container');
-    nameCategory.innerHTML = '<span class="score_icon"></span>';
-    const numberOfCategory = document.createElement('span');
-    numberOfCategory.classList.add('score__category');
-    numberOfCategory.textContent = `${ART_CATEGORIES[category % ART_CATEGORIES.length]} category`;
-    nameCategory.append(numberOfCategory);
-    return nameCategory;
+  nameCategory.classList.add('score__container');
+  nameCategory.innerHTML = '<span class="score_icon"></span>';
+  const numberOfCategory = document.createElement('span');
+  numberOfCategory.classList.add('score__category');
+  numberOfCategory.textContent = `${ART_CATEGORIES[category % ART_CATEGORIES.length]} category`;
+  nameCategory.append(numberOfCategory);
+  return nameCategory;
 }
 
 function createHeader(page, isPicturesGame = false) {

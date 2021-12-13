@@ -15,8 +15,8 @@ class PicCategory extends Category {
   renderCard() {
     this.lists.innerHTML = '';
     this.categories.forEach((el, index) => {
-      const i = this.nextPartCategories + index;
-      const card = this.createCard(i, 'pic-game');
+      const categoryNumber = this.nextPartCategories + index;
+      const card = this.createCard(categoryNumber, 'pic-game');
       this.lists.append(card);
     });
   }

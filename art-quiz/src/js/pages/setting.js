@@ -13,11 +13,11 @@ class Setting {
     this.header = document.createElement('div');
     this.header.classList.add('setting__header');
     this.header.innerHTML = `
-        <a href="./#/" class="setting__btn">
-            <span class="arrow_icon"></span>
-            <span>Setting</span>
-        </a>
-        <a href="./#/" class="close__btn"></a>`;
+      <a href="./#/" class="setting__btn">
+        <span class="arrow_icon"></span>
+        <span>Setting</span>
+      </a>
+      <a href="./#/" class="close__btn"></a>`;
     this.main = document.createElement('div');
     this.main.classList.add('setting__main');
 

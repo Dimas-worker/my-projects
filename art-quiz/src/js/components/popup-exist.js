@@ -8,11 +8,11 @@ class PopupExit extends PopupEndRound {
       <div class="popup__content">
         <button class="popup__close closing">X</button>
         <div class="wrapper__popup">
-            <div class="congratulation">Do you really want to quit the game?!</div>
-            <div class="button__container">
-                <button class="btn__popup closing">Cancel</button>
-                <a href="./#/" class="btn__popup">Yes</a>
-            </div>
+          <div class="congratulation">Do you really want to quit the game?!</div>
+          <div class="button__container">
+            <button class="btn__popup closing">Cancel</button>
+            <a href="./#/" class="btn__popup">Yes</a>
+          </div>
         </div>
       </div>`;
     this.section = document.createElement('section');
