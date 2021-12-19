@@ -1,6 +1,6 @@
 import BaseComponent from '../../../utils/base-component';
 import { getAllCards, toyData } from '../../../utils/utils';
-import { getLocalData, getFilterConstant, setFilterConstant, setLocalActiveFilters } from '../../../utils/localStorage';
+import { getLocalActiveFilters, getFilterConstant, setFilterConstant, setLocalActiveFilters } from '../../../utils/localStorage';
 import { FilterData } from '../../../constants/constants';
 import Cards from '../../cards/cards';
 import './shape.scss';
@@ -34,9 +34,9 @@ class BaseFilter {
         btnType.element.classList.add(this.activeClass);
       }
       this.filtersIcons.element.append(btnType.element);
-      
+
       btnType.element.addEventListener('click', () => {
-        const activeFilters = getLocalData();
+        const activeFilters = getLocalActiveFilters();
         if (type.status) {
           btnType.element.classList.remove(this.activeClass);
           type.status = false;

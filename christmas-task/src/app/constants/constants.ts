@@ -17,6 +17,12 @@ interface ActiveFilters {
   filters: Array<string | boolean>
 }
 
+interface ActiveRange {
+  rangeName: keyof toyData,
+  min: string,
+  max: string
+}
+
 const LIST_OF_PAGES: ListData[] = [
   { text: '', hrefLink: './', iconLink: 'logo' },
   { text: 'игрушки', hrefLink: './#/toys', iconLink: '' },
@@ -56,6 +62,22 @@ const ACTIVE_FILTERS: ActiveFilters[] = [
   { filterName: 'favorite', filters: [] }
 ]
 
+interface RangeType {
+  name:string,
+  step: number,
+  min: number,
+  max: number
+}
+
+const ALL_RANGES: RangeType[] = [
+  {name: 'count', step: 1, min: 1, max: 12},
+  {name: 'year', step: 10, min: 1940, max: 2020},
+]
+
+const ACTIVE_RANGES: ActiveRange[] = [
+  {rangeName: 'count', min: '1', max: '12'},
+  {rangeName: 'year', min: '1940', max: '2020'}
+]
 const FILTERS_NAME: string[] = ['shape', 'color', 'size'];
 
-export { LIST_OF_PAGES, All_SHAPE, ListData, FilterData, All_COLOR, All_SIZE, ACTIVE_FILTERS, ALL_FAVORITE, ActiveFilters, FILTERS_NAME };
+export { LIST_OF_PAGES, All_SHAPE, ListData, FilterData, All_COLOR, All_SIZE, ACTIVE_FILTERS, ALL_FAVORITE, ActiveFilters, FILTERS_NAME, ACTIVE_RANGES, ActiveRange, ALL_RANGES, RangeType };

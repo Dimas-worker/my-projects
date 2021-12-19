@@ -1,13 +1,18 @@
-import { ACTIVE_FILTERS, ActiveFilters, All_SHAPE, All_COLOR, All_SIZE, ALL_FAVORITE, FilterData } from '../constants/constants';
+import { ACTIVE_FILTERS, ActiveFilters, All_SHAPE, All_COLOR, All_SIZE, ALL_FAVORITE, FilterData, ACTIVE_RANGES, ActiveRange } from '../constants/constants';
 
-function setActiveFilters(): void {
-  const dataString: string = JSON.stringify(ACTIVE_FILTERS);
+function setDefaultActiveFilters(): void {
+  const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
+  const rangeString: string = JSON.stringify(ACTIVE_RANGES);
+
   if (!(localStorage.getItem('activeFilters'))) {
-    localStorage.setItem('activeFilters', dataString);
+    localStorage.setItem('activeFilters', filtersString);
+  }
+  if (!(localStorage.getItem('activeRange'))) {
+    localStorage.setItem('activeRange', rangeString);
   }
 }
 
-function getLocalData(): ActiveFilters[] {
+function getLocalActiveFilters(): Array<ActiveFilters> {
   const dataOfToys: string = localStorage.getItem('activeFilters') ?? '[]';
   const toys: ActiveFilters[] = JSON.parse(dataOfToys);
   return toys;
@@ -45,12 +50,24 @@ function getFilterConstant(filterName: string): FilterData[] {
   return filter;
 }
 
-function setFilterConstant(filterName: string, object:FilterData[] ): void {
+function setFilterConstant(filterName: string, object: FilterData[]): void {
   const constantString: string = JSON.stringify(object);
   localStorage.setItem(filterName, constantString);
 }
 
-setActiveFilters();
+function getLocalActiveRange(): Array<ActiveRange> {
+  const dataOfToys: string = localStorage.getItem('activeRange') ?? '[]';
+  const toys: ActiveRange[] = JSON.parse(dataOfToys);
+  return toys;
+}
+
+function setLocalActiveRange(object: ActiveRange[]): void {
+  const dataString: string = JSON.stringify(object);
+  localStorage.setItem('activeRange', dataString);
+}
+
+
+setDefaultActiveFilters();
 setFilterConstants();
 
-export { getLocalData, setLocalActiveFilters, getFilterConstant, setFilterConstant }
+export { getLocalActiveFilters, setLocalActiveFilters, getFilterConstant, setFilterConstant, getLocalActiveRange, setLocalActiveRange }

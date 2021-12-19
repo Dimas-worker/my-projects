@@ -1,6 +1,6 @@
 import BaseComponent from '../../../utils/base-component';
 import { ActiveFilters, FilterData } from '../../../constants/constants';
-import { getLocalData, getFilterConstant, setFilterConstant, setLocalActiveFilters } from '../../../utils/localStorage';
+import { getLocalActiveFilters, getFilterConstant, setFilterConstant, setLocalActiveFilters } from '../../../utils/localStorage';
 import Cards from '../../cards/cards';
 import './favorite.scss';
 
@@ -17,7 +17,7 @@ class Favorite extends BaseComponent {
     super('div', ['favorite'], 'Только любимые: ');
     this.cards = cards;
     this.filterName = 'favorite';
-    this.activeFilters = getLocalData();
+    this.activeFilters = getLocalActiveFilters();
     this.container = new BaseComponent('div', ['favorite__container']);
     this.label = new BaseComponent('label', ['favorite_label']);
     this.filterTypes = getFilterConstant(this.filterName);
@@ -33,7 +33,7 @@ class Favorite extends BaseComponent {
     this.element.append(this.container.element);
     this.renderFilter();
   }
-  
+
   renderFilter() {
     this.input.addEventListener('change', () => {
       if (this.input.checked) {
