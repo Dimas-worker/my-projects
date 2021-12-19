@@ -1,0 +1,34 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1920px;
+  height: 70px;
+  margin: 0 auto;
+  background-color: #121c1e;
+
+  &__github {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 20px;
+    transition: 0.5s ease-out;
+
+    &:hover {
+      color: #278d9f;
+    }
+  }
+
+  &__rss-link {
+    width: 160px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("../../../assets/svg/rss.svg");
+    transition: 0.5s ease-out;
+
+    &:hover {
+      filter: invert(57%) sepia(100%) saturate(329%) hue-rotate(141deg) brightness(89%) contrast(90%);
+    }
+  }
+}

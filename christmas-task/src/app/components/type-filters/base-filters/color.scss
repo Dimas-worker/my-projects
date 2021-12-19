@@ -1,0 +1,53 @@
+.color {
+  display: flex;
+  align-items: center;
+
+  button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin: 15px 10px;
+    border: 1px solid #278d9f;
+    border-radius: 5px;
+    outline: 0;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn-white {
+    margin-left: 20px;
+    background-color: #fff;
+  }
+
+  .btn-yellow {
+    background-color: yellow;
+  }
+
+  .btn-red {
+    background-color: red;
+  }
+
+  .btn-blue {
+    background-color: blue;
+  }
+
+  .btn-green {
+    background-color: green;
+  }
+
+  .active_color {
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 5px;
+      left: 9px;
+      width: 6px;
+      height: 10px;
+      border: solid rgba(0, 0, 0, 0.6);
+      border-width: 0 4px 4px 0;
+      transform: rotate(45deg);
+    }
+  }
+}

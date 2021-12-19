@@ -1,0 +1,36 @@
+.size {
+  display: flex;
+  align-items: center;
+
+  button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 5px 5px;
+    border: 0;
+    outline: 0;
+    background-image: url("../../../../assets/svg/ball.svg");
+    background-color: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .big {
+    margin-left: 10px;
+  }
+
+  .medium {
+    background-size: 40px 40px;
+  }
+
+  .small {
+    background-size: 32px 32px;
+  }
+
+  .active_size {
+    filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
+  }
+}

@@ -1,0 +1,35 @@
+.nav__link {
+  cursor: pointer;
+  a {
+    font-size: 18px;
+    font-weight: 500;
+    font-size: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.5s ease-out;
+  }
+  &:hover {
+    a {
+      color: #278d9f;
+    }
+  }
+
+  .logo {
+    display: inline-block;
+    width: 48px;
+    height: 60px;
+    background-image: url("../../../../../assets/svg/tree.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &:hover {
+      filter: invert(57%) sepia(100%) saturate(329%) hue-rotate(141deg) brightness(89%) contrast(90%);
+    }
+  }
+}
+.active-link {
+  a {
+    border-bottom: #278d9f solid 3px;
+  }
+}

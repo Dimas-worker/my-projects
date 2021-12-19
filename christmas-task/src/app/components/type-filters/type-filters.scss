@@ -1,0 +1,14 @@
+.filters {
+  width: 480px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: rgba(31, 112, 127, 0.3);
+  backdrop-filter: blur(6px);
+
+  &__title {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    text-transform: uppercase;
+  }
+}
