@@ -1,6 +1,11 @@
 import BaseComponent from '../../../utils/base-component';
 import { getAllCards, toyData } from '../../../utils/utils';
-import { getLocalActiveFilters, getFilterConstant, setFilterConstant, setLocalActiveFilters } from '../../../utils/localStorage';
+import {
+  getLocalActiveFilters,
+  getFilterConstant,
+  setFilterConstant,
+  setLocalActiveFilters,
+} from '../../../utils/localStorage';
 import { FilterData } from '../../../constants/constants';
 import Cards from '../../cards/cards';
 import './shape.scss';
@@ -9,11 +14,17 @@ import './size.scss';
 
 class BaseFilter {
   title: string;
+
   filtersIcons: BaseComponent;
+
   cards: Cards;
+
   allToys: toyData[];
+
   filterTypes: FilterData[];
+
   activeClass: string;
+
   filterName: string;
 
   constructor(cards: Cards, filterName: string) {
@@ -28,7 +39,7 @@ class BaseFilter {
   }
 
   renderFilter() {
-    this.filterTypes.forEach(type => {
+    this.filterTypes.forEach((type) => {
       const btnType = new BaseComponent('button', [type.class]);
       if (type.status) {
         btnType.element.classList.add(this.activeClass);
@@ -40,39 +51,39 @@ class BaseFilter {
         if (type.status) {
           btnType.element.classList.remove(this.activeClass);
           type.status = false;
-          activeFilters.forEach(el => {
+          activeFilters.forEach((el) => {
             if (el.filterName === this.filterName) {
-              let numberType = el.filters.indexOf(type.ruName)
-              el.filters.splice(numberType, 1)
+              const numberType = el.filters.indexOf(type.ruName);
+              el.filters.splice(numberType, 1);
             }
-          })
+          });
         } else {
           btnType.element.classList.add(this.activeClass);
           type.status = true;
-          activeFilters.forEach(el => {
+          activeFilters.forEach((el) => {
             if (el.filterName === this.filterName) {
               el.filters.push(type.ruName);
             }
-          })
+          });
         }
         setFilterConstant(this.filterName, this.filterTypes);
         setLocalActiveFilters(activeFilters);
         this.cards.renderCards();
-      })
-    })
+      });
+    });
   }
 
   getTitle(filterName: string): string {
     let res: string;
     switch (filterName) {
       case 'shape':
-        return res = 'Форма: ';
+        return (res = 'Форма: ');
       case 'color':
-        return res = 'Цвет: ';
+        return (res = 'Цвет: ');
       case 'size':
-        return res = 'Размер: ';
+        return (res = 'Размер: ');
       default:
-        return res = '';
+        return (res = '');
     }
   }
 }

@@ -1,17 +1,37 @@
 import './cards.scss';
-import BaseComponent from "../../utils/base-component";
-import { toyData, getAllCards, rightLetterSort, backLetterSort, rightCountSort, backCountSort, callBackSort } from '../../utils/utils';
+import BaseComponent from '../../utils/base-component';
+import {
+  toyData,
+  getAllCards,
+  rightLetterSort,
+  backLetterSort,
+  rightCountSort,
+  backCountSort,
+  callBackSort,
+} from '../../utils/utils';
 import { selectMenu } from '../../constants/constants';
 import { getLocalActiveFilters, getLocalActiveRange } from '../../utils/localStorage';
 import Card from './card/card';
 import Popup from '../popup/popup';
+import Header from '../header/header';
 
 class Cards extends BaseComponent {
   cb: callBackSort;
 
-  constructor() {
+  header: Header;
+
+  textInput: string;
+
+  constructor(header: Header) {
     super('div', ['cards']);
+    this.header = header;
     this.cb = rightLetterSort;
+    this.textInput = '';
+    const input = document.querySelector('.search__input') as HTMLInputElement;
+    input?.addEventListener('input', () => {
+      this.textInput = input.value.toLowerCase();
+      this.renderCards();
+    });
   }
 
   renderCards(): void {
@@ -20,19 +40,21 @@ class Cards extends BaseComponent {
     const activeRange = getLocalActiveRange();
     const activeSort = localStorage.getItem('sort') ?? '';
     this.getSortType(activeSort);
-    let resultToys: toyData[] = allToys.filter(toy =>
-      activeFilter.length === activeFilter.filter(current =>
-        current.filters.length
-          ? current.filters.includes(toy[current.filterName])
-          : true
-      ).length
-    )
-    .filter(toy => 
-      activeRange.length === activeRange.filter(cur =>
-        +toy[cur.rangeName] >= +cur.min && +toy[cur.rangeName] <= +cur.max
-      ).length
-    )
-    .sort(this.cb);
+    const resultToys: toyData[] = allToys
+      .filter(
+        (toy) =>
+          activeFilter.length ===
+          activeFilter.filter((current) =>
+            current.filters.length ? current.filters.includes(toy[current.filterName]) : true
+          ).length
+      )
+      .filter(
+        (toy) =>
+          activeRange.length ===
+          activeRange.filter((cur) => +toy[cur.rangeName] >= +cur.min && +toy[cur.rangeName] <= +cur.max).length
+      )
+      .sort(this.cb)
+      .filter((toy) => toy.name.toLowerCase().includes(this.textInput));
 
     this.element.innerHTML = '';
 
@@ -40,11 +62,11 @@ class Cards extends BaseComponent {
       const popup = new Popup('cards');
       document.body.append(popup.element);
     }
-    
-    resultToys.forEach(el => {
-      const toy: Card = new Card(el);
+
+    resultToys.forEach((el) => {
+      const toy: Card = new Card(el, this.header);
       this.element.append(toy.element);
-    })
+    });
   }
 
   getSortType(type: string): void {

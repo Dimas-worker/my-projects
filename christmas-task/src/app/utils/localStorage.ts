@@ -1,15 +1,23 @@
-import { ACTIVE_FILTERS, ActiveFilters, All_SHAPE, All_COLOR, All_SIZE, ALL_FAVORITE, FilterData, ACTIVE_RANGES, ActiveRange } from '../constants/constants';
-import { toyData } from './utils';
-
+import {
+  ACTIVE_FILTERS,
+  ActiveFilters,
+  All_SHAPE,
+  All_COLOR,
+  All_SIZE,
+  ALL_FAVORITE,
+  FilterData,
+  ACTIVE_RANGES,
+  ActiveRange,
+} from '../constants/constants';
 
 function setDefaultActiveFilters(): void {
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
   const rangeString: string = JSON.stringify(ACTIVE_RANGES);
 
-  if (!(localStorage.getItem('activeFilters'))) {
+  if (!localStorage.getItem('activeFilters')) {
     localStorage.setItem('activeFilters', filtersString);
   }
-  if (!(localStorage.getItem('activeRange'))) {
+  if (!localStorage.getItem('activeRange')) {
     localStorage.setItem('activeRange', rangeString);
   }
 }
@@ -31,22 +39,22 @@ function setFilterConstants() {
   const sizeString: string = JSON.stringify(All_SIZE);
   const favoriteString: string = JSON.stringify(ALL_FAVORITE);
 
-  if (!(localStorage.getItem('shape'))) {
+  if (!localStorage.getItem('shape')) {
     localStorage.setItem('shape', shapeString);
   }
-  if (!(localStorage.getItem('color'))) {
+  if (!localStorage.getItem('color')) {
     localStorage.setItem('color', colorString);
   }
-  if (!(localStorage.getItem('size'))) {
+  if (!localStorage.getItem('size')) {
     localStorage.setItem('size', sizeString);
   }
-  if (!(localStorage.getItem('favorite'))) {
+  if (!localStorage.getItem('favorite')) {
     localStorage.setItem('favorite', favoriteString);
   }
-  if (!(localStorage.getItem('sort'))) {
+  if (!localStorage.getItem('sort')) {
     localStorage.setItem('sort', 'По названию от «А» до «Я»');
   }
-  if (!(localStorage.getItem('chosenToys'))) {
+  if (!localStorage.getItem('chosenToys')) {
     localStorage.setItem('chosenToys', '[]');
   }
 }
@@ -100,4 +108,14 @@ function setChoseToys(toys: Array<string>): void {
 setDefaultActiveFilters();
 setFilterConstants();
 
-export { getLocalActiveFilters, setLocalActiveFilters, getFilterConstant, setFilterConstant, getLocalActiveRange, setLocalActiveRange, setDefaultAllFilters, getChoseToys, setChoseToys }
+export {
+  getLocalActiveFilters,
+  setLocalActiveFilters,
+  getFilterConstant,
+  setFilterConstant,
+  getLocalActiveRange,
+  setLocalActiveRange,
+  setDefaultAllFilters,
+  getChoseToys,
+  setChoseToys,
+};

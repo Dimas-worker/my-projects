@@ -3,7 +3,9 @@ import BaseComponent from '../../../utils/base-component';
 
 class MainHome extends BaseComponent {
   title: BaseComponent;
+
   subTitle: BaseComponent;
+
   button: BaseComponent;
 
   constructor() {

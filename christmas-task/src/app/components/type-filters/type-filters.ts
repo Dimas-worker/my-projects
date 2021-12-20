@@ -7,7 +7,9 @@ import BaseFilter from './base-filters/base-filters';
 
 class TypeFilters extends BaseComponent {
   cards: Cards;
+
   favorite: Favorite;
+
   title: BaseComponent;
 
   constructor(cards: Cards) {
@@ -17,15 +19,15 @@ class TypeFilters extends BaseComponent {
     this.title = new BaseComponent('div', ['filters__title'], 'Фильтры по значению');
     this.render();
   }
-  
+
   render() {
     this.element.innerHTML = '';
     // this.favorite = new Favorite(this.cards);
     this.element.append(this.title.element);
-    FILTERS_NAME.forEach(el => {
+    FILTERS_NAME.forEach((el) => {
       const filter = new BaseFilter(this.cards, el);
       this.element.append(filter.filtersIcons.element);
-    })
+    });
     this.element.append(this.favorite.element);
   }
 }

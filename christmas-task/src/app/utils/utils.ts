@@ -24,14 +24,14 @@ function createProperty(property: string, value: string): HTMLParagraphElement {
 }
 
 interface toyData {
-  num: string
-  name: string,
-  count: string,
-  year: string,
-  shape: string,
-  color: string,
-  size: string,
-  favorite: boolean,
+  num: string;
+  name: string;
+  count: string;
+  year: string;
+  shape: string;
+  color: string;
+  size: string;
+  favorite: boolean;
 }
 
 async function getData(): Promise<void> {
@@ -48,26 +48,36 @@ function getAllCards(): toyData[] {
   return allToys;
 }
 
-function rightLetterSort(a:toyData, b: toyData): number {
+function rightLetterSort(a: toyData, b: toyData): number {
   if (a.name > b.name) return 1;
   if (a.name < b.name) return -1;
   return 0;
 }
 
-function backLetterSort(a:toyData, b: toyData): number {
+function backLetterSort(a: toyData, b: toyData): number {
   if (a.name < b.name) return 1;
   if (a.name > b.name) return -1;
   return 0;
 }
 
-function rightCountSort(a:toyData, b: toyData): number {
+function rightCountSort(a: toyData, b: toyData): number {
   return +a.count - +b.count;
 }
 
-function backCountSort(a:toyData, b: toyData): number {
+function backCountSort(a: toyData, b: toyData): number {
   return +b.count - +a.count;
 }
 
 type callBackSort = (a: toyData, b: toyData) => number;
 
-export { getData, toyData, createProperty, getAllCards, rightLetterSort, backLetterSort, rightCountSort, backCountSort, callBackSort }
+export {
+  getData,
+  toyData,
+  createProperty,
+  getAllCards,
+  rightLetterSort,
+  backLetterSort,
+  rightCountSort,
+  backCountSort,
+  callBackSort,
+};

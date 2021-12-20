@@ -1,13 +1,16 @@
-import { getData } from "./utils/utils";
-import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
-import MainHome from "./components/main/main-home/main-home";
-import MainToys from "./components/main/main-toys/main-toys";
+import { getData } from './utils/utils';
+import Header from './components/header/header';
+import Footer from './components/footer/footer';
+import MainHome from './components/main/main-home/main-home';
+import MainToys from './components/main/main-toys/main-toys';
 
 class App {
   private container: HTMLElement = document.body;
-  private main: MainHome | MainToys = new MainHome();
+
   private header: Header = new Header();
+
+  private main: MainHome | MainToys = new MainHome();
+
   private footer: Footer = new Footer();
 
   constructor() {
@@ -15,24 +18,23 @@ class App {
   }
 
   private renderNewPage(idPage: string): void {
-
     let page: MainHome | MainToys | null = null;
 
     this.main.element.innerHTML = '';
 
     if (idPage === '/toys') {
-      page = new MainToys()
+      page = new MainToys(this.header);
     } else {
       page = new MainHome();
     }
-    this.main.element.append(page.element)
+    this.main.element.append(page.element);
   }
 
   private enableRouteChange(): void {
     window.addEventListener('hashchange', (): void => {
       const hash: string = window.location.hash.slice(1);
       this.renderNewPage(hash);
-    })
+    });
   }
 
   async run(): Promise<void> {

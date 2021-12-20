@@ -4,13 +4,18 @@ import { getChoseToys, setChoseToys } from '../../../utils/localStorage';
 import { CHOSEN_TOYS_AMOUNT } from '../../../constants/constants';
 import './card.scss';
 import Popup from '../../popup/popup';
+import Header from '../../header/header';
 
 class Card extends BaseComponent {
   descriptions: BaseComponent;
+
   chosenToys: string[];
 
-  constructor(data: toyData) {
-    super('div', ['card'])
+  header: Header;
+
+  constructor(data: toyData, header: Header) {
+    super('div', ['card']);
+    this.header = header;
     this.descriptions = new BaseComponent('div', ['card__description']);
     this.chosenToys = getChoseToys();
     this.getDate(data);
@@ -33,7 +38,7 @@ class Card extends BaseComponent {
         const favorite = createProperty(key, `${data[key] ? 'да' : 'нет'}`);
         this.descriptions.element.append(favorite);
       }
-      
+
       if (this.chosenToys.includes(data.num)) {
         this.element.classList.add('active__toy');
       }
@@ -41,24 +46,23 @@ class Card extends BaseComponent {
     this.element.append(this.descriptions.element);
     const ribbon = new BaseComponent('div', ['card__ribbon']);
     this.element.append(ribbon.element);
-    
+
     this.element.addEventListener('click', () => {
       const updateChosenToys: string[] = getChoseToys();
-        if (this.element.classList.contains('active__toy')) {
-          let indexToy = updateChosenToys.indexOf(data.num);
-          updateChosenToys.splice(indexToy, 1);
-        } else {
-          if (updateChosenToys.length === CHOSEN_TOYS_AMOUNT) {
-            const popup = new Popup('slots');
-            document.body.append(popup.element);
-            return;
-
-          } else {
-            updateChosenToys.push(data.num);
-          }
+      if (this.element.classList.contains('active__toy')) {
+        const indexToy = updateChosenToys.indexOf(data.num);
+        updateChosenToys.splice(indexToy, 1);
+      } else {
+        if (updateChosenToys.length === CHOSEN_TOYS_AMOUNT) {
+          const popup = new Popup('slots');
+          document.body.append(popup.element);
+          return;
         }
-        setChoseToys(updateChosenToys);
-        this.element.classList.toggle('active__toy');
+        updateChosenToys.push(data.num);
+      }
+      setChoseToys(updateChosenToys);
+      this.element.classList.toggle('active__toy');
+      this.header.updateChoseToys();
     });
   }
 }

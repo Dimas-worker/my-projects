@@ -6,64 +6,68 @@ import { getLocalActiveRange, setLocalActiveRange } from '../../../utils/localSt
 import { ActiveRange, ALL_RANGES, RangeType } from '../../../constants/constants';
 import Cards from '../../cards/cards';
 
-
 type Title = {
   [key: string]: string;
-}
+};
 
 const titleName: Title = {
   count: 'Количество экземпляров:',
-  year: 'Год приобретения:'
-}
+  year: 'Год приобретения:',
+};
 
 class BaseRange extends BaseComponent {
   slider: noUiSlider.target;
+
   minRange: BaseComponent;
+
   maxRange: BaseComponent;
+
   title: BaseComponent;
+
   container: BaseComponent;
+
   name: string;
+
   cards: Cards;
 
-  constructor(cards: Cards, name:string) {
+  constructor(cards: Cards, name: string) {
     super('div', [name]);
     this.cards = cards;
     this.name = name;
-    this.container = new BaseComponent('div', [`${name}__container`])
+    this.container = new BaseComponent('div', [`${name}__container`]);
     this.title = new BaseComponent('div', [`${name}__title`], titleName[name]);
     this.slider = document.createElement('div');
     this.slider.classList.add(`${name}__slider`);
 
-    ALL_RANGES.forEach(el => {
+    ALL_RANGES.forEach((el) => {
       if (el.name === this.name) {
         noUiSlider.create(this.slider, {
           start: [el.min, el.max],
           step: el.step,
           connect: true,
           range: {
-              'min': el.min,
-              'max': el.max
+            min: el.min,
+            max: el.max,
           },
           format: {
-            to: function (value) {
-                return Math.round(value);
+            to(value) {
+              return Math.round(value);
             },
-            from: function (value) {
-                return Number(value);
-            }
-          }
+            from(value) {
+              return Number(value);
+            },
+          },
         });
       }
-    })
- 
+    });
+
     this.minRange = new BaseComponent('span', [`${name}__output`]);
     this.maxRange = new BaseComponent('span', [`${name}__output`]);
-    
-    let defaultValue = this.slider.noUiSlider?.get() as  Array<string>;
-    this.setDefaultRange(defaultValue)
 
+    const defaultValue = this.slider.noUiSlider?.get() as Array<string>;
+    this.setDefaultRange(defaultValue);
 
-    this.slider.noUiSlider?.on('slide', (values, handle):void => {
+    this.slider.noUiSlider?.on('slide', (values, handle): void => {
       this.setRange(values, handle);
     });
 
@@ -75,7 +79,7 @@ class BaseRange extends BaseComponent {
     const activeRange: ActiveRange[] = getLocalActiveRange();
     const snapValues = [this.minRange.element, this.maxRange.element];
     snapValues[handle].textContent = value[handle] as string;
-    activeRange.forEach(el => {
+    activeRange.forEach((el) => {
       if (el.rangeName === this.name) {
         el.min = this.minRange.element.textContent as string;
         el.max = this.maxRange.element.textContent as string;
@@ -90,14 +94,14 @@ class BaseRange extends BaseComponent {
     const snapValues = [this.minRange.element, this.maxRange.element];
     snapValues.forEach((el, index) => {
       el.textContent = value[index];
-    })
-    activeRange.forEach(el => {
+    });
+    activeRange.forEach((el) => {
       if (el.rangeName === this.name) {
         el.min = this.minRange.element.textContent as string;
         el.max = this.maxRange.element.textContent as string;
       }
     });
-    setLocalActiveRange(activeRange)
+    setLocalActiveRange(activeRange);
   }
 }
 
