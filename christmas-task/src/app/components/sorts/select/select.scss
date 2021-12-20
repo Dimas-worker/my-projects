@@ -1,0 +1,85 @@
+.select {
+  position: relative;
+}
+
+.selectLabel {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.selectCustom {
+  position: relative;
+  width: 330px;
+  height: 40px;
+}
+
+.selectCustom-trigger {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  line-height: 28px;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  background-color: rgba(31, 112, 127, 0.3);
+  border: 1px solid #278d9f;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  padding-left: 1rem;
+}
+
+.selectCustom-trigger::after {
+  content: "▾";
+  position: absolute;
+  top: -10px;
+  line-height: 3.8rem;
+  right: 10px;
+}
+
+.selectCustom-trigger:hover {
+  border-color: #278d9f;
+}
+
+.selectCustom-options {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border: 1px solid #6f6f6f;
+  border-radius: 0.4rem;
+  background-color: rgba(31, 112, 127, 0.3);
+  box-shadow: 0 0 4px #e9e1f8;
+  z-index: 10;
+  display: none;
+  cursor: pointer;
+}
+
+.selectCustom.isActive .selectCustom-options {
+  display: block;
+}
+
+.selectCustom-option {
+  position: relative;
+  background-color: #183e42;
+  padding-left: 1rem;
+}
+
+.selectCustom-option:hover {
+  background-color: #278d9f;
+}
+
+.selectCustom-option:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0.8rem;
+  width: calc(100% - 1.6rem);
+  border-bottom: 1px solid #d3d3d3;
+}

@@ -48,4 +48,26 @@ function getAllCards(): toyData[] {
   return allToys;
 }
 
-export { getData, toyData, createProperty, getAllCards }
+function rightLetterSort(a:toyData, b: toyData): number {
+  if (a.name > b.name) return 1;
+  if (a.name < b.name) return -1;
+  return 0;
+}
+
+function backLetterSort(a:toyData, b: toyData): number {
+  if (a.name < b.name) return 1;
+  if (a.name > b.name) return -1;
+  return 0;
+}
+
+function rightCountSort(a:toyData, b: toyData): number {
+  return +a.count - +b.count;
+}
+
+function backCountSort(a:toyData, b: toyData): number {
+  return +b.count - +a.count;
+}
+
+type callBackSort = (a: toyData, b: toyData) => number;
+
+export { getData, toyData, createProperty, getAllCards, rightLetterSort, backLetterSort, rightCountSort, backCountSort, callBackSort }

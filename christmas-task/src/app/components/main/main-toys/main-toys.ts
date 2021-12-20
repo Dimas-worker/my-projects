@@ -3,6 +3,7 @@ import BaseComponent from '../../../utils/base-component';
 import Cards from "../../cards/cards";
 import TypeFilters from '../../type-filters/type-filters';
 import RangeFilters from '../../range-filters/range-filters';
+import Sorts from '../../sorts/sorts';
 
 class MainToys extends BaseComponent {
   cards: Cards;
@@ -10,6 +11,7 @@ class MainToys extends BaseComponent {
   rangeFilters: RangeFilters;
   wrapper: BaseComponent;
   controlsPanel: BaseComponent;
+  sorts: Sorts;
 
   constructor() {
     super('div', ['main-toys']);
@@ -19,7 +21,8 @@ class MainToys extends BaseComponent {
     this.cards.renderCards();
     this.typeFilters = new TypeFilters(this.cards);
     this.rangeFilters = new RangeFilters(this.cards);
-    this.controlsPanel.element.append(this.typeFilters.element, this.rangeFilters.element)
+    this.sorts = new Sorts(this.cards, this.rangeFilters, this.typeFilters);
+    this.controlsPanel.element.append(this.typeFilters.element, this.rangeFilters.element, this.sorts.element);
     this.wrapper.element.append(this.controlsPanel.element, this.cards.element);
     this.element.append(this.wrapper.element);
   }

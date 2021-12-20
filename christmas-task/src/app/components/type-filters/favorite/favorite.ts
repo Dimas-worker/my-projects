@@ -10,45 +10,46 @@ class Favorite extends BaseComponent {
   label: BaseComponent;
   cards: Cards;
   filterName: string;
-  activeFilters: ActiveFilters[];
-  filterTypes: FilterData[];
 
   constructor(cards: Cards) {
     super('div', ['favorite'], 'Только любимые: ');
     this.cards = cards;
     this.filterName = 'favorite';
-    this.activeFilters = getLocalActiveFilters();
     this.container = new BaseComponent('div', ['favorite__container']);
     this.label = new BaseComponent('label', ['favorite_label']);
-    this.filterTypes = getFilterConstant(this.filterName);
-    if (this.filterTypes[0].status) {
-      this.label.element.classList.add('active__favorite')
-    }
     this.input = document.createElement('input');
     this.input.classList.add('favorite_input')
     this.input.setAttribute('type', 'checkbox');
 
+    this.renderFilter();
     this.label.element.append(this.input)
     this.container.element.append(this.label.element);
     this.element.append(this.container.element);
-    this.renderFilter();
   }
 
   renderFilter() {
+    const filterTypes: FilterData[] = getFilterConstant(this.filterName);
+    if (filterTypes[0].status) {
+      this.label.element.classList.add('active__favorite')
+    } else {
+      this.label.element.classList.remove('active__favorite')
+    }
+    
     this.input.addEventListener('change', () => {
+      const activeFilters: ActiveFilters[] = getLocalActiveFilters();
       if (this.input.checked) {
         this.label.element.classList.add('active__favorite');
       } else {
         this.label.element.classList.remove('active__favorite');
       }
-      this.activeFilters.forEach(el => {
+      activeFilters.forEach(el => {
         if (el.filterName === this.filterName) {
           el.filters[0] = (this.input.checked);
         }
       })
-      this.filterTypes[0].status = this.input.checked;
-      setFilterConstant(this.filterName, this.filterTypes);
-      setLocalActiveFilters(this.activeFilters);
+      filterTypes[0].status = this.input.checked;
+      setFilterConstant(this.filterName, filterTypes);
+      setLocalActiveFilters(activeFilters);
       this.cards.renderCards();
     })
   }

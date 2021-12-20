@@ -42,6 +42,9 @@ function setFilterConstants() {
   if (!(localStorage.getItem('favorite'))) {
     localStorage.setItem('favorite', favoriteString);
   }
+  if (!(localStorage.getItem('sort'))) {
+    localStorage.setItem('sort', 'По названию от «А» до «Я»');
+  }
 }
 
 function getFilterConstant(filterName: string): FilterData[] {
@@ -66,8 +69,20 @@ function setLocalActiveRange(object: ActiveRange[]): void {
   localStorage.setItem('activeRange', dataString);
 }
 
+function setDefaultAllFilters(): void {
+  const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
+  const shapeString: string = JSON.stringify(All_SHAPE);
+  const colorString: string = JSON.stringify(All_COLOR);
+  const sizeString: string = JSON.stringify(All_SIZE);
+  const favoriteString: string = JSON.stringify(ALL_FAVORITE);
+  localStorage.setItem('activeFilters', filtersString);
+  localStorage.setItem('shape', shapeString);
+  localStorage.setItem('color', colorString);
+  localStorage.setItem('size', sizeString);
+  localStorage.setItem('favorite', favoriteString);
+}
 
 setDefaultActiveFilters();
 setFilterConstants();
 
-export { getLocalActiveFilters, setLocalActiveFilters, getFilterConstant, setFilterConstant, getLocalActiveRange, setLocalActiveRange }
+export { getLocalActiveFilters, setLocalActiveFilters, getFilterConstant, setFilterConstant, getLocalActiveRange, setLocalActiveRange, setDefaultAllFilters }

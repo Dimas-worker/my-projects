@@ -15,11 +15,13 @@ class TypeFilters extends BaseComponent {
     this.cards = cards;
     this.favorite = new Favorite(cards);
     this.title = new BaseComponent('div', ['filters__title'], 'Фильтры по значению');
-    this.element.append(this.title.element);
     this.render();
   }
-
+  
   render() {
+    this.element.innerHTML = '';
+    // this.favorite = new Favorite(this.cards);
+    this.element.append(this.title.element);
     FILTERS_NAME.forEach(el => {
       const filter = new BaseFilter(this.cards, el);
       this.element.append(filter.filtersIcons.element);

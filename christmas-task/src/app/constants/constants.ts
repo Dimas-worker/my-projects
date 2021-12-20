@@ -80,4 +80,11 @@ const ACTIVE_RANGES: ActiveRange[] = [
 ]
 const FILTERS_NAME: string[] = ['shape', 'color', 'size'];
 
-export { LIST_OF_PAGES, All_SHAPE, ListData, FilterData, All_COLOR, All_SIZE, ACTIVE_FILTERS, ALL_FAVORITE, ActiveFilters, FILTERS_NAME, ACTIVE_RANGES, ActiveRange, ALL_RANGES, RangeType };
+const selectMenu: string[] = [
+  'По названию от «А» до «Я»',
+  'По названию от «Я» до «А»',
+  'По количеству по возрастанию',
+  'По количеству по убыванию'
+];
+
+export { LIST_OF_PAGES, All_SHAPE, ListData, FilterData, All_COLOR, All_SIZE, ACTIVE_FILTERS, ALL_FAVORITE, ActiveFilters, FILTERS_NAME, ACTIVE_RANGES, ActiveRange, ALL_RANGES, RangeType, selectMenu };
