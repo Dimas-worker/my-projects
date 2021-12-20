@@ -18,11 +18,28 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1920px;
+    max-width: 1440px;
     font-size: 20px;
     line-height: 40px;
     margin: auto;
     padding-bottom: 1%;
-    gap: 0 2rem;
+    gap: 1rem 1rem;
+  }
+}
+@media (max-width: 1205px) {
+  .main-toys__controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    .filters {
+      order: 1;
+    }
+    .range-filters{
+      order: 3;
+      flex: 0 0 70%;
+    }
+    .sorts {
+      order: 2;
+    }
   }
 }
