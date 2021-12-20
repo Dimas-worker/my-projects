@@ -87,4 +87,6 @@ const selectMenu: string[] = [
   'По количеству по убыванию'
 ];
 
-export { LIST_OF_PAGES, All_SHAPE, ListData, FilterData, All_COLOR, All_SIZE, ACTIVE_FILTERS, ALL_FAVORITE, ActiveFilters, FILTERS_NAME, ACTIVE_RANGES, ActiveRange, ALL_RANGES, RangeType, selectMenu };
+const CHOSEN_TOYS_AMOUNT: number = 20;
+
+export { LIST_OF_PAGES, All_SHAPE, ListData, FilterData, All_COLOR, All_SIZE, ACTIVE_FILTERS, ALL_FAVORITE, ActiveFilters, FILTERS_NAME, ACTIVE_RANGES, ActiveRange, ALL_RANGES, RangeType, selectMenu, CHOSEN_TOYS_AMOUNT };

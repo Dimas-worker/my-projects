@@ -59,10 +59,14 @@ class BaseRange extends BaseComponent {
     this.minRange = new BaseComponent('span', [`${name}__output`]);
     this.maxRange = new BaseComponent('span', [`${name}__output`]);
     
-    this.slider.noUiSlider?.on('update', (values, handle):void => {
-      this.setRange(values, handle)
+    let defaultValue = this.slider.noUiSlider?.get() as  Array<string>;
+    this.setDefaultRange(defaultValue)
+
+
+    this.slider.noUiSlider?.on('slide', (values, handle):void => {
+      this.setRange(values, handle);
     });
-    
+
     this.container.element.append(this.minRange.element, this.slider, this.maxRange.element);
     this.element.append(this.title.element, this.container.element);
   }
@@ -80,6 +84,22 @@ class BaseRange extends BaseComponent {
     setLocalActiveRange(activeRange);
     this.cards.renderCards();
   }
+
+  setDefaultRange(value: Array<string>) {
+    const activeRange: ActiveRange[] = getLocalActiveRange();
+    const snapValues = [this.minRange.element, this.maxRange.element];
+    snapValues.forEach((el, index) => {
+      el.textContent = value[index];
+    })
+    activeRange.forEach(el => {
+      if (el.rangeName === this.name) {
+        el.min = this.minRange.element.textContent as string;
+        el.max = this.maxRange.element.textContent as string;
+      }
+    });
+    setLocalActiveRange(activeRange)
+  }
 }
 
+export { Title };
 export default BaseRange;

@@ -1,4 +1,6 @@
 import { ACTIVE_FILTERS, ActiveFilters, All_SHAPE, All_COLOR, All_SIZE, ALL_FAVORITE, FilterData, ACTIVE_RANGES, ActiveRange } from '../constants/constants';
+import { toyData } from './utils';
+
 
 function setDefaultActiveFilters(): void {
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
@@ -29,7 +31,6 @@ function setFilterConstants() {
   const sizeString: string = JSON.stringify(All_SIZE);
   const favoriteString: string = JSON.stringify(ALL_FAVORITE);
 
-
   if (!(localStorage.getItem('shape'))) {
     localStorage.setItem('shape', shapeString);
   }
@@ -44,6 +45,9 @@ function setFilterConstants() {
   }
   if (!(localStorage.getItem('sort'))) {
     localStorage.setItem('sort', 'По названию от «А» до «Я»');
+  }
+  if (!(localStorage.getItem('chosenToys'))) {
+    localStorage.setItem('chosenToys', '[]');
   }
 }
 
@@ -82,7 +86,18 @@ function setDefaultAllFilters(): void {
   localStorage.setItem('favorite', favoriteString);
 }
 
+function getChoseToys(): Array<string> {
+  const data: string = localStorage.getItem('chosenToys') ?? '[]';
+  const chosenToys = JSON.parse(data);
+  return chosenToys;
+}
+
+function setChoseToys(toys: Array<string>): void {
+  const dataString: string = JSON.stringify(toys);
+  localStorage.setItem('chosenToys', dataString);
+}
+
 setDefaultActiveFilters();
 setFilterConstants();
 
-export { getLocalActiveFilters, setLocalActiveFilters, getFilterConstant, setFilterConstant, getLocalActiveRange, setLocalActiveRange, setDefaultAllFilters }
+export { getLocalActiveFilters, setLocalActiveFilters, getFilterConstant, setFilterConstant, getLocalActiveRange, setLocalActiveRange, setDefaultAllFilters, getChoseToys, setChoseToys }

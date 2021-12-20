@@ -17,5 +17,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // height: 100vh;
+}
+
+.wrapper {
+  max-width:  1920px;
+  margin: auto;
 }

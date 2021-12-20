@@ -29,7 +29,7 @@
   }
 }
 .active-link {
-  a {
+  &::after {
     border-bottom: #278d9f solid 3px;
   }
 }

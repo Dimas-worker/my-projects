@@ -1,21 +1,24 @@
 import './search.scss';
 import BaseComponent from '../../../utils/base-component';
+import ChosenToys from '../chosen-toys/chosen-toys';
 
 class Search extends BaseComponent {
-  // element: HTMLElement;
   inputField: BaseComponent;
-  favorite: BaseComponent;
-  countOfToy: BaseComponent;
+  choseToys: ChosenToys;
   
-  constructor() {
+  constructor(choseToys: ChosenToys) {
     super('div', ['search']);
+    this.choseToys = choseToys;
     this.inputField = new BaseComponent('input', ['search__input']);
     this.inputField.element.setAttribute('type', 'search');
-    this.favorite = new BaseComponent('div', ['search__favorite']);
-    this.countOfToy = new BaseComponent('span', ['count-toys'], '0');
-    this.favorite.element.append(this.countOfToy.element);
+    this.inputField.element.autofocus = true;
+    this.inputField.element.setAttribute('autocomplete', 'off');
+    this.inputField.element.setAttribute('placeholder', 'Введите название');
     this.element.append(this.inputField.element);
-    this.element.append(this.favorite.element);
+    this.element.append(this.choseToys.element);
+    document.addEventListener('click', () => {        
+      this.choseToys.renderCountToys();
+    })
   }
 }
 

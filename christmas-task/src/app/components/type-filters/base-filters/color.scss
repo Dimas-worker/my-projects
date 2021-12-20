@@ -13,6 +13,11 @@
     background-color: transparent;
     cursor: pointer;
     transition: 0.3s;
+
+    &:hover {
+      border-color: #ccc;
+      transform: scale(1.1);
+    }
   }
 
   .btn-white {

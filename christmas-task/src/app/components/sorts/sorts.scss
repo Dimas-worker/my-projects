@@ -1,5 +1,5 @@
 .sorts {
-  width: 480px;
+  flex: 1 0 30%;
   padding: 10px 20px;
   border-radius: 10px;
   background-color: rgba(31, 112, 127, 0.3);
@@ -17,20 +17,5 @@
     flex-direction: column;
     justify-content: space-between;
     height: 75%;
-  }
-
-  button {
-    width: 250px;
-    height: 40px;
-    margin: 10px 0;
-    border-radius: 20px;
-    border: 1px solid #278d9f;
-    background-color: rgba(31, 112, 127, 0.3);
-    backdrop-filter: blur(6px);
-    cursor: pointer;
-    color: #fff;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: "Open Sans", sans-serif;
   }
 }

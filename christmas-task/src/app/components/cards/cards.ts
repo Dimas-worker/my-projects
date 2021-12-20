@@ -4,12 +4,13 @@ import { toyData, getAllCards, rightLetterSort, backLetterSort, rightCountSort, 
 import { selectMenu } from '../../constants/constants';
 import { getLocalActiveFilters, getLocalActiveRange } from '../../utils/localStorage';
 import Card from './card/card';
+import Popup from '../popup/popup';
 
 class Cards extends BaseComponent {
   cb: callBackSort;
 
   constructor() {
-    super('div', ['toys']);
+    super('div', ['cards']);
     this.cb = rightLetterSort;
   }
 
@@ -32,7 +33,14 @@ class Cards extends BaseComponent {
       ).length
     )
     .sort(this.cb);
+
     this.element.innerHTML = '';
+
+    if (!resultToys.length) {
+      const popup = new Popup('cards');
+      document.body.append(popup.element);
+    }
+    
     resultToys.forEach(el => {
       const toy: Card = new Card(el);
       this.element.append(toy.element);
