@@ -3,7 +3,7 @@ import 'nouislider/dist/nouislider.css';
 import './base-range.scss';
 import BaseComponent from '../../../utils/base-component';
 import { getLocalActiveRange, setLocalActiveRange } from '../../../utils/localStorage';
-import { ActiveRange, ALL_RANGES, RangeType } from '../../../constants/constants';
+import { ActiveRange, ALL_RANGES } from '../../../constants/constants';
 import Cards from '../../cards/cards';
 
 type Title = {
@@ -39,10 +39,17 @@ class BaseRange extends BaseComponent {
     this.slider = document.createElement('div');
     this.slider.classList.add(`${name}__slider`);
 
+    this.minRange = new BaseComponent('span', [`${name}__output`]);
+    this.maxRange = new BaseComponent('span', [`${name}__output`]);
+
+    let defaultValue = getLocalActiveRange()
+       .filter(element => element.rangeName === this.name)
+       .map(element => [element.min, element.max]).flat();
+
     ALL_RANGES.forEach((el): void => {
       if (el.name === this.name) {
         noUiSlider.create(this.slider, {
-          start: [el.min, el.max],
+          start: [defaultValue[0], defaultValue[1]],
           step: el.step,
           connect: true,
           range: {
@@ -61,10 +68,6 @@ class BaseRange extends BaseComponent {
       }
     });
 
-    this.minRange = new BaseComponent('span', [`${name}__output`]);
-    this.maxRange = new BaseComponent('span', [`${name}__output`]);
-
-    const defaultValue = this.slider.noUiSlider?.get() as Array<string>;
     this.setDefaultRange(defaultValue);
 
     this.slider.noUiSlider?.on('slide', (values, handle): void => {
@@ -90,6 +93,8 @@ class BaseRange extends BaseComponent {
   }
 
   setDefaultRange(value: Array<string>): void {
+    console.log(value);
+    
     const activeRange: ActiveRange[] = getLocalActiveRange();
     const snapValues = [this.minRange.element, this.maxRange.element];
     snapValues.forEach((el, index) => {

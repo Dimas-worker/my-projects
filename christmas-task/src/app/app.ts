@@ -3,15 +3,18 @@ import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import MainHome from './components/main/main-home/main-home';
 import MainToys from './components/main/main-toys/main-toys';
+import Cards from './components/cards/cards';
 
 class App {
   private container: HTMLElement = document.body;
-
+  
   private header: Header = new Header();
-
+  
   private main: MainHome | MainToys = new MainHome();
-
+  
   private footer: Footer = new Footer();
+  
+  private cards: Cards = new Cards(this.header);
 
   constructor() {
     this.container.append(this.header.element, this.main.element, this.footer.element);

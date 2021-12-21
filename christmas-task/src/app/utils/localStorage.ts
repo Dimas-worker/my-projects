@@ -61,7 +61,7 @@ function setFilterConstants() {
 
 function getFilterConstant(filterName: string): FilterData[] {
   const dataFilter: string = localStorage.getItem(filterName) ?? '[]';
-  let filter: FilterData[] = JSON.parse(dataFilter);
+  const filter: FilterData[] = JSON.parse(dataFilter);
   return filter;
 }
 

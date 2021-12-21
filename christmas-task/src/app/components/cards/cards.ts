@@ -26,6 +26,7 @@ class Cards extends BaseComponent {
     super('div', ['cards']);
     this.header = header;
     this.cb = rightLetterSort;
+    
     this.textInput = '';
     const input = document.querySelector('.search__input') as HTMLInputElement;
     input?.addEventListener('input', (): void => {

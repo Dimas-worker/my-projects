@@ -5,7 +5,6 @@ module.exports = {
         "node": true
     },
     "extends": [
-        "airbnb-base",
         "plugin:prettier/recommended",
         "prettier",
         "plugin:@typescript-eslint/recommended"

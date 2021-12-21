@@ -74,16 +74,15 @@ class BaseFilter {
   }
 
   getTitle(filterName: string): string {
-    let res: string;
     switch (filterName) {
       case 'shape':
-        return (res = 'Форма: ');
+        return 'Форма: ';
       case 'color':
-        return (res = 'Цвет: ');
+        return 'Цвет: ';
       case 'size':
-        return (res = 'Размер: ');
+        return 'Размер: ';
       default:
-        return (res = '');
+        return '';
     }
   }
 }

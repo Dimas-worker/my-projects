@@ -14,12 +14,15 @@ class Select extends BaseComponent {
 
   cards: Cards;
 
+  currentSort: string;
+
   constructor(cards: Cards) {
     super('div', ['select']);
     this.cards = cards;
+    this.currentSort = localStorage.getItem('sort') ?? selectMenu[0];
     this.wrapper = new BaseComponent('div', ['selectWrapper']);
     this.custom = new BaseComponent('div', ['selectCustom', 'js-selectCustom']);
-    this.trigger = new BaseComponent('div', ['selectCustom-trigger'], selectMenu[0]);
+    this.trigger = new BaseComponent('div', ['selectCustom-trigger'], this.currentSort);
     this.trigger.element.addEventListener('click', () => {
       this.custom.element.classList.add('isActive');
     });

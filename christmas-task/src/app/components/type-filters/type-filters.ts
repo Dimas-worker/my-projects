@@ -22,7 +22,6 @@ class TypeFilters extends BaseComponent {
 
   render(): void {
     this.element.innerHTML = '';
-    // this.favorite = new Favorite(this.cards);
     this.element.append(this.title.element);
     FILTERS_NAME.forEach((el) => {
       const filter = new BaseFilter(this.cards, el);
