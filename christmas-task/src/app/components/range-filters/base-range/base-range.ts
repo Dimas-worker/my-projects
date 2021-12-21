@@ -39,7 +39,7 @@ class BaseRange extends BaseComponent {
     this.slider = document.createElement('div');
     this.slider.classList.add(`${name}__slider`);
 
-    ALL_RANGES.forEach((el) => {
+    ALL_RANGES.forEach((el): void => {
       if (el.name === this.name) {
         noUiSlider.create(this.slider, {
           start: [el.min, el.max],
@@ -89,13 +89,13 @@ class BaseRange extends BaseComponent {
     this.cards.renderCards();
   }
 
-  setDefaultRange(value: Array<string>) {
+  setDefaultRange(value: Array<string>): void {
     const activeRange: ActiveRange[] = getLocalActiveRange();
     const snapValues = [this.minRange.element, this.maxRange.element];
     snapValues.forEach((el, index) => {
       el.textContent = value[index];
     });
-    activeRange.forEach((el) => {
+    activeRange.forEach((el): void => {
       if (el.rangeName === this.name) {
         el.min = this.minRange.element.textContent as string;
         el.max = this.maxRange.element.textContent as string;

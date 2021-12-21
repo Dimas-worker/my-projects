@@ -18,7 +18,7 @@ class Popup extends BaseComponent {
     super('div', ['popup']);
     this.content = new BaseComponent('div', ['popup__content']);
     this.title = new BaseComponent('div', ['popup-title'], titlePopup[title]);
-    this.continueBtn = new BaseComponent('button', ['btn-cont'], 'continue');
+    this.continueBtn = new BaseComponent('button', ['btn-cont'], 'Продолжить');
     this.continueBtn.element.addEventListener('click', () => {
       this.remove();
     });

@@ -38,8 +38,8 @@ class BaseFilter {
     this.renderFilter();
   }
 
-  renderFilter() {
-    this.filterTypes.forEach((type) => {
+  renderFilter(): void {
+    this.filterTypes.forEach((type): void => {
       const btnType = new BaseComponent('button', [type.class]);
       if (type.status) {
         btnType.element.classList.add(this.activeClass);
@@ -51,7 +51,7 @@ class BaseFilter {
         if (type.status) {
           btnType.element.classList.remove(this.activeClass);
           type.status = false;
-          activeFilters.forEach((el) => {
+          activeFilters.forEach((el): void => {
             if (el.filterName === this.filterName) {
               const numberType = el.filters.indexOf(type.ruName);
               el.filters.splice(numberType, 1);
@@ -60,7 +60,7 @@ class BaseFilter {
         } else {
           btnType.element.classList.add(this.activeClass);
           type.status = true;
-          activeFilters.forEach((el) => {
+          activeFilters.forEach((el): void => {
             if (el.filterName === this.filterName) {
               el.filters.push(type.ruName);
             }

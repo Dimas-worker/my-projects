@@ -24,7 +24,7 @@ class Header extends BaseComponent {
     this.element.append(this.wrapper.element);
   }
 
-  updateChoseToys() {
+  updateChoseToys(): void {
     this.choseToys.renderCountToys();
   }
 }

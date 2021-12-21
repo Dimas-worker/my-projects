@@ -20,7 +20,7 @@ class TypeFilters extends BaseComponent {
     this.render();
   }
 
-  render() {
+  render(): void {
     this.element.innerHTML = '';
     // this.favorite = new Favorite(this.cards);
     this.element.append(this.title.element);

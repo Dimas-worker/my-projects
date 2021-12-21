@@ -36,22 +36,22 @@ class Favorite extends BaseComponent {
     this.element.append(this.container.element);
   }
 
-  renderFilter() {
+  renderFilter(): void {
     const filterTypes: FilterData[] = getFilterConstant(this.filterName);
-    if (filterTypes[0].status) {
+    if (filterTypes[0]?.status) {
       this.label.element.classList.add('active__favorite');
     } else {
       this.label.element.classList.remove('active__favorite');
     }
 
-    this.input.addEventListener('change', () => {
+    this.input.addEventListener('change', (): void => {
       const activeFilters: ActiveFilters[] = getLocalActiveFilters();
       if (this.input.checked) {
         this.label.element.classList.add('active__favorite');
       } else {
         this.label.element.classList.remove('active__favorite');
       }
-      activeFilters.forEach((el) => {
+      activeFilters.forEach((el): void => {
         if (el.filterName === this.filterName) {
           el.filters[0] = this.input.checked;
         }

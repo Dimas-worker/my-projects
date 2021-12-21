@@ -28,7 +28,7 @@ class Cards extends BaseComponent {
     this.cb = rightLetterSort;
     this.textInput = '';
     const input = document.querySelector('.search__input') as HTMLInputElement;
-    input?.addEventListener('input', () => {
+    input?.addEventListener('input', (): void => {
       this.textInput = input.value.toLowerCase();
       this.renderCards();
     });
@@ -63,7 +63,7 @@ class Cards extends BaseComponent {
       document.body.append(popup.element);
     }
 
-    resultToys.forEach((el) => {
+    resultToys.forEach((el): void => {
       const toy: Card = new Card(el, this.header);
       this.element.append(toy.element);
     });

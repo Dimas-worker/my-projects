@@ -8,7 +8,7 @@ class ChosenToys extends BaseComponent {
     this.renderCountToys();
   }
 
-  renderCountToys() {
+  renderCountToys(): void {
     this.element.innerHTML = '';
     const currentChosenToys: string[] = getChoseToys();
     const countToys = currentChosenToys.length;

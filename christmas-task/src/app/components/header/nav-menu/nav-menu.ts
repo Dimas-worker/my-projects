@@ -12,7 +12,7 @@ class NavMenu {
   constructor() {
     this.container = document.createElement('ul');
     this.container.classList.add('nav');
-    this.navList.forEach((link) => {
+    this.navList.forEach((link): void => {
       this.listLink = new NavList(link);
       this.container.append(this.listLink.list);
     });

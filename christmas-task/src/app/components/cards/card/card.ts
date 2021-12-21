@@ -47,7 +47,7 @@ class Card extends BaseComponent {
     const ribbon = new BaseComponent('div', ['card__ribbon']);
     this.element.append(ribbon.element);
 
-    this.element.addEventListener('click', () => {
+    this.element.addEventListener('click', (): void => {
       const updateChosenToys: string[] = getChoseToys();
       if (this.element.classList.contains('active__toy')) {
         const indexToy = updateChosenToys.indexOf(data.num);
