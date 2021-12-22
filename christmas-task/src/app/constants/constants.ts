@@ -1,28 +1,5 @@
 import { ListData, FilterData, ActiveFilters, ActiveRange, RangeType } from '../constants/interface';
 
-// interface ListData {
-//   text: string;
-//   hrefLink: string;
-//   iconLink: string;
-// }
-
-// interface FilterData {
-//   class: string;
-//   ruName: string;
-//   status: boolean;
-// }
-
-// interface ActiveFilters {
-//   filterName: keyof toyData;
-//   filters: Array<string | boolean>;
-// }
-
-// interface ActiveRange {
-//   rangeName: keyof toyData;
-//   min: string;
-//   max: string;
-// }
-
 const LIST_OF_PAGES: ListData[] = [
   { text: '', hrefLink: './', iconLink: 'logo' },
   { text: 'игрушки', hrefLink: './#/toys', iconLink: '' },
@@ -59,13 +36,6 @@ const ACTIVE_FILTERS: ActiveFilters[] = [
   { filterName: 'size', filters: [] },
   { filterName: 'favorite', filters: [] },
 ];
-
-// interface RangeType {
-//   name: string;
-//   step: number;
-//   min: number;
-//   max: number;
-// }
 
 const ALL_RANGES: RangeType[] = [
   { name: 'count', step: 1, min: 1, max: 12 },
