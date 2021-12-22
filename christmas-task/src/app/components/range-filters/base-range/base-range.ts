@@ -42,6 +42,75 @@ class BaseRange extends BaseComponent {
     this.minRange = new BaseComponent('span', [`${name}__output`]);
     this.maxRange = new BaseComponent('span', [`${name}__output`]);
 
+    
+
+    ALL_RANGES.forEach((el): void => {
+      if (el.name === this.name) {
+        noUiSlider.create(this.slider, {
+          start: [el.min, el.max],
+          step: el.step,
+          connect: true,
+          range: {
+            min: el.min,
+            max: el.max,
+          },
+          format: {
+            to(value) {
+              return Math.round(value);
+            },
+            from(value) {
+              return Number(value);
+            },
+          },
+        });
+      }
+    });
+
+    let defaultValue = getLocalActiveRange()
+       .filter(element => element.rangeName === this.name)
+       .map(element => [element.min, element.max]).flat();
+    // this.renderSlider();
+    this.setDefaultRange(defaultValue);
+
+    this.slider.noUiSlider?.on('slide', (values, handle): void => {
+      this.setRange(values, handle);
+    });
+
+    this.container.element.append(this.minRange.element, this.slider, this.maxRange.element);
+    this.element.append(this.title.element, this.container.element);
+  }
+
+  setRange(value: Array<string | number>, handle: number): void {
+    const activeRange: ActiveRange[] = getLocalActiveRange();
+    const snapValues = [this.minRange.element, this.maxRange.element];
+    snapValues[handle].textContent = value[handle] as string;
+    activeRange.forEach((el) => {
+      if (el.rangeName === this.name) {
+        el.min = this.minRange.element.textContent as string;
+        el.max = this.maxRange.element.textContent as string;
+      }
+    });
+    setLocalActiveRange(activeRange);
+    this.cards.renderCards();
+  }
+
+  setDefaultRange(value: Array<string>): void {    
+    const activeRange: ActiveRange[] = getLocalActiveRange();
+    const snapValues = [this.minRange.element, this.maxRange.element];
+    snapValues.forEach((el, index) => {
+      el.textContent = value[index];
+    });
+    activeRange.forEach((el): void => {
+      if (el.rangeName === this.name) {
+        el.min = this.minRange.element.textContent as string;
+        el.max = this.maxRange.element.textContent as string;
+      }
+    });
+    this.slider.noUiSlider?.set(value);
+    setLocalActiveRange(activeRange);
+  }
+
+  renderSlider() {
     let defaultValue = getLocalActiveRange()
        .filter(element => element.rangeName === this.name)
        .map(element => [element.min, element.max]).flat();
@@ -68,45 +137,7 @@ class BaseRange extends BaseComponent {
       }
     });
 
-    this.setDefaultRange(defaultValue);
-
-    this.slider.noUiSlider?.on('slide', (values, handle): void => {
-      this.setRange(values, handle);
-    });
-
-    this.container.element.append(this.minRange.element, this.slider, this.maxRange.element);
-    this.element.append(this.title.element, this.container.element);
-  }
-
-  setRange(value: Array<string | number>, handle: number): void {
-    const activeRange: ActiveRange[] = getLocalActiveRange();
-    const snapValues = [this.minRange.element, this.maxRange.element];
-    snapValues[handle].textContent = value[handle] as string;
-    activeRange.forEach((el) => {
-      if (el.rangeName === this.name) {
-        el.min = this.minRange.element.textContent as string;
-        el.max = this.maxRange.element.textContent as string;
-      }
-    });
-    setLocalActiveRange(activeRange);
-    this.cards.renderCards();
-  }
-
-  setDefaultRange(value: Array<string>): void {
-    console.log(value);
-    
-    const activeRange: ActiveRange[] = getLocalActiveRange();
-    const snapValues = [this.minRange.element, this.maxRange.element];
-    snapValues.forEach((el, index) => {
-      el.textContent = value[index];
-    });
-    activeRange.forEach((el): void => {
-      if (el.rangeName === this.name) {
-        el.min = this.minRange.element.textContent as string;
-        el.max = this.maxRange.element.textContent as string;
-      }
-    });
-    setLocalActiveRange(activeRange);
+    // this.setDefaultRange(defaultValue);
   }
 }
 

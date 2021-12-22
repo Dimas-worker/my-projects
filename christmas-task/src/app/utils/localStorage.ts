@@ -82,11 +82,16 @@ function setLocalActiveRange(object: ActiveRange[]): void {
 }
 
 function setDefaultAllFilters(): void {
+  const rangeString: string = JSON.stringify(ACTIVE_RANGES);
+
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
   const shapeString: string = JSON.stringify(All_SHAPE);
   const colorString: string = JSON.stringify(All_COLOR);
   const sizeString: string = JSON.stringify(All_SIZE);
   const favoriteString: string = JSON.stringify(ALL_FAVORITE);
+
+  localStorage.setItem('activeRange', rangeString);
+
   localStorage.setItem('activeFilters', filtersString);
   localStorage.setItem('shape', shapeString);
   localStorage.setItem('color', colorString);

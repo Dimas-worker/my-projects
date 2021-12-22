@@ -34,7 +34,7 @@ class Sorts extends BaseComponent {
     this.select = new Select(this.cards);
     this.resetLocal = new ResetLocal();
     this.reset = new ResetButton(this.range, this.cards, this.typeFilters);
-    this.container.element.append(this.select.element, this.reset.element, this.resetLocal.element);
+    this.container.element.append(this.select.element, this.reset.element);
     this.element.append(this.title.element, this.container.element);
   }
 }
