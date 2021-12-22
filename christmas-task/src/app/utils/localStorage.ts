@@ -7,11 +7,7 @@ import {
   ACTIVE_RANGES,
 } from '../constants/constants';
 
-import {
-  ActiveFilters,
-  FilterData,
-  ActiveRange,
-} from '../constants/interface';
+import { ActiveFilters, FilterData, ActiveRange } from '../constants/interface';
 
 function setDefaultActiveFilters(): void {
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
@@ -86,7 +82,6 @@ function setLocalActiveRange(object: ActiveRange[]): void {
 
 function setDefaultAllFilters(): void {
   const rangeString: string = JSON.stringify(ACTIVE_RANGES);
-
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
   const shapeString: string = JSON.stringify(All_SHAPES);
   const colorString: string = JSON.stringify(All_COLORS);
@@ -94,7 +89,6 @@ function setDefaultAllFilters(): void {
   const favoriteString: string = JSON.stringify(ALL_FAVORITES);
 
   localStorage.setItem('activeRange', rangeString);
-
   localStorage.setItem('activeFilters', filtersString);
   localStorage.setItem('shape', shapeString);
   localStorage.setItem('color', colorString);

@@ -39,11 +39,4 @@ interface RangeType {
   max: number;
 }
 
-export {
-  toyData,
-  ListData,
-  FilterData,
-  ActiveFilters,
-  ActiveRange,
-  RangeType
-};
+export { toyData, ListData, FilterData, ActiveFilters, ActiveRange, RangeType };

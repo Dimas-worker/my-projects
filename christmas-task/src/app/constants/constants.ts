@@ -1,10 +1,4 @@
-import { 
-  ListData,
-  FilterData,
-  ActiveFilters,
-  ActiveRange,
-  RangeType 
-} from '../constants/interface';
+import { ListData, FilterData, ActiveFilters, ActiveRange, RangeType } from '../constants/interface';
 
 // interface ListData {
 //   text: string;

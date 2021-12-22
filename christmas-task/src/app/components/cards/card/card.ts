@@ -1,5 +1,5 @@
 import BaseComponent from '../../../utils/base-component';
-import {  createProperty } from '../../../utils/utils';
+import { createProperty } from '../../../utils/utils';
 import { toyData } from '../../../constants/interface';
 import { getChoseToys, setChoseToys } from '../../../utils/localStorage';
 import { CHOSEN_TOYS_MAX_AMOUNT } from '../../../constants/constants';

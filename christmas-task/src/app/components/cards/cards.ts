@@ -18,6 +18,8 @@ import Header from '../header/header';
 class Cards extends BaseComponent {
   cb: callBackSort;
 
+  popup: Popup | null = null;
+
   header: Header;
 
   textInput: string;
@@ -28,15 +30,18 @@ class Cards extends BaseComponent {
     this.cb = rightLetterSort;
 
     this.textInput = '';
-    const input = document.querySelector('.search__input') as HTMLInputElement;
-    input?.addEventListener('input', (): void => {
+    const input = this.header.search.inputField;
+    input.addEventListener('input', (): void => {
+      console.log('input');
       this.textInput = input.value.toLowerCase();
       this.renderCards();
     });
   }
 
-  renderCards(): void {
-    const allToys: toyData[] = getAllCards();
+  async renderCards(): Promise<void> {
+    console.log('render');
+
+    const allToys: toyData[] = await getAllCards();
     const activeFilter = getLocalActiveFilters();
     const activeRange = getLocalActiveRange();
     const activeSort = localStorage.getItem('sort') ?? '';
@@ -60,8 +65,16 @@ class Cards extends BaseComponent {
     this.element.innerHTML = '';
 
     if (!resultToys.length) {
-      const popup = new Popup('cards');
-      document.body.append(popup.element);
+      console.log(this.popup);
+
+      if (!this.popup) {
+        this.popup = new Popup('cards');
+        this.popup.continueBtn.element.addEventListener('click', () => {
+          this.popup?.remove();
+          this.popup = null;
+        });
+        document.body.append(this.popup.element);
+      }
     }
 
     resultToys.forEach((el): void => {

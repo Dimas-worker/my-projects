@@ -5,11 +5,11 @@ import ChosenToys from '../chosen-toys/chosen-toys';
 class Search extends BaseComponent {
   inputField: HTMLInputElement;
 
-  choseToys: ChosenToys;
+  chosenToys: ChosenToys;
 
-  constructor(choseToys: ChosenToys) {
+  constructor(chosenToys: ChosenToys) {
     super('div', ['search']);
-    this.choseToys = choseToys;
+    this.chosenToys = chosenToys;
     this.inputField = document.createElement('input');
     this.inputField.classList.add('search__input');
     this.inputField.setAttribute('type', 'search');
@@ -17,7 +17,7 @@ class Search extends BaseComponent {
     this.inputField.setAttribute('autocomplete', 'off');
     this.inputField.setAttribute('placeholder', 'Введите название');
     this.element.append(this.inputField);
-    this.element.append(this.choseToys.element);
+    this.element.append(this.chosenToys.element);
   }
 }
 

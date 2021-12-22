@@ -65,9 +65,10 @@ class BaseRange extends BaseComponent {
       }
     });
 
-    let defaultValue = getLocalActiveRange()
-       .filter(element => element.rangeName === this.name)
-       .map(element => [element.min, element.max]).flat();
+    const defaultValue = getLocalActiveRange()
+      .filter((element) => element.rangeName === this.name)
+      .map((element) => [element.min, element.max])
+      .flat();
     this.setDefaultRange(defaultValue);
 
     this.slider.noUiSlider?.on('slide', (values, handle): void => {
@@ -92,7 +93,7 @@ class BaseRange extends BaseComponent {
     this.cards.renderCards();
   }
 
-  setDefaultRange(value: Array<string>): void {    
+  setDefaultRange(value: Array<string>): void {
     const activeRange: ActiveRange[] = getLocalActiveRange();
     const snapValues = [this.minRange.element, this.maxRange.element];
     snapValues.forEach((el, index) => {

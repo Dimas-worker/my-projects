@@ -33,8 +33,11 @@ async function getData(): Promise<void> {
   localStorage.setItem('toys', dataString);
 }
 
-function getAllCards(): toyData[] {
-  const dataOfToys: string = localStorage.getItem('toys') ?? '';
+async function getAllCards(): Promise<toyData[]> {
+  if (!localStorage.getItem('toys')) {
+    await getData();
+  }
+  const dataOfToys = localStorage.getItem('toys') as string;
   const allToys: toyData[] = JSON.parse(dataOfToys);
   return allToys;
 }

@@ -19,7 +19,7 @@ class BaseFilter {
 
   cards: Cards;
 
-  allToys: toyData[];
+  allToys: toyData[] = [];
 
   filterTypes: FilterData[];
 
@@ -31,7 +31,9 @@ class BaseFilter {
     this.cards = cards;
     this.filterName = filterName;
     this.title = this.getTitle(filterName);
-    this.allToys = getAllCards();
+    getAllCards().then((res) => {
+      this.allToys = res;
+    });
     this.activeClass = `active__${filterName}`;
     this.filterTypes = getFilterConstant(filterName);
     this.filtersIcons = new BaseComponent('div', [filterName], this.title);

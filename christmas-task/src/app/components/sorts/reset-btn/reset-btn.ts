@@ -18,12 +18,13 @@ class ResetButton extends BaseComponent {
     this.cards = cards;
     this.typeFilter = typeFilter;
 
-    this.element.addEventListener('click', (): void => {      
+    this.element.addEventListener('click', (): void => {
       this.range.rangeCount.slider.noUiSlider?.reset();
       this.range.rangeYear.slider.noUiSlider?.reset();
+
       const defaultValueCount = this.range.rangeCount.slider.noUiSlider?.get() as Array<string>;
-      this.range.rangeCount.setDefaultRange(defaultValueCount);
       const defaultValueYear = this.range.rangeYear.slider.noUiSlider?.get() as Array<string>;
+      this.range.rangeCount.setDefaultRange(defaultValueCount);
       this.range.rangeYear.setDefaultRange(defaultValueYear);
 
       setDefaultAllFilters();

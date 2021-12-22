@@ -1,5 +1,5 @@
 import BaseComponent from '../../../utils/base-component';
-import { ActiveFilters, FilterData } from '../../../constants/constants';
+import { ActiveFilters, FilterData } from '../../../constants/interface';
 import {
   getLocalActiveFilters,
   getFilterConstant,
@@ -29,7 +29,6 @@ class Favorite extends BaseComponent {
     this.input = document.createElement('input');
     this.input.classList.add('favorite_input');
     this.input.setAttribute('type', 'checkbox');
-
     this.renderFilter();
     this.label.element.append(this.input);
     this.container.element.append(this.label.element);
