@@ -1,7 +1,7 @@
 import './select.scss';
 import BaseComponent from '../../../utils/base-component';
 import Cards from '../../cards/cards';
-import { selectMenu } from '../../../constants/constants';
+import { SORTING_OPTIONS } from '../../../constants/constants';
 
 class Select extends BaseComponent {
   wrapper: BaseComponent;
@@ -19,7 +19,7 @@ class Select extends BaseComponent {
   constructor(cards: Cards) {
     super('div', ['select']);
     this.cards = cards;
-    this.currentSort = localStorage.getItem('sort') ?? selectMenu[0];
+    this.currentSort = localStorage.getItem('sort') ?? SORTING_OPTIONS[0];
     this.wrapper = new BaseComponent('div', ['select__wrapper']);
     this.custom = new BaseComponent('div', ['select__custom']);
     this.trigger = new BaseComponent('div', ['custom__trigger'], this.currentSort);
@@ -34,7 +34,7 @@ class Select extends BaseComponent {
   }
 
   creatOptions(): void {
-    selectMenu.forEach((el) => {
+    SORTING_OPTIONS.forEach((el) => {
       const option = new BaseComponent('div', ['custom__option'], el);
       option.element.addEventListener('click', () => {
         this.trigger.element.textContent = option.element.textContent;

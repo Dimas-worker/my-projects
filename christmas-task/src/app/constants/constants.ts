@@ -1,27 +1,33 @@
-import { toyData } from '../utils/utils';
+import { 
+  ListData,
+  FilterData,
+  ActiveFilters,
+  ActiveRange,
+  RangeType 
+} from '../constants/interface';
 
-interface ListData {
-  text: string;
-  hrefLink: string;
-  iconLink: string;
-}
+// interface ListData {
+//   text: string;
+//   hrefLink: string;
+//   iconLink: string;
+// }
 
-interface FilterData {
-  class: string;
-  ruName: string;
-  status: boolean;
-}
+// interface FilterData {
+//   class: string;
+//   ruName: string;
+//   status: boolean;
+// }
 
-interface ActiveFilters {
-  filterName: keyof toyData;
-  filters: Array<string | boolean>;
-}
+// interface ActiveFilters {
+//   filterName: keyof toyData;
+//   filters: Array<string | boolean>;
+// }
 
-interface ActiveRange {
-  rangeName: keyof toyData;
-  min: string;
-  max: string;
-}
+// interface ActiveRange {
+//   rangeName: keyof toyData;
+//   min: string;
+//   max: string;
+// }
 
 const LIST_OF_PAGES: ListData[] = [
   { text: '', hrefLink: './', iconLink: 'logo' },
@@ -29,7 +35,7 @@ const LIST_OF_PAGES: ListData[] = [
   { text: 'елка', hrefLink: './#/tree', iconLink: '' },
 ];
 
-const All_SHAPE: FilterData[] = [
+const All_SHAPES: FilterData[] = [
   { class: 'ball', ruName: 'шар', status: false },
   { class: 'bell', ruName: 'колокольчик', status: false },
   { class: 'cone', ruName: 'шишка', status: false },
@@ -37,7 +43,7 @@ const All_SHAPE: FilterData[] = [
   { class: 'toy', ruName: 'фигурка', status: false },
 ];
 
-const All_COLOR: FilterData[] = [
+const All_COLORS: FilterData[] = [
   { class: 'btn__white', ruName: 'белый', status: false },
   { class: 'btn__yellow', ruName: 'желтый', status: false },
   { class: 'btn__red', ruName: 'красный', status: false },
@@ -45,13 +51,13 @@ const All_COLOR: FilterData[] = [
   { class: 'btn__green', ruName: 'зелёный', status: false },
 ];
 
-const All_SIZE: FilterData[] = [
+const All_SIZES: FilterData[] = [
   { class: 'big', ruName: 'большой', status: false },
   { class: 'medium', ruName: 'средний', status: false },
   { class: 'small', ruName: 'малый', status: false },
 ];
 
-const ALL_FAVORITE: FilterData[] = [{ class: 'favorite', ruName: '', status: false }];
+const ALL_FAVORITES: FilterData[] = [{ class: 'favorite', ruName: '', status: false }];
 
 const ACTIVE_FILTERS: ActiveFilters[] = [
   { filterName: 'shape', filters: [] },
@@ -60,12 +66,12 @@ const ACTIVE_FILTERS: ActiveFilters[] = [
   { filterName: 'favorite', filters: [] },
 ];
 
-interface RangeType {
-  name: string;
-  step: number;
-  min: number;
-  max: number;
-}
+// interface RangeType {
+//   name: string;
+//   step: number;
+//   min: number;
+//   max: number;
+// }
 
 const ALL_RANGES: RangeType[] = [
   { name: 'count', step: 1, min: 1, max: 12 },
@@ -77,32 +83,27 @@ const ACTIVE_RANGES: ActiveRange[] = [
   { rangeName: 'year', min: '1940', max: '2020' },
 ];
 
-const FILTERS_NAME: string[] = ['shape', 'color', 'size'];
+const FILTERS_NAMES: string[] = ['shape', 'color', 'size'];
 
-const selectMenu: string[] = [
+const SORTING_OPTIONS: string[] = [
   'По названию от «А» до «Я»',
   'По названию от «Я» до «А»',
   'По количеству по возрастанию',
   'По количеству по убыванию',
 ];
 
-const CHOSEN_TOYS_AMOUNT = 20;
+const CHOSEN_TOYS_MAX_AMOUNT = 20;
 
 export {
   LIST_OF_PAGES,
-  All_SHAPE,
-  ListData,
-  FilterData,
-  All_COLOR,
-  All_SIZE,
+  All_SHAPES,
+  All_COLORS,
+  All_SIZES,
   ACTIVE_FILTERS,
-  ALL_FAVORITE,
-  ActiveFilters,
-  FILTERS_NAME,
+  ALL_FAVORITES,
+  FILTERS_NAMES,
   ACTIVE_RANGES,
-  ActiveRange,
   ALL_RANGES,
-  RangeType,
-  selectMenu,
-  CHOSEN_TOYS_AMOUNT,
+  SORTING_OPTIONS,
+  CHOSEN_TOYS_MAX_AMOUNT,
 };

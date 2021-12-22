@@ -1,12 +1,12 @@
 import BaseComponent from '../../../utils/base-component';
-import { getAllCards, toyData } from '../../../utils/utils';
+import { getAllCards } from '../../../utils/utils';
 import {
   getLocalActiveFilters,
   getFilterConstant,
   setFilterConstant,
   setLocalActiveFilters,
 } from '../../../utils/localStorage';
-import { FilterData } from '../../../constants/constants';
+import { FilterData, toyData } from '../../../constants/interface';
 import Cards from '../../cards/cards';
 import './shape.scss';
 import './color.scss';

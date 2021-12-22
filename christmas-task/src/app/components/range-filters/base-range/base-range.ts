@@ -3,7 +3,8 @@ import 'nouislider/dist/nouislider.css';
 import './base-range.scss';
 import BaseComponent from '../../../utils/base-component';
 import { getLocalActiveRange, setLocalActiveRange } from '../../../utils/localStorage';
-import { ActiveRange, ALL_RANGES } from '../../../constants/constants';
+import { ALL_RANGES } from '../../../constants/constants';
+import { ActiveRange } from '../../../constants/interface';
 import Cards from '../../cards/cards';
 
 type Title = {

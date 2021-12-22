@@ -1,14 +1,17 @@
 import {
   ACTIVE_FILTERS,
-  ActiveFilters,
-  All_SHAPE,
-  All_COLOR,
-  All_SIZE,
-  ALL_FAVORITE,
-  FilterData,
+  All_SHAPES,
+  All_COLORS,
+  All_SIZES,
+  ALL_FAVORITES,
   ACTIVE_RANGES,
-  ActiveRange,
 } from '../constants/constants';
+
+import {
+  ActiveFilters,
+  FilterData,
+  ActiveRange,
+} from '../constants/interface';
 
 function setDefaultActiveFilters(): void {
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
@@ -34,10 +37,10 @@ function setLocalActiveFilters(object: ActiveFilters[]): void {
 }
 
 function setFilterConstants() {
-  const shapeString: string = JSON.stringify(All_SHAPE);
-  const colorString: string = JSON.stringify(All_COLOR);
-  const sizeString: string = JSON.stringify(All_SIZE);
-  const favoriteString: string = JSON.stringify(ALL_FAVORITE);
+  const shapeString: string = JSON.stringify(All_SHAPES);
+  const colorString: string = JSON.stringify(All_COLORS);
+  const sizeString: string = JSON.stringify(All_SIZES);
+  const favoriteString: string = JSON.stringify(ALL_FAVORITES);
 
   if (!localStorage.getItem('shape')) {
     localStorage.setItem('shape', shapeString);
@@ -85,10 +88,10 @@ function setDefaultAllFilters(): void {
   const rangeString: string = JSON.stringify(ACTIVE_RANGES);
 
   const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
-  const shapeString: string = JSON.stringify(All_SHAPE);
-  const colorString: string = JSON.stringify(All_COLOR);
-  const sizeString: string = JSON.stringify(All_SIZE);
-  const favoriteString: string = JSON.stringify(ALL_FAVORITE);
+  const shapeString: string = JSON.stringify(All_SHAPES);
+  const colorString: string = JSON.stringify(All_COLORS);
+  const sizeString: string = JSON.stringify(All_SIZES);
+  const favoriteString: string = JSON.stringify(ALL_FAVORITES);
 
   localStorage.setItem('activeRange', rangeString);
 

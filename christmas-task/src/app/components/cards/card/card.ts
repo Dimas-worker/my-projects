@@ -1,7 +1,8 @@
 import BaseComponent from '../../../utils/base-component';
-import { toyData, createProperty } from '../../../utils/utils';
+import {  createProperty } from '../../../utils/utils';
+import { toyData } from '../../../constants/interface';
 import { getChoseToys, setChoseToys } from '../../../utils/localStorage';
-import { CHOSEN_TOYS_AMOUNT } from '../../../constants/constants';
+import { CHOSEN_TOYS_MAX_AMOUNT } from '../../../constants/constants';
 import './card.scss';
 import Popup from '../../popup/popup';
 import Header from '../../header/header';
@@ -53,7 +54,7 @@ class Card extends BaseComponent {
         const indexToy = updateChosenToys.indexOf(data.num);
         updateChosenToys.splice(indexToy, 1);
       } else {
-        if (updateChosenToys.length === CHOSEN_TOYS_AMOUNT) {
+        if (updateChosenToys.length === CHOSEN_TOYS_MAX_AMOUNT) {
           const popup = new Popup('slots');
           document.body.append(popup.element);
           return;

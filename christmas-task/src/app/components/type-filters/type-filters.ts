@@ -2,7 +2,7 @@ import './type-filters.scss';
 import BaseComponent from '../../utils/base-component';
 import Favorite from './favorite/favorite';
 import Cards from '../cards/cards';
-import { FILTERS_NAME } from '../../constants/constants';
+import { FILTERS_NAMES } from '../../constants/constants';
 import BaseFilter from './base-filters/base-filters';
 
 class TypeFilters extends BaseComponent {
@@ -23,7 +23,7 @@ class TypeFilters extends BaseComponent {
   render(): void {
     this.element.innerHTML = '';
     this.element.append(this.title.element);
-    FILTERS_NAME.forEach((el) => {
+    FILTERS_NAMES.forEach((el) => {
       const filter = new BaseFilter(this.cards, el);
       this.element.append(filter.filtersIcons.element);
     });

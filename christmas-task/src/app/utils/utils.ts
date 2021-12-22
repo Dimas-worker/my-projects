@@ -1,3 +1,5 @@
+import { toyData } from '../constants/interface';
+
 function createProperty(property: string, value: string): HTMLParagraphElement {
   const paragraph = document.createElement('p');
   switch (property) {
@@ -23,17 +25,6 @@ function createProperty(property: string, value: string): HTMLParagraphElement {
   return paragraph;
 }
 
-interface toyData {
-  num: string;
-  name: string;
-  count: string;
-  year: string;
-  shape: string;
-  color: string;
-  size: string;
-  favorite: boolean;
-}
-
 async function getData(): Promise<void> {
   if (localStorage.getItem('toys')) return;
   const res: Response = await fetch('./json/data.json');
@@ -47,6 +38,8 @@ function getAllCards(): toyData[] {
   const allToys: toyData[] = JSON.parse(dataOfToys);
   return allToys;
 }
+
+type callBackSort = (a: toyData, b: toyData) => number;
 
 function rightLetterSort(a: toyData, b: toyData): number {
   if (a.name > b.name) return 1;
@@ -68,11 +61,8 @@ function backCountSort(a: toyData, b: toyData): number {
   return +b.count - +a.count;
 }
 
-type callBackSort = (a: toyData, b: toyData) => number;
-
 export {
   getData,
-  toyData,
   createProperty,
   getAllCards,
   rightLetterSort,

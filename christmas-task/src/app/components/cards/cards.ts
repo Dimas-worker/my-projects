@@ -1,7 +1,6 @@
 import './cards.scss';
 import BaseComponent from '../../utils/base-component';
 import {
-  toyData,
   getAllCards,
   rightLetterSort,
   backLetterSort,
@@ -9,7 +8,8 @@ import {
   backCountSort,
   callBackSort,
 } from '../../utils/utils';
-import { selectMenu } from '../../constants/constants';
+import { toyData } from '../../constants/interface';
+import { SORTING_OPTIONS } from '../../constants/constants';
 import { getLocalActiveFilters, getLocalActiveRange } from '../../utils/localStorage';
 import Card from './card/card';
 import Popup from '../popup/popup';
@@ -26,7 +26,7 @@ class Cards extends BaseComponent {
     super('div', ['cards']);
     this.header = header;
     this.cb = rightLetterSort;
-    
+
     this.textInput = '';
     const input = document.querySelector('.search__input') as HTMLInputElement;
     input?.addEventListener('input', (): void => {
@@ -71,11 +71,11 @@ class Cards extends BaseComponent {
   }
 
   getSortType(type: string): void {
-    if (selectMenu.indexOf(type) === 1) {
+    if (SORTING_OPTIONS.indexOf(type) === 1) {
       this.cb = backLetterSort;
-    } else if (selectMenu.indexOf(type) === 2) {
+    } else if (SORTING_OPTIONS.indexOf(type) === 2) {
       this.cb = rightCountSort;
-    } else if (selectMenu.indexOf(type) === 3) {
+    } else if (SORTING_OPTIONS.indexOf(type) === 3) {
       this.cb = backCountSort;
     } else {
       this.cb = rightLetterSort;
