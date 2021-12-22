@@ -10,10 +10,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  // animation: name duration timing-function delay iteration-count direction fill-mode;
   animation: animated-popup 0.5s 1;
   
-  .popup__content {
+  &__content {
     background-color: rgba(31, 112, 127);
     width: 100%;
     max-width: 522px;
@@ -26,14 +25,14 @@
     flex-direction: column;
     gap: 1rem 0;
 
-    .popup-title {
+    .popup__title {
       display: block;
       height: 60px;
       line-height: 60px;
       text-transform: uppercase;
     }
 
-    .btn-cont {
+    .btn__continue {
       width: 250px;
       height: 40px;
       margin: 10px 0;
@@ -54,7 +53,9 @@
     }
   }
 }
+
 @keyframes animated-popup {
+  
   0% {
     opacity: 0;
   }

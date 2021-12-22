@@ -12,7 +12,7 @@ class ChosenToys extends BaseComponent {
     this.element.innerHTML = '';
     const currentChosenToys: string[] = getChoseToys();
     const countToys = currentChosenToys.length;
-    const countOfToy = new BaseComponent('span', ['count-toys'], countToys.toString());
+    const countOfToy = new BaseComponent('span', ['chosen-toys__count'], countToys.toString());
     this.element.append(countOfToy.element);
   }
 }

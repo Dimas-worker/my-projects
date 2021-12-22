@@ -2,29 +2,23 @@
   position: relative;
 }
 
-.selectLabel {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.4rem;
-}
-
-.selectWrapper {
+.select__wrapper {
   position: relative;
 }
 
-.selectCustom {
+.select__custom {
   position: relative;
   width: 330px;
   height: 40px;
 
   &:hover {
-    .selectCustom-trigger {
+    .custom__trigger {
       border: 1px solid #fff;
     }
   }
 }
 
-.selectCustom-trigger {
+.custom__trigger {
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -43,7 +37,7 @@
   transition: 0.3s;
 }
 
-.selectCustom-trigger::after {
+.custom__trigger::after {
   content: "▾";
   position: absolute;
   top: -10px;
@@ -51,11 +45,11 @@
   right: 10px;
 }
 
-.selectCustom-trigger:hover {
+.custom__trigger:hover {
   border-color: #278d9f;
 }
 
-.selectCustom-options {
+.custom__options {
   position: absolute;
   left: 0;
   width: 100%;
@@ -68,21 +62,21 @@
   cursor: pointer;
 }
 
-.selectCustom.isActive .selectCustom-options {
+.select__custom.isActive .custom__options {
   display: block;
 }
 
-.selectCustom-option {
+.custom__option {
   position: relative;
   background-color: #183e42;
   padding-left: 1rem;
 }
 
-.selectCustom-option:hover {
+.custom__option:hover {
   background-color: #278d9f;
 }
 
-.selectCustom-option:not(:last-of-type)::after {
+.custom__option:not(:last-of-type)::after {
   content: "";
   position: absolute;
   bottom: 0;

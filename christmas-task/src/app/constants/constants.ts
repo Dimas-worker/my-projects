@@ -38,11 +38,11 @@ const All_SHAPE: FilterData[] = [
 ];
 
 const All_COLOR: FilterData[] = [
-  { class: 'btn-white', ruName: 'белый', status: false },
-  { class: 'btn-yellow', ruName: 'желтый', status: false },
-  { class: 'btn-red', ruName: 'красный', status: false },
-  { class: 'btn-blue', ruName: 'синий', status: false },
-  { class: 'btn-green', ruName: 'зелёный', status: false },
+  { class: 'btn__white', ruName: 'белый', status: false },
+  { class: 'btn__yellow', ruName: 'желтый', status: false },
+  { class: 'btn__red', ruName: 'красный', status: false },
+  { class: 'btn__blue', ruName: 'синий', status: false },
+  { class: 'btn__green', ruName: 'зелёный', status: false },
 ];
 
 const All_SIZE: FilterData[] = [

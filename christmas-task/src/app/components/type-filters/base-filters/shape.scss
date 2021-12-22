@@ -17,7 +17,6 @@
     transition: 0.3s;
     
     &:hover {
-      // filter: invert(20%);
       transform: scale(1.1);
     }
 
@@ -46,7 +45,7 @@
   .toy {
     background-image: url("../../../../assets/svg/toy.svg");
   }
-  .active_shape {
+  .active__shape {
     filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
   }
 }

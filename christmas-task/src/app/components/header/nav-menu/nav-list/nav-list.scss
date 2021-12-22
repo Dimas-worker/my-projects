@@ -1,5 +1,6 @@
 .nav__link {
   cursor: pointer;
+
   a {
     font-size: 18px;
     font-weight: 500;
@@ -28,7 +29,8 @@
     }
   }
 }
-.active-link {
+
+.active__link {
   &::after {
     border-bottom: #278d9f solid 3px;
   }

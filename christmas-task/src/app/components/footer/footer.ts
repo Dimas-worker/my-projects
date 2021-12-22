@@ -13,7 +13,7 @@ class Footer extends BaseComponent {
   constructor() {
     super('div', ['footer']);
     this.wrapper = new BaseComponent('div', ['wrapper']);
-    this.date = new BaseComponent('div', [], '2021');
+    this.date = new BaseComponent('div', ['date'], '2021');
     this.github = new BaseComponent('a', ['footer__github'], 'dimas-worker');
     this.github.element.setAttribute('href', 'https://github.com/Dimas-worker/');
     this.github.element.setAttribute('target', '_blank');

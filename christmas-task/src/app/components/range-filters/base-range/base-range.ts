@@ -42,8 +42,6 @@ class BaseRange extends BaseComponent {
     this.minRange = new BaseComponent('span', [`${name}__output`]);
     this.maxRange = new BaseComponent('span', [`${name}__output`]);
 
-    
-
     ALL_RANGES.forEach((el): void => {
       if (el.name === this.name) {
         noUiSlider.create(this.slider, {
@@ -69,7 +67,6 @@ class BaseRange extends BaseComponent {
     let defaultValue = getLocalActiveRange()
        .filter(element => element.rangeName === this.name)
        .map(element => [element.min, element.max]).flat();
-    // this.renderSlider();
     this.setDefaultRange(defaultValue);
 
     this.slider.noUiSlider?.on('slide', (values, handle): void => {
@@ -108,36 +105,6 @@ class BaseRange extends BaseComponent {
     });
     this.slider.noUiSlider?.set(value);
     setLocalActiveRange(activeRange);
-  }
-
-  renderSlider() {
-    let defaultValue = getLocalActiveRange()
-       .filter(element => element.rangeName === this.name)
-       .map(element => [element.min, element.max]).flat();
-
-    ALL_RANGES.forEach((el): void => {
-      if (el.name === this.name) {
-        noUiSlider.create(this.slider, {
-          start: [defaultValue[0], defaultValue[1]],
-          step: el.step,
-          connect: true,
-          range: {
-            min: el.min,
-            max: el.max,
-          },
-          format: {
-            to(value) {
-              return Math.round(value);
-            },
-            from(value) {
-              return Number(value);
-            },
-          },
-        });
-      }
-    });
-
-    // this.setDefaultRange(defaultValue);
   }
 }
 

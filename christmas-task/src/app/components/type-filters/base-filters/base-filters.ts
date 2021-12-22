@@ -32,7 +32,7 @@ class BaseFilter {
     this.filterName = filterName;
     this.title = this.getTitle(filterName);
     this.allToys = getAllCards();
-    this.activeClass = `active_${filterName}`;
+    this.activeClass = `active__${filterName}`;
     this.filterTypes = getFilterConstant(filterName);
     this.filtersIcons = new BaseComponent('div', [filterName], this.title);
     this.renderFilter();

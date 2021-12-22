@@ -20,28 +20,28 @@
     }
   }
 
-  .btn-white {
+  .btn__white {
     margin-left: 20px;
     background-color: #fff;
   }
 
-  .btn-yellow {
+  .btn__yellow {
     background-color: yellow;
   }
 
-  .btn-red {
+  .btn__red {
     background-color: red;
   }
 
-  .btn-blue {
+  .btn__blue {
     background-color: blue;
   }
 
-  .btn-green {
+  .btn__green {
     background-color: green;
   }
 
-  .active_color {
+  .active__color {
     &::after {
       content: "";
       display: block;

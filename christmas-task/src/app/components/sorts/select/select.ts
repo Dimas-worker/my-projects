@@ -20,13 +20,13 @@ class Select extends BaseComponent {
     super('div', ['select']);
     this.cards = cards;
     this.currentSort = localStorage.getItem('sort') ?? selectMenu[0];
-    this.wrapper = new BaseComponent('div', ['selectWrapper']);
-    this.custom = new BaseComponent('div', ['selectCustom', 'js-selectCustom']);
-    this.trigger = new BaseComponent('div', ['selectCustom-trigger'], this.currentSort);
+    this.wrapper = new BaseComponent('div', ['select__wrapper']);
+    this.custom = new BaseComponent('div', ['select__custom']);
+    this.trigger = new BaseComponent('div', ['custom__trigger'], this.currentSort);
     this.trigger.element.addEventListener('click', () => {
       this.custom.element.classList.add('isActive');
     });
-    this.options = new BaseComponent('div', ['selectCustom-options']);
+    this.options = new BaseComponent('div', ['custom__options']);
     this.creatOptions();
     this.custom.element.append(this.trigger.element, this.options.element);
     this.wrapper.element.append(this.custom.element);
@@ -35,7 +35,7 @@ class Select extends BaseComponent {
 
   creatOptions(): void {
     selectMenu.forEach((el) => {
-      const option = new BaseComponent('div', ['selectCustom-option'], el);
+      const option = new BaseComponent('div', ['custom__option'], el);
       option.element.addEventListener('click', () => {
         this.trigger.element.textContent = option.element.textContent;
         this.custom.element.classList.remove('isActive');
