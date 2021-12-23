@@ -65,8 +65,6 @@ class Cards extends BaseComponent {
     this.element.innerHTML = '';
 
     if (!resultToys.length) {
-      console.log(this.popup);
-
       if (!this.popup) {
         this.popup = new Popup('cards');
         this.popup.continueBtn.element.addEventListener('click', () => {

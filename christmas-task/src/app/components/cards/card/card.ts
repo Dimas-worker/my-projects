@@ -14,6 +14,8 @@ class Card extends BaseComponent {
 
   header: Header;
 
+  popup: Popup | null = null;
+
   constructor(data: toyData, header: Header) {
     super('div', ['card']);
     this.header = header;
@@ -55,9 +57,15 @@ class Card extends BaseComponent {
         updateChosenToys.splice(indexToy, 1);
       } else {
         if (updateChosenToys.length === CHOSEN_TOYS_MAX_AMOUNT) {
-          const popup = new Popup('slots');
-          document.body.append(popup.element);
-          return;
+          if (!this.popup) {
+            this.popup = new Popup('slots');
+            this.popup.continueBtn.element.addEventListener('click', () => {
+              this.popup?.remove();
+              this.popup = null;
+            });
+            document.body.append(this.popup.element);
+            return;
+          }
         }
         updateChosenToys.push(data.num);
       }

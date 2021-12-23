@@ -27,19 +27,19 @@ class Select extends BaseComponent {
       this.custom.element.classList.add('isActive');
     });
     this.options = new BaseComponent('div', ['custom__options']);
-    this.creatOptions();
+    this.createOptions();
     this.custom.element.append(this.trigger.element, this.options.element);
     this.wrapper.element.append(this.custom.element);
     this.element.append(this.wrapper.element);
   }
 
-  creatOptions(): void {
-    SORTING_OPTIONS.forEach((el) => {
-      const option = new BaseComponent('div', ['custom__option'], el);
+  createOptions(): void {
+    SORTING_OPTIONS.forEach((type) => {
+      const option = new BaseComponent('div', ['custom__option'], type);
       option.element.addEventListener('click', () => {
         this.trigger.element.textContent = option.element.textContent;
         this.custom.element.classList.remove('isActive');
-        const sortName: string = this.trigger.element.textContent as string;
+        const sortName = this.trigger.element.textContent as string;
         localStorage.setItem('sort', sortName);
         this.cards.renderCards();
       });
