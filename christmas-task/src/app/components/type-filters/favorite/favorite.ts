@@ -52,7 +52,11 @@ class Favorite extends BaseComponent {
       }
       activeFilters.forEach((el): void => {
         if (el.filterName === this.filterName) {
-          el.filters[0] = this.input.checked;
+          if (this.input.checked) {
+            el.filters[0] = this.input.checked;
+          } else {
+            el.filters.length = 0;
+          }
         }
       });
       filterTypes[0].status = this.input.checked;

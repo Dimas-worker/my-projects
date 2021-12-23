@@ -32,15 +32,12 @@ class Cards extends BaseComponent {
     this.textInput = '';
     const input = this.header.search.inputField;
     input.addEventListener('input', (): void => {
-      console.log('input');
       this.textInput = input.value.toLowerCase();
       this.renderCards();
     });
   }
 
   async renderCards(): Promise<void> {
-    console.log('render');
-
     const allToys: toyData[] = await getAllCards();
     const activeFilter = getLocalActiveFilters();
     const activeRange = getLocalActiveRange();
