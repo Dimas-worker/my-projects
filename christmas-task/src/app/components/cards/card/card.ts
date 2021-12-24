@@ -1,7 +1,7 @@
 import BaseComponent from '../../../utils/base-component';
 import { createProperty } from '../../../utils/utils';
 import { toyData } from '../../../constants/interfaces';
-import { getChosenToys, setChosenToys } from '../../../utils/localStorage';
+import { getChosenToysFromStorage, setChosenToysInStorage } from '../../../utils/localStorage';
 import { CHOSEN_TOYS_MAX_AMOUNT } from '../../../constants/constants';
 import './card.scss';
 import Popup from '../../popup/popup';
@@ -21,7 +21,7 @@ class Card extends BaseComponent {
     super('div', ['card']);
     this.header = header;
     this.descriptions = new BaseComponent('div', ['card__description']);
-    this.chosenToys = getChosenToys();
+    this.chosenToys = getChosenToysFromStorage();
     this.element.addEventListener('click', (): void => {
       this.toggleCardForChosen(this.element, data);
     })
@@ -56,7 +56,7 @@ class Card extends BaseComponent {
   }
 
   toggleCardForChosen(card: HTMLElement, data: toyData): void {
-    const updateChosenToys: string[] = getChosenToys();
+    const updateChosenToys: string[] = getChosenToysFromStorage();
     if (card.classList.contains('active__toy')) {
       const toyIndex = updateChosenToys.indexOf(data.num);
       updateChosenToys.splice(toyIndex, 1);
@@ -72,7 +72,7 @@ class Card extends BaseComponent {
       }
       updateChosenToys.push(data.num);
     }
-    setChosenToys(updateChosenToys);
+    setChosenToysInStorage(updateChosenToys);
     card.classList.toggle('active__toy');
     this.header.updateChosenToys();
   }

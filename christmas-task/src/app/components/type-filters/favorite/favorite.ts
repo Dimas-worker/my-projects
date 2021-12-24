@@ -1,10 +1,10 @@
 import BaseComponent from '../../../utils/base-component';
 import { ActiveFilters, FilterData } from '../../../constants/interfaces';
 import {
-  getLocalActiveFilters,
+  getActiveFiltersFromStorage,
   getFilterConstant,
   setFilterConstant,
-  setLocalActiveFilters,
+  setActiveFiltersInStorage,
 } from '../../../utils/localStorage';
 import Cards from '../../cards/cards';
 import './favorite.scss';
@@ -44,24 +44,24 @@ class Favorite extends BaseComponent {
     }
 
     this.input.addEventListener('change', (): void => {
-      const activeFilters: ActiveFilters[] = getLocalActiveFilters();
+      const activeFilters: ActiveFilters[] = getActiveFiltersFromStorage();
       if (this.input.checked) {
         this.label.element.classList.add('active__favorite');
       } else {
         this.label.element.classList.remove('active__favorite');
       }
-      activeFilters.forEach((el): void => {
-        if (el.filterName === this.filterName) {
+      activeFilters.forEach((filterType: ActiveFilters): void => {
+        if (filterType.filterName === this.filterName) {
           if (this.input.checked) {
-            el.filters[0] = this.input.checked;
+            filterType.filters[0] = this.input.checked;
           } else {
-            el.filters.length = 0;
+            filterType.filters.length = 0;
           }
         }
       });
       filterTypes[0].status = this.input.checked;
       setFilterConstant(this.filterName, filterTypes);
-      setLocalActiveFilters(activeFilters);
+      setActiveFiltersInStorage(activeFilters);
       this.cards.renderCards();
     });
   }

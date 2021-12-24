@@ -1,6 +1,6 @@
 import BaseComponent from '../../../utils/base-component';
 import './chosen-toys.scss';
-import { getChosenToys } from '../../../utils/localStorage';
+import { getChosenToysFromStorage } from '../../../utils/localStorage';
 
 class ChosenToys extends BaseComponent {
   constructor() {
@@ -10,7 +10,7 @@ class ChosenToys extends BaseComponent {
 
   setCountToys(): void {
     this.element.innerHTML = '';
-    const currentChosenToys: string[] = getChosenToys();
+    const currentChosenToys: string[] = getChosenToysFromStorage();
     const countOfChosenToys = currentChosenToys.length.toString();
     const countOfToys = new BaseComponent('span', ['chosen-toys__count'], countOfChosenToys);
     this.element.append(countOfToys.element);

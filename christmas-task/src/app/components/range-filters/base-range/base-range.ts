@@ -2,10 +2,11 @@ import * as noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import './base-range.scss';
 import BaseComponent from '../../../utils/base-component';
-import { getLocalActiveRange, setLocalActiveRange } from '../../../utils/localStorage';
+import { getActiveRangeFromStorage, setActiveRangeInStorage } from '../../../utils/localStorage';
 import { ALL_RANGES } from '../../../constants/constants';
 import { ActiveRange } from '../../../constants/interfaces';
 import Cards from '../../cards/cards';
+import { RangeType } from '../../../constants/interfaces'
 
 const enum TitleName {
   count = 'Количество экземпляров:',
@@ -39,15 +40,22 @@ class BaseRange extends BaseComponent {
     this.minRange = new BaseComponent('span', [`${name}__output`]);
     this.maxRange = new BaseComponent('span', [`${name}__output`]);
 
-    ALL_RANGES.forEach((el): void => {
-      if (el.name === this.name) {
+    this.createRange();
+
+    this.container.element.append(this.minRange.element, this.slider, this.maxRange.element);
+    this.element.append(this.title.element, this.container.element);
+  }
+
+  createRange(): void {
+    ALL_RANGES.forEach((range: RangeType): void => {
+      if (range.name === this.name) {
         noUiSlider.create(this.slider, {
-          start: [el.min, el.max],
-          step: el.step,
+          start: [range.min, range.max],
+          step: range.step,
           connect: true,
           range: {
-            min: el.min,
-            max: el.max,
+            min: range.min,
+            max: range.max,
           },
           format: {
             to(value) {
@@ -61,48 +69,45 @@ class BaseRange extends BaseComponent {
       }
     });
 
-    const defaultValue = getLocalActiveRange()
-      .filter((element) => element.rangeName === this.name)
-      .map((element) => [element.min, element.max])
+    const defaultRanges = getActiveRangeFromStorage()
+      .filter((range): boolean => range.rangeName === this.name)
+      .map((range): string[] => [range.min, range.max])
       .flat();
-    this.setDefaultRange(defaultValue);
+    this.setDefaultRange(defaultRanges);
 
-    this.slider.noUiSlider?.on('slide', (values, handle): void => {
+    this.slider.noUiSlider?.on('slide', (values: Array<string | number>, handle: number): void => {
       this.setRange(values, handle);
     });
-
-    this.container.element.append(this.minRange.element, this.slider, this.maxRange.element);
-    this.element.append(this.title.element, this.container.element);
   }
 
   setRange(value: Array<string | number>, handle: number): void {
-    const activeRange: ActiveRange[] = getLocalActiveRange();
+    const activeRanges: ActiveRange[] = getActiveRangeFromStorage();
     const snapValues = [this.minRange.element, this.maxRange.element];
     snapValues[handle].textContent = value[handle] as string;
-    activeRange.forEach((el) => {
-      if (el.rangeName === this.name) {
-        el.min = this.minRange.element.textContent as string;
-        el.max = this.maxRange.element.textContent as string;
+    activeRanges.forEach((range: ActiveRange): void => {
+      if (range.rangeName === this.name) {
+        range.min = this.minRange.element.textContent as string;
+        range.max = this.maxRange.element.textContent as string;
       }
     });
-    setLocalActiveRange(activeRange);
+    setActiveRangeInStorage(activeRanges);
     this.cards.renderCards();
   }
 
-  setDefaultRange(value: Array<string>): void {
-    const activeRange: ActiveRange[] = getLocalActiveRange();
-    const snapValues = [this.minRange.element, this.maxRange.element];
-    snapValues.forEach((el, index) => {
-      el.textContent = value[index];
+  setDefaultRange(value: string[]): void {
+    const activeRange: ActiveRange[] = getActiveRangeFromStorage();
+    const snapValues: HTMLElement[] = [this.minRange.element, this.maxRange.element];
+    snapValues.forEach((range: HTMLElement, index: number) => {
+      range.textContent = value[index];
     });
-    activeRange.forEach((el): void => {
-      if (el.rangeName === this.name) {
-        el.min = this.minRange.element.textContent as string;
-        el.max = this.maxRange.element.textContent as string;
+    activeRange.forEach((range: ActiveRange): void => {
+      if (range.rangeName === this.name) {
+        range.min = this.minRange.element.textContent as string;
+        range.max = this.maxRange.element.textContent as string;
       }
     });
     this.slider.noUiSlider?.set(value);
-    setLocalActiveRange(activeRange);
+    setActiveRangeInStorage(activeRange);
   }
 }
 

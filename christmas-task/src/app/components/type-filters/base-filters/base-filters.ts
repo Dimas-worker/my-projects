@@ -1,10 +1,10 @@
 import BaseComponent from '../../../utils/base-component';
 import { getAllCards } from '../../../utils/utils';
 import {
-  getLocalActiveFilters,
+  getActiveFiltersFromStorage,
   getFilterConstant,
   setFilterConstant,
-  setLocalActiveFilters,
+  setActiveFiltersInStorage,
 } from '../../../utils/localStorage';
 import { FilterData, toyData } from '../../../constants/interfaces';
 import Cards from '../../cards/cards';
@@ -21,7 +21,7 @@ class BaseFilter {
 
   allToys: toyData[] = [];
 
-  filterTypes: FilterData[];
+  filtersTypes: FilterData[];
 
   activeClass: string;
 
@@ -30,52 +30,52 @@ class BaseFilter {
   constructor(cards: Cards, filterName: string) {
     this.cards = cards;
     this.filterName = filterName;
-    this.title = this.getTitle(filterName);
+    this.title = this.getFilterTitle(filterName);
     getAllCards().then((res) => {
       this.allToys = res;
     });
     this.activeClass = `active__${filterName}`;
-    this.filterTypes = getFilterConstant(filterName);
+    this.filtersTypes = getFilterConstant(filterName);
     this.filtersIcons = new BaseComponent('div', [filterName], this.title);
     this.renderFilter();
   }
 
   renderFilter(): void {
-    this.filterTypes.forEach((type): void => {
-      const btnType = new BaseComponent('button', [type.class]);
-      if (type.status) {
+    this.filtersTypes.forEach((typeFilter): void => {
+      const btnType = new BaseComponent('button', [typeFilter.class]);
+      if (typeFilter.status) {
         btnType.element.classList.add(this.activeClass);
       }
       this.filtersIcons.element.append(btnType.element);
 
       btnType.element.addEventListener('click', () => {
-        const activeFilters = getLocalActiveFilters();
-        if (type.status) {
+        const activeFilters = getActiveFiltersFromStorage();
+        if (typeFilter.status) {
           btnType.element.classList.remove(this.activeClass);
-          type.status = false;
+          typeFilter.status = false;
           activeFilters.forEach((el): void => {
             if (el.filterName === this.filterName) {
-              const numberType = el.filters.indexOf(type.ruName);
+              const numberType = el.filters.indexOf(typeFilter.ruName);
               el.filters.splice(numberType, 1);
             }
           });
         } else {
           btnType.element.classList.add(this.activeClass);
-          type.status = true;
+          typeFilter.status = true;
           activeFilters.forEach((el): void => {
             if (el.filterName === this.filterName) {
-              el.filters.push(type.ruName);
+              el.filters.push(typeFilter.ruName);
             }
           });
         }
-        setFilterConstant(this.filterName, this.filterTypes);
-        setLocalActiveFilters(activeFilters);
+        setFilterConstant(this.filterName, this.filtersTypes);
+        setActiveFiltersInStorage(activeFilters);
         this.cards.renderCards();
       });
     });
   }
 
-  getTitle(filterName: string): string {
+  getFilterTitle(filterName: string): string {
     switch (filterName) {
       case 'shape':
         return 'Форма: ';

@@ -10,45 +10,45 @@ import {
 import { ActiveFilters, FilterData, ActiveRange } from '../constants/interfaces';
 
 function setDefaultActiveFilters(): void {
-  const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
-  const rangeString: string = JSON.stringify(ACTIVE_RANGES);
+  const activeFiltersJSON: string = JSON.stringify(ACTIVE_FILTERS);
+  const activeRangeJSON: string = JSON.stringify(ACTIVE_RANGES);
 
   if (!localStorage.getItem('activeFilters')) {
-    localStorage.setItem('activeFilters', filtersString);
+    localStorage.setItem('activeFilters', activeFiltersJSON);
   }
   if (!localStorage.getItem('activeRange')) {
-    localStorage.setItem('activeRange', rangeString);
+    localStorage.setItem('activeRange', activeRangeJSON);
   }
 }
 
-function getLocalActiveFilters(): Array<ActiveFilters> {
+function getActiveFiltersFromStorage(): ActiveFilters[] {
   const dataOfToys: string = localStorage.getItem('activeFilters') ?? '[]';
   const toys: ActiveFilters[] = JSON.parse(dataOfToys);
   return toys;
 }
 
-function setLocalActiveFilters(object: ActiveFilters[]): void {
-  const dataString: string = JSON.stringify(object);
-  localStorage.setItem('activeFilters', dataString);
+function setActiveFiltersInStorage(activeFilters: ActiveFilters[]): void {
+  const activeFiltersJSON: string = JSON.stringify(activeFilters);
+  localStorage.setItem('activeFilters', activeFiltersJSON);
 }
 
-function setFilterConstants() {
-  const shapeString: string = JSON.stringify(All_SHAPES);
-  const colorString: string = JSON.stringify(All_COLORS);
-  const sizeString: string = JSON.stringify(All_SIZES);
-  const favoriteString: string = JSON.stringify(ALL_FAVORITES);
+function setFiltersConstants() {
+  const shapeJSON: string = JSON.stringify(All_SHAPES);
+  const colorJSON: string = JSON.stringify(All_COLORS);
+  const sizeJSON: string = JSON.stringify(All_SIZES);
+  const favoriteJSON: string = JSON.stringify(ALL_FAVORITES);
 
   if (!localStorage.getItem('shape')) {
-    localStorage.setItem('shape', shapeString);
+    localStorage.setItem('shape', shapeJSON);
   }
   if (!localStorage.getItem('color')) {
-    localStorage.setItem('color', colorString);
+    localStorage.setItem('color', colorJSON);
   }
   if (!localStorage.getItem('size')) {
-    localStorage.setItem('size', sizeString);
+    localStorage.setItem('size', sizeJSON);
   }
   if (!localStorage.getItem('favorite')) {
-    localStorage.setItem('favorite', favoriteString);
+    localStorage.setItem('favorite', favoriteJSON);
   }
   if (!localStorage.getItem('sort')) {
     localStorage.setItem('sort', 'По названию от «А» до «Я»');
@@ -64,60 +64,60 @@ function getFilterConstant(filterName: string): FilterData[] {
   return filter;
 }
 
-function setFilterConstant(filterName: string, object: FilterData[]): void {
-  const constantString: string = JSON.stringify(object);
-  localStorage.setItem(filterName, constantString);
+function setFilterConstant(filterName: string, filtersData: FilterData[]): void {
+  const filtersConstantJSON: string = JSON.stringify(filtersData);
+  localStorage.setItem(filterName, filtersConstantJSON);
 }
 
-function getLocalActiveRange(): Array<ActiveRange> {
-  const dataOfToys: string = localStorage.getItem('activeRange') ?? '[]';
-  const toys: ActiveRange[] = JSON.parse(dataOfToys);
+function getActiveRangeFromStorage(): ActiveRange[] {
+  const activeRangesJSON: string = localStorage.getItem('activeRange') ?? '[]';
+  const toys: ActiveRange[] = JSON.parse(activeRangesJSON);
   return toys;
 }
 
-function setLocalActiveRange(object: ActiveRange[]): void {
-  const dataString: string = JSON.stringify(object);
-  localStorage.setItem('activeRange', dataString);
+function setActiveRangeInStorage(activeRanges: ActiveRange[]): void {
+  const activeRangesJSON: string = JSON.stringify(activeRanges);
+  localStorage.setItem('activeRange', activeRangesJSON);
 }
 
 function setDefaultAllFilters(): void {
-  const rangeString: string = JSON.stringify(ACTIVE_RANGES);
-  const filtersString: string = JSON.stringify(ACTIVE_FILTERS);
-  const shapeString: string = JSON.stringify(All_SHAPES);
-  const colorString: string = JSON.stringify(All_COLORS);
-  const sizeString: string = JSON.stringify(All_SIZES);
-  const favoriteString: string = JSON.stringify(ALL_FAVORITES);
+  const rangeJSON: string = JSON.stringify(ACTIVE_RANGES);
+  const filtersJSON: string = JSON.stringify(ACTIVE_FILTERS);
+  const shapeJSON: string = JSON.stringify(All_SHAPES);
+  const colorJSON: string = JSON.stringify(All_COLORS);
+  const sizeJSON: string = JSON.stringify(All_SIZES);
+  const favoriteJSON: string = JSON.stringify(ALL_FAVORITES);
 
-  localStorage.setItem('activeRange', rangeString);
-  localStorage.setItem('activeFilters', filtersString);
-  localStorage.setItem('shape', shapeString);
-  localStorage.setItem('color', colorString);
-  localStorage.setItem('size', sizeString);
-  localStorage.setItem('favorite', favoriteString);
+  localStorage.setItem('activeRange', rangeJSON);
+  localStorage.setItem('activeFilters', filtersJSON);
+  localStorage.setItem('shape', shapeJSON);
+  localStorage.setItem('color', colorJSON);
+  localStorage.setItem('size', sizeJSON);
+  localStorage.setItem('favorite', favoriteJSON);
 }
 
-function getChosenToys(): Array<string> {
-  const data: string = localStorage.getItem('chosenToys') ?? '[]';
-  const chosenToys = JSON.parse(data);
+function getChosenToysFromStorage(): string[] {
+  const dataJSON: string = localStorage.getItem('chosenToys') ?? '[]';
+  const chosenToys = JSON.parse(dataJSON);
   return chosenToys;
 }
 
-function setChosenToys(toys: Array<string>): void {
-  const dataString: string = JSON.stringify(toys);
-  localStorage.setItem('chosenToys', dataString);
+function setChosenToysInStorage(toys: string[]): void {
+  const dataToysJSON: string = JSON.stringify(toys);
+  localStorage.setItem('chosenToys', dataToysJSON);
 }
 
 setDefaultActiveFilters();
-setFilterConstants();
+setFiltersConstants();
 
 export {
-  getLocalActiveFilters,
-  setLocalActiveFilters,
+  getActiveFiltersFromStorage,
+  setActiveFiltersInStorage,
   getFilterConstant,
   setFilterConstant,
-  getLocalActiveRange,
-  setLocalActiveRange,
+  getActiveRangeFromStorage,
+  setActiveRangeInStorage,
   setDefaultAllFilters,
-  getChosenToys,
-  setChosenToys,
+  getChosenToysFromStorage,
+  setChosenToysInStorage,
 };

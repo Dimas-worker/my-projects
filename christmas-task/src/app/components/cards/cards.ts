@@ -10,7 +10,7 @@ import {
 } from '../../utils/utils';
 import { toyData } from '../../constants/interfaces';
 import { SORTING_OPTIONS } from '../../constants/constants';
-import { getLocalActiveFilters, getLocalActiveRange } from '../../utils/localStorage';
+import { getActiveFiltersFromStorage, getActiveRangeFromStorage } from '../../utils/localStorage';
 import Card from './card/card';
 import Popup from '../popup/popup';
 import Header from '../header/header';
@@ -61,7 +61,7 @@ class Cards extends BaseComponent {
   }
 
   getSortType(type: string): void {
-    switch(SORTING_OPTIONS.indexOf(type)) {
+    switch (SORTING_OPTIONS.indexOf(type)) {
       case 1:
         this.sortCards = backLetterSort;
         break;
@@ -78,8 +78,8 @@ class Cards extends BaseComponent {
 
   async getToysAfterFilters(): Promise<toyData[]> {
     const allToys: toyData[] = await getAllCards();
-    const activeFilter = getLocalActiveFilters();
-    const activeRange = getLocalActiveRange();
+    const activeFilter = getActiveFiltersFromStorage();
+    const activeRange = getActiveRangeFromStorage();
     const activeSort = localStorage.getItem('sort') ?? '';
     this.getSortType(activeSort);
     const resultToys: toyData[] = allToys

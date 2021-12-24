@@ -1,27 +1,30 @@
 import { toyData } from '../constants/interfaces';
 
+type callBackSort = (a: toyData, b: toyData) => number;
+
 function createProperty(property: string, value: string): HTMLParagraphElement {
   const paragraph = document.createElement('p');
   switch (property) {
     case 'count':
-      paragraph.textContent = `Количество: ${value}`;
+      paragraph.textContent = 'Количество: ';
       break;
     case 'year':
-      paragraph.textContent = `Год покупки: ${value}`;
+      paragraph.textContent = 'Год покупки: ';
       break;
     case 'shape':
-      paragraph.textContent = `Форма: ${value}`;
+      paragraph.textContent = 'Форма: ';
       break;
     case 'color':
-      paragraph.textContent = `Цвет: ${value}`;
+      paragraph.textContent = 'Цвет: ';
       break;
     case 'size':
-      paragraph.textContent = `Размер: ${value}`;
+      paragraph.textContent = 'Размер: ';
       break;
     case 'favorite':
-      paragraph.textContent = `Любимая: ${value}`;
+      paragraph.textContent = 'Любимая: ';
       break;
   }
+  paragraph.textContent += `${value}`;
   return paragraph;
 }
 
@@ -42,7 +45,6 @@ async function getAllCards(): Promise<toyData[]> {
   return allToys;
 }
 
-type callBackSort = (a: toyData, b: toyData) => number;
 
 function rightLetterSort(a: toyData, b: toyData): number {
   if (a.name > b.name) return 1;
