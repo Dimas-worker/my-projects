@@ -1,5 +1,5 @@
 import { LIST_OF_PAGES } from '../../../constants/constants';
-import { ListData } from '../../../constants/interface';
+import { ListData } from '../../../constants/interfaces';
 import NavList from './nav-list/nav-list';
 import './nav-menu.scss';
 

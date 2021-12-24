@@ -1,4 +1,4 @@
-import { toyData } from '../constants/interface';
+import { toyData } from '../constants/interfaces';
 
 function createProperty(property: string, value: string): HTMLParagraphElement {
   const paragraph = document.createElement('p');

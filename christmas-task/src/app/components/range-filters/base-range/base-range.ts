@@ -4,7 +4,7 @@ import './base-range.scss';
 import BaseComponent from '../../../utils/base-component';
 import { getLocalActiveRange, setLocalActiveRange } from '../../../utils/localStorage';
 import { ALL_RANGES } from '../../../constants/constants';
-import { ActiveRange } from '../../../constants/interface';
+import { ActiveRange } from '../../../constants/interfaces';
 import Cards from '../../cards/cards';
 
 type Title = {

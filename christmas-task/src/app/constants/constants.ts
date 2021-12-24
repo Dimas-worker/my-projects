@@ -1,4 +1,4 @@
-import { ListData, FilterData, ActiveFilters, ActiveRange, RangeType } from '../constants/interface';
+import { ListData, FilterData, ActiveFilters, ActiveRange, RangeType } from './interfaces';
 
 const LIST_OF_PAGES: ListData[] = [
   { text: '', hrefLink: './', iconLink: 'logo' },

@@ -8,7 +8,7 @@ import {
   backCountSort,
   callBackSort,
 } from '../../utils/utils';
-import { toyData } from '../../constants/interface';
+import { toyData } from '../../constants/interfaces';
 import { SORTING_OPTIONS } from '../../constants/constants';
 import { getLocalActiveFilters, getLocalActiveRange } from '../../utils/localStorage';
 import Card from './card/card';
@@ -16,7 +16,7 @@ import Popup from '../popup/popup';
 import Header from '../header/header';
 
 class Cards extends BaseComponent {
-  cb: callBackSort;
+  sortCards: callBackSort;
 
   popup: Popup | null = null;
 
@@ -27,7 +27,7 @@ class Cards extends BaseComponent {
   constructor(header: Header) {
     super('div', ['cards']);
     this.header = header;
-    this.cb = rightLetterSort;
+    this.sortCards = rightLetterSort;
 
     this.textInput = '';
     const input = this.header.search.inputField;
@@ -38,6 +38,44 @@ class Cards extends BaseComponent {
   }
 
   async renderCards(): Promise<void> {
+    const resultToys: toyData[] = await this.getToysAfterFilters()
+
+    this.element.innerHTML = '';
+
+    if (!resultToys.length) {
+      if (!this.popup) {
+        this.popup = new Popup('cards');
+        this.popup.continueBtn.element.addEventListener('click', () => {
+          this.popup?.remove();
+          this.popup = null;
+        });
+        document.body.append(this.popup.element);
+      }
+    }
+
+    resultToys.forEach((toy): void => {
+      const card: Card = new Card(toy, this.header);
+      this.element.append(card.element);
+    });
+  }
+
+  getSortType(type: string): void {
+    switch(SORTING_OPTIONS.indexOf(type)) {
+      case 1:
+        this.sortCards = backLetterSort;
+        break;
+      case 2:
+        this.sortCards = rightCountSort;
+        break;
+      case 3:
+        this.sortCards = backCountSort;
+        break;
+      default:
+        this.sortCards = rightLetterSort;
+    }
+  }
+
+  async getToysAfterFilters(): Promise<toyData[]> {
     const allToys: toyData[] = await getAllCards();
     const activeFilter = getLocalActiveFilters();
     const activeRange = getLocalActiveRange();
@@ -56,38 +94,9 @@ class Cards extends BaseComponent {
           activeRange.length ===
           activeRange.filter((cur) => +toy[cur.rangeName] >= +cur.min && +toy[cur.rangeName] <= +cur.max).length
       )
-      .sort(this.cb)
+      .sort(this.sortCards)
       .filter((toy) => toy.name.toLowerCase().includes(this.textInput));
-
-    this.element.innerHTML = '';
-
-    if (!resultToys.length) {
-      if (!this.popup) {
-        this.popup = new Popup('cards');
-        this.popup.continueBtn.element.addEventListener('click', () => {
-          this.popup?.remove();
-          this.popup = null;
-        });
-        document.body.append(this.popup.element);
-      }
-    }
-
-    resultToys.forEach((el): void => {
-      const toy: Card = new Card(el, this.header);
-      this.element.append(toy.element);
-    });
-  }
-
-  getSortType(type: string): void {
-    if (SORTING_OPTIONS.indexOf(type) === 1) {
-      this.cb = backLetterSort;
-    } else if (SORTING_OPTIONS.indexOf(type) === 2) {
-      this.cb = rightCountSort;
-    } else if (SORTING_OPTIONS.indexOf(type) === 3) {
-      this.cb = backCountSort;
-    } else {
-      this.cb = rightLetterSort;
-    }
+    return resultToys;
   }
 }
 

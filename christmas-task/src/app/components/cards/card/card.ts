@@ -1,6 +1,6 @@
 import BaseComponent from '../../../utils/base-component';
 import { createProperty } from '../../../utils/utils';
-import { toyData } from '../../../constants/interface';
+import { toyData } from '../../../constants/interfaces';
 import { getChoseToys, setChoseToys } from '../../../utils/localStorage';
 import { CHOSEN_TOYS_MAX_AMOUNT } from '../../../constants/constants';
 import './card.scss';
@@ -21,10 +21,13 @@ class Card extends BaseComponent {
     this.header = header;
     this.descriptions = new BaseComponent('div', ['card__description']);
     this.chosenToys = getChoseToys();
-    this.getDate(data);
+    this.element.addEventListener('click', (): void => {
+      this.toggleCardForChosen(this.element, data);
+    })
+    this.renderCards(data);
   }
 
-  getDate(data: toyData): void {
+  renderCards(data: toyData): void {
     for (const key in data) {
       if (key === 'name') {
         const title = new BaseComponent('h2', ['card__title'], data[key]);
@@ -49,30 +52,28 @@ class Card extends BaseComponent {
     this.element.append(this.descriptions.element);
     const ribbon = new BaseComponent('div', ['card__ribbon']);
     this.element.append(ribbon.element);
+  }
 
-    this.element.addEventListener('click', (): void => {
-      const updateChosenToys: string[] = getChoseToys();
-      if (this.element.classList.contains('active__toy')) {
-        const indexToy = updateChosenToys.indexOf(data.num);
-        updateChosenToys.splice(indexToy, 1);
-      } else {
-        if (updateChosenToys.length === CHOSEN_TOYS_MAX_AMOUNT) {
-          if (!this.popup) {
-            this.popup = new Popup('slots');
-            this.popup.continueBtn.element.addEventListener('click', () => {
-              this.popup?.remove();
-              this.popup = null;
-            });
-            document.body.append(this.popup.element);
-            return;
-          }
-        }
-        updateChosenToys.push(data.num);
+  toggleCardForChosen(card: HTMLElement, data: toyData): void {
+    const updateChosenToys: string[] = getChoseToys();
+    if (card.classList.contains('active__toy')) {
+      const toyIndex = updateChosenToys.indexOf(data.num);
+      updateChosenToys.splice(toyIndex, 1);
+    } else {
+      if (updateChosenToys.length === CHOSEN_TOYS_MAX_AMOUNT && !this.popup) {
+        this.popup = new Popup('slots');
+        this.popup.continueBtn.element.addEventListener('click', () => {
+          this.popup?.remove();
+          this.popup = null;
+        });
+        document.body.append(this.popup.element);
+        return;
       }
-      setChoseToys(updateChosenToys);
-      this.element.classList.toggle('active__toy');
-      this.header.updateChoseToys();
-    });
+      updateChosenToys.push(data.num);
+    }
+    setChoseToys(updateChosenToys);
+    card.classList.toggle('active__toy');
+    this.header.updateChoseToys();
   }
 }
 
