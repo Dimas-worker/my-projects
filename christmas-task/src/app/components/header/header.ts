@@ -11,21 +11,21 @@ class Header extends BaseComponent {
 
   search: Search;
 
-  choseToys: ChosenToys;
+  chosenToys: ChosenToys;
 
   constructor() {
     super('div', ['header']);
     this.wrapper = new BaseComponent('div', ['wrapper']);
     this.menu = new NavMenu();
     this.wrapper.element.append(this.menu.container);
-    this.choseToys = new ChosenToys();
-    this.search = new Search(this.choseToys);
+    this.chosenToys = new ChosenToys();
+    this.search = new Search(this.chosenToys);
     this.wrapper.element.append(this.search.element);
     this.element.append(this.wrapper.element);
   }
 
-  updateChoseToys(): void {
-    this.choseToys.renderCountToys();
+  updateChosenToys(): void {
+    this.chosenToys.setCountToys();
   }
 }
 

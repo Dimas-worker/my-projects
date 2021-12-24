@@ -96,13 +96,13 @@ function setDefaultAllFilters(): void {
   localStorage.setItem('favorite', favoriteString);
 }
 
-function getChoseToys(): Array<string> {
+function getChosenToys(): Array<string> {
   const data: string = localStorage.getItem('chosenToys') ?? '[]';
   const chosenToys = JSON.parse(data);
   return chosenToys;
 }
 
-function setChoseToys(toys: Array<string>): void {
+function setChosenToys(toys: Array<string>): void {
   const dataString: string = JSON.stringify(toys);
   localStorage.setItem('chosenToys', dataString);
 }
@@ -118,6 +118,6 @@ export {
   getLocalActiveRange,
   setLocalActiveRange,
   setDefaultAllFilters,
-  getChoseToys,
-  setChoseToys,
+  getChosenToys,
+  setChosenToys,
 };

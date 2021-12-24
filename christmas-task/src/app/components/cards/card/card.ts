@@ -1,11 +1,12 @@
 import BaseComponent from '../../../utils/base-component';
 import { createProperty } from '../../../utils/utils';
 import { toyData } from '../../../constants/interfaces';
-import { getChoseToys, setChoseToys } from '../../../utils/localStorage';
+import { getChosenToys, setChosenToys } from '../../../utils/localStorage';
 import { CHOSEN_TOYS_MAX_AMOUNT } from '../../../constants/constants';
 import './card.scss';
 import Popup from '../../popup/popup';
 import Header from '../../header/header';
+import { TitlePopup } from '../../popup/popup';
 
 class Card extends BaseComponent {
   descriptions: BaseComponent;
@@ -20,7 +21,7 @@ class Card extends BaseComponent {
     super('div', ['card']);
     this.header = header;
     this.descriptions = new BaseComponent('div', ['card__description']);
-    this.chosenToys = getChoseToys();
+    this.chosenToys = getChosenToys();
     this.element.addEventListener('click', (): void => {
       this.toggleCardForChosen(this.element, data);
     })
@@ -55,13 +56,13 @@ class Card extends BaseComponent {
   }
 
   toggleCardForChosen(card: HTMLElement, data: toyData): void {
-    const updateChosenToys: string[] = getChoseToys();
+    const updateChosenToys: string[] = getChosenToys();
     if (card.classList.contains('active__toy')) {
       const toyIndex = updateChosenToys.indexOf(data.num);
       updateChosenToys.splice(toyIndex, 1);
     } else {
       if (updateChosenToys.length === CHOSEN_TOYS_MAX_AMOUNT && !this.popup) {
-        this.popup = new Popup('slots');
+        this.popup = new Popup(TitlePopup.slots);
         this.popup.continueBtn.element.addEventListener('click', () => {
           this.popup?.remove();
           this.popup = null;
@@ -71,9 +72,9 @@ class Card extends BaseComponent {
       }
       updateChosenToys.push(data.num);
     }
-    setChoseToys(updateChosenToys);
+    setChosenToys(updateChosenToys);
     card.classList.toggle('active__toy');
-    this.header.updateChoseToys();
+    this.header.updateChosenToys();
   }
 }
 

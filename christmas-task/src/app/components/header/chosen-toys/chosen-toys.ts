@@ -1,19 +1,19 @@
 import BaseComponent from '../../../utils/base-component';
 import './chosen-toys.scss';
-import { getChoseToys } from '../../../utils/localStorage';
+import { getChosenToys } from '../../../utils/localStorage';
 
 class ChosenToys extends BaseComponent {
   constructor() {
     super('div', ['chosen-toys']);
-    this.renderCountToys();
+    this.setCountToys();
   }
 
-  renderCountToys(): void {
+  setCountToys(): void {
     this.element.innerHTML = '';
-    const currentChosenToys: string[] = getChoseToys();
-    const countToys = currentChosenToys.length;
-    const countOfToy = new BaseComponent('span', ['chosen-toys__count'], countToys.toString());
-    this.element.append(countOfToy.element);
+    const currentChosenToys: string[] = getChosenToys();
+    const countOfChosenToys = currentChosenToys.length.toString();
+    const countOfToys = new BaseComponent('span', ['chosen-toys__count'], countOfChosenToys);
+    this.element.append(countOfToys.element);
   }
 }
 

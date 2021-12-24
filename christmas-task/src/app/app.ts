@@ -1,8 +1,8 @@
 import { getData } from './utils/utils';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
-import MainHome from './components/main/main-home/main-home';
-import MainToys from './components/main/main-toys/main-toys';
+import MainHome from './components/home/home';
+import MainToys from './components/toys/toys';
 
 class App {
   private container: HTMLElement = document.body;

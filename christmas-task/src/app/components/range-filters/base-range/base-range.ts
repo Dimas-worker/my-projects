@@ -7,14 +7,10 @@ import { ALL_RANGES } from '../../../constants/constants';
 import { ActiveRange } from '../../../constants/interfaces';
 import Cards from '../../cards/cards';
 
-type Title = {
-  [key: string]: string;
-};
-
-const titleName: Title = {
-  count: 'Количество экземпляров:',
-  year: 'Год приобретения:',
-};
+const enum TitleName {
+  count = 'Количество экземпляров:',
+  year = 'Год приобретения:'
+}
 
 class BaseRange extends BaseComponent {
   slider: noUiSlider.target;
@@ -31,12 +27,12 @@ class BaseRange extends BaseComponent {
 
   cards: Cards;
 
-  constructor(cards: Cards, name: string) {
+  constructor(cards: Cards, name: string, titleName: TitleName) {
     super('div', [name]);
     this.cards = cards;
     this.name = name;
     this.container = new BaseComponent('div', [`${name}__container`]);
-    this.title = new BaseComponent('div', [`${name}__title`], titleName[name]);
+    this.title = new BaseComponent('div', [`${name}__title`], titleName);
     this.slider = document.createElement('div');
     this.slider.classList.add(`${name}__slider`);
 
@@ -110,5 +106,5 @@ class BaseRange extends BaseComponent {
   }
 }
 
-export { Title };
+export { TitleName };
 export default BaseRange;

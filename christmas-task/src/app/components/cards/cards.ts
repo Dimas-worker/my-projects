@@ -14,6 +14,7 @@ import { getLocalActiveFilters, getLocalActiveRange } from '../../utils/localSto
 import Card from './card/card';
 import Popup from '../popup/popup';
 import Header from '../header/header';
+import { TitlePopup } from '../popup/popup';
 
 class Cards extends BaseComponent {
   sortCards: callBackSort;
@@ -44,7 +45,7 @@ class Cards extends BaseComponent {
 
     if (!resultToys.length) {
       if (!this.popup) {
-        this.popup = new Popup('cards');
+        this.popup = new Popup(TitlePopup.cards);
         this.popup.continueBtn.element.addEventListener('click', () => {
           this.popup?.remove();
           this.popup = null;
