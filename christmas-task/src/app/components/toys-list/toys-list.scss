@@ -1,0 +1,14 @@
+.toys-list {
+  flex: 0 0 20%;
+  height: calc(100vh - 140px);
+  min-height: 750px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding-top: 25px;
+  padding-left: 25px;
+}

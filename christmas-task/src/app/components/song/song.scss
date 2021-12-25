@@ -1,0 +1,27 @@
+.song {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      filter: invert(57%) sepia(100%) saturate(329%) hue-rotate(141deg) brightness(89%) contrast(90%);
+    }
+  }
+
+  .active__song {
+    background-image: url('../../../assets/svg/audio.svg');
+  }
+
+  .mute__song {
+    background-image: url('../../../assets/svg/mute.svg');
+  }
+}

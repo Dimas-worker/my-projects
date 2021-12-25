@@ -17,6 +17,14 @@ class NavMenu {
       this.listLink = new NavList(link);
       this.container.append(this.listLink.list);
     });
+    this.container.addEventListener('click', (e) => {
+      let target = e.target as HTMLElement;
+      this.container.childNodes.forEach(element => {
+        let link = element.firstChild as HTMLElement;
+        link.classList.remove('active__link');
+      });
+      target.classList.add('active__link');
+    })
   }
 }
 

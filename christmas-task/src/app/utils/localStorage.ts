@@ -27,7 +27,7 @@ function getActiveFiltersFromStorage(): ActiveFilters[] {
   return toys;
 }
 
-function setActiveFiltersInStorage(activeFilters: ActiveFilters[]): void {
+function setActiveFiltersInStorage<T>(activeFilters: T[]): void {
   const activeFiltersJSON: string = JSON.stringify(activeFilters);
   localStorage.setItem('activeFilters', activeFiltersJSON);
 }

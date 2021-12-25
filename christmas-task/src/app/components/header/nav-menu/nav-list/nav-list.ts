@@ -15,6 +15,9 @@ class NavList {
       this.link.textContent = data.text;
     } else {
       this.link.classList.add(data.iconLink);
+    };
+    if (window.location.hash === `${data.hrefLink.slice(2)}`) {
+      this.link.classList.add('active__link');
     }
     this.list.append(this.link);
   }

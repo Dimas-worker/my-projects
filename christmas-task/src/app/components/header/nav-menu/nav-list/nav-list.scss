@@ -31,7 +31,5 @@
 }
 
 .active__link {
-  &::after {
-    border-bottom: #278d9f solid 3px;
-  }
+  color: #278d9f !important;
 }

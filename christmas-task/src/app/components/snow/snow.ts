@@ -1,0 +1,41 @@
+import './snow.scss';
+import BaseComponent from '../../utils/base-component';
+
+class Snow {
+  icon: BaseComponent;
+  snowField: BaseComponent;
+  IDtimer: NodeJS.Timer | null = null;
+
+  constructor() {
+    this.icon = new BaseComponent('div', ['snow-control']);
+    this.snowField = new BaseComponent('div', ['snow-field']);
+    this.icon.element.addEventListener('click', (): void => {
+      if (this.IDtimer) {
+        this.icon.element.classList.remove('active__snow');
+        clearInterval(this.IDtimer);
+        this.IDtimer = null;
+      } else {
+        this.icon.element.classList.add('active__snow');
+        this.IDtimer = setInterval((): void => {
+          this.createSnowFlake();
+        }, 50);
+      }
+    })
+  }
+
+  createSnowFlake() {
+    const snow_flake = document.createElement('i');
+    snow_flake.classList.add('snowflake');
+    snow_flake.style.left = Math.random() * window.innerWidth + 'px';
+    snow_flake.style.animationDuration = Math.random() * 3 + 2 + 's';
+    snow_flake.style.opacity = Math.random().toString();
+    snow_flake.style.width = snow_flake.style.height = Math.random() * 10 + 10 + 'px'
+    this.snowField.element.append(snow_flake);
+
+    setTimeout(() => {
+      snow_flake.remove();
+    }, 5000)
+  }
+}
+
+export default Snow;
