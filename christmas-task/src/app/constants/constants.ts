@@ -58,6 +58,9 @@ const SORTING_OPTIONS: string[] = [
 
 const CHOSEN_TOYS_MAX_AMOUNT = 20;
 
+const BG_MENU_AMOUNT = 10;
+const TREE_MENU_AMOUNT = 6;
+
 export {
   LIST_OF_PAGES,
   All_SHAPES,
@@ -70,4 +73,6 @@ export {
   ALL_RANGES,
   SORTING_OPTIONS,
   CHOSEN_TOYS_MAX_AMOUNT,
+  BG_MENU_AMOUNT,
+  TREE_MENU_AMOUNT,
 };

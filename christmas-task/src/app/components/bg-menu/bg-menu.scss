@@ -1,0 +1,40 @@
+.setting-menu {
+  padding: 1rem 0;
+  width: 100%;
+
+  &__title {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    margin-bottom: 20px;
+
+    .bg-menu__icon {
+      width: 65px;
+      height: 65px;
+      border: 1px solid #cccc;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.5);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+      transition: 0.3s;
+      
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
