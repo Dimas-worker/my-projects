@@ -56,10 +56,15 @@ const SORTING_OPTIONS: string[] = [
   'По количеству по убыванию',
 ];
 
-const CHOSEN_TOYS_MAX_AMOUNT = 20;
+const CHOSEN_TOYS_MAX_AMOUNT: number = 20;
 
-const BG_MENU_AMOUNT = 10;
-const TREE_MENU_AMOUNT = 6;
+const BG_MENU_AMOUNT: number = 10;
+
+const TREE_MENU_AMOUNT: number = 6;
+
+const GARLAND_DATA: Array<number[]> = [[5, 15], [11, 30], [15, 45], [21, 60], [25, 75]];
+
+const GARLAND_COLORS: string[] = ['all', 'blue', 'green', 'yellow', 'red'];
 
 export {
   LIST_OF_PAGES,
@@ -75,4 +80,6 @@ export {
   CHOSEN_TOYS_MAX_AMOUNT,
   BG_MENU_AMOUNT,
   TREE_MENU_AMOUNT,
+  GARLAND_DATA,
+  GARLAND_COLORS,
 };

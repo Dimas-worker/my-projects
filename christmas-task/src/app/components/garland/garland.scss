@@ -1,0 +1,347 @@
+$globe-width: 10px;
+$globe-height: 10px;
+$globe-spacing: 6px;
+$globe-spread: 3px;
+$light-off-opacity: 0.4;
+
+.garland {
+  display: flex;
+  justify-content: center;
+  z-index: 90;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.light-rope {
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  // margin: -15px 0 0 0;
+  padding: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 8rem;
+  list-style: none;
+  transform: rotate(180deg);
+
+  .all-color {
+    position: relative;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: $globe-width;
+    height: $globe-height;
+    border-radius: 50%;
+    margin: $globe-spacing/2;
+    display: inline-block;
+    background: rgba(0, 247, 165, 1);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 247, 165, 1);
+    animation-name: flash-1;
+    animation-duration: 2s;
+
+    &:nth-child(2n + 1) {
+      background: rgba(0, 255, 255, 1);
+      box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 255, 255, 0.8);
+      animation-name: flash-2;
+      animation-duration: 0.4s;
+    }
+
+    &:nth-child(4n + 2) {
+      background: rgba(247, 0, 148, 1);
+      box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(247, 0, 148, 1);
+      animation-name: flash-3;
+      animation-duration: 1.1s;
+    }
+
+    &:nth-child(3n + 2) {
+      background: rgba(195, 228, 9, 1);
+      box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(195, 228, 9, 1);
+      animation-name: flash-4;
+      animation-duration: 1.1s;
+    }
+
+    &:nth-child(odd) {
+      animation-duration: 1.8s;
+    }
+
+    &:nth-child(3n + 1) {
+      animation-duration: 1.4s;
+    }
+
+    &:last-child:after {
+      content: none;
+    }
+
+    &:first-child {
+      margin-left: -$globe-spacing;
+    }
+  }
+}
+
+.yellow-color {
+  position: relative;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: $globe-width;
+  height: $globe-height;
+  border-radius: 50%;
+  margin: $globe-spacing/2;
+  display: inline-block;
+  background: rgba(195, 228, 9, 1);
+  box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(195, 228, 9, 1);
+  animation-name: flash-4;
+  animation-duration: 2s;
+
+  &:nth-child(odd) {
+    animation-duration: 1.8s;
+  }
+
+  &:nth-child(3n + 1) {
+    animation-duration: 1.4s;
+  }
+
+  &:last-child:after {
+    content: none;
+  }
+
+  &:first-child {
+    margin-left: -$globe-spacing;
+  }
+}
+
+.red-color {
+  position: relative;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: $globe-width;
+  height: $globe-height;
+  border-radius: 50%;
+  margin: $globe-spacing/2;
+  display: inline-block;
+  background: rgba(247, 0, 41, 1);
+  box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(247, 0, 41, 1);
+  animation-name: flash-3;
+  animation-duration: 2s;
+
+  &:nth-child(odd) {
+    animation-duration: 1.8s;
+  }
+
+  &:nth-child(3n + 1) {
+    animation-duration: 1.4s;
+  }
+
+  &:last-child:after {
+    content: none;
+  }
+
+  &:first-child {
+    margin-left: -$globe-spacing;
+  }
+}
+
+.blue-color {
+  position: relative;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: $globe-width;
+  height: $globe-height;
+  border-radius: 50%;
+  margin: $globe-spacing/2;
+  display: inline-block;
+  background: rgba(0, 255, 255, 1);
+  box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 255, 255, 0.8);
+  animation-name: flash-2;
+  animation-duration: 2s;
+
+  &:nth-child(odd) {
+    animation-duration: 1.8s;
+  }
+
+  &:nth-child(3n + 1) {
+    animation-duration: 1.4s;
+  }
+
+  &:last-child:after {
+    content: none;
+  }
+
+  &:first-child {
+    margin-left: -$globe-spacing;
+  }
+}
+
+.green-color {
+  position: relative;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: $globe-width;
+  height: $globe-height;
+  border-radius: 50%;
+  margin: $globe-spacing/2;
+  display: inline-block;
+  background: rgba(0, 247, 165, 1);
+  box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 247, 165, 1);
+  animation-name: flash-1;
+  animation-duration: 2s;
+
+  &:nth-child(odd) {
+    animation-duration: 1.8s;
+  }
+
+  &:nth-child(3n + 1) {
+    animation-duration: 1.4s;
+  }
+
+  &:last-child:after {
+    content: none;
+  }
+
+  &:first-child {
+    margin-left: -$globe-spacing;
+  }
+}
+
+@keyframes flash-1 {
+  0%,
+  100% {
+    background: rgba(0, 247, 165, 1);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 247, 165, 1);
+  }
+  50% {
+    background: rgba(0, 247, 165, $light-off-opacity);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 247, 165, 0.2);
+  }
+}
+@keyframes flash-2 {
+  0%,
+  100% {
+    background: rgba(0, 255, 255, 1);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 255, 255, 1);
+  }
+  50% {
+    background: rgba(0, 255, 255, $light-off-opacity);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(0, 255, 255, 0.2);
+  }
+}
+@keyframes flash-3 {
+  0%,
+  100% {
+    background: rgb(247, 0, 41);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(247, 0, 41, 1);
+  }
+  50% {
+    background: rgba(247, 0, 148, $light-off-opacity);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(247, 0, 41, 0.2);
+  }
+}
+
+@keyframes flash-4 {
+  0%,
+  100% {
+    background: rgb(217, 255, 0);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgb(217, 255, 0);
+  }
+  50% {
+    background: rgba(247, 0, 148, $light-off-opacity);
+    box-shadow: 0px $globe-height/6 $globe-width * 2 $globe-spread rgba(202, 236, 11, 0.2);
+  }
+}
+
+.garland__position_15 {
+  top: 0;
+}
+.garland__position_30 {
+  top: 15%;
+}
+.garland__position_45 {
+  top: 30%;
+}
+.garland__position_60 {
+  top: 47%;
+}
+.garland__position_75 {
+  top: 65%;
+}
+
+.garland__container {
+  padding: 1rem 0;
+  width: 100%;
+
+  .garland__title {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+}
+
+.garland__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+
+  .color-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  .all-btn {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
+    box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, #ccc 0 2px 12px;
+  }
+
+  .red-btn {
+    background-color: #f00;
+    box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgb(255 0 0 / 50%) 0 2px 12px;
+  }
+  .blue-btn {
+    background-color: #24e0ff;
+    box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
+  }
+
+  .yellow-btn {
+    background-color: #ff0;
+    box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+  }
+
+  .green-btn {
+    background-color: #abff00;
+    box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+  }
+}
+
+.hidden__garland {
+  opacity: 0;
+}
