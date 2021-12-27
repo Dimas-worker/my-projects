@@ -9,12 +9,16 @@ class Snow {
   constructor() {
     this.icon = new BaseComponent('div', ['snow-control']);
     this.snowField = new BaseComponent('div', ['snow-field']);
+    this.checkedLocal();
+    
     this.icon.element.addEventListener('click', (): void => {
       if (this.IDtimer) {
+        localStorage.setItem('snow', '');
         this.icon.element.classList.remove('active__snow');
         clearInterval(this.IDtimer);
         this.IDtimer = null;
       } else {
+        localStorage.setItem('snow', 'on');
         this.icon.element.classList.add('active__snow');
         this.IDtimer = setInterval((): void => {
           this.createSnowFlake();
@@ -25,7 +29,7 @@ class Snow {
 
   createSnowFlake() {
     const snow_flake = document.createElement('i');
-    snow_flake.classList.add('snowflake');
+    snow_flake.classList.add('snowflake__icon');
     snow_flake.style.left = Math.random() * window.innerWidth + 'px';
     snow_flake.style.animationDuration = Math.random() * 3 + 2 + 's';
     snow_flake.style.opacity = Math.random().toString();
@@ -35,6 +39,15 @@ class Snow {
     setTimeout(() => {
       snow_flake.remove();
     }, 5000)
+  }
+
+  checkedLocal() {
+    if (localStorage.getItem('snow')) {
+      this.icon.element.classList.add('active__snow');
+      this.IDtimer = setInterval((): void => {
+        this.createSnowFlake();
+      }, 50);
+    }
   }
 }
 

@@ -8,9 +8,10 @@ class TreeMenu extends BgMenu {
   constructor(amount: number, title: TitleMenu) {
     super(amount, title);
     this.treeDefault = new Image();
-    this.treeDefault.setAttribute('src', './assets/tree/1.png');
+    const treeNumber = localStorage.getItem('tree') ?? '1';
+    this.treeDefault.setAttribute('src', `./assets/tree/${treeNumber}.png`);
     this.treeDefault.setAttribute('alt', 'tree-1');
-    this.treeDefault.setAttribute('usemap', '#image-map');
+    this.treeDefault.setAttribute('usemap', '#tree-map');
     this.treeDefault.classList.add('main-tree');
   }
 
@@ -21,6 +22,8 @@ class TreeMenu extends BgMenu {
     treeIcon.addEventListener('click', ():void => {
       let url: string = treeIcon.style.backgroundImage.slice(5, -2);
       this.treeDefault.src = url;
+      const treeNumber: string = url.replace(/\D/g, '');
+      localStorage.setItem('tree', treeNumber);
     })
     this.bgContainer.element.append(treeIcon);
   }

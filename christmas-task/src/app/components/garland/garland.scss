@@ -24,7 +24,6 @@ $light-off-opacity: 0.4;
   overflow: hidden;
   position: absolute;
   z-index: 1;
-  // margin: -15px 0 0 0;
   padding: 0;
   pointer-events: none;
   width: 100%;
@@ -278,21 +277,24 @@ $light-off-opacity: 0.4;
 .garland__position_15 {
   top: 0;
 }
+
 .garland__position_30 {
   top: 15%;
 }
+
 .garland__position_45 {
   top: 30%;
 }
+
 .garland__position_60 {
   top: 47%;
 }
+
 .garland__position_75 {
   top: 65%;
 }
 
 .garland__container {
-  padding: 1rem 0;
   width: 100%;
 
   .garland__title {
@@ -315,30 +317,53 @@ $light-off-opacity: 0.4;
     width: 24px;
     height: 24px;
     border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
   }
 
   .all-btn {
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
     box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, #ccc 0 2px 12px;
+
+    &:hover {
+      box-shadow: 0px 0px 8px 10px rgba(202, 62, 139, 0.8);
+    }
   }
 
   .red-btn {
     background-color: #f00;
     box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgb(255 0 0 / 50%) 0 2px 12px;
+    
+    &:hover {
+      box-shadow: 0px 0px 8px 10px rgba(255, 1, 1, 0.8);
+    }
   }
+
   .blue-btn {
     background-color: #24e0ff;
     box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3f8cff 0 2px 14px;
+    
+    &:hover {
+      box-shadow: 0px 0px 8px 10px rgba(79, 82, 255, 0.8);
+    }
   }
 
   .yellow-btn {
     background-color: #ff0;
     box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #ff0 0 2px 12px;
+
+    &:hover {
+      box-shadow: 0px 0px 8px 10px rgba(221, 236, 7, 0.8);
+    }
   }
 
   .green-btn {
-    background-color: #abff00;
+    background-color: #20a75d;
     box-shadow: rgb(0 0 0 / 20%) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89ff00 0 2px 12px;
+
+    &:hover {
+      box-shadow: 0px 0px 8px 10px rgba(21, 153, 91, 0.8);
+    }
   }
 }
 

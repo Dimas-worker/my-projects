@@ -9,18 +9,16 @@
     background: rgba(22, 41, 41, 0.5);
     backdrop-filter: blur(3px);
     height: 100%;
-    // min-height: calc(100vh - 140px);
     width: 100%;
-
-    
   }
+  
   &__container {
     height: 100%;
     min-height: calc(100vh - 140px);
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     max-width: 1440px;
     margin: auto;
   }

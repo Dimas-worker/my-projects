@@ -1,14 +1,16 @@
 .christmas-tree {
-  flex: 0 0 50%;
+  flex: 0 0 45%;
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  background-image: url('../../../assets/bg/1.jpg');
-  background-size: cover;
-  background-position: center;
-  // height: calc(100vh - 140px);
-  // min-height: 650px;
-  padding-bottom: 20px;
-  overflow: hidden;
   position: relative;
+
+  &__field {
+    width: 500px;
+    position: relative;
+    padding-bottom: 20px;
+    overflow: hidden;
+  }
 }

@@ -5,7 +5,6 @@ import { GARLAND_DATA, GARLAND_COLORS } from '../../constants/constants';
 
 class Garland {
   buttonContainer: BaseComponent;
-  // buttonsControl: BaseComponent;
   activeClass: string;
   garland: BaseComponent;
   switcher: Switcher;
@@ -16,6 +15,7 @@ class Garland {
     this.activeClass = 'all-color';
     this.switcher = new Switcher();
     
+    this.checkedLocal();
     this.switchGarland();
     this.createGarland();
     this.createButtons();
@@ -45,9 +45,11 @@ class Garland {
 
   hideGarland(): void {
     if (this.switcher.checkbox.checked) {
+      localStorage.setItem('garland', `${this.activeClass}`);
       this.garland.element.classList.remove('hidden__garland');
     } else {
       this.garland.element.classList.add('hidden__garland');
+      localStorage.setItem('garland', '');
     }
   }
 
@@ -63,6 +65,7 @@ class Garland {
         this.garland.element.innerHTML= '';
         this.activeClass = `${color}-color`;
         this.createGarland();
+        localStorage.setItem('garland', `${color}-color`);
       })
       buttonsControl.element.append(button.element);
     });
@@ -74,6 +77,14 @@ class Garland {
     this.switcher.checkbox.addEventListener('change', (): void => {
       this.hideGarland();
     });
+  }
+
+  checkedLocal(): void {
+    if (localStorage.getItem('garland')) {
+      this.activeClass = localStorage.getItem('garland')!;
+      this.switcher.checkbox.checked = true;
+      this.hideGarland();
+    }
   }
 }
 
