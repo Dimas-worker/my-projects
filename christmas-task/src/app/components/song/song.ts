@@ -2,7 +2,7 @@ import './song.scss';
 import BaseComponent from '../../utils/base-component';
 
 class Song extends BaseComponent {
-  icon: BaseComponent
+  icon: BaseComponent;
   audio: HTMLAudioElement;
 
   constructor() {
@@ -12,11 +12,12 @@ class Song extends BaseComponent {
     this.audio.loop = true;
     this.icon = new BaseComponent('div', ['song__icon', 'mute__song']);
     this.element.append(this.icon.element);
-    this.icon.element.addEventListener('click', () => {
+    this.icon.element.addEventListener('click', (): void => {
       this.togglePlay();
-    })
+    });
     this.checkedLocal();
   }
+
   togglePlay(): void {
     if (this.audio.paused) {
       this.icon.element.className = 'song__icon active__song';
@@ -31,10 +32,14 @@ class Song extends BaseComponent {
 
   checkedLocal(): void {
     if (localStorage.getItem('song') && this.audio.paused) {
-      window.addEventListener('click', () => {
-        this.icon.element.className = 'song__icon active__song';
-        this.audio.play();
-      }, {once: true})
+      window.addEventListener(
+        'click',
+        () => {
+          this.icon.element.className = 'song__icon active__song';
+          this.audio.play();
+        },
+        { once: true }
+      );
     }
   }
 }

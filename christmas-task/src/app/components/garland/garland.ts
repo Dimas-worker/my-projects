@@ -14,7 +14,7 @@ class Garland {
     this.buttonContainer = new BaseComponent('div', ['garland__container']);
     this.activeClass = 'all-color';
     this.switcher = new Switcher();
-    
+
     this.checkedLocal();
     this.switchGarland();
     this.createGarland();
@@ -24,13 +24,13 @@ class Garland {
   createRope(bulbAmount: number, level: number): void {
     const lightRope: BaseComponent = new BaseComponent('ul', ['light-rope', `garland__position_${level}`]);
     for (let i = 1, j = bulbAmount; i <= bulbAmount; i++, j--) {
-      let middle = Math.floor(bulbAmount / 2);
+      const middle = Math.floor(bulbAmount / 2);
       const lightbulb: HTMLLIElement = document.createElement('li');
       lightbulb.classList.add(this.activeClass);
-      if( i <= middle) {
-        lightbulb.style.transform = `translateY(${(i**1.8)}px)`;
+      if (i <= middle) {
+        lightbulb.style.transform = `translateY(${i ** 1.8}px)`;
       } else {
-        lightbulb.style.transform = `translateY(${(j**1.8)}px)`;
+        lightbulb.style.transform = `translateY(${j ** 1.8}px)`;
       }
       lightRope.element.append(lightbulb);
     }
@@ -40,7 +40,7 @@ class Garland {
   createGarland(): void {
     GARLAND_DATA.forEach((rope: number[]): void => {
       this.createRope(rope[0], rope[1]);
-    })
+    });
   }
 
   hideGarland(): void {
@@ -59,14 +59,14 @@ class Garland {
 
     GARLAND_COLORS.forEach((color: string): void => {
       const button = new BaseComponent('button', ['color-btn', `${color}-btn`]);
-      button.element.addEventListener('click', ():void => {
+      button.element.addEventListener('click', (): void => {
         this.switcher.checkbox.checked = true;
         this.hideGarland();
-        this.garland.element.innerHTML= '';
+        this.garland.element.innerHTML = '';
         this.activeClass = `${color}-color`;
         this.createGarland();
         localStorage.setItem('garland', `${color}-color`);
-      })
+      });
       buttonsControl.element.append(button.element);
     });
     buttonsControl.element.append(this.switcher.element);
@@ -81,7 +81,7 @@ class Garland {
 
   checkedLocal(): void {
     if (localStorage.getItem('garland')) {
-      this.activeClass = localStorage.getItem('garland')!;
+      this.activeClass = localStorage.getItem('garland') as string;
       this.switcher.checkbox.checked = true;
       this.hideGarland();
     }

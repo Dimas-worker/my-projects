@@ -14,16 +14,20 @@ class ChristmasTree extends BaseComponent {
     this.map = map;
     this.setting = settings;
     this.numberBg = localStorage.getItem('bg-tree') ?? '1';
-    this.element.style.backgroundImage = `url("./assets/bg/${this.numberBg}.jpg")`
+    this.element.style.backgroundImage = `url("./assets/bg/${this.numberBg}.jpg")`;
     this.treeField = new BaseComponent('div', ['christmas-tree__field']);
     this.setting.bgMenu.bgContainer.element.addEventListener('click', (e: Event): void => {
       const target = e.target as HTMLElement;
       this.element.style.backgroundImage = target.style.backgroundImage;
       const imgNumber = this.element.style.backgroundImage.replace(/\D/g, '');
-      localStorage.setItem('bg-tree', imgNumber)
-    })
-    
-    this.treeField.element.append(this.setting.garland.garland.element, this.map.mapElement, this.setting.treeMenu.treeDefault);
+      localStorage.setItem('bg-tree', imgNumber);
+    });
+
+    this.treeField.element.append(
+      this.setting.garland.garland.element,
+      this.map.mapElement,
+      this.setting.treeMenu.treeDefault
+    );
     this.element.append(this.setting.snow.snowField.element, this.treeField.element);
   }
 }

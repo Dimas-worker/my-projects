@@ -19,12 +19,12 @@ class TreeMenu extends BgMenu {
     const treeIcon: HTMLElement = document.createElement('div');
     treeIcon.classList.add('tree-menu__icon');
     treeIcon.style.backgroundImage = `url('./assets/tree/${number}.png')`;
-    treeIcon.addEventListener('click', ():void => {
-      let url: string = treeIcon.style.backgroundImage.slice(5, -2);
+    treeIcon.addEventListener('click', (): void => {
+      const url: string = treeIcon.style.backgroundImage.slice(5, -2);
       this.treeDefault.src = url;
       const treeNumber: string = url.replace(/\D/g, '');
       localStorage.setItem('tree', treeNumber);
-    })
+    });
     this.bgContainer.element.append(treeIcon);
   }
 }

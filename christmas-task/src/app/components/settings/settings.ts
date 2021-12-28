@@ -7,10 +7,9 @@ import Garland from '../garland/garland';
 import { BG_MENU_AMOUNT, TREE_MENU_AMOUNT } from '../../constants/constants';
 import TreeMenu from '../trees-menu/trees-menu';
 
-
 const enum TitleMenu {
   bgMenu = 'Выберите фон',
-  treeMenu = 'Выберите ёлку'
+  treeMenu = 'Выберите ёлку',
 }
 
 class Settings extends BaseComponent {
@@ -31,7 +30,12 @@ class Settings extends BaseComponent {
     this.garland = new Garland();
 
     this.iconsContainer.element.append(this.song.element, this.snow.icon.element);
-    this.element.append(this.iconsContainer.element, this.treeMenu.element, this.bgMenu.element, this.garland.buttonContainer.element);
+    this.element.append(
+      this.iconsContainer.element,
+      this.treeMenu.element,
+      this.bgMenu.element,
+      this.garland.buttonContainer.element
+    );
   }
 }
 

@@ -13,7 +13,6 @@ class Tree extends BaseComponent {
   toysList: ToysList;
   map: MapTree;
 
-
   constructor() {
     super('div', ['tree']);
     this.wrapper = new BaseComponent('div', ['tree__wrapper']);

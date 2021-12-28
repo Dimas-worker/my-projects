@@ -19,10 +19,10 @@ class MainHome extends BaseComponent {
     this.title.element.append(this.subTitle.element);
     this.link = new BaseComponent('a', ['main-home__button'], 'Начать');
     this.link.element.setAttribute('href', './#/toys');
-    this.link.element.addEventListener('click', () => {      
+    this.link.element.addEventListener('click', () => {
       const toysLink = this.header.menu.container.childNodes[1].firstChild as HTMLElement;
       toysLink.classList.add('active__link');
-    })
+    });
     this.element.append(this.title.element, this.link.element);
   }
 }

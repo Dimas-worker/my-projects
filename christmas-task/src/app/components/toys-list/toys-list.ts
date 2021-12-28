@@ -38,7 +38,7 @@ class ToysList extends BaseComponent {
         const currentCard: toyData = allToys[+toyNumber - 1];
         const chosenToy = new Toy(toyNumber, currentCard.count, index, this.map);
         this.toysContainer.element.append(chosenToy.element);
-      })
+      });
     } else {
       for (let i = 0; i < CHOSEN_TOYS_MAX_AMOUNT; i++) {
         const currentCard: toyData = allToys[i];
