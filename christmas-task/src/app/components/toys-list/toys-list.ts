@@ -26,7 +26,7 @@ class ToysList extends BaseComponent {
     this.element.append(this.toysContainer.element, this.buttonLocal.element);
     this.chosenToys = getChosenToysFromStorage();
 
-    this.map.map.addEventListener('dragover', (e) => {
+    this.map.mapElement.addEventListener('dragover', (e) => {
       e.preventDefault();
     });
   }

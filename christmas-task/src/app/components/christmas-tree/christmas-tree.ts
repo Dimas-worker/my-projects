@@ -23,7 +23,7 @@ class ChristmasTree extends BaseComponent {
       localStorage.setItem('bg-tree', imgNumber)
     })
     
-    this.treeField.element.append(this.setting.garland.garland.element, this.map.map, this.setting.treeMenu.treeDefault);
+    this.treeField.element.append(this.setting.garland.garland.element, this.map.mapElement, this.setting.treeMenu.treeDefault);
     this.element.append(this.setting.snow.snowField.element, this.treeField.element);
   }
 }

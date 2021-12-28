@@ -6,15 +6,17 @@ class Toy extends BaseComponent {
   amount: BaseComponent;
   map: MapTree;
   toysOnMap: string[] = [];
+  onValidDrop: boolean = false;
 
   constructor(numberImg: string, amountToys: string, id: number, map: MapTree) {
     super('div', ['toy']);
     this.map = map;
     this.amount = new BaseComponent('p', ['toy__amount'], amountToys);
     this.element.setAttribute('id', `${id}`);
-
-    this.map.map.addEventListener('drop', (e) => {
+    
+    this.map.mapElement.addEventListener('drop', (e) => {
       let event = e as DragEvent;
+      this.updateToyAmount(event);
       this.drop(event);
     });
     
@@ -33,7 +35,25 @@ class Toy extends BaseComponent {
         let event = e as DragEvent;
         this.dragStart(event, imgToy.element);
       });
-
+      this.map.mapElement.addEventListener('dragleave', (e: Event): void => {
+        this.onValidDrop = false;
+      });
+     
+      imgToy.element.addEventListener('dragend', (e: Event): void => {
+        if (!this.onValidDrop) {
+          const target = e.target as HTMLElement;
+          if (this.element.id === target.id.split('-')[0]) {
+            target.removeAttribute('style');
+            this.element.prepend(target);
+            const toysAmount: number = Number(this.element.lastElementChild?.textContent);            
+            if (this.element.lastElementChild && toysAmount < +amountToys) {
+              const indexID = this.toysOnMap.indexOf(target.id);
+              this.toysOnMap.splice(indexID, 1);
+              this.element.lastElementChild.textContent = (toysAmount + 1).toString();
+            }
+          }
+        }
+      });
       this.element.append(imgToy.element);
     }
     this.element.append(this.amount.element);
@@ -41,16 +61,14 @@ class Toy extends BaseComponent {
 
   dragStart(e: DragEvent, toy: HTMLElement): void {
     e.dataTransfer?.setData('id', toy.id);
-    // let xToy = e.pageX - toy.offsetWidth / 2 + 'px';
-    // let yToy = e.pageY - toy.offsetHeight  / 2 + 'px';
-    // e.dataTransfer?.setData(toy.id, `[${xToy}, ${yToy}]`);
     let startCoordsToy = toy.getBoundingClientRect();
     let totalX = e.clientX - startCoordsToy.x;
     let totalY = e.clientY - startCoordsToy.y;
     e.dataTransfer?.setData(toy.id, `${totalX}-${totalY}`);
   }
-
-  drop(e: DragEvent): void {
+  
+  drop(e: DragEvent): void {  
+    this.onValidDrop = true;
     const moveAt = (pageX: number, pageY: number, tag: HTMLElement): void => {
       tag.style.left = pageX + 'px';
       tag.style.top = pageY + 'px';
@@ -58,30 +76,30 @@ class Toy extends BaseComponent {
 
     const toyID = e.dataTransfer?.getData('id') as string;
     const startCoordsToy = (e.dataTransfer?.getData(toyID) as string).split('-');
-    let toy = document.getElementById(toyID) as HTMLElement;
-    const coordsMap = this.map.map.nextElementSibling?.getBoundingClientRect() as DOMRect;
+    const toy = document.getElementById(toyID) as HTMLElement;
+    const coordsMap = this.map.mapElement.nextElementSibling?.getBoundingClientRect() as DOMRect;
 
-    let endCoordX = e.clientX - coordsMap.x - +startCoordsToy[0];
-    let endCoordY = e.clientY - coordsMap.y - +startCoordsToy[1];
+    const endCoordX = e.clientX - coordsMap.x - +startCoordsToy[0];
+    const endCoordY = e.clientY - coordsMap.y - +startCoordsToy[1];
     
     moveAt(endCoordX, endCoordY, toy);
 
-    if (this.map.map.firstElementChild) {
-      this.map.map.firstElementChild.append(toy);
+    if (this.map.mapElement.firstElementChild) {
+      this.map.mapElement.firstElementChild.append(toy);
     }
-    this.updateToyAmount(e);
   }
 
   updateToyAmount(e: DragEvent): void {
-    const toyID = e.dataTransfer?.getData('id') as string;
+    const toyID = e.dataTransfer?.getData('id') as string;    
     if (this.element.id === toyID.split('-')[0] && !this.toysOnMap.includes(toyID)) {
       this.toysOnMap.push(toyID);
-      let toysAmount: number = Number(this.element.lastElementChild?.textContent);      
+      const toysAmount: number = Number(this.element.lastElementChild?.textContent);
       if (this.element.lastElementChild && toysAmount) {
         this.element.lastElementChild.textContent = (toysAmount - 1).toString();
       }
     }
   }
+
 }
 
 export default Toy;
