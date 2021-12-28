@@ -45,7 +45,6 @@ async function getAllCards(): Promise<toyData[]> {
   return allToys;
 }
 
-
 function rightLetterSort(a: toyData, b: toyData): number {
   if (a.name > b.name) return 1;
   if (a.name < b.name) return -1;

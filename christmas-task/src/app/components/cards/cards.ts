@@ -39,14 +39,14 @@ class Cards extends BaseComponent {
   }
 
   async renderCards(): Promise<void> {
-    const resultToys: toyData[] = await this.getToysAfterFilters()
+    const resultToys: toyData[] = await this.getToysAfterFilters();
 
     this.element.innerHTML = '';
 
     if (!resultToys.length) {
       if (!this.popup) {
         this.popup = new Popup(TitlePopup.cards);
-        this.popup.continueBtn.element.addEventListener('click', () => {
+        this.popup.continueBtn.element.addEventListener('click', (): void => {
           this.popup?.remove();
           this.popup = null;
         });
@@ -54,7 +54,7 @@ class Cards extends BaseComponent {
       }
     }
 
-    resultToys.forEach((toy): void => {
+    resultToys.forEach((toy: toyData): void => {
       const card: Card = new Card(toy, this.header);
       this.element.append(card.element);
     });
@@ -84,19 +84,20 @@ class Cards extends BaseComponent {
     this.getSortType(activeSort);
     const resultToys: toyData[] = allToys
       .filter(
-        (toy) =>
+        (toy: toyData): boolean =>
           activeFilter.length ===
-          activeFilter.filter((current) =>
-            current.filters.length ? current.filters.includes(toy[current.filterName]) : true
+          activeFilter.filter((filter) =>
+            filter.filters.length ? filter.filters.includes(toy[filter.filterName]) : true
           ).length
       )
       .filter(
-        (toy) =>
+        (toy: toyData): boolean =>
           activeRange.length ===
-          activeRange.filter((cur) => +toy[cur.rangeName] >= +cur.min && +toy[cur.rangeName] <= +cur.max).length
+          activeRange.filter((range) => +toy[range.rangeName] >= +range.min && +toy[range.rangeName] <= +range.max)
+            .length
       )
       .sort(this.sortCards)
-      .filter((toy) => toy.name.toLowerCase().includes(this.textInput));
+      .filter((toy: toyData): boolean => toy.name.toLowerCase().includes(this.textInput));
     return resultToys;
   }
 }

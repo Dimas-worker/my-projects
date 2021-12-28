@@ -5,15 +5,15 @@ import { getChosenToysFromStorage } from '../../../utils/localStorage';
 class ChosenToys extends BaseComponent {
   constructor() {
     super('div', ['chosen-toys']);
-    this.setCountToys();
+    this.setToysAmount();
   }
 
-  setCountToys(): void {
+  setToysAmount(): void {
     this.element.innerHTML = '';
     const currentChosenToys: string[] = getChosenToysFromStorage();
-    const countOfChosenToys = currentChosenToys.length.toString();
-    const countOfToys = new BaseComponent('span', ['chosen-toys__count'], countOfChosenToys);
-    this.element.append(countOfToys.element);
+    const chosenToysAmount = currentChosenToys.length.toString();
+    const chosenToysAmountTag = new BaseComponent('span', ['chosen-toys__count'], chosenToysAmount);
+    this.element.append(chosenToysAmountTag.element);
   }
 }
 

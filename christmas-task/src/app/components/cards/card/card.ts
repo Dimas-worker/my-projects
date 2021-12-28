@@ -24,7 +24,7 @@ class Card extends BaseComponent {
     this.chosenToys = getChosenToysFromStorage();
     this.element.addEventListener('click', (): void => {
       this.toggleCardForChosen(this.element, data);
-    })
+    });
     this.renderCards(data);
   }
 

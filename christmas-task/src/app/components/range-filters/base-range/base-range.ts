@@ -6,11 +6,11 @@ import { getActiveRangeFromStorage, setActiveRangeInStorage } from '../../../uti
 import { ALL_RANGES } from '../../../constants/constants';
 import { ActiveRange } from '../../../constants/interfaces';
 import Cards from '../../cards/cards';
-import { RangeType } from '../../../constants/interfaces'
+import { RangeType } from '../../../constants/interfaces';
 
 const enum TitleName {
   count = 'Количество экземпляров:',
-  year = 'Год приобретения:'
+  year = 'Год приобретения:',
 }
 
 class BaseRange extends BaseComponent {
@@ -70,8 +70,8 @@ class BaseRange extends BaseComponent {
     });
 
     const defaultRanges = getActiveRangeFromStorage()
-      .filter((range): boolean => range.rangeName === this.name)
-      .map((range): string[] => [range.min, range.max])
+      .filter((range: ActiveRange): boolean => range.rangeName === this.name)
+      .map((range: ActiveRange): string[] => [range.min, range.max])
       .flat();
     this.setDefaultRange(defaultRanges);
 

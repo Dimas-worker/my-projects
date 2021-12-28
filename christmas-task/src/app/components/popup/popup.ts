@@ -3,7 +3,7 @@ import './popup.scss';
 
 const enum TitlePopup {
   slots = 'Извините, все слоты заполнены',
-  cards = 'Извините, совпадений не обнаружено'
+  cards = 'Извините, совпадений не обнаружено',
 }
 
 class Popup extends BaseComponent {
@@ -29,6 +29,4 @@ class Popup extends BaseComponent {
 
 export default Popup;
 
-export {
-  TitlePopup
-}
+export { TitlePopup };
