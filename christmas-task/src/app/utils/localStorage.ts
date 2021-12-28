@@ -75,7 +75,7 @@ function getActiveRangeFromStorage(): ActiveRange[] {
   return toys;
 }
 
-function setActiveRangeInStorage(activeRanges: ActiveRange[]): void {
+function setActiveRangeInStorage<T>(activeRanges: T[]): void {
   const activeRangesJSON: string = JSON.stringify(activeRanges);
   localStorage.setItem('activeRange', activeRangesJSON);
 }
