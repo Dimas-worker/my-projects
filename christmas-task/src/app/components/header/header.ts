@@ -25,7 +25,7 @@ class Header extends BaseComponent {
   }
 
   updateChosenToys(): void {
-    this.chosenToys.setCountToys();
+    this.chosenToys.setToysAmount();
   }
 }
 
