@@ -370,3 +370,11 @@ $light-off-opacity: 0.4;
 .hidden__garland {
   opacity: 0;
 }
+
+@media (min-width: 768px) and (max-width: 1040px) {
+  .garland__buttons {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0 2rem;
+  }
+}
