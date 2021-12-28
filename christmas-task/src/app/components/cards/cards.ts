@@ -8,7 +8,7 @@ import {
   backCountSort,
   callBackSort,
 } from '../../utils/utils';
-import { toyData } from '../../constants/interfaces';
+import { toyData, ActiveRange, ActiveFilters } from '../../constants/interfaces';
 import { SORTING_OPTIONS } from '../../constants/constants';
 import { getActiveFiltersFromStorage, getActiveRangeFromStorage } from '../../utils/localStorage';
 import Card from './card/card';
@@ -86,14 +86,14 @@ class Cards extends BaseComponent {
       .filter(
         (toy: toyData): boolean =>
           activeFilter.length ===
-          activeFilter.filter((filter) =>
+          activeFilter.filter((filter: ActiveFilters): boolean =>
             filter.filters.length ? filter.filters.includes(toy[filter.filterName]) : true
           ).length
       )
       .filter(
         (toy: toyData): boolean =>
           activeRange.length ===
-          activeRange.filter((range) => +toy[range.rangeName] >= +range.min && +toy[range.rangeName] <= +range.max)
+          activeRange.filter((range: ActiveRange): boolean => +toy[range.rangeName] >= +range.min && +toy[range.rangeName] <= +range.max)
             .length
       )
       .sort(this.sortCards)
