@@ -1,5 +1,11 @@
 import './snow.scss';
 import BaseComponent from '../../utils/base-component';
+import { SNOW_FLAKE_SIZE } from '../../constants/constants';
+
+const enum AnimationTime {
+  min = 2,
+  range = 3,
+}
 
 class Snow {
   icon: BaseComponent;
@@ -9,28 +15,26 @@ class Snow {
   constructor() {
     this.icon = new BaseComponent('div', ['snow-control']);
     this.snowField = new BaseComponent('div', ['snow-field']);
-    this.checkedLocal();
+    this.checkSnowActive();
 
-    this.icon.element.addEventListener('click', (): void => {
-      this.showSnow();
-    });
+    this.icon.element.addEventListener('click', (): void => this.showSnow());
   }
 
-  createSnowFlake() {
-    const snow_flake = document.createElement('i');
-    snow_flake.classList.add('snowflake__icon');
-    snow_flake.style.left = Math.random() * window.innerWidth + 'px';
-    snow_flake.style.animationDuration = Math.random() * 3 + 2 + 's';
-    snow_flake.style.opacity = Math.random().toString();
-    snow_flake.style.width = snow_flake.style.height = Math.random() * 10 + 10 + 'px';
-    this.snowField.element.append(snow_flake);
+  createSnowFlake(): void {
+    const snowFlake: HTMLElement = document.createElement('i');
+    snowFlake.classList.add('snowflake__icon');
+    snowFlake.style.left = Math.random() * window.innerWidth + 'px';
+    snowFlake.style.animationDuration = Math.random() * AnimationTime.range + AnimationTime.min + 's';
+    snowFlake.style.opacity = Math.random().toString();
+    snowFlake.style.width = snowFlake.style.height = Math.random() * SNOW_FLAKE_SIZE + SNOW_FLAKE_SIZE + 'px';
+    this.snowField.element.append(snowFlake);
 
-    setTimeout(() => {
-      snow_flake.remove();
+    setTimeout((): void => {
+      snowFlake.remove();
     }, 5000);
   }
 
-  checkedLocal() {
+  checkSnowActive(): void {
     if (localStorage.getItem('snow')) {
       this.icon.element.classList.add('active__snow');
       this.IDtimer = setInterval((): void => {

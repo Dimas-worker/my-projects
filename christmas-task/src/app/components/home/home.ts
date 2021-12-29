@@ -4,11 +4,8 @@ import Header from '../header/header';
 
 class MainHome extends BaseComponent {
   header: Header;
-
   title: BaseComponent;
-
   subTitle: BaseComponent;
-
   link: BaseComponent;
 
   constructor(header: Header) {

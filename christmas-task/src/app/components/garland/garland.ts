@@ -1,7 +1,7 @@
 import './garland.scss';
 import BaseComponent from '../../utils/base-component';
 import Switcher from './switcher/switcher';
-import { GARLAND_DATA, GARLAND_COLORS } from '../../constants/constants';
+import { GARLAND_DATA, GARLAND_COLORS, DISTANCE_BETWEEN_BULBS } from '../../constants/constants';
 
 class Garland {
   buttonContainer: BaseComponent;
@@ -24,15 +24,12 @@ class Garland {
   createRope(bulbAmount: number, level: number): void {
     const lightRope: BaseComponent = new BaseComponent('ul', ['light-rope', `garland__position_${level}`]);
     for (let i = 1, j = bulbAmount; i <= bulbAmount; i++, j--) {
-      const middle = Math.floor(bulbAmount / 2);
-      const lightbulb: HTMLLIElement = document.createElement('li');
-      lightbulb.classList.add(this.activeClass);
-      if (i <= middle) {
-        lightbulb.style.transform = `translateY(${i ** 1.8}px)`;
-      } else {
-        lightbulb.style.transform = `translateY(${j ** 1.8}px)`;
-      }
-      lightRope.element.append(lightbulb);
+      const middle: number = Math.floor(bulbAmount / 2);
+      const lightBulb: HTMLLIElement = document.createElement('li');
+      lightBulb.classList.add(this.activeClass);
+      lightBulb.style.transform =
+        i <= middle ? `translateY(${i ** DISTANCE_BETWEEN_BULBS}px)` : `translateY(${j ** DISTANCE_BETWEEN_BULBS}px)`;
+      lightRope.element.append(lightBulb);
     }
     this.garland.element.append(lightRope.element);
   }
@@ -54,11 +51,11 @@ class Garland {
   }
 
   createButtons(): void {
-    const title = new BaseComponent('div', ['garland__title'], 'Гирлянда');
-    const buttonsControl = new BaseComponent('div', ['garland__buttons']);
+    const title: BaseComponent = new BaseComponent('div', ['garland__title'], 'Гирлянда');
+    const buttonsControl: BaseComponent = new BaseComponent('div', ['garland__buttons']);
 
     GARLAND_COLORS.forEach((color: string): void => {
-      const button = new BaseComponent('button', ['color-btn', `${color}-btn`]);
+      const button: BaseComponent = new BaseComponent('button', ['color-btn', `${color}-btn`]);
       button.element.addEventListener('click', (): void => {
         this.switcher.checkbox.checked = true;
         this.hideGarland();
@@ -74,9 +71,7 @@ class Garland {
   }
 
   switchGarland(): void {
-    this.switcher.checkbox.addEventListener('change', (): void => {
-      this.hideGarland();
-    });
+    this.switcher.checkbox.addEventListener('change', (): void => this.hideGarland());
   }
 
   checkedLocal(): void {

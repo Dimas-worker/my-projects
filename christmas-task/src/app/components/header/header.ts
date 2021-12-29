@@ -6,11 +6,8 @@ import ChosenToys from './chosen-toys/chosen-toys';
 
 class Header extends BaseComponent {
   wrapper: BaseComponent;
-
   menu: NavMenu;
-
   search: Search;
-
   chosenToys: ChosenToys;
 
   constructor() {

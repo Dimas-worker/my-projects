@@ -72,6 +72,14 @@ const GARLAND_DATA: Array<number[]> = [
 
 const GARLAND_COLORS: string[] = ['all', 'blue', 'green', 'yellow', 'red'];
 
+const SNOW_FLAKE_SIZE = 10;
+
+const DEFAULT_TREE_NUMBER = '1';
+
+const DEFAULT_BG_NUMBER = '1';
+
+const DISTANCE_BETWEEN_BULBS = 1.8;
+
 export {
   LIST_OF_PAGES,
   All_SHAPES,
@@ -88,4 +96,8 @@ export {
   TREE_MENU_AMOUNT,
   GARLAND_DATA,
   GARLAND_COLORS,
+  SNOW_FLAKE_SIZE,
+  DEFAULT_TREE_NUMBER,
+  DEFAULT_BG_NUMBER,
+  DISTANCE_BETWEEN_BULBS,
 };

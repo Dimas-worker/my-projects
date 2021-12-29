@@ -15,6 +15,7 @@ class BgMenu extends BaseComponent {
     }
     this.element.append(this.title.element, this.bgContainer.element);
   }
+
   createBgElement(number: number): void {
     const bgIcon: HTMLElement = document.createElement('div');
     bgIcon.classList.add('bg-menu__icon');

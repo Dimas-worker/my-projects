@@ -25,10 +25,7 @@ class ToysList extends BaseComponent {
     this.createChosenToys();
     this.element.append(this.toysContainer.element, this.buttonLocal.element);
     this.chosenToys = getChosenToysFromStorage();
-
-    this.map.mapElement.addEventListener('dragover', (e) => {
-      e.preventDefault();
-    });
+    this.map.mapElement.addEventListener('dragover', (e: DragEvent): void => e.preventDefault());
   }
 
   async createChosenToys(): Promise<void> {
@@ -36,13 +33,13 @@ class ToysList extends BaseComponent {
     if (this.chosenToys.length) {
       this.chosenToys.forEach((toyNumber: string, index: number): void => {
         const currentCard: toyData = allToys[+toyNumber - 1];
-        const chosenToy = new Toy(toyNumber, currentCard.count, index, this.map);
+        const chosenToy: Toy = new Toy(toyNumber, currentCard.count, index, this.map);
         this.toysContainer.element.append(chosenToy.element);
       });
     } else {
       for (let i = 0; i < CHOSEN_TOYS_MAX_AMOUNT; i++) {
         const currentCard: toyData = allToys[i];
-        const chosenToy = new Toy(currentCard.num, currentCard.count, i, this.map);
+        const chosenToy: Toy = new Toy(currentCard.num, currentCard.count, i, this.map);
         this.toysContainer.element.append(chosenToy.element);
       }
     }

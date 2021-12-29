@@ -10,11 +10,8 @@ import { TitlePopup } from '../../popup/popup';
 
 class Card extends BaseComponent {
   descriptions: BaseComponent;
-
   chosenToys: string[];
-
   header: Header;
-
   popup: Popup | null = null;
 
   constructor(data: toyData, header: Header) {
@@ -22,27 +19,25 @@ class Card extends BaseComponent {
     this.header = header;
     this.descriptions = new BaseComponent('div', ['card__description']);
     this.chosenToys = getChosenToysFromStorage();
-    this.element.addEventListener('click', (): void => {
-      this.toggleCardForChosen(this.element, data);
-    });
+    this.element.addEventListener('click', (): void => this.toggleCardForChosen(this.element, data));
     this.renderCards(data);
   }
 
   renderCards(data: toyData): void {
     for (const key in data) {
       if (key === 'name') {
-        const title = new BaseComponent('h2', ['card__title'], data[key]);
+        const title: BaseComponent = new BaseComponent('h2', ['card__title'], data[key]);
         this.element.prepend(title.element);
       } else if (key === 'num') {
-        const img = new BaseComponent('img', ['card__img']);
+        const img: BaseComponent = new BaseComponent('img', ['card__img']);
         img.element.setAttribute('src', `./assets/toys/${data[key]}.png`);
         img.element.setAttribute('alt', `card-${data[key]}`);
         this.element.append(img.element);
       } else if (key === 'count' || key === 'year' || key === 'shape' || key === 'color' || key === 'size') {
-        const property = createProperty(key, data[key]);
+        const property: HTMLParagraphElement = createProperty(key, data[key]);
         this.descriptions.element.append(property);
       } else if (key === 'favorite') {
-        const favorite = createProperty(key, `${data[key] ? 'да' : 'нет'}`);
+        const favorite: HTMLParagraphElement = createProperty(key, `${data[key] ? 'да' : 'нет'}`);
         this.descriptions.element.append(favorite);
       }
 
@@ -51,14 +46,14 @@ class Card extends BaseComponent {
       }
     }
     this.element.append(this.descriptions.element);
-    const ribbon = new BaseComponent('div', ['card__ribbon']);
+    const ribbon: BaseComponent = new BaseComponent('div', ['card__ribbon']);
     this.element.append(ribbon.element);
   }
 
   toggleCardForChosen(card: HTMLElement, data: toyData): void {
     const updateChosenToys: string[] = getChosenToysFromStorage();
     if (card.classList.contains('active__toy')) {
-      const toyIndex = updateChosenToys.indexOf(data.num);
+      const toyIndex: number = updateChosenToys.indexOf(data.num);
       updateChosenToys.splice(toyIndex, 1);
     } else {
       if (updateChosenToys.length === CHOSEN_TOYS_MAX_AMOUNT && !this.popup) {

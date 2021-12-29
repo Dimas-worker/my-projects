@@ -18,11 +18,8 @@ import { TitlePopup } from '../popup/popup';
 
 class Cards extends BaseComponent {
   sortCards: callBackSort;
-
   popup: Popup | null = null;
-
   header: Header;
-
   textInput: string;
 
   constructor(header: Header) {
@@ -31,7 +28,7 @@ class Cards extends BaseComponent {
     this.sortCards = rightLetterSort;
 
     this.textInput = '';
-    const input = this.header.search.inputField;
+    const input: HTMLInputElement = this.header.search.inputField;
     input.addEventListener('input', (): void => {
       this.textInput = input.value.toLowerCase();
       this.renderCards();
@@ -78,9 +75,9 @@ class Cards extends BaseComponent {
 
   async getToysAfterFilters(): Promise<toyData[]> {
     const allToys: toyData[] = await getAllCards();
-    const activeFilter = getActiveFiltersFromStorage();
-    const activeRange = getActiveRangeFromStorage();
-    const activeSort = localStorage.getItem('sort') ?? '';
+    const activeFilter: ActiveFilters[] = getActiveFiltersFromStorage();
+    const activeRange: ActiveRange[] = getActiveRangeFromStorage();
+    const activeSort: string = localStorage.getItem('sort') ?? '';
     this.getSortType(activeSort);
     const resultToys: toyData[] = allToys
       .filter(
@@ -93,8 +90,9 @@ class Cards extends BaseComponent {
       .filter(
         (toy: toyData): boolean =>
           activeRange.length ===
-          activeRange.filter((range: ActiveRange): boolean => +toy[range.rangeName] >= +range.min && +toy[range.rangeName] <= +range.max)
-            .length
+          activeRange.filter(
+            (range: ActiveRange): boolean => +toy[range.rangeName] >= +range.min && +toy[range.rangeName] <= +range.max
+          ).length
       )
       .sort(this.sortCards)
       .filter((toy: toyData): boolean => toy.name.toLowerCase().includes(this.textInput));

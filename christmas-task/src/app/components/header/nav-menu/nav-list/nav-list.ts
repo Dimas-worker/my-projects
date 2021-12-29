@@ -3,7 +3,6 @@ import './nav-list.scss';
 
 class NavList {
   list: HTMLLIElement;
-
   link: HTMLAnchorElement;
 
   constructor(data: ListData) {

@@ -8,15 +8,10 @@ import Header from '../header/header';
 
 class MainToys extends BaseComponent {
   cards: Cards;
-
   typeFilters: TypeFilters;
-
   rangeFilters: RangeFilters;
-
   wrapper: BaseComponent;
-
   controlsPanel: BaseComponent;
-
   sorts: Sorts;
 
   constructor(header: Header) {

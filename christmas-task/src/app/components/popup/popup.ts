@@ -8,9 +8,7 @@ const enum TitlePopup {
 
 class Popup extends BaseComponent {
   content: BaseComponent;
-
   title: BaseComponent;
-
   continueBtn: BaseComponent;
 
   constructor(title: TitlePopup) {

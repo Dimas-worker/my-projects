@@ -6,11 +6,8 @@ import { TitleName } from './base-range/base-range';
 
 class RangeFilters extends BaseComponent {
   cards: Cards;
-
   title: BaseComponent;
-
   rangeCount: BaseRange;
-
   rangeYear: BaseRange;
 
   constructor(cards: Cards) {

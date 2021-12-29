@@ -8,10 +8,10 @@ class Toy extends BaseComponent {
   toysOnMap: string[] = [];
   onValidDrop = false;
 
-  constructor(numberImg: string, amountToys: string, id: number, map: MapTree) {
+  constructor(imgNumber: string, toysAmount: string, id: number, map: MapTree) {
     super('div', ['toy']);
     this.map = map;
-    this.amount = new BaseComponent('p', ['toy__amount'], amountToys);
+    this.amount = new BaseComponent('p', ['toy__amount'], toysAmount);
     this.element.setAttribute('id', `${id}`);
 
     this.map.mapElement.addEventListener('drop', (e) => {
@@ -20,14 +20,14 @@ class Toy extends BaseComponent {
       this.drop(event);
     });
 
-    this.createToy(numberImg, amountToys, id);
+    this.createToy(imgNumber, toysAmount, id);
   }
 
-  createToy(numberImg: string, amountToys: string, id: number): void {
-    for (let i = 1; i <= +amountToys; i++) {
-      const imgToy = new BaseComponent('img', ['toy__img']);
-      imgToy.element.setAttribute('src', `./assets/toys/${numberImg}.png`);
-      imgToy.element.setAttribute('alt', `${numberImg}-toy`);
+  createToy(imgNumber: string, toysAmount: string, id: number): void {
+    for (let i = 1; i <= +toysAmount; i++) {
+      const imgToy: BaseComponent = new BaseComponent('img', ['toy__img']);
+      imgToy.element.setAttribute('src', `./assets/toys/${imgNumber}.png`);
+      imgToy.element.setAttribute('alt', `${imgNumber}-toy`);
       imgToy.element.setAttribute('draggable', 'true');
       imgToy.element.setAttribute('id', `${id}-${i}`);
 
@@ -46,9 +46,9 @@ class Toy extends BaseComponent {
             target.removeAttribute('style');
             this.element.prepend(target);
             const toysAmount = Number(this.element.lastElementChild?.textContent);
-            if (this.element.lastElementChild && toysAmount < +amountToys) {
-              const indexID = this.toysOnMap.indexOf(target.id);
-              this.toysOnMap.splice(indexID, 1);
+            if (this.element.lastElementChild && toysAmount < +toysAmount) {
+              const toyIndex: number = this.toysOnMap.indexOf(target.id);
+              this.toysOnMap.splice(toyIndex, 1);
               this.element.lastElementChild.textContent = (toysAmount + 1).toString();
             }
           }
@@ -61,9 +61,9 @@ class Toy extends BaseComponent {
 
   dragStart(e: DragEvent, toy: HTMLElement): void {
     e.dataTransfer?.setData('id', toy.id);
-    const startCoordsToy = toy.getBoundingClientRect();
-    const totalX = e.clientX - startCoordsToy.x;
-    const totalY = e.clientY - startCoordsToy.y;
+    const toyStartCoords: DOMRect = toy.getBoundingClientRect();
+    const totalX: number = e.clientX - toyStartCoords.x;
+    const totalY: number = e.clientY - toyStartCoords.y;
     e.dataTransfer?.setData(toy.id, `${totalX}-${totalY}`);
   }
 
@@ -75,12 +75,12 @@ class Toy extends BaseComponent {
     };
 
     const toyID = e.dataTransfer?.getData('id') as string;
-    const startCoordsToy = (e.dataTransfer?.getData(toyID) as string).split('-');
+    const startCoordsToy: string[] = (e.dataTransfer?.getData(toyID) as string).split('-');
     const toy = document.getElementById(toyID) as HTMLElement;
     const coordsMap = this.map.mapElement.nextElementSibling?.getBoundingClientRect() as DOMRect;
 
-    const endCoordX = e.clientX - coordsMap.x - +startCoordsToy[0];
-    const endCoordY = e.clientY - coordsMap.y - +startCoordsToy[1];
+    const endCoordX: number = e.clientX - coordsMap.x - +startCoordsToy[0];
+    const endCoordY: number = e.clientY - coordsMap.y - +startCoordsToy[1];
 
     moveAt(endCoordX, endCoordY, toy);
 

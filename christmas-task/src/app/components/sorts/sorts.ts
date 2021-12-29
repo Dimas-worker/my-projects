@@ -9,19 +9,12 @@ import ResetLocal from './reset-local/reset-local';
 
 class Sorts extends BaseComponent {
   select: Select;
-
   title: BaseComponent;
-
   cards: Cards;
-
   reset: ResetButton;
-
   resetLocal: ResetLocal;
-
   range: RangeFilters;
-
   typeFilters: TypeFilters;
-
   container: BaseComponent;
 
   constructor(cards: Cards, range: RangeFilters, typeFilters: TypeFilters) {

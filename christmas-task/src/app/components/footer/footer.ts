@@ -3,11 +3,8 @@ import BaseComponent from '../../utils/base-component';
 
 class Footer extends BaseComponent {
   wrapper: BaseComponent;
-
   date: BaseComponent;
-
   github: BaseComponent;
-
   rssLink: BaseComponent;
 
   constructor() {

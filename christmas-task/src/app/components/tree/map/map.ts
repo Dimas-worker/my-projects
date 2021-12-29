@@ -7,7 +7,7 @@ class MapTree {
     this.createArea();
   }
 
-  createArea() {
+  createArea(): void {
     const area: HTMLAreaElement = document.createElement('area');
     area.coords = '253,6,96,354,22,616,181,689,307,689,477,625,400,340';
     area.shape = 'poly';

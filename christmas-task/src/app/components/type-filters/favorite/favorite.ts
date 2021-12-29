@@ -11,13 +11,9 @@ import './favorite.scss';
 
 class Favorite extends BaseComponent {
   container: BaseComponent;
-
   input: HTMLInputElement;
-
   label: BaseComponent;
-
   cards: Cards;
-
   filterName: string;
 
   constructor(cards: Cards) {

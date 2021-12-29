@@ -3,7 +3,7 @@ import { toyData } from '../constants/interfaces';
 type callBackSort = (a: toyData, b: toyData) => number;
 
 function createProperty(property: string, value: string): HTMLParagraphElement {
-  const paragraph = document.createElement('p');
+  const paragraph: HTMLParagraphElement = document.createElement('p');
   switch (property) {
     case 'count':
       paragraph.textContent = 'Количество: ';

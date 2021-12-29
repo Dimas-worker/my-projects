@@ -7,11 +7,8 @@ import Tree from './components/tree/tree';
 
 class App {
   private container: HTMLElement = document.body;
-
   private header: Header = new Header();
-
   private main: MainHome | MainToys = new MainHome(this.header);
-
   private footer: Footer = new Footer();
 
   constructor() {

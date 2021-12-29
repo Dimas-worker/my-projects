@@ -14,17 +14,11 @@ import './size.scss';
 
 class BaseFilter {
   title: string;
-
   filtersIcons: BaseComponent;
-
   cards: Cards;
-
   allToys: toyData[] = [];
-
   filtersTypes: FilterData[];
-
   activeClass: string;
-
   filterName: string;
 
   constructor(cards: Cards, filterName: string) {
@@ -42,20 +36,20 @@ class BaseFilter {
 
   renderFilter(): void {
     this.filtersTypes.forEach((typeFilter: FilterData): void => {
-      const btnType = new BaseComponent('button', [typeFilter.class]);
+      const btnType: BaseComponent = new BaseComponent('button', [typeFilter.class]);
       if (typeFilter.status) {
         btnType.element.classList.add(this.activeClass);
       }
       this.filtersIcons.element.append(btnType.element);
 
       btnType.element.addEventListener('click', (): void => {
-        const activeFilters = getActiveFiltersFromStorage();
+        const activeFilters: ActiveFilters[] = getActiveFiltersFromStorage();
         if (typeFilter.status) {
           btnType.element.classList.remove(this.activeClass);
           typeFilter.status = false;
           activeFilters.forEach((filter: ActiveFilters): void => {
             if (filter.filterName === this.filterName) {
-              const numberType = filter.filters.indexOf(typeFilter.ruName);
+              const numberType: number = filter.filters.indexOf(typeFilter.ruName);
               filter.filters.splice(numberType, 1);
             }
           });

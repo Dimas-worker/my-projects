@@ -7,9 +7,7 @@ import BaseFilter from './base-filters/base-filters';
 
 class TypeFilters extends BaseComponent {
   cards: Cards;
-
   favorite: Favorite;
-
   title: BaseComponent;
 
   constructor(cards: Cards) {
@@ -23,8 +21,8 @@ class TypeFilters extends BaseComponent {
   render(): void {
     this.element.innerHTML = '';
     this.element.append(this.title.element);
-    FILTERS_NAMES.forEach((el) => {
-      const filter = new BaseFilter(this.cards, el);
+    FILTERS_NAMES.forEach((filterName: string): void => {
+      const filter: BaseFilter = new BaseFilter(this.cards, filterName);
       this.element.append(filter.filtersIcons.element);
     });
     this.element.append(this.favorite.element);

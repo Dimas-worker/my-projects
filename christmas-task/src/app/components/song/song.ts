@@ -15,7 +15,7 @@ class Song extends BaseComponent {
     this.icon.element.addEventListener('click', (): void => {
       this.togglePlay();
     });
-    this.checkedLocal();
+    this.checkSongActive();
   }
 
   togglePlay(): void {
@@ -30,7 +30,7 @@ class Song extends BaseComponent {
     }
   }
 
-  checkedLocal(): void {
+  checkSongActive(): void {
     if (localStorage.getItem('song') && this.audio.paused) {
       window.addEventListener(
         'click',

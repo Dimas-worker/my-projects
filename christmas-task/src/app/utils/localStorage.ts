@@ -98,7 +98,7 @@ function setDefaultAllFilters(): void {
 
 function getChosenToysFromStorage(): string[] {
   const dataJSON: string = localStorage.getItem('chosenToys') ?? '[]';
-  const chosenToys = JSON.parse(dataJSON);
+  const chosenToys: string[] = JSON.parse(dataJSON);
   return chosenToys;
 }
 

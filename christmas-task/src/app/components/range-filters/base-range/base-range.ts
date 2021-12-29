@@ -15,17 +15,11 @@ const enum TitleName {
 
 class BaseRange extends BaseComponent {
   slider: noUiSlider.target;
-
   minRange: BaseComponent;
-
   maxRange: BaseComponent;
-
   title: BaseComponent;
-
   container: BaseComponent;
-
   name: string;
-
   cards: Cards;
 
   constructor(cards: Cards, name: string, titleName: TitleName) {
@@ -69,7 +63,7 @@ class BaseRange extends BaseComponent {
       }
     });
 
-    const defaultRanges = getActiveRangeFromStorage()
+    const defaultRanges: string[] = getActiveRangeFromStorage()
       .filter((range: ActiveRange): boolean => range.rangeName === this.name)
       .map((range: ActiveRange): string[] => [range.min, range.max])
       .flat();
@@ -82,7 +76,7 @@ class BaseRange extends BaseComponent {
 
   setRange(value: Array<string | number>, handle: number): void {
     const activeRanges: ActiveRange[] = getActiveRangeFromStorage();
-    const snapValues = [this.minRange.element, this.maxRange.element];
+    const snapValues: HTMLElement[] = [this.minRange.element, this.maxRange.element];
     snapValues[handle].textContent = value[handle] as string;
     activeRanges.forEach((range: ActiveRange): void => {
       if (range.rangeName === this.name) {

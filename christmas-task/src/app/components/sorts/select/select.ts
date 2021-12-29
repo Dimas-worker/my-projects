@@ -5,15 +5,10 @@ import { SORTING_OPTIONS } from '../../../constants/constants';
 
 class Select extends BaseComponent {
   wrapper: BaseComponent;
-
   container: BaseComponent;
-
   trigger: BaseComponent;
-
   options: BaseComponent;
-
   cards: Cards;
-
   currentSort: string;
 
   constructor(cards: Cards) {
@@ -23,7 +18,7 @@ class Select extends BaseComponent {
     this.wrapper = new BaseComponent('div', ['select__wrapper']);
     this.container = new BaseComponent('div', ['select__custom']);
     this.trigger = new BaseComponent('div', ['custom__trigger'], this.currentSort);
-    this.trigger.element.addEventListener('click', () => {
+    this.trigger.element.addEventListener('click', (): void => {
       this.container.element.classList.add('active');
     });
     this.options = new BaseComponent('div', ['custom__options']);
@@ -34,9 +29,9 @@ class Select extends BaseComponent {
   }
 
   createOptions(): void {
-    SORTING_OPTIONS.forEach((type) => {
-      const option = new BaseComponent('div', ['custom__option'], type);
-      option.element.addEventListener('click', () => {
+    SORTING_OPTIONS.forEach((type: string): void => {
+      const option: BaseComponent = new BaseComponent('div', ['custom__option'], type);
+      option.element.addEventListener('click', (): void => {
         this.trigger.element.textContent = option.element.textContent;
         this.container.element.classList.remove('active');
         const sortName = this.trigger.element.textContent as string;

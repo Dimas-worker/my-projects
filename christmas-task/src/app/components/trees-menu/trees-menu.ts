@@ -1,6 +1,7 @@
 import './trees-menu.scss';
 import BgMenu from '../bg-menu/bg-menu';
 import { TitleMenu } from '../settings/settings';
+import { DEFAULT_TREE_NUMBER } from '../../constants/constants';
 
 class TreeMenu extends BgMenu {
   treeDefault: HTMLImageElement;
@@ -8,7 +9,7 @@ class TreeMenu extends BgMenu {
   constructor(amount: number, title: TitleMenu) {
     super(amount, title);
     this.treeDefault = new Image();
-    const treeNumber = localStorage.getItem('tree') ?? '1';
+    const treeNumber: string = localStorage.getItem('tree') ?? DEFAULT_TREE_NUMBER;
     this.treeDefault.setAttribute('src', `./assets/tree/${treeNumber}.png`);
     this.treeDefault.setAttribute('alt', 'tree-1');
     this.treeDefault.setAttribute('usemap', '#tree-map');

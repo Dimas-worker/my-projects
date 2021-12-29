@@ -7,9 +7,7 @@ import { setDefaultAllFilters } from '../../../utils/localStorage';
 
 class ResetButton extends BaseComponent {
   range: RangeFilters;
-
   cards: Cards;
-
   typeFilter: TypeFilters;
 
   constructor(range: RangeFilters, cards: Cards, typeFilter: TypeFilters) {

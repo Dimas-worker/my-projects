@@ -4,7 +4,6 @@ import ChosenToys from '../chosen-toys/chosen-toys';
 
 class Search extends BaseComponent {
   inputField: HTMLInputElement;
-
   chosenToys: ChosenToys;
 
   constructor(chosenToys: ChosenToys) {

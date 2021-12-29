@@ -11,7 +11,7 @@ class ChosenToys extends BaseComponent {
   setToysAmount(): void {
     this.element.innerHTML = '';
     const currentChosenToys: string[] = getChosenToysFromStorage();
-    const chosenToysAmount = currentChosenToys.length.toString();
+    const chosenToysAmount: string = currentChosenToys.length.toString();
     const chosenToysAmountTag = new BaseComponent('span', ['chosen-toys__count'], chosenToysAmount);
     this.element.append(chosenToysAmountTag.element);
   }

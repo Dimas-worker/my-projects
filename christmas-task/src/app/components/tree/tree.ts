@@ -18,7 +18,6 @@ class Tree extends BaseComponent {
     this.wrapper = new BaseComponent('div', ['tree__wrapper']);
     this.container = new BaseComponent('div', ['tree__container']);
     this.map = new MapTree();
-
     this.settings = new Settings();
     this.christmasTree = new ChristmasTree(this.settings, this.map);
     this.toysList = new ToysList(this.map);
