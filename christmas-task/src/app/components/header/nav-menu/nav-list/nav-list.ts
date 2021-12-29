@@ -1,4 +1,4 @@
-import { ListData } from '../../../../constants/interfaces';
+import { ListData } from '../../../../interfaces/interfaces';
 import './nav-list.scss';
 
 class NavList {

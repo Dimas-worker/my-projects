@@ -3,7 +3,7 @@ import BaseComponent from '../../utils/base-component';
 import Toy from './toy/toy';
 import { getChosenToysFromStorage } from '../../utils/localStorage';
 import { getAllCards } from '../../utils/utils';
-import { toyData } from '../../constants/interfaces';
+import { toyData } from '../../interfaces/interfaces';
 import { CHOSEN_TOYS_MAX_AMOUNT } from '../../constants/constants';
 import MapTree from '../tree/map/map';
 import ResetLocal from '../sorts/reset-local/reset-local';

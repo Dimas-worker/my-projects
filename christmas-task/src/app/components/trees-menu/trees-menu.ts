@@ -11,7 +11,7 @@ class TreeMenu extends BgMenu {
     this.treeDefault = new Image();
     const treeNumber: string = localStorage.getItem('tree') ?? DEFAULT_TREE_NUMBER;
     this.treeDefault.setAttribute('src', `./assets/tree/${treeNumber}.png`);
-    this.treeDefault.setAttribute('alt', 'tree-1');
+    this.treeDefault.setAttribute('alt', `tree-${treeNumber}`);
     this.treeDefault.setAttribute('usemap', '#tree-map');
     this.treeDefault.classList.add('main-tree');
   }

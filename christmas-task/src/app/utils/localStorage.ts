@@ -7,7 +7,7 @@ import {
   ACTIVE_RANGES,
 } from '../constants/constants';
 
-import { ActiveFilters, FilterData, ActiveRange } from '../constants/interfaces';
+import { ActiveFilters, FilterData, ActiveRange } from '../interfaces/interfaces';
 
 function setDefaultActiveFilters(): void {
   const activeFiltersJSON: string = JSON.stringify(ACTIVE_FILTERS);

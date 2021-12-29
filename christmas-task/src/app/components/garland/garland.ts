@@ -27,8 +27,7 @@ class Garland {
       const middle: number = Math.floor(bulbAmount / 2);
       const lightBulb: HTMLLIElement = document.createElement('li');
       lightBulb.classList.add(this.activeClass);
-      lightBulb.style.transform =
-        i <= middle ? `translateY(${i ** DISTANCE_BETWEEN_BULBS}px)` : `translateY(${j ** DISTANCE_BETWEEN_BULBS}px)`;
+      lightBulb.style.transform = `translateY(${i <= middle ? i : j} ** ${DISTANCE_BETWEEN_BULBS}px)`;
       lightRope.element.append(lightBulb);
     }
     this.garland.element.append(lightRope.element);

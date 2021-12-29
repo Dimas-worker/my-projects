@@ -1,4 +1,4 @@
-import { ListData, FilterData, ActiveFilters, ActiveRange, RangeType } from './interfaces';
+import { ListData, FilterData, ActiveFilters, ActiveRange, RangeType } from '../interfaces/interfaces';
 
 const LIST_OF_PAGES: ListData[] = [
   { text: '', hrefLink: './', iconLink: 'logo' },
@@ -80,6 +80,11 @@ const DEFAULT_BG_NUMBER = '1';
 
 const DISTANCE_BETWEEN_BULBS = 1.8;
 
+const enum TitlePopup {
+  slots = 'Извините, все слоты заполнены',
+  cards = 'Извините, совпадений не обнаружено',
+}
+
 export {
   LIST_OF_PAGES,
   All_SHAPES,
@@ -100,4 +105,5 @@ export {
   DEFAULT_TREE_NUMBER,
   DEFAULT_BG_NUMBER,
   DISTANCE_BETWEEN_BULBS,
+  TitlePopup,
 };

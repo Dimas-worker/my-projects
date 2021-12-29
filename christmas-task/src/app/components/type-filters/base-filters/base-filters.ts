@@ -6,7 +6,7 @@ import {
   setFilterConstant,
   setActiveFiltersInStorage,
 } from '../../../utils/localStorage';
-import { FilterData, toyData, ActiveFilters } from '../../../constants/interfaces';
+import { FilterData, toyData, ActiveFilters } from '../../../interfaces/interfaces';
 import Cards from '../../cards/cards';
 import './shape.scss';
 import './color.scss';

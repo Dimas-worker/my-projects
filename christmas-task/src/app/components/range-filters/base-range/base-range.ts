@@ -4,9 +4,9 @@ import './base-range.scss';
 import BaseComponent from '../../../utils/base-component';
 import { getActiveRangeFromStorage, setActiveRangeInStorage } from '../../../utils/localStorage';
 import { ALL_RANGES } from '../../../constants/constants';
-import { ActiveRange } from '../../../constants/interfaces';
+import { ActiveRange } from '../../../interfaces/interfaces';
 import Cards from '../../cards/cards';
-import { RangeType } from '../../../constants/interfaces';
+import { RangeType } from '../../../interfaces/interfaces';
 
 const enum TitleName {
   count = 'Количество экземпляров:',

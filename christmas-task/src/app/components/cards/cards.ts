@@ -8,13 +8,13 @@ import {
   backCountSort,
   callBackSort,
 } from '../../utils/utils';
-import { toyData, ActiveRange, ActiveFilters } from '../../constants/interfaces';
+import { toyData, ActiveRange, ActiveFilters } from '../../interfaces/interfaces';
 import { SORTING_OPTIONS } from '../../constants/constants';
 import { getActiveFiltersFromStorage, getActiveRangeFromStorage } from '../../utils/localStorage';
 import Card from './card/card';
 import Popup from '../popup/popup';
 import Header from '../header/header';
-import { TitlePopup } from '../popup/popup';
+import { TitlePopup } from '../../constants/constants';
 
 class Cards extends BaseComponent {
   sortCards: callBackSort;

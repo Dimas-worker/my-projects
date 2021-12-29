@@ -1,10 +1,6 @@
 import BaseComponent from '../../utils/base-component';
 import './popup.scss';
-
-const enum TitlePopup {
-  slots = 'Извините, все слоты заполнены',
-  cards = 'Извините, совпадений не обнаружено',
-}
+import { TitlePopup } from '../../constants/constants';
 
 class Popup extends BaseComponent {
   content: BaseComponent;
@@ -26,5 +22,3 @@ class Popup extends BaseComponent {
 }
 
 export default Popup;
-
-export { TitlePopup };

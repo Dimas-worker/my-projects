@@ -1,4 +1,4 @@
-import { toyData } from '../constants/interfaces';
+import { toyData } from '../interfaces/interfaces';
 
 type callBackSort = (a: toyData, b: toyData) => number;
 

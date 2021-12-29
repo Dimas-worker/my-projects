@@ -1,5 +1,5 @@
 import BaseComponent from '../../../utils/base-component';
-import { ActiveFilters, FilterData } from '../../../constants/interfaces';
+import { ActiveFilters, FilterData } from '../../../interfaces/interfaces';
 import {
   getActiveFiltersFromStorage,
   getFilterConstant,

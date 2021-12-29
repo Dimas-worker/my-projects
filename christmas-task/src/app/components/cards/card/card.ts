@@ -1,12 +1,12 @@
 import BaseComponent from '../../../utils/base-component';
 import { createProperty } from '../../../utils/utils';
-import { toyData } from '../../../constants/interfaces';
+import { toyData } from '../../../interfaces/interfaces';
 import { getChosenToysFromStorage, setChosenToysInStorage } from '../../../utils/localStorage';
 import { CHOSEN_TOYS_MAX_AMOUNT } from '../../../constants/constants';
 import './card.scss';
 import Popup from '../../popup/popup';
 import Header from '../../header/header';
-import { TitlePopup } from '../../popup/popup';
+import { TitlePopup } from '../../../constants/constants';
 
 class Card extends BaseComponent {
   descriptions: BaseComponent;
