@@ -16,6 +16,9 @@ class Song extends BaseComponent {
       this.togglePlay();
     });
     this.checkSongActive();
+    window.addEventListener('hashchange', (): void => {
+      this.audio.pause();
+    });
   }
 
   togglePlay(): void {
