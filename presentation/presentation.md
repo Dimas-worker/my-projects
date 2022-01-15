@@ -1,2 +1,2 @@
-- youtube link: 
+- youtube link: https://youtu.be/zivqkrssn50
 - link presentation sliders: https://dimas-worker-presentation.netlify.app/
