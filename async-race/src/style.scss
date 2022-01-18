@@ -3,3 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  padding: 1rem;
+  background-color: rgb(65, 58, 58);
+}
+
+.input {
+  outline: none;
+  border: none;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.main {
+  position: relative;
+}
+
+.visible {
+  opacity: 0;
+  z-index: -1;
+}

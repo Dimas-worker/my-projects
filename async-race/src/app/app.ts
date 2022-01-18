@@ -1,15 +1,29 @@
+import Header from './components/header/header';
+import Garage from './components/garage/garage';
+import Winner from './components/winners/winner';
+import BaseComponent from './shared/base-component';
+
 class App {
   private container: HTMLElement = document.body;
 
-  test: HTMLDivElement;
+  private header: Header;
+
+  private main: BaseComponent;
+
+  private garage: Garage;
+
+  private winner: Winner;
 
   constructor() {
-    this.test = document.createElement('div');
-    this.test.textContent = 'hello';
+    this.garage = new Garage();
+    this.winner = new Winner();
+    this.header = new Header(this.garage.element, this.winner.element);
+    this.main = new BaseComponent('div', ['main']);
+    this.main.element.append(this.garage.element, this.winner.element);
   }
 
-  run() {
-    this.container.append(this.test);
+  run(): void {
+    this.container.append(this.header.element, this.main.element);
   }
 }
 

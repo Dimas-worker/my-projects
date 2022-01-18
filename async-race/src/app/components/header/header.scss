@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  gap: 0 1rem;
+}
+.btn {
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: wheat;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+  font: 1rem cursive;
+
+  &:hover {
+    box-shadow: 0px 0px 8px 6px rgba(187, 178, 50, 0.4);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
