@@ -1,2 +1,3 @@
-- youtube link: https://youtu.be/zivqkrssn50
-- link presentation sliders: https://dimas-worker-presentation.netlify.app/
+- link to YouTube video: https://youtu.be/zivqkrssn50
+- link to Reveal presentation's deploy: https://dimas-worker-presentation.netlify.app/
+- link to the transcript: https://docs.google.com/document/d/1aYgOjFtpwjlDAmU32IFud92Y8kBT2_YJ_pwPpWEDiFQ/edi
