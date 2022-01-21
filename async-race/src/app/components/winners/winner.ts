@@ -3,7 +3,7 @@ import './winner.scss';
 
 class Winner extends BaseComponent {
   constructor() {
-    super('div', ['winner', 'visible'], 'Table');
+    super('div', ['winner', 'invisible'], 'Table');
   }
 }
 

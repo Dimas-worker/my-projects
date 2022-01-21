@@ -1,5 +1,5 @@
 class Button {
-  button: HTMLElement;
+  button: HTMLButtonElement;
 
   constructor(selector: string) {
     this.button = document.createElement('button');

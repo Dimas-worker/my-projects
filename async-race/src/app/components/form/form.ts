@@ -1,6 +1,6 @@
 import './form.scss';
 import BaseComponent from '../../shared/base-component';
-import createInputElement from '../../utils/utils';
+import { createInputElement } from '../../utils/utils';
 
 class Form extends BaseComponent {
   inputText: HTMLInputElement;

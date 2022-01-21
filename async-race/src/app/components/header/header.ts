@@ -26,13 +26,13 @@ class Header extends BaseComponent {
       element.addEventListener('click', (e: Event): void => {
         const target = e.target as HTMLElement;
         if (target.textContent === 'To garage') {
-          if (this.winner.classList.contains('visible')) return;
+          if (this.winner.classList.contains('invisible')) return;
           this.removeCLassVisible();
-          this.winner.classList.add('visible');
+          this.winner.classList.add('invisible');
         } else {
-          if (this.garage.classList.contains('visible')) return;
+          if (this.garage.classList.contains('invisible')) return;
           this.removeCLassVisible();
-          this.garage.classList.add('visible');
+          this.garage.classList.add('invisible');
         }
       });
     });
@@ -40,7 +40,7 @@ class Header extends BaseComponent {
 
   removeCLassVisible(): void {
     [this.garage, this.winner].forEach((page: HTMLElement): void => {
-      page.classList.remove('visible');
+      page.classList.remove('invisible');
     });
   }
 }
