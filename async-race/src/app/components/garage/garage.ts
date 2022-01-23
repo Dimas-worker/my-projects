@@ -52,6 +52,8 @@ class Garage extends BaseComponent {
 
   manegeGarage: BaseComponent = new BaseComponent('div', ['garage-manege']);
 
+  popup: Popup | null = null;
+
   constructor() {
     super('div', ['garage']);
     this.controls.element.append(this.raceAll.button, this.resetAll.button, this.generatedCars.button);
@@ -104,20 +106,28 @@ class Garage extends BaseComponent {
   startRace(): void {
     this.raceAll.button.addEventListener('click', async (): Promise<void> => {
       this.raceAll.button.disabled = true;
+      let bestTime: string;
       const carsTime: Promise<string>[] = this.currentCars.map((car: Car): Promise<string> => car.moveCar());
       const resultTimeCars: string[] = await Promise.all(carsTime);
 
-      // bestTime = resultTimeCars.reduce((acc, curTime) => (+acc < +curTime ? acc : curTime));
+      bestTime = resultTimeCars.reduce((acc, curTime) => (+acc < +curTime ? acc : curTime));
 
-      Promise.race(this.currentCars.map((car: Car): Promise<void> => car.getStatusEngine(car.element.id)))
-        .then((res) => console.log(res))
-        .catch((err) => err);
+      const res = await Promise.allSettled(this.currentCars.map((car: Car): Promise<void> => car.getStatusEngine(car.element.id)))
+        // .then((res) => console.log(res))
+        // .catch((err) => err);
+        console.log('res' ,res);
+
+        this.popup = new Popup('' , bestTime);
+        this.element.append(this.popup.element);
     });
   }
 
   stopRace(): void {
     this.resetAll.button.addEventListener('click', async (): Promise<void> => {
       this.raceAll.button.disabled = false;
+      if (this.popup) {
+        this.popup.remove();
+      }
       await Promise.all(this.currentCars.map((car: Car): Promise<void> => car.stopCar()));
     });
   }

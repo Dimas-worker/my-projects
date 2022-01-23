@@ -117,14 +117,14 @@ class Car extends BaseComponent {
   }
 
   async getStatusEngine(id: string): Promise<void> {
-    fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, { method: 'PATCH' })
+    return fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, { method: 'PATCH' })
       .then((res) => {
         if (res.status === 500) {
           this.isAnimated = false;
         }
         return res.json();
       })
-      .then((data) => console.log(data.success))
+      .then((data) => data)
       .catch((err) => err);
   }
 
