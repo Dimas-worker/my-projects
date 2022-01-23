@@ -13,4 +13,14 @@ interface StatusEngineData {
   success: boolean;
 }
 
-export { CarData, StartData, StatusEngineData };
+interface CarStats {
+  name: string;
+  color: string;
+}
+
+interface GarageData {
+  allCars: CarData[];
+  carsCount: string;
+}
+
+export { CarData, StartData, StatusEngineData, CarStats, GarageData };

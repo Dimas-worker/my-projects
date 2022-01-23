@@ -8,6 +8,10 @@ class BaseComponent {
       this.element.textContent = text;
     }
   }
+
+  updateTextContent(text: string): void {
+    this.element.textContent = text;
+  }
 }
 
 export default BaseComponent;

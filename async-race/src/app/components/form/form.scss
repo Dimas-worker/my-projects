@@ -2,9 +2,10 @@
   display: flex;
   gap: 0 1rem;
   padding: 1rem 0;
+  transition: 0.5s;
 
   .input-text {
-    color: white;
+    color: black;
     background-color: rgb(209, 196, 196);
     font: 1rem cursive;
     border: none;
@@ -50,6 +51,26 @@
     }
     &:active {
       transform: scale(0.95);
+    }
+  }
+}
+
+.form-inactive {
+  opacity: 0.6;
+
+  .input-color {
+    cursor: default;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  .input-submit {
+    cursor: default;
+
+    &:hover {
+      box-shadow: none;
     }
   }
 }

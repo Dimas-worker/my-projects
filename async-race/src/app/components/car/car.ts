@@ -3,8 +3,9 @@ import BaseComponent from '../../shared/base-component';
 import Button from '../../shared/button';
 import { CarData, StartData } from '../../interfaces/interfaces';
 import { setColorCar } from '../../utils/utils';
-import CAR_START_POSITION from '../../constants/constants';
-import { getEngineParameters } from '../../utils/server-requests';
+import { CAR_START_POSITION } from '../../constants/constants';
+import { getEngineParameters, updateCarData } from '../../utils/server-requests';
+import Form from '../form/form';
 
 const enum ChangeButtons {
   select = 'select',
@@ -19,46 +20,42 @@ const enum StatusEngine {
 }
 
 class Car extends BaseComponent {
-  changeCar: BaseComponent;
+  updatedForm: Form;
 
-  trackCar: BaseComponent;
+  modelCar: BaseComponent;
 
-  imageCar: BaseComponent;
+  changeCar: BaseComponent = new BaseComponent('div', ['shift-car']);
 
-  selectCar: Button;
+  trackCar: BaseComponent = new BaseComponent('div', ['track-car']);
 
-  removeCar: Button;
+  imageCar: BaseComponent = new BaseComponent('div', ['img-car']);
 
-  startEngine: Button;
+  selectCar: Button = new Button(ChangeButtons.select);
 
-  stopEngine: Button;
+  removeCar: Button = new Button(ChangeButtons.remove);
+
+  startEngine: Button = new Button(ChangeButtons.start);
+
+  stopEngine: Button = new Button(ChangeButtons.stop);
 
   isAnimated = true;
 
   isEngineStop = false;
 
-  constructor(car: CarData) {
+  constructor(car: CarData, updatedForm: Form) {
     super('div', ['car']);
+    this.updatedForm = updatedForm;
     this.element.setAttribute('id', car.id.toString());
-    this.changeCar = new BaseComponent('div', ['shift-car']);
-    this.selectCar = new Button(ChangeButtons.select);
-    this.removeCar = new Button(ChangeButtons.remove);
-    this.addChangeBlock(car.name);
+    this.removeCar.button.setAttribute('id', car.id.toString());
+    this.modelCar = new BaseComponent('p', ['name-car'], car.name);
+    this.changeCar.element.append(this.selectCar.button, this.removeCar.button, this.modelCar.element);
 
-    this.trackCar = new BaseComponent('div', ['track-car']);
-    this.imageCar = new BaseComponent('div', ['img-car']);
-
-    this.startEngine = new Button(ChangeButtons.start);
-    this.stopEngine = new Button(ChangeButtons.stop);
     this.addTrackBlock(car);
-
     this.statusCat();
-    this.element.append(this.changeCar.element, this.trackCar.element);
-  }
+    this.updateCar();
+    this.deleteCar();
 
-  addChangeBlock(model: string): void {
-    const modelCar: BaseComponent = new BaseComponent('p', ['name-car'], model);
-    this.changeCar.element.append(this.selectCar.button, this.removeCar.button, modelCar.element);
+    this.element.append(this.changeCar.element, this.trackCar.element);
   }
 
   addTrackBlock(car: CarData): void {
@@ -93,7 +90,7 @@ class Car extends BaseComponent {
   statusCat() {
     this.startEngine.button.addEventListener('click', async (): Promise<void> => {
       await this.moveCar();
-      this.getStatusEngine(+this.element.id);
+      this.getStatusEngine(this.element.id);
     });
     this.stopEngine.button.addEventListener('click', async (): Promise<void> => {
       await this.stopCar();
@@ -119,14 +116,43 @@ class Car extends BaseComponent {
     window.requestAnimationFrame(step);
   }
 
-  async getStatusEngine(id: number): Promise<void> {
-    return fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, { method: 'PATCH' })
+  async getStatusEngine(id: string): Promise<void> {
+    fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, { method: 'PATCH' })
       .then((res) => {
-        if (res.status === 500) this.isAnimated = false;
+        if (res.status === 500) {
+          this.isAnimated = false;
+        }
         return res.json();
       })
-      .then((data) => data.success)
+      .then((data) => console.log(data.success))
       .catch((err) => err);
+  }
+
+  updateCar(): void {
+    this.selectCar.button.addEventListener('click', (): void => {
+      this.updatedForm.switchActive();
+      this.updatedForm.submit.addEventListener(
+        'click',
+        async (e: Event): Promise<void> => {
+          e.preventDefault();
+          this.modelCar.updateTextContent(this.updatedForm.inputText.value);
+          this.imageCar.element.innerHTML = setColorCar(this.updatedForm.inputColor.value);
+          await updateCarData(this.element.id, {
+            name: this.updatedForm.inputText.value,
+            color: this.updatedForm.inputColor.value,
+          });
+          this.updatedForm.cleanInputs();
+          this.updatedForm.switchActive();
+        },
+        { once: true }
+      );
+    });
+  }
+
+  deleteCar(): void {
+    this.removeCar.button.addEventListener('click', (): void => {
+      this.element.remove();
+    });
   }
 }
 

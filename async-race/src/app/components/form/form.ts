@@ -14,16 +14,19 @@ class Form extends BaseComponent {
     this.inputText = createInputElement('text', 'input-text', '', 'Car name');
     this.inputColor = createInputElement('color', 'input-color', '');
     this.submit = createInputElement('submit', 'input-submit', typeForm);
-
-    this.setParameters();
-
     this.element.append(this.inputText, this.inputColor, this.submit);
   }
 
-  setParameters(): void {
-    this.submit.addEventListener('click', (e: Event): void => {
-      e.preventDefault();
-      console.log(this.inputText.value, this.inputColor.value);
+  cleanInputs() {
+    this.inputText.value = '';
+    this.inputColor.value = '#000000';
+  }
+
+  switchActive() {
+    this.element.classList.toggle('form-inactive');
+    Array.from(this.element.children).forEach((element: Element): void => {
+      const input = element as HTMLInputElement;
+      input.disabled = !input.disabled;
     });
   }
 }
