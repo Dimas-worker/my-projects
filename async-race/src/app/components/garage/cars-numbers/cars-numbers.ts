@@ -23,7 +23,7 @@ class CarsNumber extends BaseComponent {
     this.element.textContent = `Garage (${--this.numbers})`;
   }
 
-  get getValue() {
+  get getValue(): number {
     return this.numbers;
   }
 }

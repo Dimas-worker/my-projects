@@ -1,10 +1,18 @@
+const PAGE_DEFAULT = 1;
+
 const CAR_START_POSITION = 63;
 
-const CARS_LIMIT = 7;
+const CARS_LIMIT_GARAGE = 7;
+
+const CARS_LIMIT_WINNERS = 10;
 
 const RANDOM_CARS_AMOUNT = 100;
 
-const MODELS_CARS: string[] = [
+const BASE_URL = 'http://127.0.0.1:3000/';
+
+const TABLE_HEADER: string[] = ['#', 'Car', 'Name', 'Wins', 'Best time (s)'];
+
+const CARS_MODELS: string[] = [
   'Roadster',
   'S',
   'X',
@@ -57,7 +65,7 @@ const MODELS_CARS: string[] = [
   'FX37',
 ];
 
-const BRANDS_CARS: string[] = [
+const CARS_BRANDS: string[] = [
   'Audi',
   'Alfa Romeo',
   'Alpina',
@@ -92,7 +100,7 @@ const BRANDS_CARS: string[] = [
   'Pontiac',
   'Porsche',
   'Renault',
-  'Å koda',
+  'Skoda',
   'Smart',
   'Subaru',
   'Suzuki',
@@ -110,4 +118,25 @@ const BRANDS_CARS: string[] = [
   'Daewoo',
 ];
 
-export { CAR_START_POSITION, MODELS_CARS, BRANDS_CARS, CARS_LIMIT, RANDOM_CARS_AMOUNT };
+const enum ButtonType {
+  created = 'create',
+  updated = 'update',
+  race = 'race',
+  reset = 'reset',
+  generateCars = 'generate-cars',
+  prev = 'prev',
+  next = 'next',
+}
+
+export {
+  PAGE_DEFAULT,
+  CAR_START_POSITION,
+  CARS_MODELS,
+  CARS_BRANDS,
+  CARS_LIMIT_GARAGE,
+  RANDOM_CARS_AMOUNT,
+  BASE_URL,
+  TABLE_HEADER,
+  ButtonType,
+  CARS_LIMIT_WINNERS,
+};

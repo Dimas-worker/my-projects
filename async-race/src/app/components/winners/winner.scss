@@ -1,6 +1,82 @@
 .winner {
-  color: white;
   font: 1rem cursive;
   position: absolute;
   transition: 0.5s;
+
+  .table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    
+    th {
+      padding: 5px;
+      border: 1px dashed #01130d;
+      text-align: center;
+    }
+
+    .table-head {
+      font: 1rem cursive;
+
+      th {
+        background-color: rgb(0, 206, 209);
+      }
+    }
+
+    .table-body {
+      font: 1rem cursive;
+
+      tr {
+        td {
+          padding: 5px;
+          border: 1px dashed #01130d;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .winner-manege {
+    display: flex;
+    gap: 0 1rem;
+    padding: 0.5rem 0;
+
+    .prev,
+    .next {
+      color: black;
+      font: 1rem cursive;
+      border: none;
+      border-radius: 5px;
+      padding: 0 15px;
+      transition: 0.5s;
+      cursor: pointer;
+      height: 25px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: wheat;
+      
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &:hover {
+        box-shadow: 0px 0px 8px 6px rgba(187, 178, 50, 0.4);
+      }
+    }
+  }
+
+  .active-column {
+    cursor: pointer;
+  }
+
+  .arrow-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('../../../assets/arrow.svg');
+  }
+  
+  .arrow-rotated {
+    transform: rotate(180deg);
+  }
 }

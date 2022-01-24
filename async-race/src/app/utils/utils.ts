@@ -1,4 +1,4 @@
-import { MODELS_CARS, BRANDS_CARS } from '../constants/constants';
+import { CARS_MODELS, CARS_BRANDS } from '../constants/constants';
 
 const enum ColorParameters {
   HexLength = 6,
@@ -22,7 +22,7 @@ function createInputElement(
   return input;
 }
 
-function getRandColor(): string {
+function getRandomColor(): string {
   let color: string = Math.floor(Math.random() * ColorParameters.hexDecimalMax).toString(ColorParameters.radix);
   while (color.length < ColorParameters.HexLength) {
     color = `0${color}`;
@@ -31,9 +31,11 @@ function getRandColor(): string {
 }
 
 function getRandomCarName(): string {
-  const model: string[] = MODELS_CARS;
-  const brands: string[] = BRANDS_CARS;
-  return `${brands[Math.ceil(Math.random() * brands.length)]} ${model[Math.ceil(Math.random() * model.length)]}`;
+  const model: string[] = CARS_MODELS;
+  const brands: string[] = CARS_BRANDS;
+  return `${brands[Math.ceil(Math.random() * (brands.length - 1))]} ${
+    model[Math.ceil(Math.random() * (model.length - 1))]
+  }`;
 }
 
 function setColorCar(color = '#000000'): string {
@@ -139,4 +141,4 @@ function setColorCar(color = '#000000'): string {
   return modelCar;
 }
 
-export { createInputElement, setColorCar, getRandColor, getRandomCarName };
+export { createInputElement, setColorCar, getRandomColor, getRandomCarName };

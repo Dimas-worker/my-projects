@@ -15,8 +15,8 @@ class App {
   private winner: Winner;
 
   constructor() {
-    this.garage = new Garage();
     this.winner = new Winner();
+    this.garage = new Garage(this.winner);
     this.header = new Header(this.garage.element, this.winner.element);
     this.main = new BaseComponent('div', ['main']);
     this.main.element.append(this.garage.element, this.winner.element);

@@ -4,12 +4,12 @@ interface CarData {
   id: number;
 }
 
-interface StartData {
+interface CarParameters {
   velocity: number;
   distance: number;
 }
 
-interface StatusEngineData {
+interface IsEngineData {
   success: boolean;
 }
 
@@ -23,4 +23,20 @@ interface GarageData {
   carsCount: string;
 }
 
-export { CarData, StartData, StatusEngineData, CarStats, GarageData };
+interface CarWinnerData {
+  wins: number;
+  time: number;
+}
+
+interface WinnerData {
+  id: number;
+  wins: number;
+  time: number;
+}
+
+interface WinnersDate {
+  allCars: WinnerData[];
+  carsCount: string;
+}
+
+export { CarData, CarParameters, IsEngineData, CarStats, GarageData, WinnerData, CarWinnerData, WinnersDate };

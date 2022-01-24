@@ -1,10 +1,10 @@
 import './car.scss';
 import BaseComponent from '../../shared/base-component';
 import Button from '../../shared/button';
-import { CarData, StartData } from '../../interfaces/interfaces';
+import { CarData, CarParameters } from '../../interfaces/interfaces';
 import { setColorCar } from '../../utils/utils';
 import { CAR_START_POSITION } from '../../constants/constants';
-import { getEngineParameters, updateCarData } from '../../utils/server-requests';
+import { getEngineParameters, updateCarData, getStatusDrive } from '../../utils/server-requests';
 import Form from '../form/form';
 
 const enum ChangeButtons {
@@ -22,13 +22,13 @@ const enum StatusEngine {
 class Car extends BaseComponent {
   updatedForm: Form;
 
-  modelCar: BaseComponent;
+  carModel: BaseComponent;
 
   changeCar: BaseComponent = new BaseComponent('div', ['shift-car']);
 
-  trackCar: BaseComponent = new BaseComponent('div', ['track-car']);
+  carTrack: BaseComponent = new BaseComponent('div', ['track-car']);
 
-  imageCar: BaseComponent = new BaseComponent('div', ['img-car']);
+  carImage: BaseComponent = new BaseComponent('div', ['img-car']);
 
   selectCar: Button = new Button(ChangeButtons.select);
 
@@ -47,35 +47,35 @@ class Car extends BaseComponent {
     this.updatedForm = updatedForm;
     this.element.setAttribute('id', car.id.toString());
     this.removeCar.button.setAttribute('id', car.id.toString());
-    this.modelCar = new BaseComponent('p', ['name-car'], car.name);
-    this.changeCar.element.append(this.selectCar.button, this.removeCar.button, this.modelCar.element);
+    this.carModel = new BaseComponent('p', ['name-car'], car.name);
+    this.changeCar.element.append(this.selectCar.button, this.removeCar.button, this.carModel.element);
 
-    this.addTrackBlock(car);
-    this.statusCat();
+    this.renderCarTrack(car);
+    this.engineStatus();
     this.updateCar();
     this.deleteCar();
 
-    this.element.append(this.changeCar.element, this.trackCar.element);
+    this.element.append(this.changeCar.element, this.carTrack.element);
   }
 
-  addTrackBlock(car: CarData): void {
+  renderCarTrack(car: CarData): void {
     const controlsCar: BaseComponent = new BaseComponent('div', ['controls-car']);
     controlsCar.element.append(this.startEngine.button, this.stopEngine.button);
-    this.imageCar.element.innerHTML = setColorCar(car.color);
+    this.carImage.element.innerHTML = setColorCar(car.color);
     const flag: HTMLImageElement = document.createElement('img');
     flag.classList.add('img-flag');
     flag.src = './assets/flag.svg';
     flag.alt = 'flag';
-    this.trackCar.element.append(controlsCar.element, this.imageCar.element, flag);
+    this.carTrack.element.append(controlsCar.element, this.carImage.element, flag);
   }
 
   async moveCar(): Promise<string> {
     this.startEngine.button.disabled = true;
-    const engineParameters: StartData = await getEngineParameters(+this.element.id, StatusEngine.start);
+    const engineParameters: CarParameters = await getEngineParameters(+this.element.id, StatusEngine.start);
     this.isEngineStop = false;
     this.isAnimated = true;
-    const timeRace = engineParameters.distance / engineParameters.velocity;
-    this.animationCar(timeRace);
+    const timeRace: number = engineParameters.distance / engineParameters.velocity;
+    this.animateCarMoving(timeRace);
     return (timeRace / 1000).toFixed(2);
   }
 
@@ -84,10 +84,10 @@ class Car extends BaseComponent {
     await getEngineParameters(+this.element.id, StatusEngine.stop);
     this.isAnimated = false;
     this.isEngineStop = true;
-    this.imageCar.element.style.transform = `translateX(0px)`;
+    this.carImage.element.style.transform = `translateX(0px)`;
   }
 
-  statusCat() {
+  engineStatus(): void {
     this.startEngine.button.addEventListener('click', async (): Promise<void> => {
       await this.moveCar();
       this.getStatusEngine(this.element.id);
@@ -97,8 +97,8 @@ class Car extends BaseComponent {
     });
   }
 
-  animationCar(timeRace: number): void {
-    const distance: number = this.trackCar.element.offsetWidth - this.imageCar.element.offsetWidth - CAR_START_POSITION;
+  animateCarMoving(timeRace: number): void {
+    const distance: number = this.carTrack.element.offsetWidth - this.carImage.element.offsetWidth - CAR_START_POSITION;
     const prevTimeElapsed: number = performance.now();
     let traveledWay = 0;
     let passedTime = 0;
@@ -108,7 +108,7 @@ class Car extends BaseComponent {
       if (this.isEngineStop) {
         traveledWay = 0;
       }
-      this.imageCar.element.style.transform = `translateX(${traveledWay}px)`;
+      this.carImage.element.style.transform = `translateX(${traveledWay}px)`;
       if (passedTime < timeRace && this.isAnimated) {
         window.requestAnimationFrame(step);
       }
@@ -116,16 +116,12 @@ class Car extends BaseComponent {
     window.requestAnimationFrame(step);
   }
 
-  async getStatusEngine(id: string): Promise<void> {
-    return fetch(`http://127.0.0.1:3000/engine?id=${id}&status=drive`, { method: 'PATCH' })
-      .then((res) => {
-        if (res.status === 500) {
-          this.isAnimated = false;
-        }
-        return res.json();
-      })
-      .then((data) => data)
-      .catch((err) => err);
+  async getStatusEngine(id: string): Promise<number> {
+    const promise: Response = await getStatusDrive(id);
+    if (promise.status === 500) {
+      this.isAnimated = false;
+    }
+    return promise.status;
   }
 
   updateCar(): void {
@@ -135,8 +131,8 @@ class Car extends BaseComponent {
         'click',
         async (e: Event): Promise<void> => {
           e.preventDefault();
-          this.modelCar.updateTextContent(this.updatedForm.inputText.value);
-          this.imageCar.element.innerHTML = setColorCar(this.updatedForm.inputColor.value);
+          this.carModel.updateTextContent(this.updatedForm.inputText.value);
+          this.carImage.element.innerHTML = setColorCar(this.updatedForm.inputColor.value);
           await updateCarData(this.element.id, {
             name: this.updatedForm.inputText.value,
             color: this.updatedForm.inputColor.value,
