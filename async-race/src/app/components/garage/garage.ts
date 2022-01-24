@@ -72,6 +72,7 @@ class Garage extends BaseComponent {
     this.createRandomCars();
     this.switchGaragePage();
     this.renderGaragePage();
+    this.updateCarsWinner();
   }
 
   renderGaragePage() {
@@ -223,6 +224,12 @@ class Garage extends BaseComponent {
     const carsWinner: WinnerData[] = await getAllWinners();
     const winners: WinnerData[] = carsWinner.filter((winner: WinnerData) => winner.id === +id);
     return winners;
+  }
+
+  updateCarsWinner() {
+    this.updatedForm.submit.addEventListener('click', (): void => {
+      this.winner.createTableBody()
+    })
   }
 }
 
