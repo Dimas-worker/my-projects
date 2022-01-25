@@ -51,6 +51,7 @@ class Car extends BaseComponent {
     this.changeCar.element.append(this.selectCar.button, this.removeCar.button, this.carModel.element);
     this.stopEngine.button.disabled = true;
     this.startEngine.button.disabled = false;
+    this.stopEngine.button.classList.add('inactive-btn');
     this.renderCarTrack(car);
     this.engineStatus();
     this.updateCar();
@@ -71,8 +72,7 @@ class Car extends BaseComponent {
   }
 
   async moveCar(): Promise<string> {
-    this.startEngine.button.disabled = true;
-    this.stopEngine.button.disabled = false;
+    this.switchActiveButton();
     const engineParameters: CarParameters = await getEngineParameters(+this.element.id, StatusEngine.start);
     this.isEngineStop = false;
     this.isAnimated = true;
@@ -82,8 +82,7 @@ class Car extends BaseComponent {
   }
 
   async stopCar(): Promise<void> {
-    this.startEngine.button.disabled = false;
-    this.stopEngine.button.disabled = true;
+    this.switchActiveButton();
     await getEngineParameters(+this.element.id, StatusEngine.stop);
     this.isAnimated = false;
     this.isEngineStop = true;
@@ -152,6 +151,14 @@ class Car extends BaseComponent {
     this.removeCar.button.addEventListener('click', (): void => {
       this.element.remove();
     });
+  }
+
+  switchActiveButton() {
+    this.startEngine.button.disabled = !this.startEngine.button.disabled;
+    this.startEngine.button.classList.toggle('inactive-btn');
+
+    this.stopEngine.button.disabled = !this.stopEngine.button.disabled;
+    this.stopEngine.button.classList.toggle('inactive-btn');
   }
 }
 

@@ -53,6 +53,7 @@ class Garage extends BaseComponent {
     super('div', ['garage']);
     this.winner = winner;
     this.resetAll.button.disabled = true;
+    this.resetAll.button.classList.add('inactive-btn');
     this.controls.element.append(this.raceAll.button, this.resetAll.button, this.generatedCars.button);
     this.titleCarsNumbers = new CarsNumber(this.currentCars.length);
     this.updatedForm.switchActive();
@@ -216,8 +217,11 @@ class Garage extends BaseComponent {
   }
 
   disableManegeGarage() {
+    this.resetAll.button.classList.toggle('inactive-btn');
+    this.raceAll.button.classList.toggle('inactive-btn');
     this.prevGaragePage.button.disabled = !this.prevGaragePage.button.disabled;
     this.nextGaragePage.button.disabled = !this.nextGaragePage.button.disabled;
+    this.manegeGarage.element.classList.toggle('inactive-btn');
   }
 }
 
