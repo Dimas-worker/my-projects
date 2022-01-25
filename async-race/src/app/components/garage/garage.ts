@@ -6,18 +6,9 @@ import PageNumber from './page-number/page-number';
 import Car from '../car/car';
 import CarsNumber from './cars-numbers/cars-numbers';
 import Popup from '../popup/popup';
-import {
-  createCarData,
-  deleteCarData,
-  getCurrentGarageData,
-  getCarWinnerData,
-  getAllWinners,
-  updateCarWinnerData,
-  createCarWinner,
-  deleteCarWinnerData,
-} from '../../utils/server-requests';
+import { createCarData, deleteCarData, getCurrentGarageData, deleteCarWinnerData } from '../../utils/server-requests';
 import { CarData, GarageData, CarStats, WinnerData } from '../../interfaces/interfaces';
-import { getRandomColor, getRandomCarName } from '../../utils/utils';
+import { getRandomColor, getRandomCarName, getAllCars, setCarWinner } from '../../utils/utils';
 import { PAGE_DEFAULT, CARS_LIMIT_GARAGE, RANDOM_CARS_AMOUNT, ButtonType } from '../../constants/constants';
 import Winner from '../winners/winner';
 
@@ -55,6 +46,8 @@ class Garage extends BaseComponent {
   popup: Popup | null = null;
 
   winner: Winner;
+
+  isStarted = true;
 
   constructor(winner: Winner) {
     super('div', ['garage']);
@@ -109,18 +102,18 @@ class Garage extends BaseComponent {
 
   startRace(): void {
     this.raceAll.button.addEventListener('click', async (): Promise<void> => {
+      this.isStarted = true;
       this.popup = null;
       this.raceAll.button.disabled = true;
       this.currentCars.forEach(async (car: Car): Promise<void> => {
         const time: string = await car.moveCar();
         const status: number = await car.getStatusEngine(car.element.id);
-        if (status === 200) {
+        if (status === 200 && this.isStarted) {
           if (!this.popup) {
             const carModel = car.carModel.element.textContent as string;
             this.popup = new Popup(carModel, time);
             this.element.append(this.popup.element);
-
-            await this.setCarWinner(car.element.id, time);
+            await setCarWinner(car.element.id, time);
             this.winner.createTableBody();
           }
         }
@@ -131,6 +124,7 @@ class Garage extends BaseComponent {
   stopRace(): void {
     this.resetAll.button.addEventListener('click', async (): Promise<void> => {
       this.raceAll.button.disabled = false;
+      this.isStarted = false;
       if (this.popup) {
         this.popup.remove();
       }
@@ -200,36 +194,18 @@ class Garage extends BaseComponent {
     });
   }
 
-  async setCarWinner(id: string, time: string): Promise<void> {
-    const winners: WinnerData[] = await this.getAllCars(id);
-    if (winners.length) {
-      const carWinner: WinnerData = await getCarWinnerData(id);
-      ++carWinner.wins;
-      carWinner.time = +time > carWinner.time ? carWinner.time : +time;
-      await updateCarWinnerData(id, { wins: carWinner.wins, time: carWinner.time });
-    } else {
-      await createCarWinner({ id: +id, wins: 1, time: +time });
-    }
-  }
-
   async deleteCarWinner(id: string): Promise<void> {
-    const winners: WinnerData[] = await this.getAllCars(id);
+    const winners: WinnerData[] = await getAllCars(id);
     if (winners.length) {
       await deleteCarWinnerData(id);
       await this.winner.createTableBody();
     }
   }
 
-  async getAllCars(id: string): Promise<WinnerData[]> {
-    const carsWinner: WinnerData[] = await getAllWinners();
-    const winners: WinnerData[] = carsWinner.filter((winner: WinnerData) => winner.id === +id);
-    return winners;
-  }
-
   updateCarsWinner() {
     this.updatedForm.submit.addEventListener('click', (): void => {
-      this.winner.createTableBody()
-    })
+      this.winner.createTableBody();
+    });
   }
 }
 

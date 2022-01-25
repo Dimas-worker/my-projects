@@ -1,8 +1,8 @@
 import BaseComponent from '../../shared/base-component';
 import './winner.scss';
-import { WinnersDate, WinnerData, CarData } from '../../interfaces/interfaces';
-import { getWinnersData, getCarData, sortWinner } from '../../utils/server-requests';
-import { setColorCar } from '../../utils/utils';
+import { WinnersDate, WinnerData } from '../../interfaces/interfaces';
+import { getWinnersData, sortWinner } from '../../utils/server-requests';
+import { setColorCar, convertCarWinners } from '../../utils/utils';
 import { TABLE_HEADER, ButtonType, CARS_LIMIT_WINNERS, PAGE_DEFAULT } from '../../constants/constants';
 import CarsNumber from '../garage/cars-numbers/cars-numbers';
 import PageNumber from '../garage/page-number/page-number';
@@ -10,7 +10,7 @@ import Button from '../../shared/button';
 
 const enum SortType {
   wins = 'wins',
-  time = 'time,',
+  time = 'time',
 }
 
 const enum OrderType {
@@ -71,18 +71,19 @@ class Winner extends BaseComponent {
   }
 
   sortTable(tag: HTMLElement, sort: string, isPrimary: boolean): void {
+    let isSwitch: boolean = isPrimary;
     tag.classList.add('active-column');
     const arrow: HTMLElement = document.createElement('span');
     tag.append(arrow);
     tag.addEventListener('click', async (): Promise<void> => {
-      const order: OrderType = isPrimary ? OrderType.firstMax : OrderType.firstMin;
-      isPrimary = !isPrimary;
+      const order: OrderType = isSwitch ? OrderType.firstMax : OrderType.firstMin;
+      isSwitch = !isSwitch;
       if (!arrow.classList.contains('arrow-icon')) {
         arrow.classList.add('arrow-icon');
       }
       arrow.classList.toggle('arrow-rotated');
       const winnersData: WinnerData[] = await sortWinner(sort, order, this.currentPageWinner);
-      const winners = await this.convertCarWinners(winnersData);
+      const winners = await convertCarWinners(winnersData);
       this.updateTableBody(winners);
     });
   }
@@ -107,20 +108,10 @@ class Winner extends BaseComponent {
     this.table.element.append(this.tbody.element);
   }
 
-  async convertCarWinners(carsWinner: WinnerData[]): Promise<string[][]> {
-    const carsWinnerData: Promise<string[]>[] = carsWinner.map(async (winner: WinnerData): Promise<string[]> => {
-      const allCarsData: string[] = [];
-      const car: CarData = await getCarData(winner.id);
-      allCarsData.push(car.color, car.name, winner.wins.toString(), winner.time.toString());
-      return allCarsData;
-    });
-    return Promise.all(carsWinnerData);
-  }
-
   async createTableBody(): Promise<void> {
     const carsWinner: WinnersDate = await getWinnersData(this.currentPageWinner);
     this.titleCarsNumbers.updateValue(+carsWinner.carsCount);
-    const winners: string[][] = await this.convertCarWinners(carsWinner.allCars);
+    const winners: string[][] = await convertCarWinners(carsWinner.allCars);
     this.updateTableBody(winners);
   }
 

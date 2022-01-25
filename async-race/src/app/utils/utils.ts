@@ -1,4 +1,6 @@
 import { CARS_MODELS, CARS_BRANDS } from '../constants/constants';
+import { WinnerData, CarData } from '../interfaces/interfaces';
+import { getCarData, getAllWinners, getCarWinnerData, updateCarWinnerData, createCarWinner } from './server-requests';
 
 const enum ColorParameters {
   HexLength = 6,
@@ -36,6 +38,34 @@ function getRandomCarName(): string {
   return `${brands[Math.ceil(Math.random() * (brands.length - 1))]} ${
     model[Math.ceil(Math.random() * (model.length - 1))]
   }`;
+}
+
+async function convertCarWinners(carsWinner: WinnerData[]): Promise<string[][]> {
+  const carsWinnerData: Promise<string[]>[] = carsWinner.map(async (winner: WinnerData): Promise<string[]> => {
+    const allCarsData: string[] = [];
+    const car: CarData = await getCarData(winner.id);
+    allCarsData.push(car.color, car.name, winner.wins.toString(), winner.time.toString());
+    return allCarsData;
+  });
+  return Promise.all(carsWinnerData);
+}
+
+async function getAllCars(id: string): Promise<WinnerData[]> {
+  const carsWinner: WinnerData[] = await getAllWinners();
+  const winners: WinnerData[] = carsWinner.filter((winner: WinnerData) => winner.id === +id);
+  return winners;
+}
+
+async function setCarWinner(id: string, time: string): Promise<void> {
+  const winners: WinnerData[] = await getAllCars(id);
+  if (winners.length) {
+    const carWinner: WinnerData = await getCarWinnerData(id);
+    ++carWinner.wins;
+    carWinner.time = +time > carWinner.time ? carWinner.time : +time;
+    await updateCarWinnerData(id, { wins: carWinner.wins, time: carWinner.time });
+  } else {
+    await createCarWinner({ id: +id, wins: 1, time: +time });
+  }
 }
 
 function setColorCar(color = '#000000'): string {
@@ -141,4 +171,12 @@ function setColorCar(color = '#000000'): string {
   return modelCar;
 }
 
-export { createInputElement, setColorCar, getRandomColor, getRandomCarName };
+export {
+  createInputElement,
+  setColorCar,
+  getRandomColor,
+  getRandomCarName,
+  convertCarWinners,
+  getAllCars,
+  setCarWinner,
+};
