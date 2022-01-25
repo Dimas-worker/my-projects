@@ -52,10 +52,13 @@ class Garage extends BaseComponent {
   constructor(winner: Winner) {
     super('div', ['garage']);
     this.winner = winner;
+    this.resetAll.button.disabled = true;
     this.controls.element.append(this.raceAll.button, this.resetAll.button, this.generatedCars.button);
     this.titleCarsNumbers = new CarsNumber(this.currentCars.length);
     this.updatedForm.switchActive();
     this.pageNumber = new PageNumber(this.currentGaragePage);
+    this.prevGaragePage.button.disabled = false;
+    this.nextGaragePage.button.disabled = false;
 
     this.getGarageCars();
     this.createCar();
@@ -105,6 +108,8 @@ class Garage extends BaseComponent {
       this.isStarted = true;
       this.popup = null;
       this.raceAll.button.disabled = true;
+      this.resetAll.button.disabled = false;
+      this.disableManegeGarage();
       this.currentCars.forEach(async (car: Car): Promise<void> => {
         const time: string = await car.moveCar();
         const status: number = await car.getStatusEngine(car.element.id);
@@ -124,7 +129,9 @@ class Garage extends BaseComponent {
   stopRace(): void {
     this.resetAll.button.addEventListener('click', async (): Promise<void> => {
       this.raceAll.button.disabled = false;
+      this.resetAll.button.disabled = true;
       this.isStarted = false;
+      this.disableManegeGarage();
       if (this.popup) {
         this.popup.remove();
       }
@@ -206,6 +213,11 @@ class Garage extends BaseComponent {
     this.updatedForm.submit.addEventListener('click', (): void => {
       this.winner.createTableBody();
     });
+  }
+
+  disableManegeGarage() {
+    this.prevGaragePage.button.disabled = !this.prevGaragePage.button.disabled;
+    this.nextGaragePage.button.disabled = !this.nextGaragePage.button.disabled;
   }
 }
 

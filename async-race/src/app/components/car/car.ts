@@ -49,7 +49,8 @@ class Car extends BaseComponent {
     this.removeCar.button.setAttribute('id', car.id.toString());
     this.carModel = new BaseComponent('p', ['name-car'], car.name);
     this.changeCar.element.append(this.selectCar.button, this.removeCar.button, this.carModel.element);
-
+    this.stopEngine.button.disabled = true;
+    this.startEngine.button.disabled = false;
     this.renderCarTrack(car);
     this.engineStatus();
     this.updateCar();
@@ -71,6 +72,7 @@ class Car extends BaseComponent {
 
   async moveCar(): Promise<string> {
     this.startEngine.button.disabled = true;
+    this.stopEngine.button.disabled = false;
     const engineParameters: CarParameters = await getEngineParameters(+this.element.id, StatusEngine.start);
     this.isEngineStop = false;
     this.isAnimated = true;
@@ -81,6 +83,7 @@ class Car extends BaseComponent {
 
   async stopCar(): Promise<void> {
     this.startEngine.button.disabled = false;
+    this.stopEngine.button.disabled = true;
     await getEngineParameters(+this.element.id, StatusEngine.stop);
     this.isAnimated = false;
     this.isEngineStop = true;
