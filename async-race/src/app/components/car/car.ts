@@ -2,7 +2,7 @@ import './car.scss';
 import BaseComponent from '../../shared/base-component';
 import Button from '../../shared/button';
 import { CarData, CarParameters } from '../../interfaces/interfaces';
-import { setColorCar } from '../../utils/utils';
+import { getCarModel } from '../../utils/utils';
 import { CAR_START_POSITION } from '../../constants/constants';
 import { getEngineParameters, updateCarData, getStatusDrive } from '../../utils/server-requests';
 import Form from '../form/form';
@@ -63,7 +63,7 @@ class Car extends BaseComponent {
   renderCarTrack(car: CarData): void {
     const controlsCar: BaseComponent = new BaseComponent('div', ['controls-car']);
     controlsCar.element.append(this.startEngine.button, this.stopEngine.button);
-    this.carImage.element.innerHTML = setColorCar(car.color);
+    this.carImage.element.append(getCarModel(car.color));
     const flag: HTMLImageElement = document.createElement('img');
     flag.classList.add('img-flag');
     flag.src = './assets/flag.svg';
@@ -134,7 +134,7 @@ class Car extends BaseComponent {
         async (e: Event): Promise<void> => {
           e.preventDefault();
           this.carModel.updateTextContent(this.updatedForm.inputText.value);
-          this.carImage.element.innerHTML = setColorCar(this.updatedForm.inputColor.value);
+          this.carImage.element.append(getCarModel(this.updatedForm.inputColor.value));
           await updateCarData(this.element.id, {
             name: this.updatedForm.inputText.value,
             color: this.updatedForm.inputColor.value,

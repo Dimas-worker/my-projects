@@ -188,14 +188,19 @@ class Garage extends BaseComponent {
   switchGaragePage(): void {
     this.manegeGarage.element.addEventListener('click', async (e: Event): Promise<void> => {
       const target = e.target as HTMLButtonElement;
-      if (target.textContent === 'next') {
-        if (this.currentGaragePage * CARS_LIMIT_GARAGE < this.titleCarsNumbers.getValue) {
-          this.pageNumber.updateValue(++this.currentGaragePage);
-        }
-      } else {
-        if (this.currentGaragePage === PAGE_DEFAULT) return;
-        this.pageNumber.updateValue(--this.currentGaragePage);
-        getCurrentGarageData(this.currentGaragePage.toString());
+      switch (target.textContent) {
+        case 'next':
+          if (this.currentGaragePage * CARS_LIMIT_GARAGE < this.titleCarsNumbers.getValue) {
+            this.pageNumber.updateValue(++this.currentGaragePage);
+          }
+          break;
+        case 'prev':
+          if (this.currentGaragePage === PAGE_DEFAULT) return;
+          this.pageNumber.updateValue(--this.currentGaragePage);
+          getCurrentGarageData(this.currentGaragePage.toString());
+          break;
+        default:
+          return;
       }
       const cars: GarageData = await getCurrentGarageData(this.currentGaragePage.toString());
       this.renderGarageCars(cars.allCars);

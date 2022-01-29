@@ -2,7 +2,7 @@ import BaseComponent from '../../shared/base-component';
 import './winner.scss';
 import { WinnersDate, WinnerData } from '../../interfaces/interfaces';
 import { getWinnersData, sortWinner } from '../../utils/server-requests';
-import { setColorCar, convertCarWinners } from '../../utils/utils';
+import { getCarModel, convertCarWinners } from '../../utils/utils';
 import { TABLE_HEADER, ButtonType, CARS_LIMIT_WINNERS, PAGE_DEFAULT } from '../../constants/constants';
 import CarsNumber from '../garage/cars-numbers/cars-numbers';
 import PageNumber from '../garage/page-number/page-number';
@@ -75,7 +75,13 @@ class Winner extends BaseComponent {
     tag.classList.add('active-column');
     const arrow: HTMLElement = document.createElement('span');
     tag.append(arrow);
-    tag.addEventListener('click', async (): Promise<void> => {
+    tag.addEventListener('click', async (): Promise<void> => {      
+      Array.from(this.thead.element.children).forEach((column: Element) => {
+        if (column.children.length) {
+          const cell = column.lastChild as HTMLElement;
+          cell.classList.remove('arrow-icon');
+        }
+      })
       const order: OrderType = isSwitch ? OrderType.firstMax : OrderType.firstMin;
       isSwitch = !isSwitch;
       if (!arrow.classList.contains('arrow-icon')) {
@@ -90,14 +96,15 @@ class Winner extends BaseComponent {
 
   async updateTableBody(carsWinnerData: string[][]): Promise<void> {
     this.tbody.element.innerHTML = '';
+    const prefix: string = this.currentPageWinner === 1 ? '' : (this.currentPageWinner - 1).toString();
     carsWinnerData.forEach((carWinner, i: number): void => {
       const row: BaseComponent = new BaseComponent('tr', ['tr']);
-      const td: BaseComponent = new BaseComponent('td', ['td'], `${i + 1}`);
+      const td: BaseComponent = new BaseComponent('td', ['td'], `${prefix}${i + 1}`);
       row.element.append(td.element);
       carWinner.forEach((data: string, index: number): void => {
         const cell: BaseComponent = new BaseComponent('td', ['td']);
         if (!index) {
-          cell.element.innerHTML = setColorCar(data);
+          cell.element.append(getCarModel(data));
         } else {
           cell.element.textContent = `${data}`;
         }
