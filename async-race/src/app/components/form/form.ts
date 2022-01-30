@@ -1,6 +1,7 @@
 import './form.scss';
 import BaseComponent from '../../shared/base-component';
 import { createInputElement } from '../../utils/utils';
+import { COLOR_DEFAULT } from '../../constants/constants';
 
 class Form extends BaseComponent {
   inputText: HTMLInputElement;
@@ -17,14 +18,14 @@ class Form extends BaseComponent {
     this.element.append(this.inputText, this.inputColor, this.submit);
   }
 
-  cleanInputs() {
+  cleanInputs(): void {
     this.inputText.value = '';
-    this.inputColor.value = '#000000';
+    this.inputColor.value = COLOR_DEFAULT;
   }
 
-  switchActive() {
+  switchActive(): void {
     this.element.classList.toggle('form-inactive');
-    Array.from(this.element.children).forEach((element: Element): void => {
+    [...this.element.children].forEach((element: Element): void => {
       const input = element as HTMLInputElement;
       input.disabled = !input.disabled;
     });

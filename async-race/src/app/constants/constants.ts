@@ -1,4 +1,4 @@
-const PAGE_DEFAULT = 1;
+const DEFAULT_PAGE_NUMBER = 1;
 
 const CAR_START_POSITION = 63;
 
@@ -10,7 +10,9 @@ const RANDOM_CARS_AMOUNT = 100;
 
 const BASE_URL = 'http://127.0.0.1:3000/';
 
-const TABLE_HEADER: string[] = ['#', 'Car', 'Name', 'Wins', 'Best time (s)'];
+const WINNER_COLUMNS: string[] = ['#', 'Car', 'Name', 'Wins', 'Best time (s)'];
+
+const SECOND_TRANSLATED = 1000;
 
 const CARS_MODELS: string[] = [
   'Roadster',
@@ -118,6 +120,14 @@ const CARS_BRANDS: string[] = [
   'Daewoo',
 ];
 
+const ROUNDER = 2;
+
+const STATUS_BREAKING = 500;
+
+const STATUS_SUCCESS = 500;
+
+const COLOR_DEFAULT = '#000000';
+
 const enum ButtonType {
   created = 'create',
   updated = 'update',
@@ -129,14 +139,19 @@ const enum ButtonType {
 }
 
 export {
-  PAGE_DEFAULT,
+  DEFAULT_PAGE_NUMBER,
   CAR_START_POSITION,
   CARS_MODELS,
   CARS_BRANDS,
   CARS_LIMIT_GARAGE,
   RANDOM_CARS_AMOUNT,
   BASE_URL,
-  TABLE_HEADER,
+  WINNER_COLUMNS,
   ButtonType,
   CARS_LIMIT_WINNERS,
+  SECOND_TRANSLATED,
+  ROUNDER,
+  STATUS_BREAKING,
+  STATUS_SUCCESS,
+  COLOR_DEFAULT,
 };

@@ -3,7 +3,7 @@ import BaseComponent from '../../shared/base-component';
 import Button from '../../shared/button';
 import { CarData, CarParameters } from '../../interfaces/interfaces';
 import { getCarModel } from '../../utils/utils';
-import { CAR_START_POSITION } from '../../constants/constants';
+import { CAR_START_POSITION, SECOND_TRANSLATED, ROUNDER, STATUS_BREAKING } from '../../constants/constants';
 import { getEngineParameters, updateCarData, getStatusDrive } from '../../utils/server-requests';
 import Form from '../form/form';
 
@@ -20,51 +20,51 @@ const enum StatusEngine {
 }
 
 class Car extends BaseComponent {
-  updatedForm: Form;
+  updatingCarForm: Form;
 
   carModel: BaseComponent;
 
-  changeCar: BaseComponent = new BaseComponent('div', ['shift-car']);
+  carField: BaseComponent = new BaseComponent('div', ['car-field']);
 
   carTrack: BaseComponent = new BaseComponent('div', ['track-car']);
 
   carImage: BaseComponent = new BaseComponent('div', ['img-car']);
 
-  selectCar: Button = new Button(ChangeButtons.select);
+  selectCarBtn: Button = new Button(ChangeButtons.select);
 
-  removeCar: Button = new Button(ChangeButtons.remove);
+  removeCarBtn: Button = new Button(ChangeButtons.remove);
 
-  startEngine: Button = new Button(ChangeButtons.start);
+  startEngineBtn: Button = new Button(ChangeButtons.start);
 
-  stopEngine: Button = new Button(ChangeButtons.stop);
+  stopEngineBtn: Button = new Button(ChangeButtons.stop);
 
   isAnimated = true;
 
   isEngineStop = false;
 
-  constructor(car: CarData, updatedForm: Form) {
+  constructor(car: CarData, updatingCarForm: Form) {
     super('div', ['car']);
-    this.updatedForm = updatedForm;
+    this.updatingCarForm = updatingCarForm;
     this.element.setAttribute('id', car.id.toString());
-    this.removeCar.button.setAttribute('id', car.id.toString());
+    this.removeCarBtn.button.setAttribute('id', car.id.toString());
     this.carModel = new BaseComponent('p', ['name-car'], car.name);
-    this.changeCar.element.append(this.selectCar.button, this.removeCar.button, this.carModel.element);
-    this.stopEngine.button.disabled = true;
-    this.startEngine.button.disabled = false;
-    this.stopEngine.button.classList.add('inactive-btn');
+    this.carField.element.append(this.selectCarBtn.button, this.removeCarBtn.button, this.carModel.element);
+    this.stopEngineBtn.button.disabled = true;
+    this.startEngineBtn.button.disabled = false;
+    this.stopEngineBtn.button.classList.add('inactive-btn');
     this.renderCarTrack(car);
-    this.engineStatus();
+    this.switchEngineStatus();
     this.updateCar();
     this.deleteCar();
 
-    this.element.append(this.changeCar.element, this.carTrack.element);
+    this.element.append(this.carField.element, this.carTrack.element);
   }
 
   renderCarTrack(car: CarData): void {
     const controlsCar: BaseComponent = new BaseComponent('div', ['controls-car']);
-    controlsCar.element.append(this.startEngine.button, this.stopEngine.button);
-    this.carImage.element.append(getCarModel(car.color));
     const flag: HTMLImageElement = document.createElement('img');
+    controlsCar.element.append(this.startEngineBtn.button, this.stopEngineBtn.button);
+    this.carImage.element.append(getCarModel(car.color));
     flag.classList.add('img-flag');
     flag.src = './assets/flag.svg';
     flag.alt = 'flag';
@@ -72,13 +72,13 @@ class Car extends BaseComponent {
   }
 
   async moveCar(): Promise<string> {
-    this.switchActiveButton();
     const engineParameters: CarParameters = await getEngineParameters(+this.element.id, StatusEngine.start);
+    const timeRace: number = engineParameters.distance / engineParameters.velocity;
+    this.switchActiveButton();
     this.isEngineStop = false;
     this.isAnimated = true;
-    const timeRace: number = engineParameters.distance / engineParameters.velocity;
     this.animateCarMoving(timeRace);
-    return (timeRace / 1000).toFixed(2);
+    return (timeRace / SECOND_TRANSLATED).toFixed(ROUNDER);
   }
 
   async stopCar(): Promise<void> {
@@ -89,12 +89,12 @@ class Car extends BaseComponent {
     this.carImage.element.style.transform = `translateX(0px)`;
   }
 
-  engineStatus(): void {
-    this.startEngine.button.addEventListener('click', async (): Promise<void> => {
+  switchEngineStatus(): void {
+    this.startEngineBtn.button.addEventListener('click', async (): Promise<void> => {
       await this.moveCar();
       this.getStatusEngine(this.element.id);
     });
-    this.stopEngine.button.addEventListener('click', async (): Promise<void> => {
+    this.stopEngineBtn.button.addEventListener('click', async (): Promise<void> => {
       await this.stopCar();
     });
   }
@@ -120,27 +120,27 @@ class Car extends BaseComponent {
 
   async getStatusEngine(id: string): Promise<number> {
     const promise: Response = await getStatusDrive(id);
-    if (promise.status === 500) {
+    if (promise.status === STATUS_BREAKING) {
       this.isAnimated = false;
     }
     return promise.status;
   }
 
   updateCar(): void {
-    this.selectCar.button.addEventListener('click', (): void => {
-      this.updatedForm.switchActive();
-      this.updatedForm.submit.addEventListener(
+    this.selectCarBtn.button.addEventListener('click', (): void => {
+      this.updatingCarForm.switchActive();
+      this.updatingCarForm.submit.addEventListener(
         'click',
         async (e: Event): Promise<void> => {
           e.preventDefault();
-          this.carModel.updateTextContent(this.updatedForm.inputText.value);
-          this.carImage.element.append(getCarModel(this.updatedForm.inputColor.value));
+          this.carModel.updateTextContent(this.updatingCarForm.inputText.value);
+          this.carImage.element.append(getCarModel(this.updatingCarForm.inputColor.value));
           await updateCarData(this.element.id, {
-            name: this.updatedForm.inputText.value,
-            color: this.updatedForm.inputColor.value,
+            name: this.updatingCarForm.inputText.value,
+            color: this.updatingCarForm.inputColor.value,
           });
-          this.updatedForm.cleanInputs();
-          this.updatedForm.switchActive();
+          this.updatingCarForm.cleanInputs();
+          this.updatingCarForm.switchActive();
         },
         { once: true }
       );
@@ -148,17 +148,16 @@ class Car extends BaseComponent {
   }
 
   deleteCar(): void {
-    this.removeCar.button.addEventListener('click', (): void => {
+    this.removeCarBtn.button.addEventListener('click', (): void => {
       this.element.remove();
     });
   }
 
-  switchActiveButton() {
-    this.startEngine.button.disabled = !this.startEngine.button.disabled;
-    this.startEngine.button.classList.toggle('inactive-btn');
-
-    this.stopEngine.button.disabled = !this.stopEngine.button.disabled;
-    this.stopEngine.button.classList.toggle('inactive-btn');
+  switchActiveButton(): void {
+    this.startEngineBtn.button.disabled = !this.startEngineBtn.button.disabled;
+    this.startEngineBtn.button.classList.toggle('inactive-btn');
+    this.stopEngineBtn.button.disabled = !this.stopEngineBtn.button.disabled;
+    this.stopEngineBtn.button.classList.toggle('inactive-btn');
   }
 }
 

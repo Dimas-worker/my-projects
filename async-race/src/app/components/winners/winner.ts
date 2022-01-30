@@ -3,7 +3,7 @@ import './winner.scss';
 import { WinnersDate, WinnerData } from '../../interfaces/interfaces';
 import { getWinnersData, sortWinner } from '../../utils/server-requests';
 import { getCarModel, convertCarWinners } from '../../utils/utils';
-import { TABLE_HEADER, ButtonType, CARS_LIMIT_WINNERS, PAGE_DEFAULT } from '../../constants/constants';
+import { WINNER_COLUMNS, ButtonType, CARS_LIMIT_WINNERS, DEFAULT_PAGE_NUMBER } from '../../constants/constants';
 import CarsNumber from '../garage/cars-numbers/cars-numbers';
 import PageNumber from '../garage/page-number/page-number';
 import Button from '../../shared/button';
@@ -19,9 +19,9 @@ const enum OrderType {
 }
 
 class Winner extends BaseComponent {
-  currentPageWinner: number = PAGE_DEFAULT;
+  currentWinnersPage: number = DEFAULT_PAGE_NUMBER;
 
-  titleCarsNumbers: CarsNumber = new CarsNumber(PAGE_DEFAULT);
+  carsNumber: CarsNumber = new CarsNumber(DEFAULT_PAGE_NUMBER);
 
   pageNumber: PageNumber;
 
@@ -31,11 +31,11 @@ class Winner extends BaseComponent {
 
   tbody: BaseComponent = new BaseComponent('tbody', ['table-body']);
 
-  prevWinnerPage: Button = new Button(ButtonType.prev);
+  prevWinnersPage: Button = new Button(ButtonType.prev);
 
-  nextWinnerPage: Button = new Button(ButtonType.next);
+  nextWinnersPage: Button = new Button(ButtonType.next);
 
-  manegeWinners: BaseComponent = new BaseComponent('div', ['winner-manege']);
+  manageWinnersBtns: BaseComponent = new BaseComponent('div', ['winner-manege']);
 
   isWinMax = true;
 
@@ -43,23 +43,23 @@ class Winner extends BaseComponent {
 
   constructor() {
     super('div', ['winner', 'invisible']);
-    this.pageNumber = new PageNumber(this.currentPageWinner);
+    this.pageNumber = new PageNumber(this.currentWinnersPage);
 
     this.createTableHead();
     this.createTableBody();
     this.switchWinnerPage();
-    this.manegeWinners.element.append(this.prevWinnerPage.button, this.nextWinnerPage.button);
+    this.manageWinnersBtns.element.append(this.prevWinnersPage.button, this.nextWinnersPage.button);
     this.element.append(
-      this.titleCarsNumbers.element,
+      this.carsNumber.element,
       this.pageNumber.element,
       this.table.element,
-      this.manegeWinners.element
+      this.manageWinnersBtns.element
     );
   }
 
   createTableHead(): void {
-    TABLE_HEADER.forEach((text: string) => {
-      const cell = new BaseComponent('th', ['th'], text);
+    WINNER_COLUMNS.forEach((text: string): void => {
+      const cell: BaseComponent = new BaseComponent('th', ['th'], text);
       if (text === 'Wins') {
         this.sortTable(cell.element, SortType.wins, this.isWinMax);
       } else if (text === 'Best time (s)') {
@@ -71,32 +71,32 @@ class Winner extends BaseComponent {
   }
 
   sortTable(tag: HTMLElement, sort: string, isPrimary: boolean): void {
+    const arrow: HTMLElement = document.createElement('span');
     let isSwitch: boolean = isPrimary;
     tag.classList.add('active-column');
-    const arrow: HTMLElement = document.createElement('span');
     tag.append(arrow);
-    tag.addEventListener('click', async (): Promise<void> => {      
-      Array.from(this.thead.element.children).forEach((column: Element) => {
+    tag.addEventListener('click', async (): Promise<void> => {
+      [...this.thead.element.children].forEach((column: Element): void => {
         if (column.children.length) {
           const cell = column.lastChild as HTMLElement;
           cell.classList.remove('arrow-icon');
         }
-      })
+      });
       const order: OrderType = isSwitch ? OrderType.firstMax : OrderType.firstMin;
       isSwitch = !isSwitch;
       if (!arrow.classList.contains('arrow-icon')) {
         arrow.classList.add('arrow-icon');
       }
+      const winnersData: WinnerData[] = await sortWinner(sort, order, this.currentWinnersPage);
+      const winners: string[][] = await convertCarWinners(winnersData);
       arrow.classList.toggle('arrow-rotated');
-      const winnersData: WinnerData[] = await sortWinner(sort, order, this.currentPageWinner);
-      const winners = await convertCarWinners(winnersData);
       this.updateTableBody(winners);
     });
   }
 
   async updateTableBody(carsWinnerData: string[][]): Promise<void> {
+    const prefix: string = this.currentWinnersPage === 1 ? '' : (this.currentWinnersPage - 1).toString();
     this.tbody.element.innerHTML = '';
-    const prefix: string = this.currentPageWinner === 1 ? '' : (this.currentPageWinner - 1).toString();
     carsWinnerData.forEach((carWinner, i: number): void => {
       const row: BaseComponent = new BaseComponent('tr', ['tr']);
       const td: BaseComponent = new BaseComponent('td', ['td'], `${prefix}${i + 1}`);
@@ -116,24 +116,28 @@ class Winner extends BaseComponent {
   }
 
   async createTableBody(): Promise<void> {
-    const carsWinner: WinnersDate = await getWinnersData(this.currentPageWinner);
-    this.titleCarsNumbers.updateValue(+carsWinner.carsCount);
+    const carsWinner: WinnersDate = await getWinnersData(this.currentWinnersPage);
     const winners: string[][] = await convertCarWinners(carsWinner.allCars);
+    this.carsNumber.updateValue(+carsWinner.carsCount);
     this.updateTableBody(winners);
   }
 
   switchWinnerPage(): void {
-    this.manegeWinners.element.addEventListener('click', async (e: Event): Promise<void> => {
+    this.manageWinnersBtns.element.addEventListener('click', async (e: Event): Promise<void> => {
       const target = e.target as HTMLButtonElement;
-      if (target.textContent === 'next') {
-        if (this.currentPageWinner * CARS_LIMIT_WINNERS < this.titleCarsNumbers.getValue) {
-          this.pageNumber.updateValue(++this.currentPageWinner);
+      switch (target.textContent) {
+        case 'next':
+          if (this.currentWinnersPage * CARS_LIMIT_WINNERS < this.carsNumber.getValue) {
+            this.pageNumber.updateValue(++this.currentWinnersPage);
+            this.createTableBody();
+          }
+          break;
+        case 'prev':
+          if (this.currentWinnersPage === DEFAULT_PAGE_NUMBER) return;
+          this.pageNumber.updateValue(--this.currentWinnersPage);
           this.createTableBody();
-        }
-      } else {
-        if (this.currentPageWinner === PAGE_DEFAULT) return;
-        this.pageNumber.updateValue(--this.currentPageWinner);
-        this.createTableBody();
+          break;
+        default:
       }
     });
   }

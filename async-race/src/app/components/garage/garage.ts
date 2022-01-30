@@ -9,39 +9,45 @@ import Popup from '../popup/popup';
 import { createCarData, deleteCarData, getCurrentGarageData, deleteCarWinnerData } from '../../utils/server-requests';
 import { CarData, GarageData, CarStats, WinnerData } from '../../interfaces/interfaces';
 import { getRandomColor, getRandomCarName, getAllCars, setCarWinner } from '../../utils/utils';
-import { PAGE_DEFAULT, CARS_LIMIT_GARAGE, RANDOM_CARS_AMOUNT, ButtonType } from '../../constants/constants';
+import {
+  DEFAULT_PAGE_NUMBER,
+  CARS_LIMIT_GARAGE,
+  RANDOM_CARS_AMOUNT,
+  ButtonType,
+  STATUS_SUCCESS,
+} from '../../constants/constants';
 import Winner from '../winners/winner';
 
 class Garage extends BaseComponent {
-  createdForm: Form = new Form(ButtonType.created);
+  creatingCarForm: Form = new Form(ButtonType.created);
 
-  updatedForm: Form = new Form(ButtonType.updated);
+  updatingCarForm: Form = new Form(ButtonType.updated);
 
   controls: BaseComponent = new BaseComponent('div', ['controls']);
 
-  raceAll: Button = new Button(ButtonType.race);
+  raceAllBtn: Button = new Button(ButtonType.race);
 
-  resetAll: Button = new Button(ButtonType.reset);
+  resetAllBtn: Button = new Button(ButtonType.reset);
 
-  generatedCars: Button = new Button(ButtonType.generateCars);
+  generatingCarsBtn: Button = new Button(ButtonType.generateCars);
 
   garageArea: BaseComponent = new BaseComponent('div', ['garage-area']);
 
-  titleCarsNumbers: CarsNumber;
+  carsNumber: CarsNumber;
 
   pageNumber: PageNumber;
 
-  prevGaragePage: Button = new Button(ButtonType.prev);
+  prevGaragePageBtn: Button = new Button(ButtonType.prev);
 
-  nextGaragePage: Button = new Button(ButtonType.next);
+  nextGaragePageBtn: Button = new Button(ButtonType.next);
 
-  private currentGaragePage = PAGE_DEFAULT;
+  private currentGaragePage: number = DEFAULT_PAGE_NUMBER;
 
   private currentCars: Car[] = [];
 
   carsField: BaseComponent = new BaseComponent('div', ['cars-field']);
 
-  manegeGarage: BaseComponent = new BaseComponent('div', ['garage-manege']);
+  manageGarageBtns: BaseComponent = new BaseComponent('div', ['garage-manege']);
 
   popup: Popup | null = null;
 
@@ -52,14 +58,14 @@ class Garage extends BaseComponent {
   constructor(winner: Winner) {
     super('div', ['garage']);
     this.winner = winner;
-    this.resetAll.button.disabled = true;
-    this.resetAll.button.classList.add('inactive-btn');
-    this.controls.element.append(this.raceAll.button, this.resetAll.button, this.generatedCars.button);
-    this.titleCarsNumbers = new CarsNumber(this.currentCars.length);
-    this.updatedForm.switchActive();
+    this.resetAllBtn.button.disabled = true;
+    this.resetAllBtn.button.classList.add('inactive-btn');
+    this.controls.element.append(this.raceAllBtn.button, this.resetAllBtn.button, this.generatingCarsBtn.button);
+    this.carsNumber = new CarsNumber(this.currentCars.length);
+    this.updatingCarForm.switchActive();
     this.pageNumber = new PageNumber(this.currentGaragePage);
-    this.prevGaragePage.button.disabled = false;
-    this.nextGaragePage.button.disabled = false;
+    this.prevGaragePageBtn.button.disabled = false;
+    this.nextGaragePageBtn.button.disabled = false;
 
     this.getGarageCars();
     this.createCar();
@@ -72,17 +78,17 @@ class Garage extends BaseComponent {
     this.updateCarsWinner();
   }
 
-  renderGaragePage() {
-    this.manegeGarage.element.append(this.prevGaragePage.button, this.nextGaragePage.button);
+  renderGaragePage(): void {
+    this.manageGarageBtns.element.append(this.prevGaragePageBtn.button, this.nextGaragePageBtn.button);
     this.garageArea.element.append(
-      this.titleCarsNumbers.element,
+      this.carsNumber.element,
       this.pageNumber.element,
       this.carsField.element,
-      this.manegeGarage.element
+      this.manageGarageBtns.element
     );
     this.element.append(
-      this.createdForm.element,
-      this.updatedForm.element,
+      this.creatingCarForm.element,
+      this.updatingCarForm.element,
       this.controls.element,
       this.garageArea.element
     );
@@ -91,30 +97,30 @@ class Garage extends BaseComponent {
   async getGarageCars(): Promise<void> {
     const parkCars: GarageData = await getCurrentGarageData(this.currentGaragePage.toString());
     this.renderGarageCars(parkCars.allCars);
-    this.titleCarsNumbers.updateValue(+parkCars.carsCount);
+    this.carsNumber.updateValue(+parkCars.carsCount);
   }
 
   renderGarageCars(cars: CarData[]): void {
     this.carsField.element.innerHTML = '';
     this.currentCars.length = 0;
     cars.forEach((car: CarData): void => {
-      const carItem: Car = new Car(car, this.updatedForm);
+      const carItem: Car = new Car(car, this.updatingCarForm);
       this.currentCars.push(carItem);
       this.carsField.element.append(carItem.element);
     });
   }
 
   startRace(): void {
-    this.raceAll.button.addEventListener('click', async (): Promise<void> => {
+    this.raceAllBtn.button.addEventListener('click', async (): Promise<void> => {
       this.isStarted = true;
       this.popup = null;
-      this.raceAll.button.disabled = true;
-      this.resetAll.button.disabled = false;
-      this.disableManegeGarage();
+      this.raceAllBtn.button.disabled = true;
+      this.resetAllBtn.button.disabled = false;
+      this.disableManageGarage();
       this.currentCars.forEach(async (car: Car): Promise<void> => {
         const time: string = await car.moveCar();
         const status: number = await car.getStatusEngine(car.element.id);
-        if (status === 200 && this.isStarted) {
+        if (status === STATUS_SUCCESS && this.isStarted) {
           if (!this.popup) {
             const carModel = car.carModel.element.textContent as string;
             this.popup = new Popup(carModel, time);
@@ -128,11 +134,11 @@ class Garage extends BaseComponent {
   }
 
   stopRace(): void {
-    this.resetAll.button.addEventListener('click', async (): Promise<void> => {
-      this.raceAll.button.disabled = false;
-      this.resetAll.button.disabled = true;
+    this.resetAllBtn.button.addEventListener('click', async (): Promise<void> => {
+      this.raceAllBtn.button.disabled = false;
+      this.resetAllBtn.button.disabled = true;
       this.isStarted = false;
-      this.disableManegeGarage();
+      this.disableManageGarage();
       if (this.popup) {
         this.popup.remove();
       }
@@ -141,19 +147,19 @@ class Garage extends BaseComponent {
   }
 
   createCar(): void {
-    this.createdForm.submit.addEventListener('click', async (e: Event): Promise<void> => {
+    this.creatingCarForm.submit.addEventListener('click', async (e: Event): Promise<void> => {
       e.preventDefault();
       const carData: CarData = await createCarData({
-        name: this.createdForm.inputText.value,
-        color: this.createdForm.inputColor.value,
+        name: this.creatingCarForm.inputText.value,
+        color: this.creatingCarForm.inputColor.value,
       });
-      const car: Car = new Car(carData, this.updatedForm);
+      const car: Car = new Car(carData, this.updatingCarForm);
       this.currentCars.push(car);
       if (this.currentCars.length <= CARS_LIMIT_GARAGE) {
         this.carsField.element.append(car.element);
       }
-      this.titleCarsNumbers.addCar();
-      this.createdForm.cleanInputs();
+      this.carsNumber.addCar();
+      this.creatingCarForm.cleanInputs();
       await this.getGarageCars();
     });
   }
@@ -174,7 +180,7 @@ class Garage extends BaseComponent {
   }
 
   createRandomCars(): void {
-    this.generatedCars.button.addEventListener('click', async (): Promise<void> => {
+    this.generatingCarsBtn.button.addEventListener('click', async (): Promise<void> => {
       const hundredCars: CarStats[] = [];
       for (let i = 0; i < RANDOM_CARS_AMOUNT; i++) {
         hundredCars.push({ name: getRandomCarName(), color: getRandomColor() });
@@ -186,16 +192,16 @@ class Garage extends BaseComponent {
   }
 
   switchGaragePage(): void {
-    this.manegeGarage.element.addEventListener('click', async (e: Event): Promise<void> => {
+    this.manageGarageBtns.element.addEventListener('click', async (e: Event): Promise<void> => {
       const target = e.target as HTMLButtonElement;
       switch (target.textContent) {
         case 'next':
-          if (this.currentGaragePage * CARS_LIMIT_GARAGE < this.titleCarsNumbers.getValue) {
+          if (this.currentGaragePage * CARS_LIMIT_GARAGE < this.carsNumber.getValue) {
             this.pageNumber.updateValue(++this.currentGaragePage);
           }
           break;
         case 'prev':
-          if (this.currentGaragePage === PAGE_DEFAULT) return;
+          if (this.currentGaragePage === DEFAULT_PAGE_NUMBER) return;
           this.pageNumber.updateValue(--this.currentGaragePage);
           getCurrentGarageData(this.currentGaragePage.toString());
           break;
@@ -215,18 +221,18 @@ class Garage extends BaseComponent {
     }
   }
 
-  updateCarsWinner() {
-    this.updatedForm.submit.addEventListener('click', (): void => {
+  updateCarsWinner(): void {
+    this.updatingCarForm.submit.addEventListener('click', (): void => {
       this.winner.createTableBody();
     });
   }
 
-  disableManegeGarage() {
-    this.resetAll.button.classList.toggle('inactive-btn');
-    this.raceAll.button.classList.toggle('inactive-btn');
-    this.prevGaragePage.button.disabled = !this.prevGaragePage.button.disabled;
-    this.nextGaragePage.button.disabled = !this.nextGaragePage.button.disabled;
-    this.manegeGarage.element.classList.toggle('inactive-btn');
+  disableManageGarage(): void {
+    this.resetAllBtn.button.classList.toggle('inactive-btn');
+    this.raceAllBtn.button.classList.toggle('inactive-btn');
+    this.prevGaragePageBtn.button.disabled = !this.prevGaragePageBtn.button.disabled;
+    this.nextGaragePageBtn.button.disabled = !this.nextGaragePageBtn.button.disabled;
+    this.manageGarageBtns.element.classList.toggle('inactive-btn');
   }
 }
 

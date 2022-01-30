@@ -7,22 +7,14 @@ const enum ColorParameters {
   radix = 16,
 }
 
-function createInputElement(
-  type: string,
-  classSelector: string,
-  value: string,
-  placeHolder?: string
-): HTMLInputElement {
-  const input = document.createElement('input');
+function createInputElement(type: string, classSelector: string, value: string, placeHolder = ''): HTMLInputElement {
+  const input: HTMLInputElement = document.createElement('input');
   input.type = type;
   input.classList.add(classSelector);
   input.value = value;
-  if (placeHolder) {
-    input.placeholder = placeHolder;
-  }
+  input.placeholder = placeHolder;
   return input;
 }
-
 
 function getRandomColor(): string {
   const letters = '0123456789ABCDEF';
@@ -34,11 +26,10 @@ function getRandomColor(): string {
 }
 
 function getRandomCarName(): string {
-  const model: string[] = CARS_MODELS;
+  const models: string[] = CARS_MODELS;
   const brands: string[] = CARS_BRANDS;
-  return `${brands[Math.ceil(Math.random() * (brands.length - 1))]} ${
-    model[Math.ceil(Math.random() * (model.length - 1))]
-  }`;
+  const getRandomNumber = (array: string[]): number => Math.ceil(Math.random() * (array.length - 1));
+  return `${brands[getRandomNumber(brands)]} ${models[getRandomNumber(models)]}`;
 }
 
 async function convertCarWinners(carsWinner: WinnerData[]): Promise<string[][]> {
@@ -69,14 +60,14 @@ async function setCarWinner(id: string, time: string): Promise<void> {
   }
 }
 
-function getCarModel(color: string): HTMLObjectElement  {
+function getCarModel(color: string): HTMLObjectElement {
   const carModel: HTMLObjectElement = document.createElement('object');
   carModel.type = 'image/svg+xml';
   carModel.data = './assets/car.svg';
   carModel.classList.add('car-svg');
-  carModel.addEventListener('load', ():void => {
-    carModel.getSVGDocument()?.getElementById("car")?.setAttribute("fill", color);
-  })
+  carModel.addEventListener('load', (): void => {
+    carModel.getSVGDocument()?.getElementById('car')?.setAttribute('fill', color);
+  });
   return carModel;
 }
 
@@ -87,5 +78,5 @@ export {
   convertCarWinners,
   getAllCars,
   setCarWinner,
-  getCarModel
+  getCarModel,
 };

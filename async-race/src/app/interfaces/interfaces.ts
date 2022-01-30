@@ -9,8 +9,8 @@ interface CarParameters {
   distance: number;
 }
 
-interface IsEngineData {
-  success: boolean;
+interface EngineData {
+  isSuccess: boolean;
 }
 
 interface CarStats {
@@ -39,4 +39,4 @@ interface WinnersDate {
   carsCount: string;
 }
 
-export { CarData, CarParameters, IsEngineData, CarStats, GarageData, WinnerData, CarWinnerData, WinnersDate };
+export { CarData, CarParameters, EngineData, CarStats, GarageData, WinnerData, CarWinnerData, WinnersDate };
