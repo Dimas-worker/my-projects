@@ -7,12 +7,12 @@ const enum ColorParameters {
   radix = 16,
 }
 
-function createInputElement(type: string, classSelector: string, value: string, placeHolder = ''): HTMLInputElement {
+function createInputElement(type: string, classSelector: string, value: string, placeholder = ''): HTMLInputElement {
   const input: HTMLInputElement = document.createElement('input');
   input.type = type;
   input.classList.add(classSelector);
   input.value = value;
-  input.placeholder = placeHolder;
+  input.placeholder = placeholder;
   return input;
 }
 

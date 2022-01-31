@@ -138,6 +138,8 @@ class Winner extends BaseComponent {
           this.createTableBody();
           break;
         default:
+          //  eslint-disable-next-line no-useless-return
+          return;
       }
     });
   }
