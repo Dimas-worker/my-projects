@@ -3,7 +3,7 @@ import { WinnerData, CarData } from '../interfaces/interfaces';
 import { getCarData, getAllWinners, getCarWinnerData, updateCarWinnerData, createCarWinner } from './server-requests';
 
 const enum ColorParameters {
-  HexLength = 6,
+  hexLength = 6,
   radix = 16,
 }
 
@@ -19,7 +19,7 @@ function createInputElement(type: string, classSelector: string, value: string, 
 function getRandomColor(): string {
   const letters = '0123456789ABCDEF';
   let color = '#';
-  for (let i = 0; i < ColorParameters.HexLength; i++) {
+  for (let i = 0; i < ColorParameters.hexLength; i++) {
     color += letters[Math.floor(Math.random() * ColorParameters.radix)];
   }
   return color;

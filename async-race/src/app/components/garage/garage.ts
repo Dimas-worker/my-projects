@@ -47,7 +47,7 @@ class Garage extends BaseComponent {
 
   carsField: BaseComponent = new BaseComponent('div', ['cars-field']);
 
-  manageGarageBtns: BaseComponent = new BaseComponent('div', ['garage-manege']);
+  manageGarageBtns: BaseComponent = new BaseComponent('div', ['garage-manage']);
 
   popup: Popup | null = null;
 
@@ -228,10 +228,10 @@ class Garage extends BaseComponent {
   }
 
   disableManageGarage(): void {
-    this.resetAllBtn.button.classList.toggle('inactive-btn');
-    this.raceAllBtn.button.classList.toggle('inactive-btn');
     this.prevGaragePageBtn.button.disabled = !this.prevGaragePageBtn.button.disabled;
     this.nextGaragePageBtn.button.disabled = !this.nextGaragePageBtn.button.disabled;
+    this.resetAllBtn.button.classList.toggle('inactive-btn');
+    this.raceAllBtn.button.classList.toggle('inactive-btn');
     this.manageGarageBtns.element.classList.toggle('inactive-btn');
   }
 }

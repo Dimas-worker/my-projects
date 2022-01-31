@@ -1,7 +1,7 @@
 import './form.scss';
 import BaseComponent from '../../shared/base-component';
 import { createInputElement } from '../../utils/utils';
-import { COLOR_DEFAULT } from '../../constants/constants';
+import { DEFAULT_COLOR } from '../../constants/constants';
 
 class Form extends BaseComponent {
   inputText: HTMLInputElement;
@@ -20,7 +20,7 @@ class Form extends BaseComponent {
 
   cleanInputs(): void {
     this.inputText.value = '';
-    this.inputColor.value = COLOR_DEFAULT;
+    this.inputColor.value = DEFAULT_COLOR;
   }
 
   switchActive(): void {

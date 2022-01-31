@@ -3,7 +3,7 @@ import BaseComponent from '../../shared/base-component';
 import Button from '../../shared/button';
 import { CarData, CarParameters } from '../../interfaces/interfaces';
 import { getCarModel } from '../../utils/utils';
-import { CAR_START_POSITION, SECOND_TRANSLATED, ROUNDER, STATUS_BREAKING } from '../../constants/constants';
+import { CAR_START_POSITION, MS_IN_SECONDS, ROUNDER, STATUS_BREAKING } from '../../constants/constants';
 import { getEngineParameters, updateCarData, getStatusDrive } from '../../utils/server-requests';
 import Form from '../form/form';
 
@@ -78,7 +78,7 @@ class Car extends BaseComponent {
     this.isEngineStop = false;
     this.isAnimated = true;
     this.animateCarMoving(timeRace);
-    return (timeRace / SECOND_TRANSLATED).toFixed(ROUNDER);
+    return (timeRace / MS_IN_SECONDS).toFixed(ROUNDER);
   }
 
   async stopCar(): Promise<void> {

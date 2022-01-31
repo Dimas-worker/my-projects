@@ -31,11 +31,11 @@ class Winner extends BaseComponent {
 
   tbody: BaseComponent = new BaseComponent('tbody', ['table-body']);
 
-  prevWinnersPage: Button = new Button(ButtonType.prev);
+  prevWinnersBtn: Button = new Button(ButtonType.prev);
 
-  nextWinnersPage: Button = new Button(ButtonType.next);
+  nextWinnersBtn: Button = new Button(ButtonType.next);
 
-  manageWinnersBtns: BaseComponent = new BaseComponent('div', ['winner-manege']);
+  manageWinnersBtns: BaseComponent = new BaseComponent('div', ['winner-manage']);
 
   isWinMax = true;
 
@@ -48,7 +48,7 @@ class Winner extends BaseComponent {
     this.createTableHead();
     this.createTableBody();
     this.switchWinnerPage();
-    this.manageWinnersBtns.element.append(this.prevWinnersPage.button, this.nextWinnersPage.button);
+    this.manageWinnersBtns.element.append(this.prevWinnersBtn.button, this.nextWinnersBtn.button);
     this.element.append(
       this.carsNumber.element,
       this.pageNumber.element,
@@ -103,10 +103,10 @@ class Winner extends BaseComponent {
       row.element.append(td.element);
       carWinner.forEach((data: string, index: number): void => {
         const cell: BaseComponent = new BaseComponent('td', ['td']);
-        if (!index) {
-          cell.element.append(getCarModel(data));
-        } else {
+        if (index) {
           cell.element.textContent = `${data}`;
+        } else {
+          cell.element.append(getCarModel(data));
         }
         row.element.append(cell.element);
       });

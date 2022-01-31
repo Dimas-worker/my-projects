@@ -1,12 +1,10 @@
 class BaseComponent {
   readonly element: HTMLElement;
 
-  constructor(tag: keyof HTMLElementTagNameMap = 'div', styles: string[] = [], text?: string) {
+  constructor(tag: keyof HTMLElementTagNameMap = 'div', styles: string[] = [], text = '') {
     this.element = document.createElement(tag);
     this.element.classList.add(...styles);
-    if (text) {
-      this.element.textContent = text;
-    }
+    this.element.textContent = text;
   }
 
   updateTextContent(text: string): void {

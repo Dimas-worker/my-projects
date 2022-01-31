@@ -12,7 +12,7 @@ const BASE_URL = 'http://127.0.0.1:3000/';
 
 const WINNER_COLUMNS: string[] = ['#', 'Car', 'Name', 'Wins', 'Best time (s)'];
 
-const SECOND_TRANSLATED = 1000;
+const MS_IN_SECONDS = 1000;
 
 const CARS_MODELS: string[] = [
   'Roadster',
@@ -126,7 +126,7 @@ const STATUS_BREAKING = 500;
 
 const STATUS_SUCCESS = 500;
 
-const COLOR_DEFAULT = '#000000';
+const DEFAULT_COLOR = '#000000';
 
 const enum ButtonType {
   created = 'create',
@@ -149,9 +149,9 @@ export {
   WINNER_COLUMNS,
   ButtonType,
   CARS_LIMIT_WINNERS,
-  SECOND_TRANSLATED,
+  MS_IN_SECONDS,
   ROUNDER,
   STATUS_BREAKING,
   STATUS_SUCCESS,
-  COLOR_DEFAULT,
+  DEFAULT_COLOR,
 };

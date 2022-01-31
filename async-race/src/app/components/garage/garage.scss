@@ -24,7 +24,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
       &:active {
         transform: scale(0.95);
       }
@@ -35,7 +35,6 @@
     background-color: rgb(0, 209, 112);
     flex: 0 0 100px;
 
-
     &:hover {
       box-shadow: 0px 0px 8px 6px rgba(0, 209, 112, 0.8);
     }
@@ -44,7 +43,6 @@
   .reset {
     background-color: rgb(206, 30, 30);
     flex: 0 0 100px;
-
 
     &:hover {
       box-shadow: 0px 0px 8px 3px rgba(206, 30, 30, 0.4);
@@ -60,7 +58,7 @@
     }
   }
 
-  .garage-manege {
+  .garage-manage {
     display: flex;
     gap: 0 1rem;
     padding: 0.5rem 0;
@@ -80,7 +78,7 @@
       align-items: center;
       justify-content: center;
       background-color: wheat;
-      
+
       &:active {
         transform: scale(0.95);
       }
