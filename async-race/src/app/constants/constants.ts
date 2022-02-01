@@ -124,7 +124,7 @@ const ROUNDER = 2;
 
 const STATUS_BREAKING = 500;
 
-const STATUS_SUCCESS = 500;
+const STATUS_SUCCESS = 200;
 
 const DEFAULT_COLOR = '#000000';
 
